@@ -1,0 +1,24 @@
+<project name="Phex.TestSuite" default="startTest" basedir="..">
+  <property name="project.native" value="${project.root}/native"/>
+  <path id="library.classpath">
+    <pathelement path="${library.classpath}"/>
+  </path>
+  <path id="junit.classpath">
+    <pathelement path="${phex.classpath}"/>
+    <pathelement path="${build.target.lib}/phex-test.jar"/>
+    <pathelement path="${build.target.lib}/phex.jar"/>
+  </path>
+  <target name="startTest" depends="initTest, runTest"/>
+  
+  <target name="initTest">
+    <!-- Sets isJUnitAvailable when the  file is in the classpath -->
+    <available classname="junit.framework.TestCase" classpathref="library.classpath" property="isJUnitAvailable"/>
+  </target>
+  
+  <target name="runTest" depends="initTest" if="isJUnitAvailable">
+    <java classname="junit.textui.TestRunner" classpathref="junit.classpath" fork="yes">
+      <arg value="phex.test.PhexTestSuite"/>
+    </java>
+  </target>
+    
+</project>

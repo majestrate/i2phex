@@ -1,0 +1,18 @@
+#MAGMAv0.2 magnet:?mt=.&dn=magmatest-prior-versions.magma&as=http://gnuticles.de/magmatest-prior-versions.magma
+
+# with this magma-li8st you can download all prior versions 
+# of the MagmaTest-Source (and get fragged by the code :) )
+# Arne Babenhauserheide ( http://gnuticles.de )
+
+list: 
+ - "magnet:?xt=urn:sha1:OW2VBA5SXFAIYGOUK3DZLB4GSQZWEPOF&dn=MagmaTestv0.2.zip&xs=http://edrikor.dyndns.org:9845/uri-res/N2R?urn:sha1:OW2VBA5SXFAIYGOUK3DZLB4GSQZWEPOF"
+
+ - "magnet:?xt=urn:sha1:NTZTRLWMX4EY7AZS2LMLZKCHN2SX4LCG&dn=MagmaTestv0.31.zip&xs=http://edrikor.dyndns.org:9845/uri-res/N2R?urn:sha1:NTZTRLWMX4EY7AZS2LMLZKCHN2SX4LCG" 
+
+ - "magnet:?xt=urn:sha1:63OAFKPMOSNFDRT2AOLQ6PEI6ZSFGULX&dn=MagmaTestv0.32.zip&xs=http://edrikor.dyndns.org:9845/uri-res/N2R?urn:sha1:63OAFKPMOSNFDRT2AOLQ6PEI6ZSFGULX" 
+
+ - "magnet:?xt=urn:sha1:LJI7Y74OY2G6RAGW77FQPYH454L36I4S&dn=MagmaTestv0.34.zip&xs=http://edrikor.dyndns.org:9845/uri-res/N2R?urn:sha1:LJI7Y74OY2G6RAGW77FQPYH454L36I4S" 
+
+ - "magnet:?xt=urn:sha1:LRZEJB5FGJECKR6NBY2LNTFWZAOL5FWN&dn=MagmaTestv0.36.zip&xs=http://edrikor.dyndns.org:9845/uri-res/N2R?urn:sha1:LRZEJB5FGJECKR6NBY2LNTFWZAOL5FWN"
+
+ - "magnet:?xt=urn:sha1:KK2TVAVPGKAGI73NRVIBBYPWCOAC7OYY&dn=MagmaTest-OSX-v0.36.jar.zip&xs=http://edrikor.dyndns.org:9845/uri-res/N2R?urn:sha1:KK2TVAVPGKAGI73NRVIBBYPWCOAC7OYY"

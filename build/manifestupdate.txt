@@ -1,0 +1,2 @@
+Class-Path: ../lang/ ../ext/ forms-1.1.0.jar looks-2.1.4.jar commons-logging.jar commons-httpclient-3.0.1.jar commons-collections-3.2.jar MRJAdapter.jar i2p.jar streaming.jar mstreaming.jar jbigi.jar log4j-1.2.14.jar
+Main-Class: phex.Main

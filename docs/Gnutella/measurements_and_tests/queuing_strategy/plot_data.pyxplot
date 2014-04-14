@@ -1,0 +1,5 @@
+set width 25
+plot "phex_fifo_results.log" using 1:2 title "fifo completion", "phex_fifo_results.log" using 1:3 title "fifo wait", "phex_hrrn_results.log" using 1:2 title "hrrn completion", "phex_hrrn_results.log" using 1:3 title "hrrn wait"
+set term png
+set output "evaluation-fifo-hrrn.png"
+replot

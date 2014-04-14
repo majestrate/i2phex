@@ -1,0 +1,47 @@
+<html>
+<body>
+<h1>CVS Guideline</h1>
+<hr>
+<h2>Introduction</h2>
+This guide should collect conventions used in the Phex project when working with CVS. Every Phex developer working with CVS should try to follow this guide as good as possible.
+<h2>Release</h2>
+TODO --- Only the person creating the relase should modify the version.properties. ---
+<h2>Tagging</h2>
+<ul>
+<li>A release is always tagged with the word "release" append with a "-" and its version. The version separator "." is replaced with a "_". Only the person who builds and publishes the release should place the release tag.<br>
+<b>Example: release-0_8_0_34</b>
+</ul>
+<h2>Branching</h2>
+<h3>Recommended Documentation:</h3>
+<ul>
+<li><a href="http://www.computas.com/pub/wincvs-howto/cvsdoc/cvs_5.html#SEC55">What branches are good for.</a>
+<li><a href="http://www.computas.com/pub/wincvs-howto/#branch">Branching with WinCVS</a>
+</ul>
+<h3>Procedure and Naming Guideline:</h3>
+<ul>
+<li>Whenever you plan to integrate bigger changes that you might not get finished and tested in a few days, you should think about creating a separate branch on which you can develop freely without influencing and getting influenced by other developers.<br>
+<li>Before branching you should synchronize with the project leaders and other developers to agree about your intention and reason to create branch.
+<li>The branch point should be selected carefully. Usually its only necessary
+to branch of the /phex/src directory or of a specific package (e.g.: /phex/src/phex/gui) depending on what changes you plan to integrate.
+<li>The name of a branch should be in lower case. Words should be separated by a "-". The name should end with the word "branch".<br>
+<b>Example: xml-metadata-search-branch</b>
+<li>Before creating a branch, a tag should be placed on the branch point. The name of the tag should be the branch name appended with the word "point".<br>
+<b>Example: xml-metadata-search-branch-point</b>
+<li>Before merging a branch back into the main line or into a different branch, a tag should be placed on the branch and on the line to merge into. The name of the tag should be the branch name appended with the word "before".<br>
+<b>Example: xml-metadata-search-branch-before</b>
+<li>After merging a branch back into the main line or into a different branch a tag should be placed on the line merged into. The name of the tag should be the branch name appended with the word "after".<br>
+<b>Example: xml-metadata-search-branch-after</b>
+</ul>
+
+
+<h2>Further Readings</h2>
+<ul>
+<li><a href="http://sourceforge.net/docman/display_doc.php?docid=768&group_id=1">Introduction to SourceForge.net Project CVS Services</a>
+<li><a href="http://sourceforge.net/docman/display_doc.php?docid=766&group_id=1">WinCvs CVS Client Installation Instructions</a>
+<li><a href="http://www.computas.com/pub/wincvs-howto/">WinCvs Daily Use Guide</a>
+</ul>
+
+<hr>
+<center><font size="-1">Copyright © 2001 - 2003 The Phex Team, License GPL-2 or later.</font></center>
+</body>
+</html>

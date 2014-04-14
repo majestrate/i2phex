@@ -1,0 +1,18 @@
+2.0 It's been out of beta for a long time
+
+2.2: Adds PushProxy, headless mode and magma support
+
+2.4: Stability ( 2005-03-27)
+
+2.6: THEX for uploads, and max leaf-to-up becomes 5  (2005-05-06)
+
+2.8: adds PodCast and RSS readout, lighter but stronger IP filters, UDP host caches, download strategies, single-file-incompletes (2005-10-30)
+
+3.0: What's New searches and rule based filters (2007-01-07)
+
+3.2: THEX defeats poisoned downloads (2007-07-06)
+
+3.2.4: 40% less threads for network connections, 
+Translations: Brazilian Portuguese, Spanish and Mexican
+Nasty file filter
+DestAdress joins from i2p (2008-06-22)

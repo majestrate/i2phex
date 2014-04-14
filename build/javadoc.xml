@@ -1,0 +1,93 @@
+<project name="Phex.Javadoc" default="buildJavaDoc" basedir="..">
+
+  <property name="build.javadoc" value="${project.buildtarget}/javadoc"/>
+  <property name="build.uml" value="${project.buildtarget}/uml"/>
+  
+  <path id="javadoc.classpath">
+    <pathelement path="${phex.classpath}"/>
+  </path>
+  
+  <target name="buildJavaDoc">
+    <mkdir dir="${build.javadoc}"/>
+    <javadoc packagenames="phex.*"       sourcepath="${project.source}" 
+             destdir="${build.javadoc}"  classpathref="javadoc.classpath" 
+             author="true" version="true" use="true" 
+             windowtitle="Phex API" 
+             doctitle="Phex" bottom="Have Fun!"/>
+  </target>
+    
+  <target name="uml">
+    <tstamp/>
+    <mkdir dir="${build.uml}"/>
+    <javadoc classpathref="javadoc.classpath" Splitindex="true" use="true" 
+      notree="true" verbose="false">
+      <doclet name="gr.spinellis.umlgraph.doclet.UmlGraphDoc" path="${doc.uml.UmlGraph.jar}">
+        <param name="-d" value="${build.uml}"/>
+        <param name="-outputencoding" value="UTF-8" />
+        <param name="-qualify" />
+        <param name="-inferrel" />
+        <param name="-inferdep" />
+        <param name="-inferdepvis" value="private"/>
+        <param name="-postfixpackage" />
+        <param name="-nodefontsize" value="9"/>
+        <param name="-nodefontpackagesize" value="7" />
+        <!-- <param name="-collpackages" value="java.util.*" /> generats NPE -->
+        <param name="-hide" value="java.lang.*" />
+        <param name="-hide" value="javax.*" />
+        <param name="-hide" value="sun.*" />
+        <param name="-link" value="http://java.sun.com/j2se/1.5/docs/api" />
+        <!-- javadoc params ant ignores in case a doclet is set -->
+        <param name="-linksource" />
+        <param name="-version" />
+      </doclet>
+      <packageset dir="${project.source}">
+        <exclude name="com/**"/>
+        <exclude name="org/**"/>
+      </packageset>
+      <doctitle><![CDATA[
+        Phex API Documentation
+        ]]>
+      </doctitle>
+      <header><![CDATA[
+        Phex API <font size="-2">(${TODAY})</font>
+        ]]>
+      </header>
+      <bottom><![CDATA[
+        Generated ${TODAY}
+        ]]>
+      </bottom>
+      
+    </javadoc>
+  </target>
+  
+  <target name="uml-all">
+		<mkdir dir="${build.uml}"/>
+		<javadoc packagenames="phex.*" sourcepath="${project.source}" destdir="${build.uml}" classpathref="javadoc.classpath"
+			 author="true" version="true">
+			<doclet name="gr.spinellis.umlgraph.doclet.UmlGraph" path="${doc.uml.UmlGraph.jar}">
+				<param name="-d" value="${build.uml}"/>
+				<param name="-outputencoding" value="UTF-8"/>
+				<param name="-qualify"/>
+				<param name="-horizontal"/>
+				<param name="-inferrel"/>
+				<param name="-inferdep"/>
+				<param name="-inferdepvis" value="protected"/>
+				<param name="-postfixpackage"/>
+				<param name="-hide" value="org.*"/>
+				<param name="-hide" value="java.*"/>
+				<param name="-hide" value="javax.*"/>
+				<param name="-hide" value="com.*"/>
+				<param name="-hide" value="sun.*"/>
+			</doclet>
+		</javadoc>
+		<apply executable="dot" dest="${build.uml}" parallel="false">
+			<arg value="-Tsvg"/>
+			<arg value="-o"/>
+			<targetfile/>
+			<srcfile/>
+			<fileset dir="${build.uml}" includes="*.dot"/>
+			<mapper type="glob" from="*.dot" to="*.svg"/>
+		</apply>
+	</target>
+
+</project>

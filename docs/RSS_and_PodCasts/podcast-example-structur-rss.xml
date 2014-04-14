@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+<channel>
+<title>Zwillingssterns Weltenwald</title>
+<link>file:///Volumes/Klangfeuer/Uni/Podcasts-struktur.rss</link>
+<description>Geschichten, Gedichte, Lieder und krude Ideen</description>
+<lastBuildDate>Tue, 6 Jul 2005 22:58:15 +0200</lastBuildDate>
+<language>de-de</language>
+<copyright>Copyright 2005 Arne Babenhauserheide cc att-sa-nc</copyright>
+<webMaster>arne_bab@web.de</webMaster>
+<ttl>60</ttl>
+
+<item>
+<title>Test</title>
+<link>file:///Users/arne/Sites/arnebab/musik/eventhalle.mp3</link>
+<description>Lied - Spiegelhalle magnet:?xt=urn:sha1:4BYDO73ENZ6646MDJMT2H5MFSEXK6WX3&amp;as=http://draketo.de/musik/eventhalle.mp3&amp;dn=eventhalle.mp3</description>
+<pubDate>Tue, 6 Jul 2005 22:58:15 +0200</pubDate>
+<enclosure url="magnet:?xt=urn:sha1:4BYDO73ENZ6646MDJMT2H5MFSEXK6WX3&as=http://draketo.de/musik/eventhalle.mp3&dn=eventhalle1.mp3" length="5723338" type="audio/mpeg" /> 
+<magnet>magnet:?xt=urn:sha1:4BYDO73ENZ6646MDJMT2H5MFSEXK6WX3&as=http://draketo.de/musik/eventhalle.mp3&dn=eventhalle2.mp3</magnet>
+</item>
+
+<magnet>magnet:?xt=urn:sha1:4BYDO73ENZ6646MDJMT2H5MFSEXK6WX3&dn=eventhalle-nicht-sichtbar.mp3</magnet>
+<item>
+<title>Test</title>
+<link>file:///Users/arne/Sites/arnebab/musik/eventhalle.mp3</link>
+<description>Lied - Spiegelhalle magnet:?xt=urn:sha1:4BYDO73ENZ6646MDJMT2H5MFSEXK6WX3&amp;as=http://draketo.de/musik/eventhalle.mp3&amp;dn=eventhalle.mp3</description>
+<pubDate>Tue, 6 Jul 2005 22:58:15 +0200</pubDate>
+<enclosure url="http://draketo.de/musik/eventhalle.mp3" length="5723338" type="audio/mpeg" />
+<magnet>http://draketo.de/musik/harpie.mp3</magnet>
+
+<magnet>magnet:?xt=urn:sha1:4BYDO73ENZ6646MDJMT2H5MFSEXK6WX3&as=http://draketo.de/musik/eventhalle.mp3&dn=eventhalle3.mp3</magnet>
+</item>
+
+</channel>
+</rss>

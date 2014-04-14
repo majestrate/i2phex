@@ -1,0 +1,85 @@
+<project name="Phex.Native" default="buildNative" basedir="..">
+
+  <property name="project.native" value="${project.root}/native"/>
+
+  <target name="buildNative" depends="initNative" if="isBCCAvailable" unless="native.compiled">
+    <mkdir dir="${project.native}/release"/>
+    <mkdir dir="${project.native}/temp"/>
+    <!-- build resource -->
+    <exec dir="${project.native}" executable="${native.ccHome}/bin/brc32.exe">
+      <arg line="-r -fo temp\phex16.res csource\win\phex16.rc"/>
+    </exec>
+    <exec dir="${project.native}" executable="${native.ccHome}/bin/brc32.exe">
+      <arg line="-r -fo temp\phex32.res csource\win\phex32.rc"/>
+    </exec>
+    <property name="WININC" value="${native.ccHome}\include"/>
+    <property name="J2SEINC" value="${native.J2SEINC}"/>
+    <!-- build desktop indicator and shell execute -->
+    <property name="SYSTRAYSRC" value="csource\win\systray"/>
+    <property name="SHELLEXECSRC" value="csource\win\shellexec"/>
+    <exec dir="${project.native}" executable="${native.ccHome}/bin/bcc32.exe">
+      <arg line="-I${WININC};${J2SEINC};${J2SEINC}\win32;${SYSTRAYSRC} -c -WD -O2 -w-par -L${native.ccHome}\lib -ntemp ${SYSTRAYSRC}\DesktopIndicatorThread.cpp ${SYSTRAYSRC}\DesktopIndicator.cpp ${SYSTRAYSRC}\DesktopIndicatorHandler.cpp ${SYSTRAYSRC}\DesktopIndicatorImages.cpp ${SYSTRAYSRC}\StdAfx.cpp ${SHELLEXECSRC}\WindowsShellExecute.cpp"/>
+    </exec>
+    <exec dir="${project.native}" executable="${native.ccHome}/bin/ilink32.exe">
+      <arg line="/Tpd /Gn /L${native.ccHome}\lib\psdk;${native.ccHome}\lib temp\DesktopIndicatorHandler.obj temp\DesktopIndicatorThread.obj temp\DesktopIndicatorImages.obj temp\DesktopIndicator.obj temp\WindowsShellExecute.obj c0d32.obj,temp\Phex.dll,,kernel32 import32.lib cw32.lib,, temp\phex16.res"/>
+    </exec>
+    <!-- build launcher -->
+    <exec dir="${project.native}" executable="${native.ccHome}/bin/bcc32.exe">
+      <arg line="-I${WININC};${J2SEINC};${J2SEINC}\win32;csource\share\launcher;csource\win\launcher -c -W -w-par -w-aus -L${native.ccHome}\lib -ntemp csource\share\launcher\Phex.c csource\win\launcher\phex_sys.c"/>
+    </exec>
+    <exec dir="${project.native}" executable="${native.ccHome}/bin/ilink32.exe">
+      <arg line="/Tpe /Gn /aa /L${native.ccHome}\lib temp\Phex.obj temp\phex_sys.obj c0w32.obj, temp\Phex.exe,,import32.lib cw32.lib,, temp\phex32.res"/>
+    </exec>
+    <exec dir="${project.native}" executable="${native.ccHome}/bin/bcc32.exe">
+      <arg line="-DDEBUG_OUTPUT=1 -I${WININC};${J2SEINC};${J2SEINC}\win32;csource\share\launcher;csource\win\launcher -c -WC -w-par -w-aus -L${native.ccHome}\lib -ntemp csource\share\launcher\Phex.c csource\win\launcher\phex_sys.c"/>
+    </exec>
+    <exec dir="${project.native}" executable="${native.ccHome}/bin/ilink32.exe">
+      <arg line="/Gn /ap /L${native.ccHome}\lib temp\Phex.obj temp\phex_sys.obj c0x32.obj, temp\Phex_debug.exe,,import32.lib cw32.lib,,"/>
+    </exec>
+    <!-- move builded files to release -->
+    <move file="${project.native}/temp/Phex.exe" todir="${project.native}/release"/>
+    <move file="${project.native}/temp/Phex_debug.exe" todir="${project.native}/release"/>
+    <move file="${project.native}/temp/Phex.dll" todir="${project.native}/release"/>
+  </target>
+
+  <!-- to get borland bcc go to http://www.borland.com/products/downloads/download_cbuilder.html -->
+  <target name="initNative" if="isBCCAvailable" depends="init">
+    <!-- determine jdk include path -->
+    <available file="${java.home}\include" property="native.J2SEINC" value="${java.home}\include"/>
+    <available file="${java.home}\..\include" property="native.J2SEINC" value="${java.home}\..\include"/>
+    <!-- check if compile is necessary -->
+    <condition property="native.compiled">
+      <and>
+        <uptodate targetfile="${project.native}/release/Phex.dll">
+          <srcfiles dir="${project.native}/csource/win/systray" includes="**/*.h, **/*.cpp, **/*.c"/>
+          <srcfiles dir="${project.native}/csource/win/shellexec" includes="**/*.h, **/*.cpp, **/*.c"/>
+          <srcfiles dir="${project.native}/csource/win" includes="**/*.ico"/>
+        </uptodate>
+        <uptodate targetfile="${project.native}/release/Phex.exe">
+          <srcfiles dir="${project.native}/csource/share/launcher" includes="**/*.h, **/*.cpp, **/*.c"/>
+          <srcfiles dir="${project.native}/csource/win/launcher" includes="**/*.h, **/*.cpp, **/*.c"/>
+          <srcfiles dir="${project.native}/csource/win" includes="**/*.ico"/>
+        </uptodate>
+        <uptodate targetfile="${project.native}/release/Phex_debug.exe">
+          <srcfiles dir="${project.native}/csource/share/launcher" includes="**/*.h, **/*.cpp, **/*.c"/>
+          <srcfiles dir="${project.native}/csource/win/launcher" includes="**/*.h, **/*.cpp, **/*.c"/>
+          <srcfiles dir="${project.native}/csource/win" includes="**/*.ico"/>
+        </uptodate>
+      </and>
+    </condition>
+  </target>
+  
+  <target name="init">
+    <!-- workaround to determine compiler path -->
+    <available file="C:\Borland\BCC55" property="native.ccHome" value="C:\Borland\BCC55"/>
+    <available file="D:\Borland\BCC55" property="native.ccHome" value="D:\Borland\BCC55"/>
+    
+    <!-- Sets isWindowsOS when windows system and we have a borland compiler -->
+    <condition property="isBCCAvailable">
+      <and>
+        <available file="${native.ccHome}" />
+        <os family="windows"/>
+      </and>
+    </condition>
+  </target>
+</project>

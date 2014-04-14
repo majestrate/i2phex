@@ -1,0 +1,10 @@
+# Hostile blocks discovered to be spamming. 
+# Same format as the gtkg hostiles. 
+# they have been found by Klaus_1250 from gnutellaforums. 
+
+65.49.34.0/23
+65.49.36.0/24
+65.49.38.0/24
+78.129.148.0/23
+78.129.151.0/24
+

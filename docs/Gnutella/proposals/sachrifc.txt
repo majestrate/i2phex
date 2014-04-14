@@ -1,0 +1,171 @@
+         SACHRIFC: Simple Flow Control for Gnutella
+                       Working Draft
+                       March 1, 2002
+
+                     Christopher Rohrs
+                       Lime Wire LLC
+                   <crohrs@limewire.com>
+                   
+
+1. Introduction
+
+A good Gnutella client must be prepared to handle messaging
+connections with different capacities.  Consider a client S
+with connections C1 and C2.  What should S do if C1 is
+sending broadcast messages faster than C2 can receive them?
+One option is for S to close one of the connections in the
+hope that things will balance out.  However this introduces
+instability in the network.
+
+A better option is for S to buffer messages when possible
+and drop messages when needed.  The question is which
+messages to buffer and which to drop.  This is the problem
+of flow control.
+
+The simplest flow control scheme is to use one
+application-level FIFO buffer B per connection C.  Any
+messages to send to C are first queued in B.  Messages are
+removed from B and sent to the network as fast as possible.
+This scheme weathers small bursts of traffic, but it has
+several shortcomings.  First, what should be done if B
+overfills?  Should some messages (e.g., pushes) be removed
+before others (e.g., pings)?  Second, B can introduce
+substantial messaging latency.  If C1 has a limited capacity
+(bandwidth) R, a FIFO queue of N message bytes can introduce
+a latency of N/R seconds.
+
+Good flow control is necessary to ensure that Gnutella does
+not collapse under the weight of additional users.  It will
+also become important if vendors wish to artificially cap
+the bandwidth used for messaging, e.g., to provide more
+bandwidth for web browsing.  This paper describes SACHRIFC,
+an effective but easy-to-implement flow-control algorithm.
+
+
+2. Goals
+
+SACHRIFC has the following goals:
+
+    1. Never drop messages unless bandwidth is at a premium.
+
+    2. Minimize latency.  Never buffer messages too long.
+
+    3. Prefer messages in the following order: pushes (most
+       important), query replies, queries, pongs, pings
+       (least important).  In other words, if you have to
+       choose between dropping a push and a query, drop the
+       query.
+
+    4. Prevent any one message type from dominating traffic.
+       For example, a stream of pushes should not totally
+       prevent all replies from being routed.  This goal is
+       at odds with (3).
+
+    5. Favor less popular replies over more popular ones.
+       Assume that 10 replies have been routed to query Q1
+       and 1000 replies have been routed to query Q2.  If
+       you must choose between routing another reply R1 to
+       Q1 and another reply R2 to Q2, prefer R1.
+       
+Serguei Osokine suggests the following additional goals in
+his flow control paper (http://www.grouter.net/gnutella/).
+SACHRIFC does NOT attempt any of these:
+
+     1. Drop low hop requests before high hop requests.
+        While I would like to do this, I haven't found a way
+        of easily squeezing it into the algorithm below.
+        Suggestions are most welcome.
+
+     2. Share bandwidth fairly between all connections.
+        While this may help prevent denial-of-service
+        attacks, it's not always a good idea.  Say that
+        connection C1 is sending 10KB/s while C2 is only
+        sending 1KB/s of traffic.  It's entirely possible
+        that C2 is serving thousands of users, while C1 is
+        serving only one user.  Of course C1 could be a DoS
+        attack too.
+
+     3. Avoid forwarding queries if there will be no
+        bandwidth for the replies.  Serguei's "Q-Algorithm"
+        attempts to do this, but I suspect it is hard to do
+        right in practice.
+
+
+3. The SACHRIFC Algorithm
+
+Like the FIFO algorithm described above, SACHRIFC uses one
+application-level buffer per connection.  However, each of
+these buffers Q consists of a separate queue Qi for each of
+the 5 message types.  A buffer's query reply queue is sorted
+by "GUID volume", with messages whose GUIDs have generated
+fewer replies at the head.  (This is easily implemented with
+a binary heap.)  The remaining queues are sorted by time,
+with newer messages at the head.  A message M is added to
+buffer Q as follows
+       
+    let M have type i
+    if (queue Qi is full)
+       remove tail entry from Qi
+    add M to Qi
+
+SACHRIFC sends messages using a kind of round-robin
+algorithm.  For simplicity, assume one dedicated reader
+thread per buffer Q.  This reader continually removes
+messages from the queue and forwards them to the network as
+follows:
+
+    for each of the i message queues Qi in buffer Q
+         for each of the min(Ni, |Qi|) Mi on the head of Qi
+              if Mi is not "too old" for that message type
+                   send Mi to the network
+
+By adjusting the ratios N1:N2:N3:N4:N5, you can adjust the
+worst-case message type ratio.  Perhaps, for example, we'd
+like to send 2 replies to every one query if bandwidth is at
+a premium.  This achieves goals (3) and (4).  If you're
+really fancy, you can specify ratios in terms of volume, not
+counts.  You could even make N_QUERY_REPLY proportional to
+GUID volume.  On the other hand, if the outgoing link
+capacity is sufficient, messages ratios are not "shaped".
+
+3.1 Why LIFO?
+
+The SACHRIFC algorithm uses a LIFO policy for traffic other
+than replies.  This helps minimize latency (goal 2), without
+affecting normal message traffic.  To understand why LIFO is
+preferable to FIFO, consider a stream of queries being read
+at 1 KB/s from connection C1, being forwarded to another
+connection C2.  For simplicity, assume that all messages are
+of the same type.  Assume the capacity of C2 is exactly 1
+KB/s and the capacity of C1 is infinite.
+
+    C1 (infinite capacity) -> ROUTER -> C2 (1 KB/s capacity)
+
+Initially, of course, no messages are dropped.  Now we get
+an instantaneous burst of 10KB worth of data from from C1.
+With a FIFO policy, it will take 10 seconds to sends this
+chunk out to C2.  Subsequently, C2's buffer will always
+contain 10 seconds worth of data, so the C1->C2 latency is
+now 10 seconds for all remaining packets.  This is clearly
+undesirable.
+
+With the LIFO policy, the 10KB chunk will simply be queued.
+Subsequent packets will be sent with no latency.  Eventually
+the 10KB chunk will be dropped because of either condition
+above.  I think this is much preferable to the FIFO
+behavior.  Better to screw a few packets a lot than a lot of
+packets a little.
+
+Clients should not use the LIFO policy for query routing
+protocol (QRP) messages, as QRP depends on in-order
+delivery.  Nor should servents time out QRP messages.
+
+3.2 Implementation
+
+I have implemented the SACHRIFC algorithm on the
+flow-control-branch CVS branch of the limewire.org project.
+Most of the code can be found in the OutputRunner inner
+class of core/com/limegroup/gnutella/ManagedConnection.java.
+The code was not hard to implement and performs quite
+efficiently.  I'd be happy to explain it to anyone
+interested.

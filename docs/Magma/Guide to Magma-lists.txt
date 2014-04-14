@@ -1,0 +1,60 @@
+Contents: 
+- Part 1: Share your file-list on the web
+- Part 2: Mirror-downloading via magma-lists
+
+Created by Arne Babenhauserheide ( http://draketo.de )
+Copyrigt: cc attribution-sharealike
+
+
+- Part 1: Share your file-list on the web - 
+
+A magma-list is in essence an easy way to share your list of most loved files with your friends. 
+
+That well beloved feature of iTunes, to let friends listen in to your music-library, but now in a p2p-way, and as a plus the files stay on your computer (so you can listen to the songs whenever you want...). 
+
+It is a list of magnet-links, which get read out and downloaded by Phex automatically. ( You can get the newest beta at [url]http://phex.org[/url] )
+
+To create it, simply go to the library of Phex, make sure, that it hashed all your shared files (just select a shared-folder and look in he column "hash". It has to be filles with the hash-value - to share a folder, just do a right click and click either share folder or share folder recursive). 
+
+Then click the "export"-button at the bottom of the page and select "Magma list (YAML)" as format. Click on the browse-button next to "output" and select the folder where you want to store the file. For the name, the only limitation is, that it has to end on ".magma". 
+
+Send this file to your friends, if via E-Mail, a forum attachment, an IM-file-transfer (ICQ/AIM/YIM/MSN/etc) or by putting it on your webpage, and when they double-click it (on linux: open it with Phex), Phex instantly searches for the files and downloads them. 
+
+You can also make all downloadable contents of your webpage avaible with this by simply putting those files into your shared-folder, sharing only that single folder (waiting, till Phex hashed all the files, which can take anything between 20s and 1h, for really much data, several GB, even longer) and then exporting the file and putting it on your webpage.
+
+Now people can get the files without draining all allowed traffic from your webserver. Should your server be near its quote, you could also make the files avaible via p2p-only to preserve page-viewing capabilities...
+
+- Part 2: Mirror-downloading via magma-lists - 
+
+Magma-Lists can also be written by hand. For example you can use them to serve a file (or several files), which is/are avaible via many mirrors with phex in such a way, that phex downloads from all mirrors at once. 
+
+For that, the file must begin with: 
+"#MAGMAv0.2"
+followed by an empty line (this isn't mandatory, but looks nicer). 
+then in any following line you need to begin the line with
+"list:" 
+After this parameter, the list of magnets begings. Here any line must have a space in front of any content, else the list ends. 
+For every file, begin an object with: 
+" - " (space hyphen space). 
+After this you open a magnet inside double-quotes. : 
+"<magnet>"
+
+<magnet> must be replaced by the magnet-link. To make a multi-mirror-file-download, the magnet would look something like this: 
+magnet:?dn=the+name+of+your+file&as=http://your.domain/your-file&as=http://your.mirror/your-file&as=another.mirror/another-path/your-file-by-another-name 
+
+The dn-parameter specifies the name of your file. here you have to replace every space by a plus-sign ("+"). 
+
+You can set every parameter on its own line (and even cut the line wherever you want), but the next line has to begin with three spaces (those get ignored when reading the magnet, but tell the program, that the magnet goes on. )
+
+Don't forget to close the magnet with a double-quote. 
+
+For the next file, you beging another object with 
+" - " and go on just like you did with the first. 
+
+For additional security you can put the sha1-hash of your file into the magnet. For that, put this to your magnet-link (replacing "<sha1>" with the sha1-value. 
+"xt=urn:sha1:<sha1>"
+
+The magnet will the look something like this: 
+magnet:?xt=urn:sha1:<sha1>&dn=file-name&as=http-link
+
+To get started, best take the "mirror-download.magma" example file and modify it to fit your needs.

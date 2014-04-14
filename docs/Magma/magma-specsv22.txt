@@ -1,0 +1,192 @@
+===========================================
+MAGnet MAnifest (.magma) Simple List Format
+by Arne Babenhauserheide ( arne_bab@web.de - http://draketo.de )
+
+MAGMA files are a way to transport Magnet-lists and additional 
+information 
+in a human-readable way. 
+
+(1) Magma files are a line-oriented text format consisting of a header 
+line 
+followed by any number of comments and topics. 
+It is based off YAML and will likely be extended in the future to be 
+able to 
+contain more information. This is the first draft and specifies how a 
+simple 
+parser can extract Magnets from a Magma-File. 
+
+(2) Any line in which the first non-whitespace character is '#' is a 
+comment 
+through to the end of the line. When a '#' appears somewhere in a line, 
+that 
+line is a comment from the '#' through to the end of the line. For 
+example:
+
+# this is a comment
+
+(3) Lines consisting solely of whitespace are ignored. 
+
+(4) A line which begins with "list:" starts a list of topics, which 
+continues, 
+till another line starts with any character but a whitespace. 
+A line starting with a "#" may be ignored for this purpose (We don't 
+want a 
+thoughtlessly placed comment to break the list too early). 
+
+(5) Any line in that list beginning with " - " (space-hyphen-space) is 
+considered the start of a topic. 
+
+(6) A topic continues till any line begins with less than two spaces 
+followed by 
+any other character. A new topic begins as described in (5). 
+
+(7) If the topic begins with a magnet-link, that magnet-link must be 
+sourrounded 
+by double-quotes. The magnet must be the first element of the topic, 
+which means, it should be in the first or second line. 
+Inside these double-quotes any whitespace is ignored. 
+Also any 
+linebreak which is followed by at least three spaces is ignored. 
+
+(8) A topic may contain any URI and any number of additional objects. 
+Programs 
+should ignore every line beginning with an object-nominator they don't 
+understand. Any line beginning with two spaces and any character but a 
+"-" or a 
+"#" is considered the beginning of an object. More on objects in (10). 
+Any line 
+beginning with two spaces and a "#" is a comment inside the topic. 
+
+If the topic contains a magnet URI, the various magnet attributes have 
+their 
+usual meanings.
+
+Note that this means the following two lines have an identical meaning 
+inside a 
+magma file -- each specifies a single exact topic:
+
+ - urn:sha1:BLAH
+ - "magnet:?xt=urn:sha1:BLAH" 
+
+
+(9) Any line inside the double quotation beginning with three or more 
+whitespaces, where the first non-whitespace character is not a '#', is 
+considered a continuation of the previous topic line and should be 
+appended with 
+no intervening whitespace. For example:
+
+ - "magnet:?xt=urn:sha1:BLAH
+   &dn=magnacarta.jpg"
+
+...is equivalent to...
+
+ - "magnet:?xt=urn:sha1:BLAH&dn=magnacarta.jpg"
+
+(10) Additinal file information can be given as objects in the format 
+"nominator:information", where the nominator must be preceded by two 
+spaces and 
+must be in a new line. Any whitespaces directly following the colon can 
+be 
+ignored (as they will most probable be placed for greater readability). 
+
+For example this would be a topic which named the hash, download name 
+and an 
+alternate location without the use of a magnet-link. Watch the second 
+line being 
+indented by two spaces, one more than the "-": 
+
+ - urn:sha1:BLAH
+  dn:magnacarta.jpg
+  as:http://BLAK
+
+This should be expanded into the following magnet-link to pass it on to 
+magnet-
+aware programs: 
+
+magnet:?xt=urn:sha1:BLAH&dn=magnacarta.jpg&as=http://BLAK
+
+
+(11) The first line should begin "#MAGMA" and a Version number. In this 
+case 
+"#MAGMAv0.2". This can be ignored by simpleminded parsers as a comment, 
+but is 
+also a hint/"magic number" to help indicate the file's type in 
+situations where 
+the manifest may have been acquired solely by a typeless urn:sha1: 
+(etc.) 
+identifier. The rest of the first line must not be used as a regular 
+comment. 
+(See #12.)
+
+(12) The first line may include an optional "virtual magnet URI" 
+describing the 
+manifest itself. In such a magnet URI, the 'mt' may be set to '.' to 
+mean 
+'this'.
+For example:
+
+#MAGMAv0.2 magnet:?mt=.&dn=My%20First%20Manifest
+
+This first line cannot make use of the continuation facility described 
+in (5).
+
+(13) Another, more extensible Magnet Manifest format will be defined in 
+the 
+future. The specs for this Version of the Magnet Manifest (0.2) will 
+stay 
+compatible at least till v0.4 and also after that magnnets should be 
+extractable 
+from MAGMA-files using the sheme described in here. 
+
+====================================
+AN EXAMPLE
+
+You might come across a magnet URI like either of the following:
+
+
+magnet:?xt=urn:sha1:B4LGBGBX2J7PBNXRCQVS474Y5DW3I6WB
+&dn=gnufu-files-v0.2.magma
+&xs=http://edrikor.dyndns.org:9845/uri-res/N2R?urn:sha1:
+
+B4LGBGBX2J7PBNXRCQVS474Y5DW3I6WB
+&as=http://magnet-uri.sourceforge.net/proposals/arne/gnufu-files.magma
+
+magnet:?mt=http://magnet-uri.sourceforge.net/proposals/arne/gnufu-files.magma
+
+By either finding a file with the exact matching SHA1 (in the first 
+case), or by 
+fetching the given HTTP URL (in the second case), you might wind up 
+with the 
+following file:
+
+==== BEGIN EXAMPLE FILE ====
+#MAGMAv0.2 
+magnet:?mt=.&dn=gnufu-files-v0.2.magma&as=http://magnet-uri.sourceforge.net/proposals/arne/gnufu-files-v0.2.magma
+
+# these are the documents created for GnuFU: Gnutella For Users, 
+# a simple guide to Gnutella and recent changes in the Gnutella-network
+# written in userfriendly style. 
+
+list: 
+ - "magnet:?xt=urn:sha1:7BHEGP445NVQUNSDFHOK5FFC3P65HANG
+   &dn=gnufu-en-2004-06-26.rtd.zip
+   &xs=http://edrikor.dyndns.org:9845
+   /uri-res/N2R?urn:sha1:7BHEGP445NVQUNSDFHOK5FFC3P65HANG"
+   
+ - "magnet:?xt=urn:sha1:GK6T2LZV2IPAY57XWQTCQLWWGEGPJ6SG
+   &dn=gnufu-en-2004-06-26.pdf
+   &xs=http://edrikor.dyndns.org:9845
+   /uri-res/N2R?urn:sha1:GK6T2LZV2IPAY57XWQTCQLWWGEGPJ6SG"
+
+ - "magnet:?xt=urn:sha1:3QL5VEGHQZWNP34NCLZVSIZF3HK4P5VZ
+   &dn=gnufu-de-2004-06-26.rtd.zip
+   &xs=http://edrikor.dyndns.org:9845
+   /uri-res/N2R?urn:sha1:3QL5VEGHQZWNP34NCLZVSIZF3HK4P5VZ"
+
+ - "magnet:?xt=urn:sha1:2A5ERFKC3EBAUTRQSIYZY5GABB6MYMXF
+   &dn=gnufu-de-2004-06-26.pdf
+   &xs=http://edrikor.dyndns.org:9845
+   /uri-res/N2R?urn:sha1:2A5ERFKC3EBAUTRQSIYZY5GABB6MYMXF"
+==== END EXAMPLE FILE ====
+
+Comments? Suggestions? Problems?

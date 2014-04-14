@@ -1,0 +1,129 @@
+<!-- This project task is for Java Web Start but currently not correctly integrated since unfortunatly no develper is working on this anymore -->
+
+<project name="Phex.WebStart" default="buildWebStart" basedir="..">
+
+  <!--
+        To create and upload a webstart package with a different
+        suffix (so as not to conflict with the webstart cache),
+        you can set the webstart.suffix property to some unique
+        name.
+        e.g.: ant -Dwebstart.suffix=-newFeaturetest webstart.upload
+    -->
+  <property name="webstart.suffix" value=""/>
+  <property name="webstart" value="${basedir}/jws${webstart.suffix}"/>
+  
+  <target name="cleanJWS">
+  	<echo>Delete all JWS content</echo>
+  	<delete dir="${webstart}" verbose="true"/>
+  </target>
+    
+  <target name="copyJWSFiles">
+  	<copy todir="${webstart}">
+      <fileset dir="${apache.commons-logging.lib}">
+        <include name="**/*.jar"/>
+      </fileset>
+      <fileset dir="${apache.commons-httpclient.lib}">
+        <include name="**/*.jar"/>
+      </fileset>
+      <fileset dir="${apache.commons-log4j.lib}">
+        <include name="**/*.jar"/>
+      </fileset>
+      <fileset dir="${apple.lib}">
+        <include name="**/*.jar"/>
+        <include name="**/*.zip"/>
+      </fileset>
+      <fileset dir="${jgoodies.forms.lib}">
+        <include name="**/*.jar"/>
+      </fileset>
+      <fileset dir="${jgoodies.looks.lib.path}">
+        <include name="**/*.jar"/>
+      </fileset>
+      <fileset dir="${junit.lib}">
+        <include name="**/*.jar"/>
+      </fileset>
+      <fileset dir="${i2p.lib}">
+          <include name="**/*.jar"/>
+      </fileset>
+  	</copy>
+    <copy file="${build.target.lib}/phex.jar" todir="${webstart}"/>
+  </target>
+
+  <target name="buildWebStart" depends="cleanJWS, copyJWSFiles, signjars">
+    <mkdir dir="${webstart}"/>
+    <copy file="${project.source}/phex/resources/phex_wiz.gif" tofile="${webstart}/phex_wiz.gif"/>
+    <copy file="${project.source}/phex/resources/phex.jpg" tofile="${webstart}/phex.jpg"/>
+    <generate-jnlp codebase="http://phex.sourceforge.net/jws" file="phex.jnlp"/>
+    <generate-jnlp codebase="file://${webstart}" file="localtest.jnlp"/>
+    <echo file="${webstart}/test.html"><![CDATA[
+      <html>
+        <a href="phex.jnlp">Launch Remote Installed Phex.</a><br>
+        <a href="localtest.jnlp">Launch Local Test Phex.</a>
+      </html>
+    ]]></echo>
+  </target>
+
+  <target name="signjars">
+    <property name="key.store" value="${webstart}/phex.keystore"/>
+    <property name="key.pass" value="PHEXY4phex"/>
+    <property name="key.alias" value="phex-developer-team"/>
+    <!-- We regenerate the keystore each time. Its easier, and
+         since we are just using a self-signed certificate, it isn't
+         a problem. -->
+    <delete file="${webstart}/phex.keystore"/>
+    <genkey alias="${key.alias}" storepass="${key.pass}" validity="190"
+    	keystore="${key.store}" verbose="true">
+      <dname>
+        <param name="CN" value="Phex Developer Team"/>
+      </dname>
+    </genkey>
+    
+    
+    <echo>Signing the jar files.</echo>
+    <signjar alias="${key.alias}" storepass="${key.pass}" keystore="${key.store}">
+      <fileset dir="${webstart}">
+        <include name="**/*.jar"/>
+      </fileset>
+    </signjar>
+  </target>
+  
+  <target name="releaseWebStart" depends="buildWebStart">
+    <scp todir="gregork:${sfPWD}@phex.sourceforge.net:/home/groups/p/ph/phex/htdocs/jws" verbose="true">
+      <fileset dir="${webstart}">
+        <include name="**/*"/>
+      </fileset>
+    </scp>
+  </target>
+  
+  <macrodef name="generate-jnlp">
+    <attribute name="codebase"/>
+    <attribute name="file"/>
+    <sequential>
+      <echo>Generate JNLP file: @{codebase}/@{file}</echo>
+      <echo file="${webstart}/@{file}"><![CDATA[
+         <jnlp spec="1.0" codebase="@{codebase}" href="@{file}">
+        	<information>
+	            <title>Phex</title>
+	            <vendor>Phex Developer Team</vendor>
+	            <homepage href="http://phex.kouk.de/"/>
+	            <description>A 100% pure Java gnutella client</description>
+	            <icon href="phex_wiz.gif"/>
+	            <offline-allowed/>
+            </information>
+            <security>
+                <all-permissions/>
+            </security>
+            <resources>
+            	<j2se version="1.5+"/>
+			    <jar href="phex.jar" main="true" download="eager"/>
+			    <jar href="${jgoodies.looks.lib.filename}" download="eager"/>
+			    <jar href="forms-1.1.0.jar" download="eager"/>
+     			<jar href="commons-httpclient-3.0.jar" download="eager"/>
+			    <jar href="commons-logging.jar" download="eager"/>
+     			<jar href="MRJAdapter.jar" main="false" download="eager"/>
+	        </resources>
+	        <application-desc main-class="phex.Main"/>
+        </jnlp>
+    ]]></echo>
+  </sequential>
+</macrodef>
+</project>

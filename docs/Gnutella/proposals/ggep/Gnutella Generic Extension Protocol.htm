@@ -1,0 +1,521 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0101)http://groups.yahoo.com/group/the_gdf/files/Proposals/GGEP/GnutellaGenericExtensionProtocol.0.51.html -->
+<HTML><HEAD><TITLE>Gnutella Generic Extension Protocol</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=windows-1252">
+<META content=False name=vs_showGrid>
+<META content="MSHTML 5.50.4913.1100" name=GENERATOR></HEAD>
+<BODY>
+<CENTER>
+<H1>Gnutella Generic Extension Protocol (GGEP)</H1>
+<P>Document Revision Version 0.51</P>
+<P>Protocol Version 0.5</P>
+<P>February 4, 2002</P>
+<P>Jason Thomas (<A 
+href="mailto:jason@jasonthomas.com">jason@jasonthomas.com</A>)</P>
+<P>&nbsp;</P></CENTER>
+<H2>Change History</H2>
+<TABLE border=1>
+  <TBODY>
+  <TR>
+    <TH>Document Revision</TH>
+    <TH>Protocol Version</TH>
+    <TH>Date</TH>
+    <TH>Changes</TH></TR>
+  <TR>
+    <TD>0.51</TD>
+    <TD>0.5</TD>
+    <TD>02/4/2002</TD>
+    <TD>
+      <UL>
+        <LI>This GGEP document has a revision number, the protocol has a version 
+        number.&nbsp; Both are listed in this table, and the document 
+        header.&nbsp; This distinction will permit future cleanup of the 
+        document after the protocol has been approved. 
+        <LI>Minor documentation cleanup 
+        <LI>The section about using (not the ability to use) GUIDs as extension 
+        IDs removed.</LI></UL></TD></TR>
+  <TR>
+    <TD>0.5</TD>
+    <TD>0.5</TD>
+    <TD>01/27/2002</TD>
+    <TD>
+      <UL>
+        <LI>Flags completely redone 
+        <LI>IDs can only be between 1-15 bytes 
+        <LI>Connection Handshake Headers 
+        <LI>Ping and Pong messages may now include GGEP blocks</LI></UL></TD></TR>
+  <TR>
+    <TD>0.4</TD>
+    <TD>N/A</TD>
+    <TD>01/15/2002</TD>
+    <TD>
+      <UL>
+        <LI>The fixed 2 byte length munging scheme has been replaced with a 
+        variable length scheme 
+        <LI>1 byte extension IDs (approved ones), no longer use the extension ID 
+        length field, the field is omitted and this fact is communicated in the 
+        extension flags 
+        <LI>Extensions with no payload no longer need a data length field.&nbsp; 
+        This state is indicated in the extension flags. 
+        <LI>The extension prefix no longer contains the length of the GGEP 
+        block.&nbsp; Instead, a bit in the extension prefix indicates the prefix 
+        is the last one in the block. 
+        <LI>Push messages may now include GGEP blocks</LI></UL></TD></TR>
+  <TR>
+    <TD>0.31</TD>
+    <TD>N/A</TD>
+    <TD>01/08/2002</TD>
+    <TD>
+      <UL>
+        <LI>Changed the GEM field separator from 0xfc to 0x1c in the Peaceful 
+        Co-Existence section</LI></UL></TD></TR>
+  <TR>
+    <TD>0.3</TD>
+    <TD>N/A</TD>
+    <TD>01/03/2002</TD>
+    <TD>
+      <UL>
+        <LI>Length field in the extension prefix is defined to be the total 
+        length of each subsequent extension. 
+        <LI>Length field in the extension is defined to be the length of the raw 
+        extension data. 
+        <LI>Better guidance on the creation of Extension IDs 
+        <LI>Peaceful Co-Existence</LI></UL></TD></TR>
+  <TR>
+    <TD>0.2</TD>
+    <TD>N/A</TD>
+    <TD>12/20/2001</TD>
+    <TD>
+      <UL>
+        <LI>Length field munging is done w/o use of bit fields. 
+        <LI>The extension ID is prefixed with a 1 byte length identifier rather 
+        than a&nbsp;postfix of a specified byte. 
+        <LI>The number of extension field in the extension prefix has been 
+        replaced&nbsp;by a field listing the total length of the extensions. 
+        <LI>Encoding and compression bits within the extension flags have been 
+        changed to fields of those types.</LI></UL></TD></TR>
+  <TR>
+    <TD>0.11</TD>
+    <TD>N/A</TD>
+    <TD>12/17/2001</TD>
+    <TD>
+      <UL>
+        <LI>The extension prefix is shortened (flags and version were 
+        eliminated) 
+        <LI>Base64 was dropped in favor of COBS 
+        <LI>ExtensionIDs are now variable length.&nbsp; This changed the 
+        extension prefix. 
+        <LI>Some Extension Flags have been renamed.</LI></UL></TD></TR>
+  <TR>
+    <TD>0.1</TD>
+    <TD>N/A</TD>
+    <TD>12/13/2001</TD>
+    <TD>
+      <UL>
+        <LI>The first draft of the proposal</LI></UL></TD></TR></TBODY></TABLE>
+<H2>Background</H2>
+<P>The Gnutella 0.4 Protocol is a bare bones protocol for sharing files. Over 
+time, servent implementers have targeted different sections of the protocol for 
+extensions. An example of this is the Bear Share Trailer that was added to the 
+Query Hit. </P>
+<P>Today, proposals exist to pack yet more data into the existing protocol. 
+Unfortunately, many of these were designed for a single purpose and will close 
+off future extensions. </P>
+<P>This document describes a standardized format for the creation of arbitrary 
+new extensions. This new standard allows for : 
+<UL>
+  <LI>The inclusion of either text or binary data. 
+  <LI>Servent vendors to create extensions at will. 
+  <LI>Multiple extensions to be output within responses 
+  <LI>Unambiguous parsing</LI></UL>
+<P></P>
+<H2>Connection Handshake Headers</H2>
+<P>Servents that have support the forwarding of all packets that contain GGEP 
+extensions (whether or not they can process them), <STRONG>must</STRONG> include 
+a new header in the Gnutella 0.6 connection handshake indicating this 
+support.&nbsp; This will allow other servents to know what types of packets this 
+servent can accept.&nbsp; The format of this header is 
+<P><FONT face="Courier New">GGEP : majorversion'.'minorversion</FONT></P>
+<H2>Format</H2>
+<H3>Length Encoding</H3>
+<P>The length field uses an encoding technique that ensures that 0x0 is never 
+the value of any byte.&nbsp; Steps were also taken to ensure that the encoding 
+is compact.&nbsp;In this technique, a length field is the concatenation of 
+length chunks.&nbsp; The format of each length chunk (which contains 6 bits of 
+length info) is described in bit level below:</P>
+<H4>Format</H4><PRE>76543210			
+MLxxxxxx
+			</PRE>
+<P>M = 1 if there is another length chunk in the sequence, else 0</P>
+<P>L = 1 if this is the last length chunk in the sequence, else 0</P>
+<P>xxxxxx = 6 bits of data.</P>
+<P>01aaaaaa ==&gt; aaaaaa (2^6&nbsp;values = 0-63)</P>
+<P>10bbbbbb 01aaaaaa ==&gt; bbbbbbaaaaaa (2^12&nbsp;values = 0-4095)</P>
+<P>10ccccccc 10bbbbbb 01aaaaaa ==&gt; ccccccbbbbbbaaaaaa (2^18 values = 
+0-262143)</P>
+<H4>Boundary Cases</H4>
+<UL>
+  <LI>0 = 01 000000b = 0x40 
+  <LI>63 = 01 111111b = 0x7f 
+  <LI>64 = 10 000001&nbsp; 01 000000b = 0x8140 
+  <LI>4095 = 10 111111&nbsp; 01 111111b = 0xbf7f 
+  <LI>4096 = 10 000001&nbsp; 10 000000&nbsp; 01 000000b = 0x818040 
+  <LI>262143 = 10 111111&nbsp; 10 111111&nbsp; 01 111111b = 0xbfbf7f</LI></UL>
+<P>As you see, when the bits are concatenated, the number is in big endian 
+format.</P>
+<H4>Non-Error Checking Parsing Pseudo Code</H4><PRE>int length = 0;
+byte b;
+do
+{
+   b = *extensionbuf++;
+   length = (length &lt;&lt; 6) | (b&amp;0x3f);
+} while (0x40 != b &amp; 0x40);		
+		</PRE>
+<H3>GGEP Block</H3>
+<P>
+<TABLE id=Table8 border=1>
+  <TBODY>
+  <TR>
+    <TD>GGEP Extension Prefix</TD></TR>
+  <TR>
+    <TD>GGEP Extension Header 0</TD></TR>
+  <TR>
+    <TD>GGEP Extension Data 0</TD></TR>
+  <TR>
+    <TH>.</TH></TR>
+  <TR>
+    <TH>.</TH></TR>
+  <TR>
+    <TH>.</TH></TR>
+  <TR>
+    <TD>GGEP Extension Header N</TD></TR>
+  <TR>
+    <TD>GGEP Extension Data N</TD></TR></TBODY></TABLE></P>
+<H3>Extension Block</H3>
+<P>Extension blocks may contain an arbitrary number of GGEP blocks packed one 
+against another.&nbsp; Although this behavior is allowed, developers 
+are&nbsp;encouraged to merge multiple GGEP blocks into a single GGEP 
+block.&nbsp; If a newer extension format is created (either a new version of 
+GGEP or another format altogether), they will appear AFTER the last GGEP block 
+of an earlier version.</P>
+<P>
+<TABLE id=Table11 border=1>
+  <TBODY>
+  <TR>
+    <TD>GGEP Block 0</TD></TR>
+  <TR>
+    <TH>.</TH></TR>
+  <TR>
+    <TH>.</TH></TR>
+  <TR>
+    <TH>.</TH></TR>
+  <TR>
+    <TD>GGEP Block N</TD></TR></TBODY></TABLE></P>
+<H3>GGEP Extension Prefix</H3>
+<H3>
+<TABLE id=Table4 border=1>
+  <TBODY>
+  <TR>
+    <TH>Byte Positions</TH>
+    <TH>Name</TH>
+    <TH>Comments</TH></TR>
+  <TR>
+    <TD>0</TD>
+    <TD>Magic</TD>
+    <TD>This is a magic number is used to help distinguish GGEP extensions 
+      from legacy data which may exist.&nbsp; It must be set to the&nbsp;value 
+      0xC3.</TD></TR></TBODY></TABLE>
+<P>GGEP Extension Header</P></H3>
+<TABLE border=1>
+  <TBODY>
+  <TR>
+    <TH>Field Order</TH>
+    <TH>Bytes Required</TH>
+    <TH>Name</TH>
+    <TH>Comments</TH></TR>
+  <TR>
+    <TD>0</TD>
+    <TD>1</TD>
+    <TD>Flags</TD>
+    <TD>These are options which describe the encoding of the extension header 
+      and data.</TD></TR>
+  <TR>
+    <TD>1</TD>
+    <TD>1-15</TD>
+    <TD>ID</TD>
+    <TD>
+      <P>The raw binary data in this field is the extension ID.&nbsp; See 
+      Appendix A on suggestions for creating extension IDs.&nbsp;&nbsp;No byte 
+      in the extension header my be 0x0.&nbsp;</P></TD></TR>
+  <TR>
+    <TD>2</TD>
+    <TD>1-3</TD>
+    <TD>Data Length</TD>
+    <TD>
+      <P>This is the length of the raw extension data.&nbsp; This field is 
+      persisted according to the length encoding rules listed 
+  above.</P></TD></TR></TBODY></TABLE>
+<H3>GGEP Extension Header Flags</H3>
+<P>
+<TABLE id=Table1 border=1>
+  <TBODY>
+  <TR>
+    <TH>Bit Positions</TH>
+    <TH>Name</TH>
+    <TH>Comments</TH></TR>
+  <TR>
+    <TD>7</TD>
+    <TD>Last Extension</TD>
+    <TD>When set, this is the last extension in the GGEP block.</TD></TR>
+  <TR>
+    <TD>6</TD>
+    <TD>Encoding</TD>
+    <TD>The value contained in this field dictates the type of encoding which 
+      should be applied to the extension data (after possible 
+compression).</TD></TR>
+  <TR>
+    <TD>5</TD>
+    <TD>Compression</TD>
+    <TD>The value contained in this field dictates the type of compression 
+      that should be applied to the extension data.</TD></TR>
+  <TR>
+    <TD>4</TD>
+    <TD>Reserved</TD>
+    <TD>This field is currently reserved for future use.&nbsp; It must be set 
+      to 0.</TD></TR>
+  <TR>
+    <TD>3-0</TD>
+    <TD>ID Len</TD>
+    <TD>Value 1-15 can be stored here.&nbsp; Since this will not be zero, it 
+      ensures this byte will not be 0x0.</TD></TR></TBODY></TABLE></P>
+<H3>
+<H3>Encoding Types</H3></H3>
+<TABLE border=1>
+  <TBODY>
+  <TR>
+    <TH>Values</TH>
+    <TH>Types</TH></TR>
+  <TR>
+    <TD>0</TD>
+    <TD>There is no encoding on the data.</TD></TR>
+  <TR>
+    <TD>1</TD>
+    <TD>The data is encoded using the COBS scheme.</TD></TR></TBODY></TABLE>
+<H3>Compression&nbsp;Types</H3>
+<TABLE id=Table6 border=1>
+  <TBODY>
+  <TR>
+    <TH>Values</TH>
+    <TH>Types</TH></TR>
+  <TR>
+    <TD>0</TD>
+    <TD>The extension data has not been compressed.</TD></TR>
+  <TR>
+    <TD>1</TD>
+    <TD>The extension data should be decompressed using the deflate 
+    algorithm.&nbsp;</TD></TR></TBODY></TABLE>
+<H2>Usage</H2>
+<H3>Ping Message</H3>
+<P>The Clip2 document states that ping messages have no payloads.&nbsp; Given 
+this definition, existing servent vendors drop connections that issue pings 
+containing payloads.&nbsp; As such, developers are suggested to allow 
+widespread&nbsp;distribution&nbsp;of GGEP enabled servents before releasing 
+extensions for the ping message.&nbsp; Similarly, they should only forward ping 
+messages containing GGEP extensions to other servents who have indicated their 
+support of GGEP via the handshake header.&nbsp;</P>
+<P>Servents are instructed to forward all ping messages containing GGEP blocks 
+they do not understand regardless of ping/pong reduction schemes.</P>
+<P>The payload of the ping message is now defined to be:</P>
+<P></P>
+<P></P>
+<P>
+<TABLE id=Table9 border=1>
+  <TBODY>
+  <TR>
+    <TD>Extension Block</TD></TR></TBODY></TABLE>
+<H3>Pong Message</H3>
+<P>Being that there are not currently extensions to the pong message 
+and&nbsp;the last field has a fixed length, it is easy to extend this message to 
+include GGEP.&nbsp; That said, since the current pong message currently has a 
+fixed length, existing servents may drop connections if they receive pongs 
+containing extensions.&nbsp; To this end, developers are suggested to only 
+include GGEP blocks in response to ping messages containing GGEP blocks, as that 
+will guarantee that the pathway is GGEP enabled.</P>
+<P>The payload of the pong message is now defined to be:</P>
+<P></P>
+<P></P>
+<P>
+<TABLE id=Table10 border=1>
+  <TBODY>
+  <TR>
+    <TD>Port</TD></TR>
+  <TR>
+    <TD>IP Address</TD></TR>
+  <TR>
+    <TD>Num Files Shared</TD></TR>
+  <TR>
+    <TD>Num KBytes Shared</TD></TR>
+  <TR>
+    <TD>Extension Block</TD></TR></TBODY></TABLE></P>
+<H3>Query Message</H3>
+<P>The Query message is redefined in a way as not to break Gnutella 0.4 
+compatible servents.</P>
+<TABLE id=Table7 border=1>
+  <TBODY>
+  <TR>
+    <TD>MinSpeed</TD></TR>
+  <TR>
+    <TD>Criteria</TD></TR>
+  <TR>
+    <TD>0x0</TD></TR>
+  <TR>
+    <TD>Extension&nbsp;Block</TD></TR></TBODY></TABLE>
+<H3>QHD Private Data</H3>
+<P>Until now, servent vendors have been left to define the format of this opaque 
+field.&nbsp; Ones that are able to write to this field, only read from it if 
+they recognize their vendor code.&nbsp; To this end, we must first indicate to 
+all clients that the private data section contains a GGEP block, so they know to 
+crack open the field.&nbsp; To do this, we use an open data bit 5 of the Flags 
+and Flag2 fields (the format of this field is defined in the Clip2 
+document).&nbsp; Remember that the ability to crack the GGEP block does not mean 
+that one is able to understand the extensions contained within.</P>
+<P>For compatibility with a couple of existing servents that already use this 
+field, it is necessary to search for the GGEP block by looking for the first 
+occurance of the GGEP magic byte.&nbsp; </P>
+<P>Private Data Format for servents that already use the private area and are 
+trying to retain compatibility with older versions of their code&nbsp; This will 
+be phased out over time:</P>
+<TABLE id=Table2 border=1>
+  <TBODY>
+  <TR>
+    <TD>Servent Specific Private Data Backwards Data that are guaranteed not 
+      to contain the GGEP magic byte</TD>
+    <TD>0-XXX bytes (usually 1)</TD></TR>
+  <TR>
+    <TD>GGEP Block</TD>
+    <TD>YYY&nbsp;bytes</TD></TR>
+  <TR>
+    <TD>More Servent Specific Private Data for backwards compatibility section 
+      that can completely be ignored.</TD>
+    <TD>0-ZZZ bytes</TD></TR></TBODY></TABLE>
+<P>Private Data Format for new servents:</P>
+<TABLE id=Table12 border=1>
+  <TBODY>
+  <TR>
+    <TD>Extension Block</TD></TR></TBODY></TABLE>
+<P>Note that the code necessary to find the GGEP block in both formats is 
+identical.</P>
+<H3>Query Hit Result</H3>
+<P>Servent vendors must be careful to ensure that 0x0 does not appear in any 
+extension data placed embedded into the Query Hit Result.&nbsp; One does this by 
+using any of the available encoding options.</P>
+<P>
+<TABLE id=Table3 border=1>
+  <TBODY>
+  <TR>
+    <TD>File Index</TD></TR>
+  <TR>
+    <TD>File Size</TD></TR>
+  <TR>
+    <TD>File Name</TD></TR>
+  <TR>
+    <TD>0x0</TD></TR>
+  <TR>
+    <TD>Extension&nbsp;Block</TD></TR></TBODY></TABLE></P>
+<H3>Push Message</H3>
+<P>Being that there are not currently extensions to the push message 
+and&nbsp;the last field has a fixed length, it is easy to extend this message to 
+include GGEP.&nbsp; That said, since the current push message currently has a 
+fixed length, it is possible that old servents will validate against that 
+length, and throw out push messages that include GGEP extensions.&nbsp; To this 
+end, servents should only send push messages containing extension blocks to 
+other servents that have indicated GGEP support via the connection 
+handshake.</P>
+<P>The payload of the push message is now defined to be:</P>
+<P></P>
+<P>
+<TABLE id=Table5 border=1>
+  <TBODY>
+  <TR>
+    <TD>Servent ID</TD></TR>
+  <TR>
+    <TD>File Index</TD></TR>
+  <TR>
+    <TD>IP Address</TD></TR>
+  <TR>
+    <TD>Port</TD></TR>
+  <TR>
+    <TD>Extension&nbsp;Block</TD></TR></TBODY></TABLE></P>
+<H2>Notes/Issues</H2>
+<H3>Existing Standards</H3>
+<UL>
+  <LI>The HUGE 0.93 specification should be modified to transmit data inside a 
+  GGEP extension. 
+  <LI>Bearshare sends encrypted data in the QHD private data field.&nbsp; It is 
+  possible that this data could start with bytes that would pass for a valid 
+  Extension Prefix and an Extension Header.&nbsp; Given the wide distribution of 
+  the Bearshare client and its usage of the field, changes to that servent may 
+  take a while to distribute to the masses.&nbsp; Servent vendors implementing 
+  GGEP should ensure they gracefully handle this case.</LI></UL>
+<H3>Implementation Notes.</H3>
+<UL>
+  <LI>Extension implementers are urged to publish the ID, format, and expected 
+  data size for their extensions in the GDF database called "GGEP Extensions." 
+  <LI>When encoding an extension, be sure the apply the encoding AFTER the 
+  optional compression step.&nbsp; Likewise, when decoding the extension, do so 
+  BEFORE decompressing the data. 
+  <LI>One should only compress data if doing so will make a material difference 
+  in the resulting packet size. 
+  <LI>Extensions within a block should be processed in the order in which they 
+  appear. 
+  <LI>Please note that most gnutella clients will drop messages, and possibly 
+  connections if the message size is larger than a certain threshold (which 
+  varies according to message type).&nbsp; Please pay attention to these limits 
+  when creating and bundling new extensions. 
+  <LI>Details about the COBS encoding scheme may be found at <A 
+  href="http://www.acm.org/sigcomm/sigcomm97/papers/p062.pdf">http://www.acm.org/sigcomm/sigcomm97/papers/p062.pdf</A>&nbsp; 
+
+  <LI>Details about the Deflate compression scheme may be found at <A 
+  href="http://www.faqs.org/rfcs/rfc1951.html">http://www.faqs.org/rfcs/rfc1951.html</A> 
+  and <A href="http://www.gzip.org/zlib/">http://www.gzip.org/zlib/</A></LI></UL>
+<H2>Appendix A - Creating Extension IDs</H2>
+<P>The Extension ID field in the GGEP header is a binary field consisting of 
+between 1 and 15 bytes.&nbsp; It cannot contain the byte 0x0, and one must be 
+able to compare IDs with a simple binary comparison.&nbsp; Asisde from those 
+rules, GGEP does not mandate any particular format, but does encourage the 
+creation of short IDs that are free from conflicts.&nbsp; One should also note 
+that Extension IDs are meant to be consumed by machines.&nbsp; To this end, the 
+following techniques are recommended.&nbsp; If one has a strong need to create 
+an alternative format, be sure to avoid conflicts with the following 
+schemes.</P>
+<H3>GDF Registered Extensions</H3>
+<P>Any Extension ID of less than&nbsp;4 bytes must be stored in the appropriate 
+GDF database.&nbsp; Any Extension ID of less than 3 bytes must be also be 
+approved by the GDF.&nbsp; The format of the extension data must also be 
+registered.</P>
+<H3>VendorID Extensions</H3>
+<P>This simple technique allows for the creation of ExtensionIDs based upon uses 
+the following format <EM>VendorID|'.'|BinaryData</EM> VendorID for a Gnutella 
+servent is a 4 byte value that has been registered in the GDF Peer Codes 
+database.&nbsp; In the QueryHit Descriptor, this case is case insensitive.&nbsp; 
+With ExtensionIDs, the case matters, as one must be able to perform a binary 
+comparison on the ID.&nbsp; This means an ExtensionID of "SWAP.1" and "swap.1" 
+are different, but both "belong" the vendor who ones the code "SWAP."</P>
+<H2>Appendix&nbsp;B - Peaceful Co-Existence</H2>
+<P>It is unfortunately the case that GGEP extensions will co-exist with legacy 
+extensions for quite some time.&nbsp; In some cases, both may exist in the same 
+space allocated for extensions.&nbsp; The below&nbsp;algorithm&nbsp;for 
+interpreting extension fields will help sort out such this co-existence. 
+<OL>
+  <LI>Peek 1 byte, if is GGEP magic goto 2, else goto 6 
+  <LI>Read GGEP magic byte 
+  <LI>Read and process a single GGEP extension (extension headers, extension 
+  data) 
+  <LI>If the extension flag do not have the Last_Extension bit set, goto 3 
+  <LI>Goto&nbsp;7 
+  <LI>Read until end of extension field, or 0x1c, whichever comes first.&nbsp; 
+  It will be up to you to determine which legacy extension exists in this space. 
+
+  <LI>If no bytes left, quit 
+  <LI>Peek 1 byte, if 0x1c or 0x0, advance 1 byte 
+  <LI>Goto 1</LI></OL></BODY></HTML>

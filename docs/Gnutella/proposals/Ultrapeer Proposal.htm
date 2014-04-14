@@ -1,0 +1,871 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0049)http://www.limewire.com/developer/Ultrapeers.html -->
+<HTML xmlns="http://www.w3.org/TR/REC-html40" xmlns:o = 
+"urn:schemas-microsoft-com:office:office" xmlns:w = 
+"urn:schemas-microsoft-com:office:word"><HEAD><TITLE>Supernodes:</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=windows-1252">
+<META content=Word.Document name=ProgId>
+<META content="MSHTML 5.50.4913.1100" name=GENERATOR>
+<META content="Microsoft Word 9" name=Originator><LINK 
+href="./Supernodes2_files/filelist.xml" rel=File-List><!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>x</o:Author>
+  <o:Template>Normal</o:Template>
+  <o:LastAuthor>crohrs</o:LastAuthor>
+  <o:Revision>2</o:Revision>
+  <o:TotalTime>0</o:TotalTime>
+  <o:Created>2001-12-27T21:32:00Z</o:Created>
+  <o:LastSaved>2001-12-27T21:32:00Z</o:LastSaved>
+  <o:Pages>6</o:Pages>
+  <o:Words>1976</o:Words>
+  <o:Characters>11266</o:Characters>
+  <o:Company>y</o:Company>
+  <o:Lines>93</o:Lines>
+  <o:Paragraphs>22</o:Paragraphs>
+  <o:CharactersWithSpaces>13835</o:CharactersWithSpaces>
+  <o:Version>9.2720</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]--><![if !supportAnnotations]>
+<STYLE id=dynCom type=text/css></STYLE>
+
+<SCRIPT language=JavaScript><!--
+function msoCommentShow(anchor_id, com_id)
+{
+	if(msoBrowserCheck()) 
+		{
+		c = document.all(com_id);
+		if (null != c)
+			{
+			a = document.all(anchor_id);
+			var cw = c.offsetWidth;
+			var ch = c.offsetHeight;
+			var aw = a.offsetWidth;
+			var ah = a.offsetHeight;
+			var x  = a.offsetLeft;
+			var y  = a.offsetTop;
+			var el = a;
+			while (el.tagName != "BODY") 
+				{
+				el = el.offsetParent;
+				x = x + el.offsetLeft;
+				y = y + el.offsetTop;
+				}
+			var bw = document.body.clientWidth;
+			var bh = document.body.clientHeight;
+			var bsl = document.body.scrollLeft;
+			var bst = document.body.scrollTop;
+			if (x + cw + ah / 2 > bw + bsl && x + aw - ah / 2 - cw >= bsl ) 
+				{ c.style.left = x + aw - ah / 2 - cw; }
+			else 
+				{ c.style.left = x + ah / 2; }
+			if (y + ch + ah / 2 > bh + bst && y + ah / 2 - ch >= bst ) 
+				{ c.style.top = y + ah / 2 - ch; }
+			else 
+				{ c.style.top = y + ah / 2; }
+			c.style.visibility = "visible";
+}	}	}
+function msoCommentHide(com_id) 
+{
+	if(msoBrowserCheck())
+		{
+		c = document.all(com_id);
+		if (null != c)
+		{
+		c.style.visibility = "hidden";
+		c.style.left = -1000;
+		c.style.top = -1000;
+		} } 
+}
+function msoBrowserCheck()
+{
+	ms = navigator.appVersion.indexOf("MSIE");
+	vers = navigator.appVersion.substring(ms + 5, ms + 6);
+	ie4 = (ms > 0) && (parseInt(vers) >= 4);
+	return ie4;
+}
+if (msoBrowserCheck())
+{
+	document.styleSheets.dynCom.addRule(".msocomanchor","background: infobackground");
+	document.styleSheets.dynCom.addRule(".msocomoff","display: none");
+	document.styleSheets.dynCom.addRule(".msocomtxt","visibility: hidden");
+	document.styleSheets.dynCom.addRule(".msocomtxt","position: absolute");
+	document.styleSheets.dynCom.addRule(".msocomtxt","top: -1000");
+	document.styleSheets.dynCom.addRule(".msocomtxt","left: -1000");
+	document.styleSheets.dynCom.addRule(".msocomtxt","width: 33%");
+	document.styleSheets.dynCom.addRule(".msocomtxt","background: infobackground");
+	document.styleSheets.dynCom.addRule(".msocomtxt","color: infotext");
+	document.styleSheets.dynCom.addRule(".msocomtxt","border-top: 1pt solid threedlightshadow");
+	document.styleSheets.dynCom.addRule(".msocomtxt","border-right: 2pt solid threedshadow");
+	document.styleSheets.dynCom.addRule(".msocomtxt","border-bottom: 2pt solid threedshadow");
+	document.styleSheets.dynCom.addRule(".msocomtxt","border-left: 1pt solid threedlightshadow");
+	document.styleSheets.dynCom.addRule(".msocomtxt","padding: 3pt 3pt 3pt 3pt");
+}
+// --></SCRIPT>
+<![endif]>
+<STYLE>@font-face {
+	font-family: Wingdings;
+}
+@font-face {
+	font-family: Tahoma;
+}
+@page Section1 {size: 8.5in 11.0in; margin: 1.0in 1.25in 1.0in 1.25in; mso-header-margin: .5in; mso-footer-margin: .5in; mso-paper-source: 0; }
+P.MsoNormal {
+	FONT-SIZE: 12pt; MARGIN: 0in 0in 0pt; FONT-FAMILY: "Times New Roman"; mso-style-parent: ""; mso-pagination: widow-orphan; mso-fareast-font-family: "Times New Roman"
+}
+LI.MsoNormal {
+	FONT-SIZE: 12pt; MARGIN: 0in 0in 0pt; FONT-FAMILY: "Times New Roman"; mso-style-parent: ""; mso-pagination: widow-orphan; mso-fareast-font-family: "Times New Roman"
+}
+DIV.MsoNormal {
+	FONT-SIZE: 12pt; MARGIN: 0in 0in 0pt; FONT-FAMILY: "Times New Roman"; mso-style-parent: ""; mso-pagination: widow-orphan; mso-fareast-font-family: "Times New Roman"
+}
+H1 {
+	FONT-SIZE: 16pt; MARGIN: 12pt 0in 3pt; FONT-FAMILY: Arial; mso-font-kerning: 16.0pt; mso-pagination: widow-orphan; mso-style-next: Normal; mso-outline-level: 1
+}
+H2 {
+	FONT-SIZE: 12pt; MARGIN: 0in 0in 0pt; FONT-FAMILY: "Times New Roman"; TEXT-DECORATION: underline; mso-pagination: widow-orphan; mso-style-next: Normal; mso-outline-level: 2; text-underline: single
+}
+H3 {
+	FONT-SIZE: 12pt; MARGIN: 12pt 0in 3pt; FONT-FAMILY: "Times New Roman"; mso-pagination: widow-orphan; mso-style-next: Normal; mso-outline-level: 3; mso-bidi-font-size: 13.0pt; mso-bidi-font-family: Arial
+}
+P.MsoFootnoteText {
+	FONT-SIZE: 10pt; MARGIN: 0in 0in 0pt; FONT-FAMILY: "Times New Roman"; mso-pagination: widow-orphan; mso-fareast-font-family: "Times New Roman"
+}
+LI.MsoFootnoteText {
+	FONT-SIZE: 10pt; MARGIN: 0in 0in 0pt; FONT-FAMILY: "Times New Roman"; mso-pagination: widow-orphan; mso-fareast-font-family: "Times New Roman"
+}
+DIV.MsoFootnoteText {
+	FONT-SIZE: 10pt; MARGIN: 0in 0in 0pt; FONT-FAMILY: "Times New Roman"; mso-pagination: widow-orphan; mso-fareast-font-family: "Times New Roman"
+}
+P.MsoCommentText {
+	FONT-SIZE: 10pt; MARGIN: 0in 0in 0pt; FONT-FAMILY: "Times New Roman"; mso-pagination: widow-orphan; mso-fareast-font-family: "Times New Roman"
+}
+LI.MsoCommentText {
+	FONT-SIZE: 10pt; MARGIN: 0in 0in 0pt; FONT-FAMILY: "Times New Roman"; mso-pagination: widow-orphan; mso-fareast-font-family: "Times New Roman"
+}
+DIV.MsoCommentText {
+	FONT-SIZE: 10pt; MARGIN: 0in 0in 0pt; FONT-FAMILY: "Times New Roman"; mso-pagination: widow-orphan; mso-fareast-font-family: "Times New Roman"
+}
+SPAN.MsoFootnoteReference {
+	VERTICAL-ALIGN: super
+}
+SPAN.MsoCommentReference {
+	mso-bidi-font-size: 8.0pt; mso-ansi-font-size: 8.0pt
+}
+P.MsoTitle {
+	FONT-WEIGHT: bold; FONT-SIZE: 12pt; MARGIN: 0in 0in 0pt; FONT-FAMILY: "Times New Roman"; TEXT-ALIGN: center; TEXT-DECORATION: underline; mso-pagination: widow-orphan; mso-fareast-font-family: "Times New Roman"; text-underline: single
+}
+LI.MsoTitle {
+	FONT-WEIGHT: bold; FONT-SIZE: 12pt; MARGIN: 0in 0in 0pt; FONT-FAMILY: "Times New Roman"; TEXT-ALIGN: center; TEXT-DECORATION: underline; mso-pagination: widow-orphan; mso-fareast-font-family: "Times New Roman"; text-underline: single
+}
+DIV.MsoTitle {
+	FONT-WEIGHT: bold; FONT-SIZE: 12pt; MARGIN: 0in 0in 0pt; FONT-FAMILY: "Times New Roman"; TEXT-ALIGN: center; TEXT-DECORATION: underline; mso-pagination: widow-orphan; mso-fareast-font-family: "Times New Roman"; text-underline: single
+}
+P.MsoDocumentMap {
+	FONT-SIZE: 12pt; BACKGROUND: navy; MARGIN: 0in 0in 0pt; FONT-FAMILY: Tahoma; mso-pagination: widow-orphan; mso-fareast-font-family: "Times New Roman"
+}
+LI.MsoDocumentMap {
+	FONT-SIZE: 12pt; BACKGROUND: navy; MARGIN: 0in 0in 0pt; FONT-FAMILY: Tahoma; mso-pagination: widow-orphan; mso-fareast-font-family: "Times New Roman"
+}
+DIV.MsoDocumentMap {
+	FONT-SIZE: 12pt; BACKGROUND: navy; MARGIN: 0in 0in 0pt; FONT-FAMILY: Tahoma; mso-pagination: widow-orphan; mso-fareast-font-family: "Times New Roman"
+}
+P.MsoPlainText {
+	FONT-SIZE: 10pt; MARGIN: 0in 0in 0pt; FONT-FAMILY: "Courier New"; mso-pagination: widow-orphan; mso-fareast-font-family: "Times New Roman"
+}
+LI.MsoPlainText {
+	FONT-SIZE: 10pt; MARGIN: 0in 0in 0pt; FONT-FAMILY: "Courier New"; mso-pagination: widow-orphan; mso-fareast-font-family: "Times New Roman"
+}
+DIV.MsoPlainText {
+	FONT-SIZE: 10pt; MARGIN: 0in 0in 0pt; FONT-FAMILY: "Courier New"; mso-pagination: widow-orphan; mso-fareast-font-family: "Times New Roman"
+}
+P.CommentSubject {
+	FONT-WEIGHT: bold; FONT-SIZE: 10pt; MARGIN: 0in 0in 0pt; FONT-FAMILY: "Times New Roman"; mso-style-parent: "Comment Text"; mso-pagination: widow-orphan; mso-fareast-font-family: "Times New Roman"; mso-style-next: "Comment Text"; mso-style-name: "Comment Subject"
+}
+LI.CommentSubject {
+	FONT-WEIGHT: bold; FONT-SIZE: 10pt; MARGIN: 0in 0in 0pt; FONT-FAMILY: "Times New Roman"; mso-style-parent: "Comment Text"; mso-pagination: widow-orphan; mso-fareast-font-family: "Times New Roman"; mso-style-next: "Comment Text"; mso-style-name: "Comment Subject"
+}
+DIV.CommentSubject {
+	FONT-WEIGHT: bold; FONT-SIZE: 10pt; MARGIN: 0in 0in 0pt; FONT-FAMILY: "Times New Roman"; mso-style-parent: "Comment Text"; mso-pagination: widow-orphan; mso-fareast-font-family: "Times New Roman"; mso-style-next: "Comment Text"; mso-style-name: "Comment Subject"
+}
+P.BalloonText {
+	FONT-SIZE: 8pt; MARGIN: 0in 0in 0pt; FONT-FAMILY: Tahoma; mso-pagination: widow-orphan; mso-fareast-font-family: "Times New Roman"; mso-style-name: "Balloon Text"
+}
+LI.BalloonText {
+	FONT-SIZE: 8pt; MARGIN: 0in 0in 0pt; FONT-FAMILY: Tahoma; mso-pagination: widow-orphan; mso-fareast-font-family: "Times New Roman"; mso-style-name: "Balloon Text"
+}
+DIV.BalloonText {
+	FONT-SIZE: 8pt; MARGIN: 0in 0in 0pt; FONT-FAMILY: Tahoma; mso-pagination: widow-orphan; mso-fareast-font-family: "Times New Roman"; mso-style-name: "Balloon Text"
+}
+DIV.Section1 {
+	page: Section1
+}
+OL {
+	MARGIN-BOTTOM: 0in
+}
+UL {
+	MARGIN-BOTTOM: 0in
+}
+</STYLE>
+</HEAD>
+<BODY lang=EN-US style="tab-interval: .5in">
+<DIV class=Section1>
+<H1 style="TEXT-ALIGN: center" align=center><SPAN 
+style="mso-font-kerning: 0pt">Ultrapeers: <o:p></o:p></SPAN></H1>
+<H2 style="TEXT-ALIGN: center" align=center><SPAN 
+style="FONT-FAMILY: Arial; TEXT-DECORATION: none; text-underline: none">Another 
+Step Towards Gnutella Scalability<o:p></o:p></SPAN></H2>
+<P class=MsoNormal style="TEXT-ALIGN: center" align=center>Working Draft</P>
+<P class=MsoNormal style="TEXT-ALIGN: center" align=center><I><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></I></P>
+<P class=MsoNormal style="TEXT-ALIGN: center" align=center>Anurag Singla</P>
+<P class=MsoNormal style="TEXT-ALIGN: center" align=center>Christopher Rohrs</P>
+<P class=MsoNormal style="TEXT-ALIGN: center" align=center><SPAN 
+style="mso-spacerun: yes">&nbsp;</SPAN>Lime Wire LLC</P>
+<P class=MsoNormal style="TEXT-ALIGN: center" align=center>December 18, 2001</P>
+<P class=MsoTitle><SPAN 
+style="FONT-WEIGHT: normal; TEXT-DECORATION: none; text-underline: none">{anurag, 
+crohrs}@limewire.com<I><o:p></o:p></I></SPAN></P>
+<P class=MsoTitle style="TEXT-ALIGN: left" align=left><SPAN 
+style="FONT-SIZE: 16pt; mso-bidi-font-size: 12.0pt"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="MARGIN: 0in 0.5in 0pt"><B 
+style="mso-bidi-font-weight: normal"><I 
+style="mso-bidi-font-style: normal">Abstract</I></B><I 
+style="mso-bidi-font-style: normal">: We propose a scheme to have a hierarchical 
+gnutella network by categorizing the nodes on the network as client-nodes and 
+super-nodes. A client-node keeps only one connection open, and that is to a 
+super-node. A super-node acts as a proxy to the gnutella network for the client 
+nodes connected to it. This has a effect of making the gnutella network scale, 
+by reducing the number of nodes on the network involved in message handling and 
+routing, as well as reducing the actual traffic among them.<o:p></o:p></I></P>
+<P class=MsoNormal>&nbsp;</P>
+<P class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P>
+<H2><A name=_Toc526132563><SPAN 
+style="TEXT-DECORATION: none; text-underline: none">1. 
+Introduction</SPAN></A><SPAN 
+style="TEXT-DECORATION: none; text-underline: none"><o:p></o:p></SPAN></H2>
+<P class=MsoNormal><SPAN 
+style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN></P>
+<P class=MsoNormal>The Gnutella network is a peer-to-peer network, all the hosts 
+on the network are treated equal regardless of their bandwidth capabilities or 
+computation power or other properties (like uptime, connection capability etc). 
+Nodes on the network communicate using either of Gnutella Protocol 0.4 [PROT04], 
+or an enhanced version that uses new Connection Handshaking mechanism [GC01], 
+both of which have many interesting properties. New hosts can join any time, and 
+the current hosts on the network may leave the network any time. The ability to 
+have a dependable network, without dependence on any particular host (or set of 
+hosts), is a remarkable feature of gnutella that has led to its immense 
+popularity.<SPAN style="mso-spacerun: yes">&nbsp; </SPAN>Along with this there 
+are many other remarkable features of gnutella network [WHYGNUT01] that 
+distinguish it from other systems.</P>
+<P class=MsoNormal>&nbsp;</P>
+<P class=MsoNormal>But along with all the good features that gnutella possesses, 
+there have always been doubts cast upon the scalability of gnutella network. 
+That’s primarily because of the overabundance of messages flowing thru the 
+gnutella network including broadcast pings and queries, as well as the inability 
+to assure content availability close enough to the searching host. Queries are 
+sent to large number of hosts in an attempt to secure a hit from few of them. 
+This has led to bandwidth problems in the past as well as in the present. </P>
+<P class=MsoNormal>&nbsp;</P>
+<P class=MsoNormal>Gnutella developers have taken a number of very promising 
+initiatives to reduce the number of messages flowing in the gnutella network, by 
+making the methods more directed as well as carry more information. Notable 
+among these are Ping Pong Scheme Proposal [CV01] which reduces the number of 
+messages by eliminating the ones not contributing much to the system, Meta 
+Information Search Proposal (S01) which attempts to make search more specific, 
+and Query Routing Proposal [C00] which reduces the query traffic by doing 
+selective broadcast.</P>
+<P class=MsoNormal>&nbsp;</P>
+<P class=MsoNormal>Although the above initiatives are a promising step towards 
+making the network efficient, there definitely exist other supplementary 
+schemes, one of which is the scheme proposed in this paper that has a major 
+potential of making network scalable and efficient. We propose a scheme which if 
+implemented will create a two level hierarchy of nodes in the gnutella network, 
+where faster nodes (ones having better networking capabilities and CPU power) 
+take charge of much of the load on slower nodes. In the proposed scheme this 
+restructuring of the network takes place automatically and dynamically, and 
+works in unison with the other initiatives mentioned above. The restructured 
+network will have a effect of significant reduction in the number of messages 
+flowing thru the gnutella network.</P>
+<P class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P>
+<P class=MsoNormal>At the same point, we would like to mention that the concept 
+of the ultrapeers is not new, and has been in existence in variety of 
+applications (including proxy access to web which has static ultrapeer 
+selection, as well as distributed transaction processing which has dynamic 
+ultrapeer selection algorithm). Also it has been applied to recent peer-to-peer 
+applications using FastTrack [FTRACK], or other such similar technologies. The 
+application of the ultrapeer concept in Peer-to-Peer application has been done 
+using proprietary algorithms and protocols. Our contribution in this paper is to 
+come up with a scheme to implement the dynamic ultrapeer selection mechanism in 
+the Gnutella network. No such scheme has been published as yet. Our approach may 
+or may not be similar to the proprietary ones in existence, with which we have 
+no way to compare. </P>
+<P class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P>
+<P class=MsoNormal>We present our scheme as follows.<SPAN 
+style="mso-spacerun: yes">&nbsp; </SPAN>First we describe how ultrapeers work in 
+an ideal network with a static topology.<SPAN style="mso-spacerun: yes">&nbsp; 
+</SPAN>In doing so, we discuss options for ultrapeers to <A 
+style="mso-comment-reference: xyz_1">index </A><![if !supportAnnotations]><A 
+language=JavaScript class=msocomanchor id=_anchor_1 
+onmouseover="msoCommentShow('_anchor_1','_com_1')" 
+onmouseout="msoCommentHide('_com_1')" name=_msoanchor_1 
+href="http://www.limewire.com/developer/Ultrapeers.html#_msocom_1">[xyz1]</A><![endif]><SPAN 
+class=MsoCommentReference><SPAN 
+style="DISPLAY: none; FONT-SIZE: 8pt; mso-hide: all"><SPAN 
+style="mso-special-character: comment">&nbsp;</SPAN></SPAN></SPAN>leaf 
+nodes.<SPAN style="mso-spacerun: yes">&nbsp; </SPAN>Next we tackle the more 
+difficult problem of “ultrapeer election”, i.e., of dynamically constructing a 
+tiered network.<SPAN style="mso-spacerun: yes">&nbsp; </SPAN>We describe a 
+handshaking mechanism based on the recent Gnutella 0.6 protocol in detail and 
+the concept of “ultrapeer guidance”.<SPAN style="mso-spacerun: yes">&nbsp; 
+</SPAN>Finally, we conclude with some performance observations and directions 
+for future work.</P>
+<P class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P>
+<H2><SPAN style="TEXT-DECORATION: none; text-underline: none">2. Routing with 
+Ultrapeers<o:p></o:p></SPAN></H2>
+<P class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P>
+<P class=MsoNormal>Nodes in this network can be divided into <I 
+style="mso-bidi-font-style: normal">leaf nodes</I> and <I 
+style="mso-bidi-font-style: normal">ultrapeers</I>.<SPAN 
+style="mso-spacerun: yes">&nbsp; </SPAN>Leaf nodes maintain only a single 
+connection to a ultrapeer.<SPAN style="mso-spacerun: yes">&nbsp; 
+</SPAN>Ultrapeers maintain many (10-100) leaf connections, as well as a small 
+(&lt;10) number of connections to other ultrapeers.<SPAN 
+style="mso-spacerun: yes">&nbsp; </SPAN>Ultrapeers shield leaf nodes from 
+virtually all ping and query traffic.<SPAN style="mso-spacerun: yes">&nbsp; 
+</SPAN>This can be done in one of two ways:</P>
+<P class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P>
+<UL style="MARGIN-TOP: 0in" type=disc>
+  <LI class=MsoNormal style="mso-list: l4 level1 lfo1; tab-stops: list .5in"><B 
+  style="mso-bidi-font-weight: normal">Reflector indexing:</B> in the style of 
+  the <A style="mso-comment-reference: xyz_2">Clip2 Reflector</A><![if !supportAnnotations]><A language=JavaScript 
+  class=msocomanchor id=_anchor_2 
+  onmouseover="msoCommentShow('_anchor_2','_com_2')" 
+  onmouseout="msoCommentHide('_com_2')" name=_msoanchor_2 
+  href="http://www.limewire.com/developer/Ultrapeers.html#_msocom_2">[xyz2]</A><![endif]><SPAN 
+  class=MsoCommentReference><SPAN 
+  style="DISPLAY: none; FONT-SIZE: 8pt; mso-hide: all"><SPAN 
+  style="mso-special-character: comment">&nbsp;</SPAN></SPAN></SPAN>, ultrapeers 
+  periodically send an indexing query (four spaces, i.e., “<SPAN 
+  style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </SPAN>“) to leaf nodes.<SPAN 
+  style="mso-spacerun: yes">&nbsp; </SPAN>Leaf nodes respond with a query reply 
+  naming all shared files.<SPAN style="mso-spacerun: yes">&nbsp; </SPAN>(The 
+  leaf can send multiple query reply messages if sharing more than 255 
+  messages.)<SPAN style="mso-spacerun: yes">&nbsp; </SPAN>The ultrapeer uses 
+  these replies to build an index of its leaves’ contents.<SPAN 
+  style="mso-spacerun: yes">&nbsp; </SPAN>The ultrapeer then responds to queries 
+  on behalf of leaf nodes, shielding them from all query traffic. 
+  <LI class=MsoNormal style="mso-list: l4 level1 lfo1; tab-stops: list .5in"><B 
+  style="mso-bidi-font-weight: normal">QRP routing: </B>leaf nodes periodically 
+  send ultrapeers query routing tables using LimeWire’s proposed <A 
+  style="mso-comment-reference: xyz_3">Query Routing Protocol </A><![if !supportAnnotations]><A language=JavaScript class=msocomanchor 
+  id=_anchor_3 onmouseover="msoCommentShow('_anchor_3','_com_3')" 
+  onmouseout="msoCommentHide('_com_3')" name=_msoanchor_3 
+  href="http://www.limewire.com/developer/Ultrapeers.html#_msocom_3">[xyz3]</A><![endif]><SPAN 
+  class=MsoCommentReference><SPAN 
+  style="DISPLAY: none; FONT-SIZE: 8pt; mso-hide: all"><SPAN 
+  style="mso-special-character: comment">&nbsp;</SPAN></SPAN></SPAN>(QRP).<SPAN 
+  style="mso-spacerun: yes">&nbsp; </SPAN>Ultrapeers then forward queries only 
+  to those leaf nodes whose QRP table has a corresponding entry.<SPAN 
+  style="mso-spacerun: yes">&nbsp; </SPAN>Leaves respond in the normal 
+  manner.<SPAN style="mso-spacerun: yes">&nbsp; </SPAN><I>Ultrapeers do not 
+  propogate QRP tables amongst themselves</I>.<A title="" 
+  style="mso-footnote-id: ftn1" name=_ftnref1 
+  href="http://www.limewire.com/developer/Ultrapeers.html#_ftn1"><SPAN 
+  class=MsoFootnoteReference><SPAN style="mso-special-character: footnote"><![if !supportFootnotes]>[1]<![endif]></SPAN></SPAN></A> 
+  </LI></UL>
+<P class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P>
+<P class=MsoNormal>Hybrid schemes are of course possible.<SPAN 
+style="mso-spacerun: yes">&nbsp; </SPAN>However, we recommend QRP routing for <A 
+style="mso-comment-reference: xyz_4">several reasons</A><![if !supportAnnotations]><A language=JavaScript class=msocomanchor 
+id=_anchor_4 onmouseover="msoCommentShow('_anchor_4','_com_4')" 
+onmouseout="msoCommentHide('_com_4')" name=_msoanchor_4 
+href="http://www.limewire.com/developer/Ultrapeers.html#_msocom_4">[xyz4]</A><![endif]><SPAN 
+class=MsoCommentReference><SPAN 
+style="DISPLAY: none; FONT-SIZE: 8pt; mso-hide: all"><SPAN 
+style="mso-special-character: comment">&nbsp;</SPAN></SPAN></SPAN>:</P>
+<P class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P>
+<UL style="MARGIN-TOP: 0in" type=disc>
+  <LI class=MsoNormal style="mso-list: l3 level1 lfo2; tab-stops: list .5in"><B 
+  style="mso-bidi-font-weight: normal">Better QHD support:</B> because leaf 
+  nodes are given the chance to respond to all queries, they can provide 
+  up-to-the-minute information in the QHD, such as estimated download speed and 
+  busy status. 
+  <LI class=MsoNormal style="mso-list: l3 level1 lfo2; tab-stops: list .5in"><B 
+  style="mso-bidi-font-weight: normal">Update efficiency: </B>because QRP tables 
+  eliminate redundant keywords and add compression, they are likely to be 
+  significantly smaller than replies to indexing queries.<SPAN 
+  style="mso-spacerun: yes">&nbsp; </SPAN>Furthermore, a leaf node only needs to 
+  send incremental QRP updates when its shared files have changed.<SPAN 
+  style="mso-spacerun: yes">&nbsp; </SPAN>In contrast, a reflector-style 
+  ultrapeer would need to periodically re-index <I 
+  style="mso-bidi-font-style: normal">all</I> of the leaves’ files—this takes 
+  more bandwidth.<B style="mso-bidi-font-weight: normal"><o:p></o:p></B> 
+  <LI class=MsoNormal style="mso-list: l3 level1 lfo2; tab-stops: list .5in"><B 
+  style="mso-bidi-font-weight: normal">CPU efficiency</B>: it is very cheap 
+  (constant time) for a ultrapeer to decide whether to forward a query to a leaf 
+  node with the QRP proposal.<SPAN style="mso-spacerun: yes">&nbsp; </SPAN>The 
+  reflector-style scheme can be implemented efficiently, but it is considerably 
+  more difficult.<B style="mso-bidi-font-weight: normal"><o:p></o:p></B> 
+  <LI class=MsoNormal style="mso-list: l3 level1 lfo2; tab-stops: list .5in"><B 
+  style="mso-bidi-font-weight: normal">Privacy:</B> ultrapeers do not actually 
+  know what files are shared by leaf nodes—only those files’ hashes.<B 
+  style="mso-bidi-font-weight: normal"><o:p></o:p></B> 
+  <LI class=MsoNormal style="mso-list: l3 level1 lfo2; tab-stops: list .5in"><B 
+  style="mso-bidi-font-weight: normal">Ease of implementation</B>: LimeWire has 
+  already implemented QRP, and the code is available to the public under the GNU 
+  Public License (GPL).<SPAN style="mso-spacerun: yes">&nbsp; </SPAN>Maintaing a 
+  single QRP table per connection is easier to implement than building a 
+  “virtual file manager” for all connections.<B 
+  style="mso-bidi-font-weight: normal"><o:p></o:p></B> </LI></UL>
+<P class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P>
+<P class=MsoNormal>A more difficult question is how ultrapeers communicate 
+amongst themselves.<SPAN style="mso-spacerun: yes">&nbsp; </SPAN>Initially we 
+recommend simple broadcast as with the current Gnutella protocol. Eventually 
+ultrapeers may use more complicated protocols.<SPAN 
+style="mso-spacerun: yes">&nbsp; </SPAN>One idea is for a ultrapeer to not 
+forward a query if it receives a large number of replies from its leaf 
+nodes.<SPAN style="mso-spacerun: yes">&nbsp; </SPAN>QRP could also be used 
+between ultrapeers.</P>
+<P class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P>
+<P class=MsoNormal>The proposed scheme is backward compatible with older 
+clients.<SPAN style="mso-spacerun: yes">&nbsp; </SPAN>From the perspective of 
+newer clients, old clients are simply ultrapeers that do not maintain any 
+shielded leaf connections.<SPAN style="mso-spacerun: yes">&nbsp; </SPAN>The 
+scheme benefits the network even in the presence of old clients, though of 
+course it would be better if all clients supported ultrapeers.</P>
+<P class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P>
+<H2><SPAN style="TEXT-DECORATION: none; text-underline: none">3. Ultrapeer 
+Election<o:p></o:p></SPAN></H2>
+<P class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P>
+<P class=MsoNormal>Now we return to the question of how the ultrapeer-leaf 
+hiearchy is created in a distributed manner.<SPAN 
+style="mso-spacerun: yes">&nbsp; </SPAN>Hosts regularly determine whether they 
+are eligible to be ultrapeers (“ultrapeer capable”) by looking at uptime, 
+operating system, bandwidth, etc.<SPAN style="mso-spacerun: yes">&nbsp; 
+</SPAN>We recommend the following requirements for all ultrapeers:</P>
+<P class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P>
+<UL style="MARGIN-TOP: 0in" type=disc>
+  <LI class=MsoNormal style="mso-list: l1 level1 lfo3; tab-stops: list .5in"><B 
+  style="mso-bidi-font-weight: normal">Not firewalled</B>.<SPAN 
+  style="mso-spacerun: yes">&nbsp; </SPAN>This can usually be approximated by 
+  looking at whether the host has received incoming connections. 
+  <LI class=MsoNormal style="mso-list: l1 level1 lfo3; tab-stops: list .5in"><B 
+  style="mso-bidi-font-weight: normal">Suitable operating system</B>.<SPAN 
+  style="mso-spacerun: yes">&nbsp; </SPAN>Some operating systems handle large 
+  numbers of sockets better than others.<SPAN style="mso-spacerun: yes">&nbsp; 
+  </SPAN>Linux, Windows 2000/NT/XP, and Mac OS/X will typically make better 
+  ultrapeers than Windows 95/98/ME or Mac Classic. 
+  <LI class=MsoNormal style="mso-list: l1 level1 lfo3; tab-stops: list .5in"><B 
+  style="mso-bidi-font-weight: normal">Sufficient bandwidth</B>.<SPAN 
+  style="mso-spacerun: yes">&nbsp; </SPAN>We recommend at least 15KB/s 
+  downstream and 10KB/s upstream bandwidth.<SPAN 
+  style="mso-spacerun: yes">&nbsp; </SPAN>This can be approximated by looking at 
+  the maximum upload and download throughput. 
+  <LI class=MsoNormal style="mso-list: l1 level1 lfo3; tab-stops: list .5in"><B 
+  style="mso-bidi-font-weight: normal">Sufficient uptime</B>.<SPAN 
+  style="mso-spacerun: yes">&nbsp; </SPAN>Ultrapeers should have long expected 
+  uptimes.<SPAN style="mso-spacerun: yes">&nbsp; </SPAN>A reasonable heuristic 
+  is that the expected future uptime is proportional to the current uptime.<SPAN 
+  style="mso-spacerun: yes">&nbsp; </SPAN>That is, nodes should not become 
+  ultrapeers until they have been running for several minutes. </LI></UL>
+<P class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P>
+<P class=MsoNormal>It is important to distinguish between hosts that are 
+ultrapeer capable and hosts that are actually ultrapeers:</P>
+<P class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P>
+<UL style="MARGIN-TOP: 0in" type=disc>
+  <LI class=MsoNormal style="mso-list: l2 level1 lfo4; tab-stops: list .5in"><B 
+  style="mso-bidi-font-weight: normal">Ultrapeer</B>: hosts that are ultrapeer 
+  capable and not a shielded leaf node to an ultrapeer.<SPAN 
+  style="mso-spacerun: yes">&nbsp; </SPAN>Note that an ultrapeer does not 
+  necessarily have leaf connections. 
+  <LI class=MsoNormal style="mso-list: l2 level1 lfo4; tab-stops: list .5in"><B 
+  style="mso-bidi-font-weight: normal">Leaf</B>: hosts that have only a single, 
+  routed connection to an ultrapeer.<SPAN style="mso-spacerun: yes">&nbsp; 
+  </SPAN>Note that leaves may actually be ultrapeer capable. </LI></UL>
+<P class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P>
+<P class=MsoNormal>When hosts connect, they express their capabilities and 
+intents using <A style="mso-comment-reference: xyz_5">Gnutella 0.6 </A><![if !supportAnnotations]><A language=JavaScript class=msocomanchor 
+id=_anchor_5 onmouseover="msoCommentShow('_anchor_5','_com_5')" 
+onmouseout="msoCommentHide('_com_5')" name=_msoanchor_5 
+href="http://www.limewire.com/developer/Ultrapeers.html#_msocom_5">[xyz5]</A><![endif]><SPAN 
+style="mso-special-character: comment">&nbsp;</SPAN>connection headers.<SPAN 
+style="mso-spacerun: yes">&nbsp; </SPAN>In some cases, this will require some 
+negotiation to prevent too many nodes from becoming ultrapeers.<SPAN 
+style="mso-spacerun: yes">&nbsp; </SPAN>There are five possible cases, shown 
+below.</P>
+<H3>3.1. Leaf to Ultrapeer</H3>
+<H3></H3>
+<P class=MsoNormal>The simplest case is a leaf node connecting to a 
+ultrapeer.<SPAN style="mso-spacerun: yes">&nbsp; </SPAN>The key header here is 
+"X-Ultrapeer", which tells whether a host plans on acting as a ultrapeer (if 
+true) or a shielded node (if false).<SPAN style="mso-spacerun: yes">&nbsp; 
+</SPAN>When this interaction is over, the leaf is a shielded node of the 
+ultrapeer.<SPAN style="mso-spacerun: yes">&nbsp; </SPAN>The leaf should drop any 
+Gnutella 0.4 connection is have and send a QRP routing table.</P>
+<P class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P>
+<TABLE style="BORDER-COLLAPSE: collapse; mso-padding-alt: 0in 5.4pt 0in 5.4pt" 
+cellSpacing=0 cellPadding=0 border=0>
+  <TBODY>
+  <TR>
+    <TD 
+    style="BORDER-RIGHT: medium none; PADDING-RIGHT: 5.4pt; BORDER-TOP: medium none; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0in; BORDER-LEFT: medium none; WIDTH: 2.45in; PADDING-TOP: 0in; BORDER-BOTTOM: windowtext 0.5pt solid" 
+    vAlign=top width=235>
+      <P class=MsoNormal><B 
+      style="mso-bidi-font-weight: normal">Client<o:p></o:p></B></P></TD>
+    <TD 
+    style="BORDER-RIGHT: medium none; PADDING-RIGHT: 5.4pt; BORDER-TOP: medium none; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0in; BORDER-LEFT: medium none; WIDTH: 3.7in; PADDING-TOP: 0in; BORDER-BOTTOM: windowtext 0.5pt solid" 
+    vAlign=top width=355>
+      <P class=MsoNormal><B 
+      style="mso-bidi-font-weight: normal">Server<o:p></o:p></B></P></TD></TR>
+  <TR>
+    <TD 
+    style="BORDER-RIGHT: medium none; PADDING-RIGHT: 5.4pt; BORDER-TOP: medium none; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0in; BORDER-LEFT: medium none; WIDTH: 2.45in; PADDING-TOP: 0in; BORDER-BOTTOM: medium none; mso-border-top-alt: solid windowtext .5pt" 
+    vAlign=top width=235>
+      <P class=MsoNormal>GNUTELLA CONNECT/0.6</P>
+      <P class=MsoNormal>X-Ultrapeer: False</P>
+      <P class=MsoNormal>User-Agent: LimeWire 1.9</P>
+      <P class=MsoNormal>X-Query-Routing: 0.1</P>
+      <P class=MsoNormal>X-My-Address: 10.254.0.16:6349</P>
+      <P 
+      class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P></TD>
+    <TD 
+    style="BORDER-RIGHT: medium none; PADDING-RIGHT: 5.4pt; BORDER-TOP: medium none; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0in; BORDER-LEFT: medium none; WIDTH: 3.7in; PADDING-TOP: 0in; BORDER-BOTTOM: medium none; mso-border-top-alt: solid windowtext .5pt" 
+    vAlign=top width=355>
+      <P 
+      class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P></TD></TR>
+  <TR>
+    <TD 
+    style="PADDING-RIGHT: 5.4pt; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0in; WIDTH: 2.45in; PADDING-TOP: 0in" 
+    vAlign=top width=235>
+      <P 
+      class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P></TD>
+    <TD 
+    style="PADDING-RIGHT: 5.4pt; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0in; WIDTH: 3.7in; PADDING-TOP: 0in" 
+    vAlign=top width=355>
+      <P class=MsoNormal><SPAN style="FONT-SIZE: 11pt">GNUTELLA/0.6 200 
+      OK<o:p></o:p></SPAN></P>
+      <P class=MsoNormal><SPAN style="FONT-SIZE: 11pt">X-Ultrapeer: 
+      True<o:p></o:p></SPAN></P>
+      <P class=MsoNormal><SPAN style="FONT-SIZE: 11pt">X-Ultrapeer-Needed: 
+      false<o:p></o:p></SPAN></P>
+      <P class=MsoNormal><SPAN style="FONT-SIZE: 11pt">User-Agent: LimeWire 
+      1.9<o:p></o:p></SPAN></P>
+      <P class=MsoNormal><SPAN style="FONT-SIZE: 11pt">X-Try-Ultrapeers: 
+      23.35.1.146:6346,18.207.63.25:6347<o:p></o:p></SPAN></P>
+      <P class=MsoNormal><SPAN style="FONT-SIZE: 11pt">X-Try: 
+      24.37.144:6346,193.205.63.22:6346<o:p></o:p></SPAN></P>
+      <P class=MsoNormal><SPAN style="FONT-SIZE: 11pt">X-My-Address: 
+      10.254.0.16:6346<o:p></o:p></SPAN></P>
+      <P class=MsoNormal><SPAN style="FONT-SIZE: 11pt">X-Query-Routing: 
+      0.1</SPAN></P></TD></TR>
+  <TR>
+    <TD 
+    style="PADDING-RIGHT: 5.4pt; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0in; WIDTH: 2.45in; PADDING-TOP: 0in" 
+    vAlign=top width=235>
+      <P class=MsoNormal>GNUTELLA/0.6 200 OK</P></TD>
+    <TD 
+    style="PADDING-RIGHT: 5.4pt; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0in; WIDTH: 3.7in; PADDING-TOP: 0in" 
+    vAlign=top width=355>
+      <P 
+      class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P></TD></TR></TBODY></TABLE>
+<P class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P>
+<P class=MsoNormal>The meaning of the other headers are as follows:</P>
+<P class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P>
+<UL style="MARGIN-TOP: 0in" type=disc>
+  <LI class=MsoNormal style="mso-list: l0 level1 lfo5; tab-stops: list .5in"><B 
+  style="mso-bidi-font-weight: normal">User-Agent</B>: the identity of the 
+  vendor 
+  <LI class=MsoNormal style="mso-list: l0 level1 lfo5; tab-stops: list .5in"><B 
+  style="mso-bidi-font-weight: normal">X-Ultrapeer-Needed</B>: used to balance 
+  the number of ultrapeers.<SPAN style="mso-spacerun: yes">&nbsp; </SPAN>This is 
+  discussed in detail in section 5 below. 
+  <LI class=MsoNormal style="mso-list: l0 level1 lfo5; tab-stops: list .5in"><B 
+  style="mso-bidi-font-weight: normal">X-Query-Routing</B>: the version of query 
+  routing to be used between leaf and ultrapeer, IF a shielded leaf/ultrapeer 
+  connection is established 
+  <LI class=MsoNormal style="mso-list: l0 level1 lfo5; tab-stops: list .5in"><B 
+  style="mso-bidi-font-weight: normal">X-My-Address</B>: the host's address and 
+  port reported in query replies and pongs 
+  <LI class=MsoNormal style="mso-list: l0 level1 lfo5; tab-stops: list .5in"><B 
+  style="mso-bidi-font-weight: normal">X-Try</B>: addresses of non-ultrapeer 
+  hosts to try if the connection is lost 
+  <LI class=MsoNormal style="mso-list: l0 level1 lfo5; tab-stops: list .5in"><B 
+  style="mso-bidi-font-weight: normal">X-Try-Ultrapeers</B>: addresses of 
+  ultrapeer to try if the connection is lost </LI></UL>
+<P class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P>
+<P class=MsoNormal>These headers are sent in almost all interactions.<SPAN 
+style="mso-spacerun: yes">&nbsp; </SPAN>However, for clarity, non-essential 
+headers will be ommitted in the remaining examples.<SPAN 
+style="mso-spacerun: yes">&nbsp; </SPAN>It is important to note that headers can 
+be sent in any order.<SPAN style="mso-spacerun: yes">&nbsp; </SPAN>Also, case is 
+ignored in "True" and "False".</P>
+<H3>3.2. Leaf to Shielded Leaf</H3>
+<P class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P>
+<P class=MsoNormal>The next case we consider is a ultrapeer-incapable node A 
+connecting to a leaf node B who happens to have a connection to a ultrapeer 
+S.<SPAN style="mso-spacerun: yes">&nbsp; </SPAN>In this case, B will refuse to 
+accept the connection, redirecting A instead to S.<SPAN 
+style="mso-spacerun: yes">&nbsp; </SPAN>Note that B does not send "200 OK" in 
+its response.</P>
+<P class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P>
+<TABLE style="BORDER-COLLAPSE: collapse; mso-padding-alt: 0in 5.4pt 0in 5.4pt" 
+cellSpacing=0 cellPadding=0 border=0>
+  <TBODY>
+  <TR>
+    <TD 
+    style="PADDING-RIGHT: 5.4pt; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0in; WIDTH: 2.2in; PADDING-TOP: 0in" 
+    vAlign=top width=211>
+      <P class=MsoNormal>GNUTELLA CONNECT/0.6</P>
+      <P class=MsoNormal>X-Ultrapeer: False</P></TD>
+    <TD 
+    style="PADDING-RIGHT: 5.4pt; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0in; WIDTH: 3.95in; PADDING-TOP: 0in" 
+    vAlign=top width=379>
+      <P 
+      class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P></TD></TR>
+  <TR>
+    <TD 
+    style="PADDING-RIGHT: 5.4pt; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0in; WIDTH: 2.2in; PADDING-TOP: 0in" 
+    vAlign=top width=211>
+      <P 
+      class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P></TD>
+    <TD 
+    style="PADDING-RIGHT: 5.4pt; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0in; WIDTH: 3.95in; PADDING-TOP: 0in" 
+    vAlign=top width=379>
+      <P class=MsoNormal>GNUTELLA/0.6 503 I am a shielded leaf node</P>
+      <P class=MsoNormal>X-Ultrapeer: False</P>
+      <P class=MsoNormal>X-Try-Ultrapeers: 18.2.3.14:6346, 18.1.17.2:6346</P>
+      <P class=MsoNormal><I style="mso-bidi-font-style: normal">[terminates 
+      connection]<o:p></o:p></I></P></TD></TR></TBODY></TABLE>
+<P class=MsoNormal><SPAN 
+style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN></P>
+<P class=MsoNormal>At this point, A should should try to establish a connection 
+to S, as in case (1) above.</P>
+<H3>3.3. Leaf to Unshielded Leaf</H3>
+<P class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P>
+<P class=MsoNormal>Sometimes nodes will be ultrapeer-incapable but unable to 
+find a ultrapeer.<SPAN style="mso-spacerun: yes">&nbsp; </SPAN>In this case, 
+they behave exactly like old, unrouted Gnutella 0.4 connections.</P>
+<P class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P>
+<TABLE style="BORDER-COLLAPSE: collapse; mso-padding-alt: 0in 5.4pt 0in 5.4pt" 
+cellSpacing=0 cellPadding=0 border=0>
+  <TBODY>
+  <TR>
+    <TD 
+    style="PADDING-RIGHT: 5.4pt; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0in; WIDTH: 221.4pt; PADDING-TOP: 0in" 
+    vAlign=top width=295>
+      <P class=MsoNormal>GNUTELLA CONNECT/0.6</P>
+      <P class=MsoNormal>X-Ultrapeer: False</P>
+      <P 
+      class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P></TD>
+    <TD 
+    style="PADDING-RIGHT: 5.4pt; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0in; WIDTH: 221.4pt; PADDING-TOP: 0in" 
+    vAlign=top width=295>
+      <P 
+      class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P></TD></TR>
+  <TR>
+    <TD 
+    style="PADDING-RIGHT: 5.4pt; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0in; WIDTH: 221.4pt; PADDING-TOP: 0in" 
+    vAlign=top width=295>
+      <P 
+      class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P></TD>
+    <TD 
+    style="PADDING-RIGHT: 5.4pt; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0in; WIDTH: 221.4pt; PADDING-TOP: 0in" 
+    vAlign=top width=295>
+      <P class=MsoNormal>GNUTELLA/0.6 200 OK</P>
+      <P class=MsoNormal>X-Ultrapeer: False</P></TD></TR>
+  <TR>
+    <TD 
+    style="PADDING-RIGHT: 5.4pt; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0in; WIDTH: 221.4pt; PADDING-TOP: 0in" 
+    vAlign=top width=295>
+      <P class=MsoNormal>GNUTELLA/0.6 200 OK</P></TD>
+    <TD 
+    style="PADDING-RIGHT: 5.4pt; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0in; WIDTH: 221.4pt; PADDING-TOP: 0in" 
+    vAlign=top width=295>
+      <P 
+      class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P></TD></TR></TBODY></TABLE>
+<P class=MsoNormal><SPAN 
+style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN></P>
+<P class=MsoNormal>The original ultrapeer proposal involved two TCP connections 
+in this case.<SPAN style="mso-spacerun: yes">&nbsp; </SPAN>This version is much 
+simpler.</P>
+<H3>3.4. Ultrapeer to Ultrapeer</H3>
+<P class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P>
+<P class=MsoNormal>When two ultrapeers meet, both set X-Ultrapeer true.<SPAN 
+style="mso-spacerun: yes">&nbsp; </SPAN>If both have leaf nodes, they will 
+remain ultrapeers after the interaction.<SPAN style="mso-spacerun: yes">&nbsp; 
+</SPAN>Note that no QRP route table is sent between ultrapeers after the 
+connection is established.</P>
+<P class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P>
+<TABLE style="BORDER-COLLAPSE: collapse; mso-padding-alt: 0in 5.4pt 0in 5.4pt" 
+cellSpacing=0 cellPadding=0 border=0>
+  <TBODY>
+  <TR>
+    <TD 
+    style="PADDING-RIGHT: 5.4pt; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0in; WIDTH: 221.4pt; PADDING-TOP: 0in" 
+    vAlign=top width=295>
+      <P class=MsoNormal>GNUTELLA CONNECT/0.6</P>
+      <P class=MsoNormal>X-Ultrapeer: True</P>
+      <P 
+      class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P></TD>
+    <TD 
+    style="PADDING-RIGHT: 5.4pt; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0in; WIDTH: 221.4pt; PADDING-TOP: 0in" 
+    vAlign=top width=295>
+      <P 
+      class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P></TD></TR>
+  <TR>
+    <TD 
+    style="PADDING-RIGHT: 5.4pt; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0in; WIDTH: 221.4pt; PADDING-TOP: 0in" 
+    vAlign=top width=295>
+      <P 
+      class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P></TD>
+    <TD 
+    style="PADDING-RIGHT: 5.4pt; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0in; WIDTH: 221.4pt; PADDING-TOP: 0in" 
+    vAlign=top width=295>
+      <P class=MsoNormal>GNUTELLA/0.6 200 OK</P>
+      <P class=MsoNormal>X-Ultrapeer: True</P></TD></TR>
+  <TR>
+    <TD 
+    style="PADDING-RIGHT: 5.4pt; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0in; WIDTH: 221.4pt; PADDING-TOP: 0in" 
+    vAlign=top width=295>
+      <P class=MsoNormal>GNUTELLA/0.6 200 OK</P></TD>
+    <TD 
+    style="PADDING-RIGHT: 5.4pt; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0in; WIDTH: 221.4pt; PADDING-TOP: 0in" 
+    vAlign=top width=295>
+      <P 
+      class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P></TD></TR></TBODY></TABLE>
+<P class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P>
+<P class=MsoNormal>Note that the X-Ultrapeer-Needed header is ignored in this 
+case.<SPAN style="mso-spacerun: yes">&nbsp; </SPAN>This is discussed in the next 
+section.</P>
+<H3>3.5. Ultrapeer to Ultrapeer, with Leaf Guidance</H3>
+<P class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P>
+<P class=MsoNormal>Sometimes there will be too many ultrapeer-capable nodes on 
+the network.<SPAN style="mso-spacerun: yes">&nbsp; </SPAN>Consider the case of 
+an ultrapeer A connecting to an ultrapeer B.<SPAN 
+style="mso-spacerun: yes">&nbsp; </SPAN>If B doesn’t have enough leaves, it may 
+direct A to become a leaf node.<SPAN style="mso-spacerun: yes">&nbsp; </SPAN>If 
+A has no leaf connections, it stops fetching new connections, drops any Gnutella 
+0.4 connections, and sends a QRP table to B.<SPAN 
+style="mso-spacerun: yes">&nbsp; </SPAN>(If A has leaf connections, it obeys the 
+guidance, as in the above case.)<SPAN style="mso-spacerun: yes">&nbsp; 
+</SPAN>Then B will shield A from all traffic.</P>
+<P class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P>
+<TABLE style="BORDER-COLLAPSE: collapse; mso-padding-alt: 0in 5.4pt 0in 5.4pt" 
+cellSpacing=0 cellPadding=0 border=0>
+  <TBODY>
+  <TR>
+    <TD 
+    style="PADDING-RIGHT: 5.4pt; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0in; WIDTH: 221.4pt; PADDING-TOP: 0in" 
+    vAlign=top width=295>
+      <P class=MsoNormal>GNUTELLA CONNECT/0.6</P>
+      <P class=MsoNormal>X-Ultrapeer: True</P>
+      <P 
+      class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P></TD>
+    <TD 
+    style="PADDING-RIGHT: 5.4pt; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0in; WIDTH: 221.4pt; PADDING-TOP: 0in" 
+    vAlign=top width=295>
+      <P 
+      class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P></TD></TR>
+  <TR>
+    <TD 
+    style="PADDING-RIGHT: 5.4pt; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0in; WIDTH: 221.4pt; PADDING-TOP: 0in" 
+    vAlign=top width=295>
+      <P 
+      class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P></TD>
+    <TD 
+    style="PADDING-RIGHT: 5.4pt; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0in; WIDTH: 221.4pt; PADDING-TOP: 0in" 
+    vAlign=top width=295>
+      <P class=MsoNormal>GNUTELLA/0.6 200 OK</P>
+      <P class=MsoNormal>X-Ultrapeer: True</P>
+      <P class=MsoNormal>X-Ultrapeer-Needed: false</P></TD></TR>
+  <TR>
+    <TD 
+    style="PADDING-RIGHT: 5.4pt; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0in; WIDTH: 221.4pt; PADDING-TOP: 0in" 
+    vAlign=top width=295>
+      <P class=MsoNormal>GNUTELLA/0.6 200 OK</P>
+      <P class=MsoNormal>X-Ultrapeer: False</P></TD>
+    <TD 
+    style="PADDING-RIGHT: 5.4pt; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0in; WIDTH: 221.4pt; PADDING-TOP: 0in" 
+    vAlign=top width=295>
+      <P 
+      class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P></TD></TR></TBODY></TABLE>
+<P class=MsoNormal><SPAN 
+style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN></P>
+<P class=MsoNormal>The original ultrapeer proposal involved two TCP connections 
+in this case.<SPAN style="mso-spacerun: yes">&nbsp; </SPAN>This version is much 
+simpler.</P>
+<P 
+class=MsoNormal><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></P></DIV>
+<DIV style="mso-element: footnote-list"><![if !supportFootnotes]><BR clear=all>
+<HR align=left width="33%" SIZE=1>
+<![endif]>
+<DIV id=ftn1 style="mso-element: footnote">
+<P class=MsoFootnoteText><A title="" style="mso-footnote-id: ftn1" name=_ftn1 
+href="http://www.limewire.com/developer/Ultrapeers.html#_ftnref1"><SPAN 
+class=MsoFootnoteReference><SPAN style="mso-special-character: footnote"><![if !supportFootnotes]>[1]<![endif]></SPAN></SPAN></A> 
+Readers familiar with the QRP protocol will note that only some of the protocol 
+is actually used.<SPAN style="mso-spacerun: yes">&nbsp; </SPAN>In particular, 
+all route table entries will be limited to INFINITY or 1. </P></DIV></DIV>
+<DIV style="mso-element: comment-list"><![if !supportAnnotations]>
+<HR class=msocomoff align=left width="33%" SIZE=1>
+<![endif]>
+<DIV style="mso-element: comment"><![if !supportAnnotations]>
+<DIV language=JavaScript class=msocomtxt id=_com_1 
+onmouseover="msoCommentShow('_anchor_1','_com_1')" 
+onmouseout="msoCommentHide('_com_1')"><![endif]><SPAN 
+style="mso-comment-author: x"><![if !supportAnnotations]><A name=_msocom_1></A><![endif]></SPAN>
+<P class=MsoCommentText><SPAN class=MsoCommentReference><SPAN 
+style="FONT-SIZE: 8pt"><SPAN style="mso-special-character: comment"><![if !supportAnnotations]>&nbsp;<A 
+class=msocomoff 
+href="http://www.limewire.com/developer/Ultrapeers.html#_msoanchor_1">[xyz1]</A><![endif]></SPAN></SPAN></SPAN>I 
+don't like using this word.<SPAN style="mso-spacerun: yes">&nbsp; </SPAN>It's 
+not accurate.</P><![if !supportAnnotations]></DIV><![endif]></DIV>
+<DIV style="mso-element: comment"><![if !supportAnnotations]>
+<DIV language=JavaScript class=msocomtxt id=_com_2 
+onmouseover="msoCommentShow('_anchor_2','_com_2')" 
+onmouseout="msoCommentHide('_com_2')"><![endif]><SPAN 
+style="mso-comment-author: x"><![if !supportAnnotations]><A name=_msocom_2></A><![endif]></SPAN>
+<P class=MsoCommentText><SPAN class=MsoCommentReference><SPAN 
+style="FONT-SIZE: 8pt"><SPAN style="mso-special-character: comment"><![if !supportAnnotations]>&nbsp;<A 
+class=msocomoff 
+href="http://www.limewire.com/developer/Ultrapeers.html#_msoanchor_2">[xyz2]</A><![endif]></SPAN></SPAN></SPAN>Cite...except 
+it doesn't exists any more.</P><![if !supportAnnotations]></DIV><![endif]></DIV>
+<DIV style="mso-element: comment"><![if !supportAnnotations]>
+<DIV language=JavaScript class=msocomtxt id=_com_3 
+onmouseover="msoCommentShow('_anchor_3','_com_3')" 
+onmouseout="msoCommentHide('_com_3')"><![endif]><SPAN 
+style="mso-comment-author: x"><![if !supportAnnotations]><A name=_msocom_3></A><![endif]></SPAN>
+<P class=MsoCommentText><SPAN class=MsoCommentReference><SPAN 
+style="FONT-SIZE: 8pt"><SPAN style="mso-special-character: comment"><![if !supportAnnotations]>&nbsp;<A 
+class=msocomoff 
+href="http://www.limewire.com/developer/Ultrapeers.html#_msoanchor_3">[xyz3]</A><![endif]></SPAN></SPAN></SPAN>Expand 
+this section...perhaps discuss XML.</P><![if !supportAnnotations]></DIV><![endif]></DIV>
+<DIV style="mso-element: comment"><![if !supportAnnotations]>
+<DIV language=JavaScript class=msocomtxt id=_com_4 
+onmouseover="msoCommentShow('_anchor_4','_com_4')" 
+onmouseout="msoCommentHide('_com_4')"><![endif]><SPAN 
+style="mso-comment-author: x"><![if !supportAnnotations]><A name=_msocom_4></A><![endif]></SPAN>
+<P class=MsoCommentText><SPAN class=MsoCommentReference><SPAN 
+style="FONT-SIZE: 8pt"><SPAN style="mso-special-character: comment"><![if !supportAnnotations]>&nbsp;<A 
+class=msocomoff 
+href="http://www.limewire.com/developer/Ultrapeers.html#_msoanchor_4">[xyz4]</A><![endif]></SPAN></SPAN></SPAN>Bullet 
+points over-simplifies here.<SPAN style="mso-spacerun: yes">&nbsp; </SPAN>For 
+example up-to-dateness and efficiency are related.<SPAN 
+style="mso-spacerun: yes">&nbsp;&nbsp; </SPAN>There are tradeoffs.</P><![if !supportAnnotations]></DIV><![endif]></DIV>
+<DIV style="mso-element: comment"><![if !supportAnnotations]>
+<DIV language=JavaScript class=msocomtxt id=_com_5 
+onmouseover="msoCommentShow('_anchor_5','_com_5')" 
+onmouseout="msoCommentHide('_com_5')"><![endif]><SPAN 
+style="mso-comment-author: x"><![if !supportAnnotations]><A name=_msocom_5></A><![endif]></SPAN>
+<P class=MsoCommentText><SPAN class=MsoCommentReference><SPAN 
+style="FONT-SIZE: 8pt"><SPAN style="mso-special-character: comment"><![if !supportAnnotations]>&nbsp;<A 
+class=msocomoff 
+href="http://www.limewire.com/developer/Ultrapeers.html#_msoanchor_5">[xyz5]</A><![endif]></SPAN></SPAN></SPAN>Cite 
+this.</P><![if !supportAnnotations]></DIV><![endif]></DIV></DIV></BODY></HTML>

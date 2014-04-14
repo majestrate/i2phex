@@ -1,0 +1,114 @@
+#MAGMAv0.2 magnet:?mt=.&dn=draketos-magma-spielliste.magma&as=http://draketo.de/inhalt/lieder/draketos-magma-spielliste.magma
+
+# this is the MAGMA-playlist from my website. I hope you enjoy
+# listening to the songs!
+
+source-page: http://draketo.de
+
+---
+playlist-name: Fantasy and Science Fiction Songs by little dragon.
+comment: These are songs which I either wrote myself
+   or which I like so much, that I simply had to record them.
+
+list:
+ - "magnet:?xt=urn:sha1:MCH2HGBTFRKMGH5LSVH5MKLCCBBQ7XAP
+   &dn=Dildo%20Backenspalter.mp3
+   &xs=http://dlaikar.de/arnebab/musik/dildo-backenspalter.mp3"
+  length-ms: 90151
+  bitrate-KBit: 160
+  size-Bytes: 3005822
+  artist: Arne Babenhauserheide:
+    nickname: Draketo
+    homepage: http://draketo.de
+    instruments: voice
+    age-years: 21
+    birthdate-yyyy-mm-dd: 1982-05-26
+  composer:
+   text: Achim Hiltrop:
+     nickname: Gallagher
+     homepage: http://www.clou-gallagher.de
+   melody: Arne Babenhauserheide:
+     nickname: Draketo
+     homepage: http://draketo.de
+
+ - "magnet:?xt=urn:sha1:<another+hash>
+   &dn=<another+filename>
+   &xs=<another+exact+substitute>"
+  length-ms: <some length in ms>
+  artist: <some artist>
+
+--- # Here we instantly begin a new stream, that means in this case:
+# a new playlist.
+# I'll use only one space for indenting here,
+# even though multiple spaces look better.
+
+playlist-name: other songs
+comment: These just didn't fit in the other cathegories
+
+list: # we could use any name, or none at all, as it fits us.
+  # I would suggest using list, as it doesn't name a file-type.
+  # this comment is inside "list" as the "#" is indented by one space.
+ - "magnet:?xt=urn:sha1:PX2AN5FPSJGORDBQ2YIV3LRR2SRLP5LY
+   &dn=A%20Curse%20upon%20those%20Parents.mp3
+   &xs=http://10.0.1.3:6346/uri-res/N2R?
+   urn:sha1:PX2AN5FPSJGORDBQ2YIV3LRR2SRLP5LY"
+  artist: Draketo: 
+    real-name: Arne Babenhauserheide
+    nickname: Draketo
+     (which means small dragon)
+   some-other-thing-we-don't-really-need-to-know-about-him: uhm, yes...  :-)
+
+ - "magnet?xt=urn:sha1:<some+hash>
+   &dn=<some+filename>
+   &xs=<another+source>"
+  artist: <some artist>
+
+... # the three dots end a stream/playlist without beginning another one.
+# Here the file could end, or you could add
+# some additional general information about all the playlists/the MAGMA-file.
+# But that information would only be read after the file was processed, 
+# I assume,
+# so writing those information at the beginning seems more useful to me.
+# Still I'm sure there might be uses for this.
+
+# We could also begin anotherstream in here.
+# Then the additional information could be added one by one between the 
+# playlists (maybe for a live-feed or such).
+
+---
+playlist-name: just some addition
+creator-comment: Just wanting to show off, that we could carry 
+ far more information with the format extended like this.
+list:
+ - "magnet:?xt=urn:sha1:<some+hash>
+   &dn=<some+name>"  # the "- " is indented by one space 
+  # which makes it part of the "list"
+  MIME-type: video/mpeg
+  subtitles:
+   - time: 0h0m15s00ms
+    text: Hello miss Pats.
+   - time: 0h0h20s00ms
+    text: Who are you, sucker?
+   - time: 0h0m22s00ms
+    text: I am a fan.
+   - time: 0h0m24s00ms
+    text: Fuck off!
+   - time: 0h0m27s00ms
+    text: Darn, she did it again!
+   - time: 0h0m35s00ms
+    text: Thus ends another miserable episode 
+     in the life of Bob Bobson,
+     fan of heart, but to his peril only of his own.
+  # this way, MAGMA-Files could be used for far more than just getting  
+  # the files. You could send someone a list with the subtitles, which 
+  # gets the video itself, either from your local disk or from   
+  # filesharing networks.
+  # This comment is inside the video-magnet. 
+... # End of Stream.
+
+-------
+
+# For the time-field we used the format (in C/C++-syntax): 
+# "%dh%dm%ds%dms"
+# Means for C: 
+# printf("%dh%dm%ds%dms\n", hour, minute, seconds, milliseconds);

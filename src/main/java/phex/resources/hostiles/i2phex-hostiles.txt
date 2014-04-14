@@ -1,0 +1,4 @@
+#
+# $Id$
+#
+# Hostile IP addresses, completely banned from the Gnutella network in i2phex.

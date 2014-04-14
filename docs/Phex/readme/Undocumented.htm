@@ -1,0 +1,102 @@
+<html>
+<body>
+<h1>(Otherwise) undocumented features</h1>
+<p>You can find here a brief (but hopefully sufficient) guide for
+configuring phex "behind-the-scenes".</p>
+
+<h3>Configuration values</h3>
+<p>Most configuration values can be changed via the GUI, but some cannot:
+some values are potentially too dangerous to expose new users to, others
+should (almost) never be changed, and some should have a GUI entry but
+we haven't got around to it yet. :-)</p>
+
+<p><b>Reading:</b> When phex starts it first sets all configuration values to "safe" defaults,
+then reads the phexCorePrefs.properties and overwrites the default values. This means you can
+delete phexCorePrefs.properties if things are getting too messy. It also means you can safely
+delete individual lines, knowing that default values will be used.</p>
+<p><b>Writing:</b> Whenever configuration values are changed, and when phex
+ends, the configuration file is overwritten. This implies 2 things: don't try
+to edit phexCorePrefs.properties while phex is running, and don't be surprised when new
+configuration values appear in your config after an upgrade. (In theory some
+values may also disappear, if they're not used by the later version)</p>
+<p><b>Editing lists:</b> A few configuration settings are lists. The first element's name ends in _1, the second in _2, etc. These can be edited as usual, 
+but be aware that if phex will stop processing the list as soon as one name
+isn't found. ie: if _2 is missing, _3, _4, etc. will be ignored.</p>
+<p><b>Regular expressions and delimiters:</b> A couple of entries use regular
+expressions. These are powerful, but if you don't know what you're doing
+you may get into a mess. In addition, java requires backslashes to be
+escaped. See below for an example.</p>
+<p><b></b></p>
+
+<h5>Segment sizing<h5>
+<table border="1">
+<tr><th>Name</th><th>Description</th><th>Example</th></tr>
+<tr><td>initialSegmentSize</td>
+    <td>When a candidate is first contacted a segment of this size (in bytes) will be requested</td>
+    <td><pre>initialSegmentSize=16384</pre></td></tr>
+<tr><td>segmentTransferTime</td>
+    <td>When a candidate is ready for a further segment, the maximum size of the segment is that which
+    would have been downloaded in this time frame, based on the previous segment's download rate.
+    e.g. if the previous segment was downloaded at 10k/sec and segmentTransferTime=60, the next
+    segment would be no larger than 600k.
+    </td>
+    <td><pre>segmentTransferTime=100</pre></td></tr>
+<tr><td>maximumSegmentSize</td>
+    <td>No segment will be larger than this, no matter how quickly the previous segment was downloaded</td>
+    <td><pre>maximumSegmentSize=999999</pre></td></tr>
+</table>
+
+<h5>Segment rating</h5>
+<table border="1">
+<tr><th>Name</th><th>Description</th><th>Example</th></tr>
+<tr><td>orderingMethod</td>
+    <td>Ordering method to use if the file is streamable, unstreamable or unknown, respectively.
+    In this example, streamable files are ordered in preview mode (3), other files are sorted
+    by rating (2).
+    See the <i>Specifications/Rating.htm</i> file for more information about the methods.</td>
+    <td><pre>orderingMethod=322</pre></td></tr>
+<tr><td>streamableSuffixes</td>
+    <td>A <U>list</U> of file suffixes which are to be considered streamable. Case is ignored. Both
+    examples here use regular expressions: the first example matches "htm" and "html",
+    the second matches both "mp2" and "mp3"</td>
+    <td><pre>streamableSuffixes_1=html?
+streamableSuffixes_2=mp\\d
+</pre></td></tr>
+<tr><td>unstreamableSuffixes</td>
+    <td>A <U>list</U> of file suffixes which are to be considered unstreamable. Similar to above.</td>
+    <td><pre>unstreamableSuffixes_1=rar
+unstreamableSuffixes_2=r\\d\\d
+</pre></td></tr>
+</table>
+<h5>Previewing</h5>
+If a file is highlighted on the download screen and 'Preview' is selected, Phex will try to do some of the following:
+<ul>
+<li>Create a copy of the initial segment of the file in the user's temporary directory. This copy will be deleted when phex exits.
+Its name will be unique, but very similar to the real filename.</li>
+<li>Execute a viewer in the background. The viewer will access the copied file if a copy exists, otherwise it will access
+the initial segment directly. Direct segment access may not work correctly on some platforms (like windows).</li>
+</ul>
+For security reasons there are no default viewers.
+<table border="1">
+<tr><td>copyBeforePreviewing</td>
+    <td>Whether phex should copy the segment and before attempting to execute the viewer</td>
+    <td><pre>copyBeforePreviewing=true</pre></td></tr>
+<tr><td>previewMethod</td>
+    <td>A <U>map</U> of file suffixes to previewers. If a file matches the suffix, the previewer is 
+    invoked. The string <CODE>%s</CODE> is substituted with the filename.
+    %u is substituted with the URL referring to the file.
+    More than one suffix can be given: see the 4th example below. This uses the gimp for GIF, JPEG and JPG files.</td>
+    <td><pre>previewMethod_mp\\d=/usr/local/bin/mplayer %s
+previewMethod_ogg=/usr/local/bin/oggplay %s
+previewMethod_html?=/usr/bin/firefox %u
+previewMethod_(gif|jpe?g)=gimp %s</pre></td></tr>
+<tr><td>fallbackPreviewMethod</td>
+    <td>Preview method to use when no specific previewer is associated with this suffix.
+    <b>WARNING:</b> the following example is a <b>potential security breach</b> on windows!
+    This will have the same effect as double-clicking on the file. If you preview a batch file,
+    for example, you will actually execute it, potentially damaging your system. Proceed with 
+    caution, and consider yourself warned.</td>
+    <td><pre>fallbackPreviewMethod=cmd /c %s</pre></td></tr>
+</table>
+</body>
+</html>

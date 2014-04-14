@@ -1,0 +1,139 @@
+<project name="Phex" default="buildAll" basedir="..">
+  <!-- set global properties for this build -->
+  <property name="project.root" value="${basedir}"/>
+  <property name="project.build" value="${project.root}/build"/>
+  <property name="project.source" value="${project.root}/src/main/java"/>
+  <property name="project.testsource" value="${project.root}/src/test/java"/>
+  <property name="releasedir" value="${basedir}/release"/>
+  <property name="temp" value="${basedir}/temp"/>
+	
+  <property file="${project.build}/build.user.properties"/>
+  <property file="${project.build}/build.default.properties"/>
+	
+  <property name="build.target.classes" value="${project.buildtarget}/classes"/>
+  <property name="build.target.lib" value="${project.buildtarget}/lib"/>
+	
+  <!-- set up librarys -->
+  <!-- Apache commons-logging -->
+  <property name="apache.logging.root" value="${project.thirdparty}/apache/commons-logging"/>
+  <property name="apache.logging.lib" value="${apache.logging.root}/lib"/>
+  <path id="apache.logging.classpath">
+    <pathelement path="${apache.logging.lib}/commons-logging.jar"/>
+  </path>
+  <!-- Apache commons-collections -->
+  <path id="apache.collections.classpath">
+    <pathelement path="${apache.collections.lib.path}/${apache.collections.lib.filename}"/>
+  </path>
+	<!-- Apache commons-httpclient -->
+  <path id="apache.httpclient.classpath">
+    <pathelement path="${apache.httpclient.lib.path}/${apache.httpclient.lib.filename}"/>
+  </path>
+  <!-- Apache log4j -->
+  <path id="apache.log4j.classpath">
+    <pathelement path="${apache.log4j.lib.path}/${apache.log4j.lib.filename}"/>
+  </path>
+  <!-- JGoodies Forms -->
+  <property name="jgoodies.forms.root" value="${project.thirdparty}/jgoodies/forms"/>
+  <property name="jgoodies.forms.lib" value="${jgoodies.forms.root}/lib"/>
+  <path id="jgoodies.forms.classpath">
+    <pathelement path="${jgoodies.forms.lib}/forms-1.1.0.jar"/>
+  </path>
+  <!-- JGoodies Looks -->
+  <path id="jgoodies.looks.classpath">
+    <pathelement path="${jgoodies.looks.lib.path}/${jgoodies.looks.lib.filename}"/>
+  </path>
+  <!-- jvYAML -->
+  <property name="jvyaml.root" value="${project.thirdparty}/jvyaml"/>
+  <property name="jvyaml.lib" value="${jvyaml.root}/lib"/>
+  <path id="jvyaml.classpath">
+    <pathelement path="${jvyaml.lib}/jvyaml.jar"/>
+  </path>
+
+  <!-- Apple MRJ -->
+  <property name="apple.root" value="${project.thirdparty}/apple"/>
+  <property name="apple.lib" value="${apple.root}/lib"/>
+  <path id="apple.classpath">
+    <pathelement path="${apple.lib}/MRJAdapter.jar"/>
+  </path>
+  <!-- I2P library, I2P streaming libraries, I2P big integer math library -->
+  <property name="i2p.root" value="${project.thirdparty}/i2p"/>
+  <property name="i2p.lib" value="${i2p.root}/lib"/>
+  <path id="i2p.classpath">
+      <pathelement path="${i2p.lib}/i2p.jar"/>
+      <pathelement path="${i2p.lib}/streaming.jar"/>
+      <pathelement path="${i2p.lib}/mstreaming.jar"/>
+      <pathelement path="${i2p.lib}/jbigi.jar"/>
+  </path>
+  <!-- Setup classpath -->
+  <path id="library.classpath">
+    <path refid="apache.logging.classpath"/>
+    <path refid="apache.collections.classpath"/>
+    <path refid="apache.httpclient.classpath"/>
+    <path refid="apache.log4j.classpath"/>
+    <path refid="jgoodies.forms.classpath"/>
+    <path refid="jgoodies.looks.classpath"/>
+    <path refid="apple.classpath"/>
+    <path refid="i2p.classpath" />
+    <path refid="jvyaml.classpath"/>
+  	<fileset dir="${findbugs.lib.path}">
+  	  <include name="**/*.jar"/>
+  	</fileset>
+  	<fileset dir="${junit.lib.path}">
+  	  <include name="**/*.jar"/>
+  	</fileset>
+  </path>
+  <property name="library.classpath" refid="library.classpath"/>
+  <path id="source.classpath">
+    <pathelement path="${project.source}"/>
+  </path>
+  <path id="phex.classpath">
+    <path refid="source.classpath"/>
+    <path refid="library.classpath"/>
+  </path>
+  <property name="phex.classpath" refid="phex.classpath"/>
+
+  <target name="buildAll" depends="init, buildJava, buildNative"/>
+  <target name="buildNative" depends="init">
+    <ant antfile="${project.build}/buildNative.xml" inheritAll="true"/>
+  </target>
+  <target name="buildJava" depends="init">
+    <ant antfile="${project.build}/buildJava.xml" inheritAll="true"/>
+  </target>
+  <target name="buildJWS" depends="buildJava">
+    <ant antfile="${project.build}/buildJWS.xml" inheritAll="true"/>
+  </target>
+  <target name="releaseJWS" depends="buildJava">
+    <ant antfile="${project.build}/buildJWS.xml" target="releaseWebStart" inheritAll="true"/>
+  </target>
+  <target name="compileAll" depends="init, compileJava, buildNative"/>
+  <target name="compileJava" depends="init">
+    <ant antfile="${project.build}/buildJava.xml" target="compileJava" inheritAll="true"/>
+  </target>
+  <target name="makeRelease" depends="init">
+    <ant antfile="${project.build}/makeRelease.xml" inheritAll="true"/>
+  </target>
+  <target name="makeOsXRelease" depends="init">
+    <ant antfile="${project.build}/makeRelease.xml" target="makeOsXRelease" inheritAll="true"/>
+  </target>
+  <target name="javadoc" depends="init">
+    <ant antfile="${project.build}/javadoc.xml" inheritAll="true"/>
+  </target>
+  <target name="uml" depends="init">
+    <ant antfile="${project.build}/javadoc.xml" target="uml" inheritAll="true"/>
+  </target>
+  <target name="run" depends="buildAll">
+    <java jar="${project.buildtarget}/lib/phex.jar" fork="yes"/>
+  </target>
+  <target name="runTest" depends="buildAll">
+    <ant antfile="${project.build}/testSuite.xml" inheritAll="true"/>
+  </target>
+  <target name="init">
+    <condition property="isWindowsOS">
+      <os family="windows"/>
+    </condition>
+  </target>
+  <target name="clean">
+    <delete dir="${project.buildtarget}"/>
+    <delete dir="${temp}"/>
+  </target>
+</project>

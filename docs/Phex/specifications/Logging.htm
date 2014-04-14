@@ -1,0 +1,33 @@
+<html>
+<body>
+<h1>The Phex Logging</h1>
+<h4>for Phex 0.7 and later</h4>
+<hr>
+For the logging the following keys in your phex.cfg are responsible:
+<ul>
+<li><b>mLogFile</b><br>
+  The complete file name you like to log to.<br>
+  e.g.: c:\phex\logOutput.txt<br>
+  If not set then the path
+  {user.home}/phex/phex.log or {user.home}/.phex/phex.log is used
+<li><b>maxLogFileLength</b><br>
+  The maximal log file length in bytes. If the file is larger then this size the file is renamed to<br>
+  {original file name}.1<br>
+  The old backup of the file is overwritten.
+<li><b>logToConsole</b><br>
+  Activates or deactivate logging to console additionally to file logging.
+  Possible values are true or false.<br>
+  On Windows logging to console only works when Phex is not started with javaw.
+<li><b>loggerVerboseLevel</b><br>
+  There are 7 different logger verbose levels. From 0 (finest) to 6 (severe).<br>
+  The possible levels are FINEST (0), FINER (1), FINE (2), CONFIG (3), INFO (4), WARNING (5), SEVERE (6)
+<li><b>logType</b><br>
+  The log type indicates what kind of messages you like to log. The possible types are:<br>
+  DOWNLOAD (2), UPLOAD (4), SEARCH (8), NETWORK (16), GUI (32), GLOBAL<br>
+  GLOBAL messages are always logged if inside the verbose level. To log the different types just add the numbers.<br>
+  e.g.: to log download and network set the log type to 18 (2 + 16) or to log upload, search and gui set the log type to 44 (4 + 8 + 32)
+</ul>
+<hr>
+<center><font size="-1">Copyright © 2001, 2006 The Phex Team, License: GPL-2 or later.</font></center>
+</body>
+</html>

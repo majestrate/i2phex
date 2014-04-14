@@ -1,0 +1,5 @@
+Known Bugs (by Arne Babenhauserheide): 
+
+- Sometimes the title "Downloads" disappears and gets replaces by a white and nonexisting pane. 
+- When Phex is being started or closed while the widget runs, the widget stalls. 
+- When Phex gets started on the same machine as the widget, while the widget already runs, it can't take its preset IP, but defaults to 6346. 

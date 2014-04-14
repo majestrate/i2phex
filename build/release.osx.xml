@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<project name="Phex.Release.OsX" basedir="..">
+	<target name="-create.osx" if="do.create.osx">
+		<property name="osx.build.dir" value="${releasedir}/phex_${phex.FullPhexVersion}/osx${create.postfix}" />
+		<property name="osx.buildSrc.dir" value="${releasedir}/phex_${phex.FullPhexVersion}/osx${create.postfix}/build" />
+
+		<available file="${osx.buildSrc.dir}" property="runtime.dir.available" />
+		<fail if="runtime.dir.available">
+			The directory '${osx.buildSrc.dir}' is already available.
+		</fail>
+		<available file="${osx.build.dir}/phex_${phex.FullPhexVersion}.zip" property="runtime.file.available" />
+		<fail if="runtime.file.available">
+			The file '${osx.build.dir}/phex_${phex.FullPhexVersion}.zip' is already available.
+		</fail>
+
+		<!-- start jar builder to create the app -->
+		<taskdef name="jarbundler" classpath="${project.thirdparty}/apple/lib/jarbundler-1.8.1.jar" classname="net.sourceforge.jarbundler.JarBundler" />
+		<mkdir dir="${osx.buildSrc.dir}" />
+		<jarbundler dir="${osx.buildSrc.dir}" verbose="true" name="Phex" 
+			mainclass="phex.Main" 
+			icon="native/macosx/Phex.app/Contents/Resources/phex-osx.icns" 
+			stubfile="native/macosx/Phex.app/Contents/MacOS/JavaApplicationStub" 
+			bundleid="org.phex" build="${phex.FullPhexVersion}" 
+			version="${phex.Program.Version}" infostring="Phex ${phex.Program.Version}" 
+			jvmversion="1.5+">
+			<jarfileset dir="${build.target.lib}">
+				<include name="commons-logging.jar" />
+				<include name="${apache.httpclient.lib.filename}" />
+				<include name="${apache.collections.lib.filename}" />
+				<include name="forms-1.1.0.jar" />
+				<include name="MRJAdapter.jar" />
+				<include name="${jgoodies.looks.lib.filename}" />
+				<include name="phex.jar" />
+			</jarfileset>
+			<!-- Adds files to Resources/readme which is not exactly what we like.
+			<resourcefileset dir="docs/Phex">
+				<include name="readme/Phex_win.htm" />
+				<include name="readme/Phex_other.htm" />
+				<include name="readme/Undocumented.htm" />
+			</resourcefileset> -->
+			<documenttype name="MAGMA List (MAGnet MAnifest)" extensions="magma" iconfile="native/macosx/Phex.app/Contents/Resources/magma-icon.icns" role="viewer" />
+			<javaproperty name="apple.laf.useScreenMenuBar" value="true" />
+		</jarbundler>
+		
+
+		<!-- alternative resource file copy -->
+		<property name="osx.resource.path" value="${osx.buildSrc.dir}/Phex.app/Contents/Resources" />
+		<mkdir dir="${osx.resource.path}/Docs" />
+		<copy todir="${osx.resource.path}/Docs">
+			<fileset dir="docs/Phex">
+				<include name="license/GPL.txt" />
+			</fileset>
+		</copy>
+		<copy todir="${osx.resource.path}/Docs" filtering="yes">
+			<fileset dir="docs/Phex">
+				<include name="readme/Phex_win.htm" />
+				<include name="readme/Phex_other.htm" />
+				<include name="readme/Undocumented.htm" />
+			</fileset>
+		</copy>
+		<copy file="installer/P h e x Homepage.url" todir="${osx.resource.path}/Docs" />
+		<!-- copy subscription file in case user requested -->
+		<ant antfile="${project.build}/makeRelease.xml" target="-copySubscriptionFile" inheritAll="true">
+			<property name="subscriptionDir" value="${osx.resource.path}/Java/ext" />
+		</ant>
+
+		<!-- do some post operation to set executable flags (does it help?) -->
+		<chmod file="${osx.buildSrc.dir}/Phex.app/Contents/PkgInfo" perm="755" />
+		<chmod file="${osx.buildSrc.dir}/Phex.app/Contents/MacOS/JavaApplicationStub" perm="755" />
+
+		<zip zipfile="${osx.build.dir}/phex_${phex.FullPhexVersion}_osx.zip" update="false">
+			<zipfileset dir="${osx.buildSrc.dir}" prefix="phex_${phex.FullPhexVersion}">
+				<exclude name="**/PkgInfo" />
+				<exclude name="**/JavaApplicationStub" />
+			</zipfileset>
+			<zipfileset dir="${osx.buildSrc.dir}/Phex.app/Contents" prefix="phex_${phex.FullPhexVersion}/Phex.app/Contents" includes="PkgInfo MacOS/JavaApplicationStub" filemode="755" />
+		</zip>
+	</target>
+</project>

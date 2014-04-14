@@ -1,0 +1,158 @@
+<html>
+<body>
+<h1>Phex segment rating and prioritisation</h1>
+<h4>For Phex 2.1 and later</h4>
+implemented by Nick Farrell (n ecks f at sf)
+
+<h6>What are <I>segments</I>?</h6>
+If you click on the <I>segments</I> tab when a downloading file is selected,
+you will see that each file is divided into a number of segments. Some 
+segments are complete (ie: all the data has been downloaded), incomplete,
+or empty. Each <I>candidate</I> Phex connects to (that is, a remote computer
+containing some data we're interested in) can service only one segment at a
+time. Segments can be merged and split to try to maximise efficiency.
+
+<h6>What do you mean by <I>rating</I>?</h6>
+Each segment has a <I>rating</I>. It is used when a <I>candidate</I> is ready
+to be assigned to a segment, to help determine the order in which Phex tries to
+assign segments to the candidate.
+
+<h6>Why bother?</h6>
+Prior to version 2.1(beta), Phex more-or-less randomly allocated segments to
+candidates. The most important reasons for adding this feature are:
+<ul>
+<li>Previewing "streaming" data</li>
+<li>Getting rarest parts first</li>
+</ul>
+
+<h6>How does the segment rating work?</h6>
+This is a little complicated, and you might want to skip on to the next questions. :-)
+
+First a candidateRating list is assembled and maintained. Every candidate who is unable to
+provide all of the file registers the parts of the file it has here. Phex watches the speed at
+which it is able to download data from this candidate and records this in the same list.
+
+<table border="1">
+<tr><th>Candidate name</th><th>Candidate speed</th><th>Part of file</th></tr>
+<tr><td>X</td><td>1000</td><td>0-50</td></tr>
+<tr><td>X</td><td>1000</td><td>80-100</td></tr>
+<tr><td>Y</td><td>2000</td><td>0-20</td></tr>
+<tr><td>Y</td><td>2000</td><td>90-100</td></tr>
+</table>
+
+Every 10 seconds or so another list is created, based on the above list. It more-or-less
+adds up the candidates' total speeds for each part of the file.
+
+<table border="1">
+<tr><th>Part of file</th><th>Total candidate speed</th></tr>
+<tr><td>0-20</td><td>3000</td></tr>
+<tr><td>21-50</td><td>1000</td></tr>
+<tr><td>80-89</td><td>1000</td></tr>
+<tr><td>90-100</td><td>3000</td></tr>
+</table>
+
+Segments are then assigned a value taken from this list.
+
+<h6>How does the rating affect the prioritisation of segments?</h6>
+<U>Normally</U>, Phex will assign the lowest-rated segment to
+the first available candidate. Only unallocated and incomplete can be assigned,
+for obvious reasons. In addition, and equally obvious, a segment will not be assigned if
+the candidate in unable to provide that particular portion of the file. If two segments
+are equally rated, the one closest to the start of the file will be assigned.
+
+In the above example, that would mean a segment starting at position "21" would be
+the highest-priority segment. If the candidate is candidate "Y", however, it will not 
+have this part of the file and will instead deliver a segment starting at position "0".
+
+The above method is named <B>Prioritise by rating</B> and is the default method, when a file is
+not recognised as being <I>streamable</I>. There are two other methods:
+<B>Prioritise by position</B> and <B>Prioritise for preview</B>.
+
+<h6>What do you mean by <I>streamable</I> and <I>unstreamable</I>?</h6>
+<I>Streamable</I> just means that the file is somehow useful to you before
+it's fully downloaded. For example, AVI or MP3 streams can be used before 
+the entire file has been downloaded.
+
+<I>Unstreamable</I> is simply the opposite: if any of the file is missing the
+whole thing is pretty much useless, regardless of whether it's the start, the
+end, or somewhere in the middle that's missing.
+
+<h6>What are these other 2 prioritisation methods?</h6>
+<B>Prioritise by position</B>: ignore the rating for a segment, and always try to get the segments
+closest to the start of the file first.
+
+<B>Prioritise for preview</B>: a hybrid of the other two methods. Get the first 10% of the file
+first, then <I>prioritise by rating</I>.
+
+<h6>How can I use them?</h6>
+When a new download is started, Phex, looks at the suffix of the filename and guesses whether
+the file is <I>streamable</I> or not. If it is, it <I>prioritises for preview</I>. Otherwise, it 
+<I>prioritises by rating</I>.
+
+You can change the current priority for a downloading file by right-clicking on the file and
+selecting 'ordering'. Any change will take effect at the next calculating point (ie: roughly
+every 10 seconds)
+
+<h6>How can I change the default ordering method?</h6>
+In your phex.cfg file you will see a variable <B>orderingMethod</B>, which is a 3-digit
+number. The first value is used if a streamable file is detected, the second if an 
+unstreamable file is detected, and the first if neither is detected.
+
+<table border="1">
+<tr><th>ordering method</th><th>value</th></tr>
+<tr><td>Prioritise by position</td><td>1</td></tr>
+<tr><td>Prioritise by rating</td><td>2</td></tr>
+<tr><td>Prioritise for preview</td><td>3</td></tr>
+</table>
+
+<h6>How can I change the definition of streamed and unstreamed files?</h6>
+Also in phex.cfg, look for streamableSuffixes_#. Simply add, delete or modify the values as
+you prefer.
+<B>For advanced users:</B> the suffixes are actually regular expressions, as you may guess.
+If you create an entry starting with ^ and ending with $ it will match the whole file, not just
+the suffix. 
+
+<h6>I don't know when to stop. Please tell me more!</h6>
+Well OK. Some of the following borders on trivia, but you asked for it.
+<ul>
+<li>
+    You can view the current ordering for segments in the <I>Segment</I> view by clicking
+    on a column until no sort arrow is shown.
+</li>
+<li>
+    Candidates do not contribute to the ratings until a complete segment has been downloaded
+    from them. This serves 2 purposes: we have a more reliable estimate of their transfer
+    speed, and a candidate has to "put its money where its mouth is" and deliver us some
+    data before it affects priorities.
+</li>
+<li>
+    The weighting of speeds can be tweaked. Until recently the candidates' speeds were not
+    summed, but rather their square roots were. The idea was that 4 candidates purporting to
+    deliver a segment at speed X was as good as one candidate working at 2X. Particularly
+    coupled with the above item, this might be overkill. I welcome any feedback though.
+</li>
+<li>
+    Completely-downloaded segments are handled specially by the sorting function. The
+    intention is keep them sorted by start position. This is purely for cosmetic reasons.
+</li>
+<li>
+    It's actually possible to re-allocate a segment which is not free. This only happens
+    if no other segments are available and the current candidate is much worse (ie: slower)
+    than the idle candidate. This 'hijacking' of a segment means you need not fret about
+    some 10bytes/second block being left after all the other segments are complete.
+</li>
+</ul>
+
+<h6>I have an interesting/useful idea relating to this!</h6>
+Great! Email me, or even better post it in the Phex forums on sourceforge.
+
+Some things I would particularly appreciate:
+<ul>
+<li>Nice little icons for the 3 ordering modes. Maybe a little movie reel for streamable, a ZIP-like g-clamp for unstreamable,
+and an eye for the preview mode?</li>
+<li>Suggestions on other useful download modes</li>
+<li>More/better ways of determining a file's type</li>
+<li>Better algorithm for calculating segments' ratings</li>
+</ul>
+</body>
+</html>

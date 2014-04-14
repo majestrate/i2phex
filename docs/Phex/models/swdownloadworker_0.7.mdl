@@ -1,0 +1,2427 @@
+
+(object Petal
+    version    	43
+    _written   	"Rose 6.5.9232.10"
+    charSet    	0)
+
+(object Design "Logical View"
+    is_unit    	TRUE
+    is_loaded  	TRUE
+    quid       	"3D1044E50310"
+    defaults   	(object defaults
+	rightMargin 	0.250000
+	leftMargin 	0.250000
+	topMargin  	0.250000
+	bottomMargin 	0.500000
+	pageOverlap 	0.250000
+	clipIconLabels 	TRUE
+	autoResize 	TRUE
+	snapToGrid 	TRUE
+	gridX      	16
+	gridY      	16
+	defaultFont 	(object Font
+	    size       	10
+	    face       	"Arial"
+	    bold       	FALSE
+	    italics    	FALSE
+	    underline  	FALSE
+	    strike     	FALSE
+	    color      	0
+	    default_color 	TRUE)
+	showMessageNum 	1
+	showClassOfObject 	TRUE
+	notation   	"Unified")
+    root_usecase_package 	(object Class_Category "Use Case View"
+	quid       	"3D1044E50325"
+	exportControl 	"Public"
+	global     	TRUE
+	logical_models 	(list unit_reference_list)
+	logical_presentations 	(list unit_reference_list
+	    (object UseCaseDiagram "Main"
+		quid       	"3D1044EC034F"
+		title      	"Main"
+		zoom       	100
+		max_height 	28350
+		max_width  	21600
+		origin_x   	0
+		origin_y   	0
+		items      	(list diagram_item_list))))
+    root_category 	(object Class_Category "Logical View"
+	quid       	"3D1044E50324"
+	exportControl 	"Public"
+	global     	TRUE
+	subsystem  	"Component View"
+	quidu      	"3D1044E5037E"
+	logical_models 	(list unit_reference_list)
+	statemachine 	(object State_Machine "State/Activity Model"
+	    quid       	"3D1044FC0192"
+	    states     	(list States
+		(object State "$UNNAMED$0"
+		    quid       	"3D1045F0028C"
+		    transitions 	(list transition_list
+			(object State_Transition
+			    quid       	"3D104AC9012E"
+			    supplier   	"Allocate Download Set"
+			    quidu      	"3D104AAC03AD"
+			    sendEvent  	(object sendEvent
+				quid       	"3D104AC90131")))
+		    type       	"StartState")
+		(object Decision "Candidate needs Push?"
+		    quid       	"3D104A46016B"
+		    transitions 	(list transition_list
+			(object State_Transition
+			    quid       	"3D104AE3021C"
+			    label      	""
+			    supplier   	"DirectDownload"
+			    quidu      	"3D104ADB031F"
+			    condition  	"No"
+			    sendEvent  	(object sendEvent
+				quid       	"3D104AE3021F"))
+			(object State_Transition
+			    quid       	"3D109A6A0285"
+			    label      	""
+			    supplier   	"PushDownload"
+			    quidu      	"3D10976E0381"
+			    condition  	"Yes"
+			    sendEvent  	(object sendEvent
+				quid       	"3D109A6A0288"))))
+		(object ActivityState "NewActivity"
+		    quid       	"3D104A9A00FF")
+		(object ActivityState "Allocate Download Set"
+		    quid       	"3D104AAC03AD"
+		    transitions 	(list transition_list
+			(object State_Transition
+			    quid       	"3D104ACB01B3"
+			    supplier   	"Candidate needs Push?"
+			    quidu      	"3D104A46016B"
+			    sendEvent  	(object sendEvent
+				quid       	"3D104ACB01B6"))))
+		(object ActivityState "DirectDownload"
+		    quid       	"3D104ADB031F"
+		    transitions 	(list transition_list
+			(object State_Transition
+			    quid       	"3D109B5101DD"
+			    supplier   	"$UNNAMED$1"
+			    quidu      	"3D109B38008D"
+			    sendEvent  	(object sendEvent
+				quid       	"3D109B5101E0")))
+		    statemachine 	(object State_Machine "State/Activity Model"
+			quid       	"3D108E4D033A"
+			states     	(list States
+			    (object State "Candidate Status: CONNECTING"
+				quid       	"3D108E4D033B"
+				transitions 	(list transition_list
+				    (object State_Transition
+					quid       	"3D108E840022"
+					supplier   	":DirectDownload:Connect to Candidate"
+					quidu      	"3D108E7700A6"
+					sendEvent  	(object sendEvent
+					    quid       	"3D108E840025")))
+				type       	"Normal")
+			    (object ActivityState "Connect to Candidate"
+				quid       	"3D108E7700A6"
+				transitions 	(list transition_list
+				    (object State_Transition
+					quid       	"3D108F59032C"
+					label      	""
+					supplier   	":DirectDownload:Candidate Status\\: HOST_BUSY"
+					quidu      	"3D108E9D021D"
+					condition  	"HostBusy"
+					sendEvent  	(object sendEvent
+					    quid       	"3D108F59032F"))
+				    (object State_Transition
+					quid       	"3D1096C00038"
+					label      	""
+					supplier   	":DirectDownload:Remove Candidate"
+					quidu      	"3D108EDF02E0"
+					condition  	"Unusable Host"
+					sendEvent  	(object sendEvent
+					    quid       	"3D1096C0003B"))
+				    (object State_Transition
+					quid       	"3D10971402AF"
+					label      	""
+					supplier   	"PushDownload"
+					quidu      	"3D10976E0381"
+					condition  	"Connection Failed or IOProblem"
+					sendEvent  	(object sendEvent
+					    quid       	"3D10971402B2"))
+				    (object State_Transition
+					quid       	"3D1098E00120"
+					supplier   	"PushDownload"
+					quidu      	"3D10976E0381"
+					sendEvent  	(object sendEvent
+					    quid       	"3D1098E00123"))
+				    (object State_Transition
+					quid       	"3D10993300B1"
+					label      	""
+					supplier   	":DirectDownload:Download Status\\: CONNECTED"
+					quidu      	"3D10991B00C1"
+					condition  	"No Problem"
+					sendEvent  	(object sendEvent
+					    quid       	"3D10993300B4"))))
+			    (object State "Candidate Status: HOST_BUSY"
+				quid       	"3D108E9D021D"
+				transitions 	(list transition_list
+				    (object State_Transition
+					quid       	"3D10989F02FD"
+					supplier   	"$UNNAMED$2"
+					quidu      	"3D109889014D"
+					sendEvent  	(object sendEvent
+					    quid       	"3D10989F0309")))
+				type       	"Normal")
+			    (object ActivityState "Remove Candidate"
+				quid       	"3D108EDF02E0"
+				transitions 	(list transition_list
+				    (object State_Transition
+					quid       	"3D1098B1024F"
+					supplier   	"$UNNAMED$2"
+					quidu      	"3D109889014D"
+					sendEvent  	(object sendEvent
+					    quid       	"3D1098B10252"))))
+			    (object State "$UNNAMED$3"
+				quid       	"3D108F3D015F"
+				transitions 	(list transition_list
+				    (object State_Transition
+					quid       	"3D108F400272"
+					supplier   	":DirectDownload:Candidate Status\\: CONNECTING"
+					quidu      	"3D108E4D033B"
+					sendEvent  	(object sendEvent
+					    quid       	"3D108F400275")))
+				type       	"StartState")
+			    (object State "$UNNAMED$2"
+				quid       	"3D109889014D"
+				type       	"EndState")
+			    (object State "Download Status: CONNECTED"
+				quid       	"3D10991B00C1"
+				transitions 	(list transition_list
+				    (object State_Transition
+					quid       	"3D10993D00C0"
+					supplier   	"$UNNAMED$2"
+					quidu      	"3D109889014D"
+					sendEvent  	(object sendEvent
+					    quid       	"3D10993D00C3")))
+				type       	"Normal"))
+			partitions 	(list Partitions)
+			statediagrams 	(list StateDiagrams)))
+		(object Decision "Downaload Status CONNECTED?"
+		    quid       	"3D1052A7018E"
+		    transitions 	(list transition_list
+			(object State_Transition
+			    quid       	"3D105309012B"
+			    label      	""
+			    supplier   	"Release Download Set"
+			    quidu      	"3D1052F9036D"
+			    condition  	"No"
+			    sendEvent  	(object sendEvent
+				quid       	"3D105309012E"))
+			(object State_Transition
+			    quid       	"3D1053D9022F"
+			    label      	""
+			    supplier   	"StartDownload"
+			    quidu      	"3D109C020232"
+			    condition  	"Yes"
+			    sendEvent  	(object sendEvent
+				quid       	"3D1053D90232"))))
+		(object ActivityState "Release Download Set"
+		    quid       	"3D1052F9036D"
+		    transitions 	(list transition_list
+			(object State_Transition
+			    quid       	"3D10531703CA"
+			    supplier   	"Allocate Download Set"
+			    quidu      	"3D104AAC03AD"
+			    sendEvent  	(object sendEvent
+				quid       	"3D10531703CD"))))
+		(object ActivityState "Verify Download File Status"
+		    quid       	"3D105499011C"
+		    transitions 	(list transition_list
+			(object State_Transition
+			    quid       	"3D109D550243"
+			    supplier   	"Merge Completed Segments"
+			    quidu      	"3D1059D302BF"
+			    sendEvent  	(object sendEvent
+				quid       	"3D109D550246"))
+			(object State_Transition
+			    quid       	"3D109E0A02A8"
+			    supplier   	"Merge Completed Segments"
+			    quidu      	"3D1059D302BF"
+			    sendEvent  	(object sendEvent
+				quid       	"3D109E0A02AB"))
+			(object State_Transition
+			    quid       	"3D1054C501AC"
+			    supplier   	"Release Download Set"
+			    quidu      	"3D1052F9036D"
+			    sendEvent  	(object sendEvent
+				quid       	"3D1054C501AF"))
+			(object State_Transition
+			    quid       	"3D109E1E0238"
+			    supplier   	"Download Completed?"
+			    quidu      	"3D109E170315"
+			    sendEvent  	(object sendEvent
+				quid       	"3D109E1E023B"))))
+		(object ActivityState "Verify Status"
+		    quid       	"3D1059E700DD")
+		(object State "NewState"
+		    quid       	"3D10730D023F"
+		    type       	"Normal")
+		(object ActivityState "PushDownload"
+		    quid       	"3D10976E0381"
+		    transitions 	(list transition_list
+			(object State_Transition
+			    quid       	"3D109892024A"
+			    supplier   	"$UNNAMED$2"
+			    quidu      	"3D109889014D"
+			    sendEvent  	(object sendEvent
+				quid       	"3D109892024D"))
+			(object State_Transition
+			    quid       	"3D109B4C00DC"
+			    supplier   	"$UNNAMED$1"
+			    quidu      	"3D109B38008D"
+			    sendEvent  	(object sendEvent
+				quid       	"3D109B4C00E8")))
+		    statemachine 	(object State_Machine "State/Activity Model"
+			quid       	"3D10657E02FC"
+			states     	(list States
+			    (object ActivityState "Remove Candidate"
+				quid       	"3D104E400292"
+				transitions 	(list transition_list
+				    (object State_Transition
+					quid       	"3D109992009A"
+					supplier   	"$UNNAMED$4"
+					quidu      	"3D10738C0043"
+					sendEvent  	(object sendEvent
+					    quid       	"3D109992009D"))))
+			    (object ActivityState "Initialize Push Request"
+				quid       	"3D104AD902A4"
+				transitions 	(list transition_list
+				    (object State_Transition
+					quid       	"3D104E500119"
+					label      	""
+					quidu      	"3D1065750028"
+					condition  	"Failed"
+					sendEvent  	(object sendEvent
+					    quid       	"3D104E50011C"))
+				    (object State_Transition
+					quid       	"3D104EF8008E"
+					label      	""
+					quidu      	"3D1065750028"
+					condition  	"Successful"
+					sendEvent  	(object sendEvent
+					    quid       	"3D104EF80091"))
+				    (object State_Transition
+					quid       	"3D10AC2D020B"
+					label      	""
+					supplier   	":PushDownload:Do HTTP Handshake"
+					quidu      	"3D104EE60024"
+					condition  	"Successful"
+					sendEvent  	(object sendEvent
+					    quid       	"3D10AC2D020E"))
+				    (object State_Transition
+					quid       	"3D10AC3701E8"
+					label      	""
+					supplier   	":PushDownload:Remove Candidate"
+					quidu      	"3D104E400292"
+					condition  	"Failed"
+					sendEvent  	(object sendEvent
+					    quid       	"3D10AC3701EB"))))
+			    (object ActivityState "Do HTTP Handshake"
+				quid       	"3D104EE60024"
+				transitions 	(list transition_list
+				    (object State_Transition
+					quid       	"3D104F960334"
+					label      	""
+					quidu      	"3D1065750028"
+					condition  	"Host Busy"
+					sendEvent  	(object sendEvent
+					    quid       	"3D104F960337"))
+				    (object State_Transition
+					quid       	"3D10501400A0"
+					label      	""
+					quidu      	"3D1065750028"
+					condition  	"Unusable Host"
+					sendEvent  	(object sendEvent
+					    quid       	"3D10501400A3"))
+				    (object State_Transition
+					quid       	"3D1051D9034B"
+					label      	""
+					quidu      	"3D1065750028"
+					condition  	"No Problem"
+					sendEvent  	(object sendEvent
+					    quid       	"3D1051D9034E"))
+				    (object State_Transition
+					quid       	"3D1051720252"
+					label      	""
+					quidu      	"3D1065750028"
+					condition  	"IOProblem"
+					sendEvent  	(object sendEvent
+					    quid       	"3D1051720255"))
+				    (object State_Transition
+					quid       	"3D10AC01029E"
+					label      	""
+					supplier   	":PushDownload:Candidate Status\\: HOST_BUSY"
+					quidu      	"3D104F70013B"
+					condition  	"Host Busy"
+					sendEvent  	(object sendEvent
+					    quid       	"3D10AC0102A1"))
+				    (object State_Transition
+					quid       	"3D10AC0F0367"
+					label      	""
+					supplier   	":PushDownload:Download Status\\: CONNECTED"
+					quidu      	"3D1052400118"
+					condition  	"No Problem"
+					sendEvent  	(object sendEvent
+					    quid       	"3D10AC0F036A"))
+				    (object State_Transition
+					quid       	"3D10AC1E01A6"
+					label      	""
+					supplier   	":PushDownload:Candidate Status\\: QUEUED"
+					quidu      	"3D10734200FB"
+					condition  	"IOProblem"
+					sendEvent  	(object sendEvent
+					    quid       	"3D10AC1E01A9"))
+				    (object State_Transition
+					quid       	"3D10AC4B001A"
+					label      	""
+					supplier   	":PushDownload:Remove Candidate"
+					quidu      	"3D104E400292"
+					condition  	"Unusable Host"
+					sendEvent  	(object sendEvent
+					    quid       	"3D10AC4B001D"))))
+			    (object State "Candidate Status: HOST_BUSY"
+				quid       	"3D104F70013B"
+				transitions 	(list transition_list
+				    (object State_Transition
+					quid       	"3D10739500A0"
+					quidu      	"3D1065750028"
+					sendEvent  	(object sendEvent
+					    quid       	"3D10739500A3"))
+				    (object State_Transition
+					quid       	"3D10ABF8015B"
+					supplier   	"$UNNAMED$4"
+					quidu      	"3D10738C0043"
+					sendEvent  	(object sendEvent
+					    quid       	"3D10ABF8015E")))
+				type       	"Normal")
+			    (object State "Download Status: CONNECTED"
+				quid       	"3D1052400118"
+				transitions 	(list transition_list
+				    (object State_Transition
+					quid       	"3D1073970360"
+					quidu      	"3D1065750028"
+					sendEvent  	(object sendEvent
+					    quid       	"3D1073970363"))
+				    (object State_Transition
+					quid       	"3D10ABF400DD"
+					supplier   	"$UNNAMED$4"
+					quidu      	"3D10738C0043"
+					sendEvent  	(object sendEvent
+					    quid       	"3D10ABF400E0")))
+				type       	"Normal")
+			    (object State "Candidate Status: PUSH_REQUEST"
+				quid       	"3D104CE70340"
+				transitions 	(list transition_list
+				    (object State_Transition
+					quid       	"3D104D540347"
+					quidu      	"3D1065750028"
+					sendEvent  	(object sendEvent
+					    quid       	"3D104D54034A"))
+				    (object State_Transition
+					quid       	"3D10ABEA00C4"
+					supplier   	":PushDownload:Initialize Push Request"
+					quidu      	"3D104AD902A4"
+					sendEvent  	(object sendEvent
+					    quid       	"3D10ABEA00C7")))
+				type       	"Normal")
+			    (object Decision "Remote Host Behind Firewall?"
+				quid       	"3D104C69001E"
+				transitions 	(list transition_list
+				    (object State_Transition
+					quid       	"3D104CC50189"
+					label      	""
+					quidu      	"3D1065750028"
+					condition  	"No"
+					sendEvent  	(object sendEvent
+					    quid       	"3D104CC5018C"))
+				    (object State_Transition
+					quid       	"3D104DBE019B"
+					label      	""
+					quidu      	"3D1065750028"
+					condition  	"Yes"
+					sendEvent  	(object sendEvent
+					    quid       	"3D104DBE019E"))
+				    (object State_Transition
+					quid       	"3D10ABB8028F"
+					label      	""
+					supplier   	"$UNNAMED$4"
+					quidu      	"3D10738C0043"
+					condition  	"Yes"
+					sendEvent  	(object sendEvent
+					    quid       	"3D10ABB80292"))
+				    (object State_Transition
+					quid       	"3D10AD120138"
+					label      	""
+					supplier   	":PushDownload:Candidate Status\\: PUSH_REQUEST"
+					quidu      	"3D104CE70340"
+					condition  	"No"
+					sendEvent  	(object sendEvent
+					    quid       	"3D10AD12013B"))))
+			    (object State "Candidate Status: QUEUED"
+				quid       	"3D10734200FB"
+				transitions 	(list transition_list
+				    (object State_Transition
+					quid       	"3D10739B01DF"
+					quidu      	"3D1065750028"
+					sendEvent  	(object sendEvent
+					    quid       	"3D10739B01E2"))
+				    (object State_Transition
+					quid       	"3D10ABF001FA"
+					supplier   	"$UNNAMED$4"
+					quidu      	"3D10738C0043"
+					sendEvent  	(object sendEvent
+					    quid       	"3D10ABF001FD")))
+				type       	"Normal")
+			    (object State "$UNNAMED$4"
+				quid       	"3D10738C0043"
+				type       	"EndState")
+			    (object State "$UNNAMED$5"
+				quid       	"3D10740C02FA"
+				transitions 	(list transition_list
+				    (object State_Transition
+					quid       	"3D10741200BE"
+					quidu      	"3D1065750028"
+					sendEvent  	(object sendEvent
+					    quid       	"3D10741200C1"))
+				    (object State_Transition
+					quid       	"3D10ABD9002A"
+					supplier   	":PushDownload:Remote Host Behind Firewall?"
+					quidu      	"3D104C69001E"
+					sendEvent  	(object sendEvent
+					    quid       	"3D10ABD9002D")))
+				type       	"StartState"))
+			partitions 	(list Partitions)
+			statediagrams 	(list StateDiagrams)))
+		(object SynchronizationState "$UNNAMED$1"
+		    quid       	"3D109B38008D"
+		    transitions 	(list transition_list
+			(object State_Transition
+			    quid       	"3D1052C50322"
+			    supplier   	"Downaload Status CONNECTED?"
+			    quidu      	"3D1052A7018E"
+			    sendEvent  	(object sendEvent
+				quid       	"3D1052C50325"))))
+		(object ActivityState "StartDownload"
+		    quid       	"3D109C020232"
+		    transitions 	(list transition_list
+			(object State_Transition
+			    quid       	"3D10547901DE"
+			    label      	""
+			    supplier   	"Candidate Status : QUEUED"
+			    quidu      	"3D1051560049"
+			    condition  	"IOProblem"
+			    sendEvent  	(object sendEvent
+				quid       	"3D10547901E1"))
+			(object State_Transition
+			    quid       	"3D109E080219"
+			    supplier   	"Merge Completed Segments"
+			    quidu      	"3D1059D302BF"
+			    sendEvent  	(object sendEvent
+				quid       	"3D109E08021C")))
+		    statemachine 	(object State_Machine "State/Activity Model"
+			quid       	"3D109C0B01BD"
+			states     	(list States
+			    (object State "Candidate Status: DOWNLOADING
+File Status: DOWNLOADING"
+				quid       	"3D10537D0286"
+				transitions 	(list transition_list
+				    (object State_Transition
+					quid       	"3D105401024A"
+					supplier   	":StartDownload:Start Download"
+					quidu      	"3D1053E801E0"
+					sendEvent  	(object sendEvent
+					    quid       	"3D105401024D")))
+				type       	"Normal")
+			    (object ActivityState "Start Download"
+				quid       	"3D1053E801E0"
+				transitions 	(list transition_list
+				    (object State_Transition
+					quid       	"3D109C9503A6"
+					supplier   	":StartDownload:NewState2"
+					quidu      	"3D109C9000A5"
+					sendEvent  	(object sendEvent
+					    quid       	"3D109C9503A9"))))
+			    (object State "$UNNAMED$6"
+				quid       	"3D109C290328"
+				transitions 	(list transition_list
+				    (object State_Transition
+					quid       	"3D109C38033E"
+					supplier   	
+|:StartDownload:Candidate Status\: DOWNLOADING
+|File Status\: DOWNLOADING
+					
+					quidu      	"3D10537D0286"
+					sendEvent  	(object sendEvent
+					    quid       	"3D109C380341")))
+				type       	"StartState")
+			    (object State "NewState2"
+				quid       	"3D109C9000A5"
+				type       	"EndState"))
+			partitions 	(list Partitions)
+			statediagrams 	(list StateDiagrams)))
+		(object ActivityState "Merge Completed Segments"
+		    quid       	"3D1059D302BF"
+		    transitions 	(list transition_list
+			(object State_Transition
+			    quid       	"3D109E96006E"
+			    supplier   	"Verify Download File Status"
+			    quidu      	"3D105499011C"
+			    sendEvent  	(object sendEvent
+				quid       	"3D109E960071"))
+			(object State_Transition
+			    quid       	"3D109EB302B5"
+			    supplier   	"Verify Download File Status"
+			    quidu      	"3D105499011C"
+			    sendEvent  	(object sendEvent
+				quid       	"3D109EB302B8"))))
+		(object State "Candidate Status : QUEUED"
+		    quid       	"3D1051560049"
+		    transitions 	(list transition_list
+			(object State_Transition
+			    quid       	"3D1054A302E3"
+			    supplier   	"Merge Completed Segments"
+			    quidu      	"3D1059D302BF"
+			    sendEvent  	(object sendEvent
+				quid       	"3D1054A302E6")))
+		    type       	"Normal")
+		(object ActivityState "NewActivity2"
+		    quid       	"3D109DB2021F")
+		(object Decision "Download Completed?"
+		    quid       	"3D109E170315"
+		    transitions 	(list transition_list
+			(object State_Transition
+			    quid       	"3D109E390364"
+			    label      	""
+			    supplier   	"Release Download Set"
+			    quidu      	"3D1052F9036D"
+			    condition  	"No"
+			    sendEvent  	(object sendEvent
+				quid       	"3D109E390367"))
+			(object State_Transition
+			    quid       	"3D109EE50220"
+			    label      	""
+			    supplier   	"Move to destination"
+			    quidu      	"3D109E480333"
+			    condition  	"Yes"
+			    sendEvent  	(object sendEvent
+				quid       	"3D109EE50223"))))
+		(object ActivityState "Move to destination"
+		    quid       	"3D109E480333"
+		    transitions 	(list transition_list
+			(object State_Transition
+			    quid       	"3D109EF60207"
+			    supplier   	"Release Download Set"
+			    quidu      	"3D1052F9036D"
+			    sendEvent  	(object sendEvent
+				quid       	"3D109EF6020A")))))
+	    partitions 	(list Partitions
+		(object Partition "handleDownload()"
+		    quid       	"3D1054CC015C"
+		    persistence 	"Transient"
+		    multi      	FALSE)
+		(object Partition "run()"
+		    quid       	"3D1054F502AF"
+		    persistence 	"Transient"
+		    multi      	FALSE)
+		(object Partition "startDownload()"
+		    quid       	"3D1055C400C6"
+		    persistence 	"Transient"
+		    multi      	FALSE)
+		(object Partition "connectDownloadEngineViaPush()"
+		    quid       	"3D10569F026F"
+		    persistence 	"Transient"
+		    multi      	FALSE))
+	    statediagrams 	(list StateDiagrams
+		(object ActivityDiagram "NewDiagram2"
+		    quid       	"3D10451D018D"
+		    title      	"NewDiagram2"
+		    zoom       	75
+		    max_height 	28350
+		    max_width  	21600
+		    origin_x   	5434
+		    origin_y   	0
+		    items      	(list diagram_item_list
+			(object Swimlane "" @1
+			    line_color 	3342489
+			    width      	450)
+			(object ActivityStateView "DirectDownload" @2
+			    Parent_View 	@1
+			    location   	(4256, 1328)
+			    label      	(object ItemLabel
+				Parent_View 	@2
+				location   	(4256, 726)
+				fill_color 	13434879
+				anchor_loc 	1
+				nlines     	2
+				max_width  	1202
+				justify    	0
+				label      	"DirectDownload")
+			    icon_style 	"Icon"
+			    line_color 	3342489
+			    fill_color 	13434879
+			    quidu      	"3D104ADB031F"
+			    width      	2109
+			    height     	1306
+			    autoResize 	TRUE)
+			(object StateView "Normal" "Candidate Status: CONNECTING" @3
+			    Parent_View 	@2
+			    location   	(4558, 880)
+			    label      	(object ItemLabel
+				Parent_View 	@3
+				location   	(4558, 867)
+				fill_color 	13434879
+				anchor_loc 	1
+				nlines     	2
+				max_width  	382
+				justify    	0
+				label      	"Candidate Status: CONNECTING")
+			    icon_style 	"Icon"
+			    line_color 	3342489
+			    fill_color 	13434879
+			    quidu      	"3D108E4D033B"
+			    width      	478
+			    height     	134
+			    autoResize 	TRUE)
+			(object ActivityStateView "Connect to Candidate" @4
+			    Parent_View 	@2
+			    location   	(4558, 1056)
+			    label      	(object ItemLabel
+				Parent_View 	@4
+				location   	(4558, 1055)
+				fill_color 	13434879
+				anchor_loc 	1
+				nlines     	2
+				max_width  	268
+				justify    	0
+				label      	"Connect to Candidate")
+			    icon_style 	"Icon"
+			    line_color 	3342489
+			    fill_color 	13434879
+			    quidu      	"3D108E7700A6"
+			    autoResize 	TRUE)
+			(object TransView "" @5
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D108E840022"
+			    client     	@3
+			    supplier   	@4
+			    line_style 	0
+			    x_offset   	FALSE)
+			(object StateView "Normal" "Candidate Status: HOST_BUSY" @6
+			    Parent_View 	@2
+			    location   	(4024, 1440)
+			    label      	(object ItemLabel
+				Parent_View 	@6
+				location   	(4024, 1427)
+				fill_color 	13434879
+				anchor_loc 	1
+				nlines     	2
+				max_width  	374
+				justify    	0
+				label      	"Candidate Status: HOST_BUSY")
+			    icon_style 	"Icon"
+			    line_color 	3342489
+			    fill_color 	13434879
+			    quidu      	"3D108E9D021D"
+			    width      	470
+			    height     	134
+			    autoResize 	TRUE)
+			(object TransView "" @7
+			    label      	(object SegLabel @8
+				Parent_View 	@7
+				location   	(4068, 1304)
+				anchor_loc 	1
+				nlines     	1
+				max_width  	450
+				justify    	0
+				label      	"[ HostBusy ]"
+				pctDist    	0.999472
+				height     	86
+				orientation 	1)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D108F59032C"
+			    client     	@4
+			    supplier   	@6
+			    line_style 	0
+			    x_offset   	FALSE)
+			(object ActivityStateView "Remove Candidate" @9
+			    Parent_View 	@2
+			    location   	(3832, 1056)
+			    label      	(object ItemLabel
+				Parent_View 	@9
+				location   	(3832, 1055)
+				fill_color 	13434879
+				anchor_loc 	1
+				nlines     	2
+				max_width  	268
+				justify    	0
+				label      	"Remove Candidate")
+			    icon_style 	"Icon"
+			    line_color 	3342489
+			    fill_color 	13434879
+			    quidu      	"3D108EDF02E0"
+			    autoResize 	TRUE)
+			(object TransView "" @10
+			    label      	(object SegLabel @11
+				Parent_View 	@10
+				location   	(4195, 1101)
+				anchor_loc 	1
+				nlines     	1
+				max_width  	450
+				justify    	0
+				label      	"[ Unusable Host ]"
+				pctDist    	0.500000
+				height     	45
+				orientation 	0)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D1096C00038"
+			    client     	@4
+			    supplier   	@9
+			    line_style 	0
+			    x_offset   	FALSE)
+			(object StateView "StartState" "$UNNAMED$3" @12
+			    Parent_View 	@2
+			    location   	(4558, 720)
+			    label      	(object ItemLabel
+				Parent_View 	@12
+				location   	(4600, 690)
+				nlines     	2
+				max_width  	600
+				label      	"")
+			    icon_style 	"Icon"
+			    line_color 	3342489
+			    fill_color 	13434879
+			    quidu      	"3D108F3D015F"
+			    autoResize 	TRUE)
+			(object TransView "" @13
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D108F400272"
+			    client     	@12
+			    supplier   	@3
+			    line_style 	0
+			    x_offset   	FALSE)
+			(object StateView "EndState" "$UNNAMED$2" @14
+			    Parent_View 	@2
+			    location   	(4552, 1920)
+			    label      	(object ItemLabel
+				Parent_View 	@14
+				location   	(4606, 1878)
+				nlines     	2
+				max_width  	600
+				label      	"")
+			    icon_style 	"Icon"
+			    line_color 	3342489
+			    fill_color 	13434879
+			    quidu      	"3D109889014D"
+			    autoResize 	TRUE)
+			(object TransView "" @15
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D10989F02FD"
+			    client     	@6
+			    supplier   	@14
+			    line_style 	0
+			    x_offset   	FALSE)
+			(object TransView "" @16
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D1098B1024F"
+			    client     	@9
+			    supplier   	@14
+			    vertices   	(list Points
+				(3736, 1111)
+				(3736, 1899)
+				(4510, 1899))
+			    line_style 	3
+			    origin_attachment 	(3736, 1111)
+			    terminal_attachment 	(4510, 1899)
+			    x_offset   	FALSE)
+			(object StateView "Normal" "Download Status: CONNECTED" @17
+			    Parent_View 	@2
+			    location   	(4552, 1440)
+			    label      	(object ItemLabel
+				Parent_View 	@17
+				location   	(4552, 1427)
+				fill_color 	13434879
+				anchor_loc 	1
+				nlines     	2
+				max_width  	374
+				justify    	0
+				label      	"Download Status: CONNECTED")
+			    icon_style 	"Icon"
+			    line_color 	3342489
+			    fill_color 	13434879
+			    quidu      	"3D10991B00C1"
+			    width      	470
+			    height     	134
+			    autoResize 	TRUE)
+			(object TransView "" @18
+			    label      	(object SegLabel @19
+				Parent_View 	@18
+				location   	(4600, 1243)
+				anchor_loc 	1
+				nlines     	1
+				max_width  	450
+				justify    	0
+				label      	"[ No Problem ]"
+				pctDist    	0.500000
+				height     	45
+				orientation 	0)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D10993300B1"
+			    client     	@4
+			    supplier   	@17
+			    line_style 	0
+			    x_offset   	FALSE)
+			(object TransView "" @20
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D10993D00C0"
+			    client     	@17
+			    supplier   	@14
+			    line_style 	0
+			    x_offset   	FALSE)
+			(object NoteView @21
+			    Parent_View 	@1
+			    location   	(3968, 848)
+			    label      	(object ItemLabel
+				Parent_View 	@21
+				location   	(3729, 786)
+				fill_color 	13434879
+				nlines     	2
+				max_width  	443
+				label      	"( Wrong HTTP Header / FileNotFound )")
+			    line_color 	3342489
+			    fill_color 	13434879
+			    width      	503
+			    height     	137)
+			(object ActivityStateView "PushDownload" @22
+			    Parent_View 	@1
+			    location   	(5376, 1376)
+			    label      	(object ItemLabel
+				Parent_View 	@22
+				location   	(5376, 1360)
+				fill_color 	13434879
+				anchor_loc 	1
+				nlines     	2
+				max_width  	374
+				justify    	0
+				label      	"PushDownload")
+			    icon_style 	"Icon"
+			    line_color 	3342489
+			    fill_color 	13434879
+			    quidu      	"3D10976E0381"
+			    width      	503
+			    height     	138
+			    autoResize 	TRUE)
+			(object TransView "" @23
+			    label      	(object SegLabel @24
+				Parent_View 	@23
+				location   	(4976, 1148)
+				anchor_loc 	1
+				nlines     	1
+				max_width  	626
+				justify    	0
+				label      	"[ Connection Failed or IOProblem ]"
+				pctDist    	0.513182
+				height     	68
+				orientation 	0)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D10971402AF"
+			    client     	@4
+			    supplier   	@22
+			    line_style 	0
+			    x_offset   	FALSE)
+			(object TransView "" @25
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D109892024A"
+			    client     	@22
+			    supplier   	@14
+			    line_style 	0
+			    x_offset   	FALSE)
+			(object DecisionView "Candidate needs Push?" @26
+			    Parent_View 	@1
+			    location   	(1824, 400)
+			    label      	(object ItemLabel
+				Parent_View 	@26
+				location   	(1880, 351)
+				nlines     	2
+				max_width  	300
+				label      	"Candidate needs Push?")
+			    icon_style 	"Icon"
+			    line_color 	3342489
+			    fill_color 	13434879
+			    quidu      	"3D104A46016B"
+			    autoResize 	TRUE)
+			(object DecisionView "Downaload Status CONNECTED?" @27
+			    Parent_View 	@1
+			    location   	(2128, 2448)
+			    label      	(object ItemLabel
+				Parent_View 	@27
+				location   	(2184, 2399)
+				nlines     	2
+				max_width  	404
+				label      	"Downaload Status CONNECTED?")
+			    icon_style 	"Icon"
+			    line_color 	3342489
+			    fill_color 	13434879
+			    quidu      	"3D1052A7018E"
+			    autoResize 	TRUE)
+			(object ActivityStateView "PushDownload" @28
+			    Parent_View 	@1
+			    location   	(1840, 1376)
+			    label      	(object ItemLabel
+				Parent_View 	@28
+				location   	(1840, 657)
+				fill_color 	13434879
+				anchor_loc 	1
+				nlines     	2
+				max_width  	1516
+				justify    	0
+				label      	"PushDownload")
+			    icon_style 	"Icon"
+			    line_color 	3342489
+			    fill_color 	13434879
+			    quidu      	"3D10976E0381"
+			    width      	2582
+			    height     	1545
+			    autoResize 	TRUE)
+			(object ActivityStateView "Remove Candidate" @29
+			    Parent_View 	@28
+			    location   	(1284, 1072)
+			    label      	(object ItemLabel
+				Parent_View 	@29
+				location   	(1284, 1073)
+				fill_color 	13434879
+				anchor_loc 	1
+				nlines     	2
+				max_width  	268
+				justify    	0
+				label      	"Remove Candidate")
+			    icon_style 	"Icon"
+			    line_color 	3342489
+			    fill_color 	13434879
+			    quidu      	"3D104E400292"
+			    autoResize 	TRUE)
+			(object ActivityStateView "Initialize Push Request" @30
+			    Parent_View 	@28
+			    location   	(1908, 1072)
+			    label      	(object ItemLabel
+				Parent_View 	@30
+				location   	(1908, 1065)
+				fill_color 	13434879
+				anchor_loc 	1
+				nlines     	2
+				max_width  	268
+				justify    	0
+				label      	"Initialize Push Request")
+			    icon_style 	"Icon"
+			    line_color 	3342489
+			    fill_color 	13434879
+			    quidu      	"3D104AD902A4"
+			    autoResize 	TRUE)
+			(object ActivityStateView "Do HTTP Handshake" @31
+			    Parent_View 	@28
+			    location   	(1908, 1440)
+			    label      	(object ItemLabel
+				Parent_View 	@31
+				location   	(1908, 1441)
+				fill_color 	13434879
+				anchor_loc 	1
+				nlines     	2
+				max_width  	268
+				justify    	0
+				label      	"Do HTTP Handshake")
+			    icon_style 	"Icon"
+			    line_color 	3342489
+			    fill_color 	13434879
+			    quidu      	"3D104EE60024"
+			    autoResize 	TRUE)
+			(object StateView "Normal" "Candidate Status: HOST_BUSY" @32
+			    Parent_View 	@28
+			    location   	(1332, 1744)
+			    label      	(object ItemLabel
+				Parent_View 	@32
+				location   	(1332, 1725)
+				fill_color 	13434879
+				anchor_loc 	1
+				nlines     	2
+				max_width  	374
+				justify    	0
+				label      	"Candidate Status: HOST_BUSY")
+			    icon_style 	"Icon"
+			    line_color 	3342489
+			    fill_color 	13434879
+			    quidu      	"3D104F70013B"
+			    width      	470
+			    height     	134
+			    autoResize 	TRUE)
+			(object StateView "Normal" "Download Status: CONNECTED" @33
+			    Parent_View 	@28
+			    location   	(1876, 1744)
+			    label      	(object ItemLabel
+				Parent_View 	@33
+				location   	(1876, 1725)
+				fill_color 	13434879
+				anchor_loc 	1
+				nlines     	2
+				max_width  	374
+				justify    	0
+				label      	"Download Status: CONNECTED")
+			    icon_style 	"Icon"
+			    line_color 	3342489
+			    fill_color 	13434879
+			    quidu      	"3D1052400118"
+			    width      	470
+			    height     	134
+			    autoResize 	TRUE)
+			(object StateView "Normal" "Candidate Status: PUSH_REQUEST" @34
+			    Parent_View 	@28
+			    location   	(1908, 864)
+			    label      	(object ItemLabel
+				Parent_View 	@34
+				location   	(1908, 845)
+				fill_color 	13434879
+				anchor_loc 	1
+				nlines     	2
+				max_width  	384
+				justify    	0
+				label      	"Candidate Status: PUSH_REQUEST")
+			    icon_style 	"Icon"
+			    line_color 	3342489
+			    fill_color 	13434879
+			    quidu      	"3D104CE70340"
+			    width      	480
+			    height     	134
+			    autoResize 	TRUE)
+			(object DecisionView "Remote Host Behind Firewall?" @35
+			    Parent_View 	@28
+			    location   	(1180, 864)
+			    label      	(object ItemLabel
+				Parent_View 	@35
+				location   	(1236, 815)
+				nlines     	2
+				max_width  	300
+				label      	"Remote Host Behind Firewall?")
+			    icon_style 	"Icon"
+			    line_color 	3342489
+			    fill_color 	13434879
+			    quidu      	"3D104C69001E"
+			    autoResize 	TRUE)
+			(object StateView "Normal" "Candidate Status: QUEUED" @36
+			    Parent_View 	@28
+			    location   	(2372, 1744)
+			    label      	(object ItemLabel
+				Parent_View 	@36
+				location   	(2372, 1727)
+				fill_color 	13434879
+				anchor_loc 	1
+				nlines     	2
+				max_width  	344
+				justify    	0
+				label      	"Candidate Status: QUEUED")
+			    icon_style 	"Icon"
+			    line_color 	3342489
+			    fill_color 	13434879
+			    quidu      	"3D10734200FB"
+			    width      	440
+			    height     	131
+			    autoResize 	TRUE)
+			(object StateView "EndState" "$UNNAMED$4" @37
+			    Parent_View 	@28
+			    location   	(1876, 2080)
+			    label      	(object ItemLabel
+				Parent_View 	@37
+				location   	(1930, 2038)
+				nlines     	2
+				max_width  	600
+				label      	"")
+			    icon_style 	"Icon"
+			    line_color 	3342489
+			    fill_color 	13434879
+			    quidu      	"3D10738C0043"
+			    autoResize 	TRUE)
+			(object StateView "StartState" "$UNNAMED$5" @38
+			    Parent_View 	@28
+			    location   	(1180, 688)
+			    label      	(object ItemLabel
+				Parent_View 	@38
+				location   	(1222, 658)
+				nlines     	2
+				max_width  	600
+				label      	"")
+			    icon_style 	"Icon"
+			    line_color 	3342489
+			    fill_color 	13434879
+			    quidu      	"3D10740C02FA"
+			    autoResize 	TRUE)
+			(object NoteView @39
+			    Parent_View 	@1
+			    location   	(1552, 1264)
+			    label      	(object ItemLabel
+				Parent_View 	@39
+				location   	(1317, 1205)
+				fill_color 	13434879
+				nlines     	2
+				max_width  	435
+				label      	"( Wrong HTTP Header / FileNotFound )")
+			    line_color 	3342489
+			    fill_color 	13434879
+			    width      	495
+			    height     	130)
+			(object ActivityStateView "Verify Download File Status" @40
+			    Parent_View 	@1
+			    location   	(688, 3376)
+			    label      	(object ItemLabel
+				Parent_View 	@40
+				location   	(688, 3366)
+				fill_color 	13434879
+				anchor_loc 	1
+				nlines     	2
+				max_width  	316
+				justify    	0
+				label      	"Verify Download File Status")
+			    icon_style 	"Icon"
+			    line_color 	3342489
+			    fill_color 	13434879
+			    quidu      	"3D105499011C"
+			    width      	424
+			    height     	110
+			    autoResize 	TRUE)
+			(object ActivityStateView "StartDownload" @41
+			    Parent_View 	@1
+			    location   	(2128, 2960)
+			    label      	(object ItemLabel
+				Parent_View 	@41
+				location   	(2128, 2666)
+				fill_color 	13434879
+				anchor_loc 	1
+				nlines     	2
+				max_width  	894
+				justify    	0
+				label      	"StartDownload")
+			    icon_style 	"Label"
+			    line_color 	3342489
+			    fill_color 	13434879
+			    quidu      	"3D109C020232"
+			    width      	1393
+			    height     	695
+			    autoResize 	TRUE)
+			(object StateView "Normal" "Candidate Status: DOWNLOADING
+File Status: DOWNLOADING" @42
+			    Parent_View 	@41
+			    location   	(2144, 2832)
+			    label      	(object ItemLabel
+				Parent_View 	@42
+				location   	(2144, 2813)
+				fill_color 	13434879
+				anchor_loc 	1
+				nlines     	2
+				max_width  	762
+				justify    	0
+				label      	
+|Candidate Status: DOWNLOADING
+|File Status: DOWNLOADING
+				)
+			    icon_style 	"Icon"
+			    line_color 	3342489
+			    fill_color 	13434879
+			    quidu      	"3D10537D0286"
+			    width      	858
+			    height     	134
+			    autoResize 	TRUE)
+			(object ActivityStateView "Start Download" @43
+			    Parent_View 	@41
+			    location   	(2144, 3056)
+			    label      	(object ItemLabel
+				Parent_View 	@43
+				location   	(2144, 3057)
+				fill_color 	13434879
+				anchor_loc 	1
+				nlines     	2
+				max_width  	268
+				justify    	0
+				label      	"Start Download")
+			    icon_style 	"Icon"
+			    line_color 	3342489
+			    fill_color 	13434879
+			    quidu      	"3D1053E801E0"
+			    autoResize 	TRUE)
+			(object TransView "" @44
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D105401024A"
+			    client     	@42
+			    supplier   	@43
+			    line_style 	0
+			    x_offset   	FALSE)
+			(object StateView "StartState" "$UNNAMED$6" @45
+			    Parent_View 	@41
+			    location   	(1872, 2688)
+			    label      	(object ItemLabel
+				Parent_View 	@45
+				location   	(1914, 2658)
+				nlines     	2
+				max_width  	600
+				label      	"")
+			    icon_style 	"Icon"
+			    line_color 	3342489
+			    fill_color 	13434879
+			    quidu      	"3D109C290328"
+			    autoResize 	TRUE)
+			(object TransView "" @46
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D109C38033E"
+			    client     	@45
+			    supplier   	@42
+			    line_style 	0
+			    x_offset   	FALSE)
+			(object StateView "EndState" "NewState2" @47
+			    Parent_View 	@41
+			    location   	(2144, 3248)
+			    label      	(object ItemLabel
+				Parent_View 	@47
+				location   	(2198, 3206)
+				nlines     	2
+				max_width  	600
+				label      	"NewState2")
+			    icon_style 	"Icon"
+			    line_color 	3342489
+			    fill_color 	13434879
+			    quidu      	"3D109C9000A5"
+			    autoResize 	TRUE)
+			(object TransView "" @48
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D109C9503A6"
+			    client     	@43
+			    supplier   	@47
+			    line_style 	0
+			    x_offset   	FALSE)
+			(object StateView "Normal" "Candidate Status : QUEUED" @49
+			    Parent_View 	@1
+			    location   	(688, 2960)
+			    label      	(object ItemLabel
+				Parent_View 	@49
+				location   	(688, 2941)
+				fill_color 	13434879
+				anchor_loc 	1
+				nlines     	2
+				max_width  	340
+				justify    	0
+				label      	"Candidate Status : QUEUED")
+			    icon_style 	"Icon"
+			    line_color 	3342489
+			    fill_color 	13434879
+			    quidu      	"3D1051560049"
+			    width      	436
+			    height     	134
+			    autoResize 	TRUE)
+			(object TransView "" @50
+			    label      	(object SegLabel @51
+				Parent_View 	@50
+				location   	(1199, 2923)
+				anchor_loc 	1
+				nlines     	1
+				max_width  	341
+				justify    	0
+				label      	"[ IOProblem ]"
+				pctDist    	0.407229
+				height     	38
+				orientation 	1)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D10547901DE"
+			    client     	@41
+			    supplier   	@49
+			    line_style 	0
+			    x_offset   	FALSE)
+			(object ActivityStateView "Merge Completed Segments" @52
+			    Parent_View 	@1
+			    location   	(688, 3168)
+			    label      	(object ItemLabel
+				Parent_View 	@52
+				location   	(688, 3158)
+				fill_color 	13434879
+				anchor_loc 	1
+				nlines     	2
+				max_width  	340
+				justify    	0
+				label      	"Merge Completed Segments")
+			    icon_style 	"Icon"
+			    line_color 	3342489
+			    fill_color 	13434879
+			    quidu      	"3D1059D302BF"
+			    width      	448
+			    height     	110
+			    autoResize 	TRUE)
+			(object TransView "" @53
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D1054A302E3"
+			    client     	@49
+			    supplier   	@52
+			    line_style 	0
+			    x_offset   	FALSE)
+			(object TransView "" @54
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D109E96006E"
+			    client     	@52
+			    supplier   	@40
+			    line_style 	0
+			    x_offset   	FALSE)
+			(object ActivityStateView "Verify Download File Status" @55
+			    Parent_View 	@1
+			    location   	(2128, 3664)
+			    label      	(object ItemLabel
+				Parent_View 	@55
+				location   	(2128, 3654)
+				fill_color 	13434879
+				anchor_loc 	1
+				nlines     	2
+				max_width  	316
+				justify    	0
+				label      	"Verify Download File Status")
+			    icon_style 	"Icon"
+			    line_color 	3342489
+			    fill_color 	13434879
+			    quidu      	"3D105499011C"
+			    width      	424
+			    height     	110
+			    autoResize 	TRUE)
+			(object ActivityStateView "Merge Completed Segments" @56
+			    Parent_View 	@1
+			    location   	(2128, 3472)
+			    label      	(object ItemLabel
+				Parent_View 	@56
+				location   	(2128, 3462)
+				fill_color 	13434879
+				anchor_loc 	1
+				nlines     	2
+				max_width  	340
+				justify    	0
+				label      	"Merge Completed Segments")
+			    icon_style 	"Icon"
+			    line_color 	3342489
+			    fill_color 	13434879
+			    quidu      	"3D1059D302BF"
+			    width      	448
+			    height     	110
+			    autoResize 	TRUE)
+			(object TransView "" @57
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D109E080219"
+			    client     	@41
+			    supplier   	@56
+			    line_style 	0
+			    x_offset   	FALSE)
+			(object TransView "" @58
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D109EB302B5"
+			    client     	@56
+			    supplier   	@55
+			    line_style 	0
+			    x_offset   	FALSE)
+			(object DecisionView "Download Completed?" @59
+			    Parent_View 	@1
+			    location   	(2128, 3856)
+			    label      	(object ItemLabel
+				Parent_View 	@59
+				location   	(2184, 3807)
+				nlines     	2
+				max_width  	300
+				label      	"Download Completed?")
+			    icon_style 	"Icon"
+			    line_color 	3342489
+			    fill_color 	13434879
+			    quidu      	"3D109E170315"
+			    autoResize 	TRUE)
+			(object TransView "" @60
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D109E1E0238"
+			    client     	@55
+			    supplier   	@59
+			    line_style 	0
+			    x_offset   	FALSE)
+			(object ActivityStateView "Move to destination" @61
+			    Parent_View 	@1
+			    location   	(2128, 4048)
+			    label      	(object ItemLabel
+				Parent_View 	@61
+				location   	(2128, 4049)
+				fill_color 	13434879
+				anchor_loc 	1
+				nlines     	2
+				max_width  	268
+				justify    	0
+				label      	"Move to destination")
+			    icon_style 	"Icon"
+			    line_color 	3342489
+			    fill_color 	13434879
+			    quidu      	"3D109E480333"
+			    autoResize 	TRUE)
+			(object StateView "StartState" "$UNNAMED$0" @62
+			    Parent_View 	@1
+			    location   	(368, 208)
+			    label      	(object ItemLabel
+				Parent_View 	@62
+				location   	(410, 178)
+				nlines     	2
+				max_width  	600
+				label      	"")
+			    icon_style 	"Icon"
+			    line_color 	3342489
+			    fill_color 	13434879
+			    quidu      	"3D1045F0028C"
+			    autoResize 	TRUE)
+			(object ActivityStateView "Allocate Download Set" @63
+			    Parent_View 	@1
+			    location   	(368, 400)
+			    label      	(object ItemLabel
+				Parent_View 	@63
+				location   	(368, 400)
+				fill_color 	13434879
+				anchor_loc 	1
+				nlines     	2
+				max_width  	268
+				justify    	0
+				label      	"Allocate Download Set")
+			    icon_style 	"Icon"
+			    line_color 	3342489
+			    fill_color 	13434879
+			    quidu      	"3D104AAC03AD"
+			    autoResize 	TRUE)
+			(object TransView "" @64
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D104AC9012E"
+			    client     	@62
+			    supplier   	@63
+			    line_style 	0
+			    x_offset   	FALSE)
+			(object TransView "" @65
+			    label      	(object SegLabel @66
+				Parent_View 	@65
+				location   	(1144, 356)
+				hidden     	TRUE
+				anchor_loc 	1
+				nlines     	1
+				max_width  	450
+				justify    	0
+				label      	""
+				pctDist    	0.500000
+				height     	45
+				orientation 	0)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D104ACB01B3"
+			    client     	@63
+			    supplier   	@26
+			    line_style 	0
+			    x_offset   	FALSE)
+			(object ActivityStateView "Release Download Set" @67
+			    Parent_View 	@1
+			    location   	(416, 4048)
+			    label      	(object ItemLabel
+				Parent_View 	@67
+				location   	(416, 4047)
+				fill_color 	13434879
+				anchor_loc 	1
+				nlines     	2
+				max_width  	268
+				justify    	0
+				label      	"Release Download Set")
+			    icon_style 	"Icon"
+			    line_color 	3342489
+			    fill_color 	13434879
+			    quidu      	"3D1052F9036D"
+			    autoResize 	TRUE)
+			(object TransView "" @68
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D109EF60207"
+			    client     	@61
+			    supplier   	@67
+			    line_style 	0
+			    x_offset   	FALSE)
+			(object SynchronizationView "$UNNAMED$1" @69
+			    location   	(2096, 2304)
+			    label      	(object ItemLabel
+				Parent_View 	@69
+				location   	(2258, 2238)
+				nlines     	2
+				max_width  	300
+				label      	"")
+			    icon_style 	"Icon"
+			    line_color 	3342489
+			    fill_color 	13434879
+			    quidu      	"3D109B38008D"
+			    autoResize 	TRUE
+			    sync_is_horizontal 	TRUE)
+			(object TransView "" @70
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D1052C50322"
+			    client     	@69
+			    supplier   	@27
+			    line_style 	3
+			    origin_attachment 	(2128, 2313)
+			    terminal_attachment 	(2128, 2411)
+			    x_offset   	FALSE)
+			(object TransView "" @71
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D10531703CA"
+			    client     	@67
+			    supplier   	@63
+			    line_style 	3
+			    origin_attachment 	(319, 3993)
+			    terminal_attachment 	(319, 455)
+			    x_offset   	FALSE)
+			(object TransView "" @72
+			    label      	(object SegLabel @73
+				Parent_View 	@72
+				location   	(2095, 2563)
+				anchor_loc 	1
+				nlines     	1
+				max_width  	159
+				justify    	0
+				label      	"[ Yes ]"
+				pctDist    	0.622748
+				height     	34
+				orientation 	1)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D1053D9022F"
+			    client     	@27
+			    supplier   	@41
+			    line_style 	3
+			    origin_attachment 	(2128, 2485)
+			    terminal_attachment 	(2128, 2610)
+			    x_offset   	FALSE)
+			(object TransView "" @74
+			    label      	(object SegLabel @75
+				Parent_View 	@74
+				location   	(436, 2493)
+				anchor_loc 	1
+				nlines     	1
+				max_width  	450
+				justify    	0
+				label      	"[ No ]"
+				pctDist    	0.500000
+				height     	45
+				orientation 	0)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D105309012B"
+			    client     	@27
+			    supplier   	@67
+			    vertices   	(list Points
+				(2053, 2448)
+				(364, 2448)
+				(364, 3993))
+			    line_style 	3
+			    origin_attachment 	(2053, 2448)
+			    terminal_attachment 	(364, 3993)
+			    x_offset   	FALSE)
+			(object TransView "" @76
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D1054C501AC"
+			    client     	@40
+			    supplier   	@67
+			    vertices   	(list Points
+				(498, 3387)
+				(434, 3387)
+				(434, 3993))
+			    line_style 	3
+			    origin_attachment 	(498, 3387)
+			    terminal_attachment 	(434, 3993)
+			    x_offset   	FALSE)
+			(object TransView "" @77
+			    label      	(object SegLabel @78
+				Parent_View 	@77
+				location   	(2173, 3943)
+				anchor_loc 	1
+				nlines     	1
+				max_width  	450
+				justify    	0
+				label      	"[ Yes ]"
+				pctDist    	0.500000
+				height     	45
+				orientation 	0)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D109EE50220"
+			    client     	@59
+			    supplier   	@61
+			    line_style 	0
+			    x_offset   	FALSE)
+			(object TransView "" @79
+			    label      	(object SegLabel @80
+				Parent_View 	@79
+				location   	(1205, 3825)
+				anchor_loc 	1
+				nlines     	1
+				max_width  	450
+				justify    	0
+				label      	"[ No ]"
+				pctDist    	0.499170
+				height     	32
+				orientation 	1)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D109E390364"
+			    client     	@59
+			    supplier   	@67
+			    vertices   	(list Points
+				(2053, 3856)
+				(489, 3856)
+				(489, 3993))
+			    line_style 	3
+			    origin_attachment 	(2053, 3856)
+			    terminal_attachment 	(489, 3993)
+			    x_offset   	FALSE)
+			(object TransView "" @81
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D109B4C00DC"
+			    client     	@28
+			    supplier   	@69
+			    line_style 	3
+			    origin_attachment 	(1962, 2151)
+			    terminal_attachment 	(1962, 2295)
+			    x_offset   	FALSE)
+			(object TransView "" @82
+			    label      	(object SegLabel @83
+				Parent_View 	@82
+				location   	(2319, 366)
+				anchor_loc 	1
+				nlines     	1
+				max_width  	110
+				justify    	0
+				label      	"[ No ]"
+				pctDist    	0.158251
+				height     	35
+				orientation 	0)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D104AE3021C"
+			    client     	@26
+			    supplier   	@2
+			    vertices   	(list Points
+				(1899, 400)
+				(4285, 400)
+				(4285, 672))
+			    line_style 	3
+			    origin_attachment 	(1899, 400)
+			    terminal_attachment 	(4285, 672)
+			    x_offset   	FALSE)
+			(object TransView "" @84
+			    label      	(object SegLabel @85
+				Parent_View 	@84
+				location   	(1870, 519)
+				anchor_loc 	1
+				nlines     	1
+				max_width  	450
+				justify    	0
+				label      	"[ Yes ]"
+				pctDist    	0.500000
+				height     	45
+				orientation 	0)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D109A6A0285"
+			    client     	@26
+			    supplier   	@28
+			    line_style 	0
+			    x_offset   	FALSE)
+			(object TransView "" @86
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D109B5101DD"
+			    client     	@2
+			    supplier   	@69
+			    vertices   	(list Points
+				(4355, 1984)
+				(4355, 2221)
+				(2148, 2221)
+				(2148, 2295))
+			    line_style 	3
+			    origin_attachment 	(4355, 1984)
+			    terminal_attachment 	(2148, 2295)
+			    x_offset   	FALSE)
+			(object AttachView "" @87
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    client     	@21
+			    supplier   	@10
+			    line_style 	3
+			    origin_attachment 	(4100, 916)
+			    terminal_attachment 	(4100, 1029))
+			(object TransView "" @88
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D109992009A"
+			    client     	@29
+			    supplier   	@37
+			    vertices   	(list Points
+				(1112, 1071)
+				(1071, 1071)
+				(1071, 2059)
+				(1834, 2059))
+			    line_style 	3
+			    origin_attachment 	(1112, 1071)
+			    terminal_attachment 	(1834, 2059)
+			    x_offset   	FALSE)
+			(object TransView "" @89
+			    label      	(object SegLabel @90
+				Parent_View 	@89
+				location   	(966, 925)
+				anchor_loc 	1
+				nlines     	1
+				max_width  	208
+				justify    	0
+				label      	"[ Yes ]"
+				pctDist    	0.063667
+				height     	67
+				orientation 	1)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D10ABB8028F"
+			    client     	@35
+			    supplier   	@37
+			    vertices   	(list Points
+				(1105, 864)
+				(1033, 864)
+				(1033, 2080)
+				(1834, 2080))
+			    line_style 	3
+			    origin_attachment 	(1105, 864)
+			    terminal_attachment 	(1834, 2080)
+			    x_offset   	FALSE)
+			(object TransView "" @91
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D10ABD9002A"
+			    client     	@38
+			    supplier   	@35
+			    line_style 	0
+			    x_offset   	FALSE)
+			(object TransView "" @92
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D10ABEA00C4"
+			    client     	@34
+			    supplier   	@30
+			    line_style 	0
+			    x_offset   	FALSE)
+			(object TransView "" @93
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D10ABF001FA"
+			    client     	@36
+			    supplier   	@37
+			    line_style 	0
+			    x_offset   	FALSE)
+			(object TransView "" @94
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D10ABF400DD"
+			    client     	@33
+			    supplier   	@37
+			    line_style 	0
+			    x_offset   	FALSE)
+			(object TransView "" @95
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D10ABF8015B"
+			    client     	@32
+			    supplier   	@37
+			    line_style 	0
+			    x_offset   	FALSE)
+			(object TransView "" @96
+			    label      	(object SegLabel @97
+				Parent_View 	@96
+				location   	(2037, 1242)
+				anchor_loc 	1
+				nlines     	1
+				max_width  	308
+				justify    	0
+				label      	"[ Successful ]"
+				pctDist    	0.445736
+				height     	129
+				orientation 	0)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D10AC2D020B"
+			    client     	@30
+			    supplier   	@31
+			    line_style 	0
+			    x_offset   	FALSE)
+			(object TransView "" @98
+			    label      	(object SegLabel @99
+				Parent_View 	@98
+				location   	(1596, 1117)
+				anchor_loc 	1
+				nlines     	1
+				max_width  	450
+				justify    	0
+				label      	"[ Failed ]"
+				pctDist    	0.500000
+				height     	45
+				orientation 	0)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D10AC3701E8"
+			    client     	@30
+			    supplier   	@29
+			    line_style 	0
+			    x_offset   	FALSE)
+			(object TransView "" @100
+			    label      	(object SegLabel @101
+				Parent_View 	@100
+				location   	(1443, 1596)
+				anchor_loc 	1
+				nlines     	1
+				max_width  	244
+				justify    	0
+				label      	"[ Host Busy ]"
+				pctDist    	0.938317
+				height     	78
+				orientation 	1)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D10AC01029E"
+			    client     	@31
+			    supplier   	@32
+			    line_style 	0
+			    x_offset   	FALSE)
+			(object TransView "" @102
+			    label      	(object SegLabel @103
+				Parent_View 	@102
+				location   	(1904, 1587)
+				anchor_loc 	1
+				nlines     	1
+				max_width  	450
+				justify    	0
+				label      	"[ No Problem ]"
+				pctDist    	0.505495
+				height     	4
+				orientation 	1)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D10AC0F0367"
+			    client     	@31
+			    supplier   	@33
+			    line_style 	3
+			    origin_attachment 	(1908, 1495)
+			    terminal_attachment 	(1908, 1677)
+			    x_offset   	FALSE)
+			(object TransView "" @104
+			    label      	(object SegLabel @105
+				Parent_View 	@104
+				location   	(2218, 1550)
+				anchor_loc 	1
+				nlines     	1
+				max_width  	450
+				justify    	0
+				label      	"[ IOProblem ]"
+				pctDist    	0.655105
+				height     	79
+				orientation 	0)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D10AC1E01A6"
+			    client     	@31
+			    supplier   	@36
+			    line_style 	0
+			    x_offset   	FALSE)
+			(object TransView "" @106
+			    label      	(object SegLabel @107
+				Parent_View 	@106
+				location   	(1331, 1478)
+				anchor_loc 	1
+				nlines     	1
+				max_width  	450
+				justify    	0
+				label      	"[ Unusable Host ]"
+				pctDist    	0.500000
+				height     	45
+				orientation 	0)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D10AC4B001A"
+			    client     	@31
+			    supplier   	@29
+			    vertices   	(list Points
+				(1737, 1433)
+				(1229, 1433)
+				(1229, 1127))
+			    line_style 	3
+			    origin_attachment 	(1737, 1433)
+			    terminal_attachment 	(1229, 1127)
+			    x_offset   	FALSE)
+			(object TransView "" @108
+			    label      	(object SegLabel @109
+				Parent_View 	@108
+				location   	(1461, 820)
+				anchor_loc 	1
+				nlines     	1
+				max_width  	450
+				justify    	0
+				label      	"[ No ]"
+				pctDist    	0.500000
+				height     	45
+				orientation 	0)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D10AD120138"
+			    client     	@35
+			    supplier   	@34
+			    line_style 	0
+			    x_offset   	FALSE)))))
+	logical_presentations 	(list unit_reference_list
+	    (object ClassDiagram "Main"
+		quid       	"3D1044EC0394"
+		title      	"Main"
+		zoom       	100
+		max_height 	28350
+		max_width  	21600
+		origin_x   	0
+		origin_y   	0
+		items      	(list diagram_item_list))))
+    root_subsystem 	(object SubSystem "Component View"
+	quid       	"3D1044E5037E"
+	physical_models 	(list unit_reference_list)
+	physical_presentations 	(list unit_reference_list
+	    (object Module_Diagram "Main"
+		quid       	"3D1044EC034E"
+		title      	"Main"
+		zoom       	100
+		max_height 	28350
+		max_width  	21600
+		origin_x   	0
+		origin_y   	0
+		items      	(list diagram_item_list))))
+    process_structure 	(object Processes
+	quid       	"3D1044E5037F"
+	ProcsNDevs 	(list
+	    (object Process_Diagram "Deployment View"
+		quid       	"3D1044E503D8"
+		title      	"Deployment View"
+		zoom       	100
+		max_height 	28350
+		max_width  	21600
+		origin_x   	0
+		origin_y   	0
+		items      	(list diagram_item_list))))
+    properties 	(object Properties
+	attributes 	(list Attribute_Set
+	    (object Attribute
+		tool       	"DDL"
+		name       	"propertyId"
+		value      	"809135966")
+	    (object Attribute
+		tool       	"DDL"
+		name       	"default__Project"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"DDL"
+			name       	"Directory"
+			value      	"AUTO GENERATE")
+		    (object Attribute
+			tool       	"DDL"
+			name       	"DataBase"
+			value      	("DataBaseSet" 800))
+		    (object Attribute
+			tool       	"DDL"
+			name       	"DataBaseSet"
+			value      	(list Attribute_Set
+			    (object Attribute
+				tool       	"DDL"
+				name       	"ANSI"
+				value      	800)
+			    (object Attribute
+				tool       	"DDL"
+				name       	"Oracle"
+				value      	801)
+			    (object Attribute
+				tool       	"DDL"
+				name       	"SQLServer"
+				value      	802)
+			    (object Attribute
+				tool       	"DDL"
+				name       	"Sybase"
+				value      	803)
+			    (object Attribute
+				tool       	"DDL"
+				name       	"Watcom"
+				value      	804)))
+		    (object Attribute
+			tool       	"DDL"
+			name       	"PrimaryKeyColumnName"
+			value      	"Id")
+		    (object Attribute
+			tool       	"DDL"
+			name       	"PrimaryKeyColumnType"
+			value      	"NUMBER(5)")
+		    (object Attribute
+			tool       	"DDL"
+			name       	"ViewName"
+			value      	"V_")
+		    (object Attribute
+			tool       	"DDL"
+			name       	"TableName"
+			value      	"T_")
+		    (object Attribute
+			tool       	"DDL"
+			name       	"InheritSuffix"
+			value      	"_V")
+		    (object Attribute
+			tool       	"DDL"
+			name       	"DropClause"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"DDL"
+			name       	"BaseViews"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"DDL"
+			name       	"DDLScriptFilename"
+			value      	"DDL1.SQL")))
+	    (object Attribute
+		tool       	"DDL"
+		name       	"default__Attribute"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"DDL"
+			name       	"ColumnType"
+			value      	"VARCHAR")
+		    (object Attribute
+			tool       	"DDL"
+			name       	"Length"
+			value      	"")
+		    (object Attribute
+			tool       	"DDL"
+			name       	"NullsOK"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"DDL"
+			name       	"PrimaryKey"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"DDL"
+			name       	"Unique"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"DDL"
+			name       	"CompositeUnique"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"DDL"
+			name       	"CheckConstraint"
+			value      	"")))
+	    (object Attribute
+		tool       	"DDL"
+		name       	"HiddenTool"
+		value      	FALSE)
+	    (object Attribute
+		tool       	"IS-EJB"
+		name       	"propertyId"
+		value      	"809135967")
+	    (object Attribute
+		tool       	"IS-ORM"
+		name       	"propertyId"
+		value      	"809135967")
+	    (object Attribute
+		tool       	"Intershop"
+		name       	"propertyId"
+		value      	"809135967")
+	    (object Attribute
+		tool       	"Intershop"
+		name       	"default__Project"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"Intershop"
+			name       	"CartridgeName"
+			value      	"")
+		    (object Attribute
+			tool       	"Intershop"
+			name       	"CartridgePackage"
+			value      	"com.intershop.beehive.")))
+	    (object Attribute
+		tool       	"IS-EJB"
+		name       	"default__Attribute"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"IS-EJB"
+			name       	"GenerateChangeHook"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"IS-EJB"
+			name       	"Persistent"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"IS-EJB"
+			name       	"NullAllowed"
+			value      	TRUE)
+		    (object Attribute
+			tool       	"IS-EJB"
+			name       	"PartOfKey"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"IS-EJB"
+			name       	"OptimisticControlAttribute"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"IS-EJB"
+			name       	"GenerateQueryByValueMethod"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"IS-EJB"
+			name       	"IsReadOnly"
+			value      	FALSE)))
+	    (object Attribute
+		tool       	"IS-EJB"
+		name       	"default__Role"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"IS-EJB"
+			name       	"ForeignKeySpec"
+			value      	"")
+		    (object Attribute
+			tool       	"IS-EJB"
+			name       	"Pageable"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"IS-EJB"
+			name       	"RelationshipPin"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"IS-EJB"
+			name       	"DeleteActionSet"
+			value      	(list Attribute_Set
+			    (object Attribute
+				tool       	"IS-EJB"
+				name       	"Default"
+				value      	1)
+			    (object Attribute
+				tool       	"IS-EJB"
+				name       	"Remove"
+				value      	2)
+			    (object Attribute
+				tool       	"IS-EJB"
+				name       	"Block"
+				value      	3)
+			    (object Attribute
+				tool       	"IS-EJB"
+				name       	"Propagate"
+				value      	4)))
+		    (object Attribute
+			tool       	"IS-EJB"
+			name       	"DeleteAction"
+			value      	("DeleteActionSet" 1))))
+	    (object Attribute
+		tool       	"IS-EJB"
+		name       	"default__Uses"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"IS-EJB"
+			name       	"IsWeakRelation"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"IS-EJB"
+			name       	"ForeignKeyAttribute"
+			value      	"")))
+	    (object Attribute
+		tool       	"IS-ORM"
+		name       	"default__Class"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"IS-ORM"
+			name       	"TableName"
+			value      	"")))
+	    (object Attribute
+		tool       	"IS-ORM"
+		name       	"default__Attribute"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"IS-ORM"
+			name       	"ColumnName"
+			value      	"")
+		    (object Attribute
+			tool       	"IS-ORM"
+			name       	"ForeignKey"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"IS-ORM"
+			name       	"ForeignKeyGroupsMember"
+			value      	"")
+		    (object Attribute
+			tool       	"IS-ORM"
+			name       	"BitmapKey"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"IS-ORM"
+			name       	"BitmapKeyGroupsMember"
+			value      	"")
+		    (object Attribute
+			tool       	"IS-ORM"
+			name       	"AlternateKey"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"IS-ORM"
+			name       	"AlternateKeyGroupsMember"
+			value      	"")
+		    (object Attribute
+			tool       	"IS-ORM"
+			name       	"InversionEntry"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"IS-ORM"
+			name       	"InversionEntryGroupsMember"
+			value      	"")
+		    (object Attribute
+			tool       	"IS-ORM"
+			name       	"ContextKey"
+			value      	FALSE)
+		    (object Attribute
+			tool       	"IS-ORM"
+			name       	"ContextKeyGroupsMember"
+			value      	"")))
+	    (object Attribute
+		tool       	"XML"
+		name       	"propertyId"
+		value      	"1234567890")
+	    (object Attribute
+		tool       	"XML"
+		name       	"default__Attribute"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"XML"
+			name       	"XMLFormat"
+			value      	("aFormatSet" 100))
+		    (object Attribute
+			tool       	"XML"
+			name       	"aFormatSet"
+			value      	(list Attribute_Set
+			    (object Attribute
+				tool       	"XML"
+				name       	"Element"
+				value      	100)
+			    (object Attribute
+				tool       	"XML"
+				name       	"Attribute"
+				value      	101)
+			    (object Attribute
+				tool       	"XML"
+				name       	"Text"
+				value      	102)))
+		    (object Attribute
+			tool       	"XML"
+			name       	"XMLName"
+			value      	"")
+		    (object Attribute
+			tool       	"XML"
+			name       	"XMLPattern"
+			value      	"")
+		    (object Attribute
+			tool       	"XML"
+			name       	"XMLEncodeDefaultValue"
+			value      	("anEncodingSet" 110))
+		    (object Attribute
+			tool       	"XML"
+			name       	"anEncodingSet"
+			value      	(list Attribute_Set
+			    (object Attribute
+				tool       	"XML"
+				name       	"yes"
+				value      	110)
+			    (object Attribute
+				tool       	"XML"
+				name       	"no"
+				value      	111)))
+		    (object Attribute
+			tool       	"XML"
+			name       	"XMLEncodeEmptyValue"
+			value      	("anEmptySet" 121))
+		    (object Attribute
+			tool       	"XML"
+			name       	"anEmptySet"
+			value      	(list Attribute_Set
+			    (object Attribute
+				tool       	"XML"
+				name       	"yes"
+				value      	120)
+			    (object Attribute
+				tool       	"XML"
+				name       	"no"
+				value      	121)))))
+	    (object Attribute
+		tool       	"XML"
+		name       	"default__Class"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"XML"
+			name       	"XMLFormat"
+			value      	("cFormatSet" 200))
+		    (object Attribute
+			tool       	"XML"
+			name       	"cFormatSet"
+			value      	(list Attribute_Set
+			    (object Attribute
+				tool       	"XML"
+				name       	"Element"
+				value      	200)))
+		    (object Attribute
+			tool       	"XML"
+			name       	"XMLName"
+			value      	"")))
+	    (object Attribute
+		tool       	"XML"
+		name       	"default__Role"
+		value      	(list Attribute_Set
+		    (object Attribute
+			tool       	"XML"
+			name       	"XMLFormat"
+			value      	("rFormatSet" 300))
+		    (object Attribute
+			tool       	"XML"
+			name       	"rFormatSet"
+			value      	(list Attribute_Set
+			    (object Attribute
+				tool       	"XML"
+				name       	"Element"
+				value      	300)
+			    (object Attribute
+				tool       	"XML"
+				name       	"Text"
+				value      	302)))
+		    (object Attribute
+			tool       	"XML"
+			name       	"XMLName"
+			value      	"")))
+	    (object Attribute
+		tool       	"JGen"
+		name       	"HiddenTool"
+		value      	FALSE))
+	quid       	"3D1044E50380"))

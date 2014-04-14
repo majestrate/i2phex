@@ -1,0 +1,353 @@
+
+<html><head><title>Gnutella Developer Forum: Gnutella Ultrapeer Query Routing v0.1</title>
+<meta http-equiv="Expires" content="Tue, 20 May 2003 14:13:02 +0000">
+<STYLE type='text/css'>
+    .title { color: #990000; font-size: 22px; line-height: 22px; font-weight: bold; text-align: right;
+             font-family: helvetica, arial, sans-serif }
+    .filename { color: #666666; font-size: 18px; line-height: 28px; font-weight: bold; text-align: right;
+                  font-family: helvetica, arial, sans-serif }
+    p.copyright { color: #000000; font-size: 10px;
+                  font-family: verdana, charcoal, helvetica, arial, sans-serif }
+    p { margin-left: 2em; margin-right: 2em; }
+    span.emph { font-style: italic; }
+    span.strong { font-weight: bold; }
+    span.verb { font-style: oblique; }
+    li { margin-left: 3em;  }
+    ol { margin-left: 2em; margin-right: 2em; }
+    ul.text { margin-left: 2em; margin-right: 2em; }
+    pre { margin-left: 3em; color: #333333 }
+    ul.toc { color: #000000; line-height: 16px;
+             font-family: verdana, charcoal, helvetica, arial, sans-serif }
+    H3 { color: #333333; font-size: 16px; line-height: 16px; font-family: helvetica, arial, sans-serif }
+    H4 { color: #000000; font-size: 14px; font-family: helvetica, arial, sans-serif }
+    TD.header { color: #ffffff; font-size: 10px; font-family: arial, helvetica, san-serif; valign: top }
+    TD.author-text { color: #000000; font-size: 10px;
+                     font-family: verdana, charcoal, helvetica, arial, sans-serif }
+    TD.author { color: #000000; font-weight: bold; margin-left: 4em; font-size: 10px; font-family: verdana, charcoal, helvetica, arial, sans-serif }
+     A:link { color: #990000; font-weight: bold;
+              font-family: MS Sans Serif, verdana, charcoal, helvetica, arial, sans-serif }
+     A:visited { color: #333333; font-weight: bold;
+                 font-family: MS Sans Serif, verdana, charcoal, helvetica, arial, sans-serif }
+     A:name { color: #333333; font-weight: bold;
+              font-family: MS Sans Serif, verdana, charcoal, helvetica, arial, sans-serif }
+    .link2 { color:#ffffff; font-weight: bold; text-decoration: none;
+             font-family: monaco, charcoal, geneva, MS Sans Serif, helvetica, monotype, verdana, sans-serif;
+             font-size: 9px }
+    .RFC { color:#666666; font-weight: bold; text-decoration: none;
+           font-family: monaco, charcoal, geneva, MS Sans Serif, helvetica, monotype, verdana, sans-serif;
+           font-size: 9px }
+    .hotText { color:#ffffff; font-weight: normal; text-decoration: none;
+               font-family: charcoal, monaco, geneva, MS Sans Serif, helvetica, monotype, verdana, sans-serif;
+               font-size: 9px }
+</style>
+</head>
+<body bgcolor="#ffffff" text="#000000" alink="#000000" vlink="#666666" link="#990000">
+<table border="0" cellpadding="0" cellspacing="2" width="30" height="15" align="right"><tr><td bgcolor="#990000" align="center" width="30" height="15"><a href="#toc" CLASS="link2"><font face="monaco, MS Sans Serif" color="#ffffff" size="1"><b>&nbsp;TOC&nbsp;</b></font></a><br></td></tr></table>
+<table width="66%" border="0" cellpadding="0" cellspacing="0"><tr><td><table width="100%" border="0" cellpadding="2" cellspacing="1">
+<tr valign="top"><td width="33%" bgcolor="#666666" class="header">Gnutella Developer Forum</td><td width="33%" bgcolor="#666666" class="header">A. Fisk</td></tr>
+<tr valign="top"><td width="33%" bgcolor="#666666" class="header">&nbsp;</td><td width="33%" bgcolor="#666666" class="header">LimeWire LLC</td></tr>
+<tr valign="top"><td width="33%" bgcolor="#666666" class="header">&nbsp;</td><td width="33%" bgcolor="#666666" class="header">May 20, 2003</td></tr>
+</table></td></tr></table>
+<div align="right"><font face="monaco, MS Sans Serif" color="#990000" size="+3"><b><br><span class="title">Gnutella Ultrapeer Query Routing v0.1</span></b></font></div>
+<font face="verdana, helvetica, arial, sans-serif" size="2">
+
+<h3>Abstract</h3>
+
+<p>
+        Gnutella has traditionally used a broadcast search model.  Broadcast
+        architectures search many computers quickly, but they consume a
+        great deal of bandwidth.  The use of query routing tables between 
+        Ultrapeers attempts to minimize this bandwidth use by using a 
+        form of keyword indexing that allows the majority of queries to be routed 
+        instead of broadcast.  
+	  
+</p><a name="toc"><br><hr size="1" shade="0"></a>
+<table border="0" cellpadding="0" cellspacing="2" width="30" height="15" align="right"><tr><td bgcolor="#990000" align="center" width="30" height="15"><a href="#toc" CLASS="link2"><font face="monaco, MS Sans Serif" color="#ffffff" size="1"><b>&nbsp;TOC&nbsp;</b></font></a><br></td></tr></table>
+<h3>Table of Contents</h3>
+<ul compact class="toc">
+<b><a href="#intro">1.</a>&nbsp;
+Introduction<br></b>
+<b><a href="#anchor1">1.1</a>&nbsp;
+Purpose<br></b>
+<b><a href="#requirements">1.2</a>&nbsp;
+Requirements<br></b>
+<b><a href="#required">1.3</a>&nbsp;
+Required Features<br></b>
+<b><a href="#architecture">2.</a>&nbsp;
+Architecture<br></b>
+<b><a href="#aggregate">2.1</a>&nbsp;
+Aggregate Leaf Tables<br></b>
+<b><a href="#forward">2.2</a>&nbsp;
+Forwarding Tables<br></b>
+<b><a href="#last_hop">2.3</a>&nbsp;
+Last Hop Most Important Hop<br></b>
+<b><a href="#unit">2.4</a>&nbsp;
+Ultrapeers and Leaves Single Unit<br></b>
+<b><a href="#size">2.5</a>&nbsp;
+Route Table Sizes<br></b>
+<b><a href="#headers">2.6</a>&nbsp;
+Connection Headers<br></b>
+<b><a href="#conclusion">3.</a>&nbsp;
+Conclusion<br></b>
+<b><a href="#rfc.references1">&#167;</a>&nbsp;
+References<br></b>
+<b><a href="#rfc.authors">&#167;</a>&nbsp;
+Author's Address<br></b>
+<b><a href="#anchor2">A.</a>&nbsp;
+Acknowledgements<br></b>
+</ul>
+<br clear="all">
+
+<a name="intro"><br><hr size="1" shade="0"></a>
+<table border="0" cellpadding="0" cellspacing="2" width="30" height="15" align="right"><tr><td bgcolor="#990000" align="center" width="30" height="15"><a href="#toc" CLASS="link2"><font face="monaco, MS Sans Serif" color="#ffffff" size="1"><b>&nbsp;TOC&nbsp;</b></font></a><br></td></tr></table>
+<a name="rfc.section.1"></a><h3>1.&nbsp;Introduction</h3>
+
+<a name="rfc.section.1.1"></a><h4><a name="anchor1">1.1</a>&nbsp;Purpose</h4>
+
+<p>
+        This proposal makes use of the query routing tables specified in
+        the <a href="#refs.qrp" title="Rohrs, C., Query Routing for the Gnutella Network, May 2002.">query routing proposal</a>[2] for Gnutella.
+        The query routing proposal distributes bit vectors 
+        of keyword hashes, or query routing tables (QRT), between hosts,
+        with the keywords coming from the names of shared files on disk.
+        On Gnutella, Ultrapeers take advantage of QRTs to pass keyword data from
+        leaves to Ultrapeers.<a href="#refs.ultrapeer" title="Rohrs, C. and A. Singla, Ultrapeers: Another Step Towards Gnutella Scalability, December 2001.">[3]</a>  This allows 
+        Ultrapeers to only forward queries to leaves that have matching files
+        for that keyword search, thus shielding leaves from the vast majority 
+        of query traffic.  This proposal uses the same idea to pass query 
+        routing tables between directly connected Ultrapeers, allowing 
+        Ultrapeers to also shield other Ultrapeers from the majority of 
+        query traffic.  The details of how this is achieved are described
+        below.
+	  
+</p>
+<a name="rfc.section.1.2"></a><h4><a name="requirements">1.2</a>&nbsp;Requirements</h4>
+
+<p>The key words “MUST”, “MUST NOT”, “REQUIRED”, 
+		“SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”, 
+		“RECOMMENDED”, “MAY”, and “OPTIONAL” in this 
+		document are to be interpreted as described in 
+		RFC 2119.<a href="#RFC2119" title="Bradner, S., Key words for use in RFCs to Indicate Requirement Levels, March 1997.">[1]</a>
+		An implementation is not compliant if it fails to satisfy one or 
+		more of the MUST or REQUIRED level requirements for the protocols 
+		it implements. An implementation that satisfies all the MUST or 
+		REQUIRED level and all the SHOULD level requirements for its 
+		protocols is said to be “unconditionally compliant”; one that 
+		satisfies all the MUST level requirements but not all the SHOULD 
+		level requirements for its protocols is said to be “conditionally
+        compliant.”
+</p>
+<a name="rfc.section.1.3"></a><h4><a name="required">1.3</a>&nbsp;Required Features</h4>
+
+<p>
+          Because this proposal makes use of both the query routing proposal
+          and Ultrapeers, clients wishing to use query routing tables between
+          Ultrapeers also MUST implement both the 
+          <a href="#refs.qrp" title="Rohrs, C., Query Routing for the Gnutella Network, May 2002.">query routing proposal</a>[2] and the
+          <a href="#refs.ultrapeer" title="Rohrs, C. and A. Singla, Ultrapeers: Another Step Towards Gnutella Scalability, December 2001.">Ultrapeer proposal</a>[3].
+        
+</p>
+<a name="architecture"><br><hr size="1" shade="0"></a>
+<table border="0" cellpadding="0" cellspacing="2" width="30" height="15" align="right"><tr><td bgcolor="#990000" align="center" width="30" height="15"><a href="#toc" CLASS="link2"><font face="monaco, MS Sans Serif" color="#ffffff" size="1"><b>&nbsp;TOC&nbsp;</b></font></a><br></td></tr></table>
+<a name="rfc.section.2"></a><h3>2.&nbsp;Architecture</h3>
+
+<a name="rfc.section.2.1"></a><h4><a name="aggregate">2.1</a>&nbsp;Aggregate Leaf Tables</h4>
+
+<p>
+        The use of query routing tables between Ultrapeers differs slightly from
+        the use of query routing tables between Ultrapeers and leaves.  In particular, 
+        leaves only include keywords for their own files in their tables.  Ultrapeers,
+        however, MUST aggregate the query routing tables for all of their leaves
+        in addition to adding keywords for their own files.  
+        So, when an Ultrapeer receives a QRT from another Ultrapeer, it knows all
+        of the keyword data for that Ultrapeer and all of the keyword data for that 
+        Ultrapeer's leaves.          
+        
+</p>
+<a name="rfc.section.2.2"></a><h4><a name="forward">2.2</a>&nbsp;Forwarding Tables</h4>
+
+<p>
+          Just as leaves periodically send query routing messages to their Ultrapeers,
+          Ultrapeers also MUST periodically send query routing messages to their
+          neighboring Ultrapeers -- in particular, PATCH and RESET messages when
+          these messages are necessary.  Because data for an Ultrapeer and all of its
+          leaves is more subject to change than data for a single leaf only, 
+          Ultrapeers MUST send route table messages more frequently than leaves 
+          currently send them to their Ultrapeers.  Checking if new messages are
+          necessary every minute should be adequate to ensure relatively live data
+          while not consuming excessive resources for table passing.
+        
+</p>
+<a name="rfc.section.2.3"></a><h4><a name="last_hop">2.3</a>&nbsp;Last Hop Most Important Hop</h4>
+
+<p>
+          Because query routing tables are only exchanged between Ultrapeers that
+          have direct Gnutella, TCP connections, it's only possible
+          to use those tables for the last hop of a query.  If a query has further to
+          travel than 1 hop, the Ultrapeer has no way of knowing whether or not there
+          might be more results for the query 2 or more hops away, so it MUST simply
+          forward the query as it normally would.  If the query is on the last hop,
+          however, the Ultrapeer MUST check the query routing table for a given Ultrapeer
+          before forwarding it on.  It then MUST forward the query if there is a hit in
+          the table, and it MUST NOT forward the query if there is not a hit.
+          If the Ultrapeer potentially receiving the query
+          does not support Ultrapeer query routing, then the query also MUST be
+          forwarded just as it normally would in traditional Gnutella.
+
+		  <br>
+<br>
+
+
+          At first glance, it may seem that the limitation of only passing last hop queries
+          through the tables makes this proposal significantly less powerful.  A closer
+          analysis of the Gnutella search architecture reveals that this is not the case, 
+          however.  Traditionally, Gnutella Ultrapeers held 6 connections to other 
+          Ultrapeers, and sent queries out with TTL=7.  In this configuration, 80% of the
+          Ultrapeers reached for a given query are reached on the last hop, so 80% of query
+          traffic would be filtered through our new tables.  What's more,
+          newer Gnutella clients maintain up to 32 connections to other Ultrapeers, passing
+          queries with a maximum TTL of 3.  In this configuration, almost 97% of the 
+          Ultrapeers reached for a query are reached on the last hop.  This concentration
+          of nodes on the last hop is really the key insight that makes this proposal so
+          powerful, however obvious and simple an insight it may be.
+
+		  <br>
+<br>
+
+
+          This concentration of nodes on the last hop also clarifies
+          why this query routing scheme is preferable to traditional query routing.  In
+          the raw query routing proposal, nodes maintain routing information for all
+          nodes within their horizon, up to 7 hops away.  This is a powerful system,
+          but it is costly and difficult to maintain fresh routing information for this
+          many Ultrapeers due to the high transience of nodes on Gnutella, as on most
+          peer-to-peer networks.  With the majority of nodes on the last hop, however, 
+          maintaining routing information for all hops is an unnecessary waste of 
+          resources, particularly given the simplicity of the last hop scheme.  
+        
+</p>
+<a name="rfc.section.2.4"></a><h4><a name="unit">2.4</a>&nbsp;Ultrapeers and Leaves Single Unit</h4>
+
+<p>
+          To make this proposal work, Ultrapeers and leaves MUST be treated as a single
+          "unit" when processing queries.  In particular, if an Ultrapeer receives
+          a query, it MUST forward that query only to leaves with hits in their routing
+          tables, and it MUST do so regardless of the query's TTL.  For example, if an Ultrapeer
+          receives a query with TTL=1, the Ultrapeer then decrements the TTL to 0, but 
+          still forwards that query to its leaves.  This change allows Ultrapeers to pass 
+          generic query routing tables that use bit vectors instead of tables that specify 
+          the hops of the content.  
+          In other words, the tables don't specify whether a leaf or the Ultrapeer is sharing 
+          the content, they just specify that the content is being shared by at least one of
+          the nodes in the Ultrapeer/leaf
+          unit.  This change allows the routing tables to use bits instead of bytes -- a bit 
+          simply indicating whether or not there's a matching keyword, as opposed to a byte
+          specifying the number hops away the content resides.  Clients implementing this
+          proposal MUST use bits instead of bytes in their query routing tables to save 
+          space.  This change reduces the size of
+          the query routing tables by a factor of 8 while also simplifying the design, 
+          but it requires that Ultrapeers forward all query traffic to their leaves regardless 
+          of TTL.
+        
+</p>
+<a name="rfc.section.2.5"></a><h4><a name="size">2.5</a>&nbsp;Route Table Sizes</h4>
+
+<p>
+          On average, query routing tables passed between Ultrapeers will contain far more
+          "hits" than query routing tables passed from leaves to Ultrapeers.  This is because the
+          routing tables passed between Ultrapeers contain all of the keywords for all of the
+          files shared on leaves as well as on the Ultrapeer itself.  This significantly 
+          increases the chance of "false positives" -- two words that happen to hash to 
+          the same value, resulting in queries being forwarded even though the recipient does
+          not, in fact, have matching content for the query.  To mitigate this problem the
+          tables passed between Ultrapeers must be fairly large.  Because 64 kilobyte tables
+          have worked well in practice and because resizing of query routing tables can consume
+          significant CPU, it is RECOMMENDED that clients use 64 kilobyte tables for both 
+          Ultrapeers and leaves.  When compressed, these tables become quite small.  
+          With most messages being small patches, these
+          tables overall should consume very little bandwidth when compared with other 
+          Gnutella message traffic.
+        
+</p>
+<a name="rfc.section.2.6"></a><h4><a name="headers">2.6</a>&nbsp;Connection Headers</h4>
+
+<p>
+          To advertise support for Ultrapeer query routing, clients MUST include
+          a new connection header indicating the version of Ultrapeer query routing
+          they support.  To advertise support for version 0.1 of this protocol, for
+          example, clients MUST include the following header:
+        
+</p></font><pre>
+		    X-Ultrapeer-Query-Routing: 0.1
+		  </pre><font face="verdana, helvetica, arial, sans-serif" size="2">
+
+<p>
+          Given that Ultrapeers may wish to prefer leaves that also are aware of these
+          features, leaves also MUST report this header.  If leaves did not report this 
+          header, it would not be possible to offer significant performance improvements to new
+          clients unless they became Ultrapeers themselves.  This is because this is an
+          optimization at the Ultrapeer level only -- unless a leaf happens to connect to one
+          of these Ultrapeers, new leaves would not see any performance improvements.
+          At the same time, however, new Ultrapeers supporting these features will only
+          appear if users download new clients, making it necessary to give users extra motivation
+          to download clients supporting this proposal.  In this case, the motivation is 
+          giving leaves a better chance of obtaining a leaf connection to a new Ultrapeer that uses 
+          bandwidth more efficiently, and that will therefore provide better results for leaf
+          queries.
+        
+</p>
+<a name="conclusion"><br><hr size="1" shade="0"></a>
+<table border="0" cellpadding="0" cellspacing="2" width="30" height="15" align="right"><tr><td bgcolor="#990000" align="center" width="30" height="15"><a href="#toc" CLASS="link2"><font face="monaco, MS Sans Serif" color="#ffffff" size="1"><b>&nbsp;TOC&nbsp;</b></font></a><br></td></tr></table>
+<a name="rfc.section.3"></a><h3>3.&nbsp;Conclusion</h3>
+
+<p>
+        Use of query routing tables between Ultrapeers is a relatively simple change, particularly 
+        if you already have implemented Ultrapeers, since the query routing code can easily be
+        reused.  With adoption of this proposal, 80% to 98% of query traffic will be routed instead
+        of broadcast, effectively solving one of the most glaring and long-lasting issues on the
+        Gnutella network.  
+      
+</p>
+<a name="rfc.references1"><br><hr size="1" shade="0"></a>
+<table border="0" cellpadding="0" cellspacing="2" width="30" height="15" align="right"><tr><td bgcolor="#990000" align="center" width="30" height="15"><a href="#toc" CLASS="link2"><font face="monaco, MS Sans Serif" color="#ffffff" size="1"><b>&nbsp;TOC&nbsp;</b></font></a><br></td></tr></table>
+<h3>References</h3>
+<table width="99%" border="0">
+<tr><td class="author-text" valign="top"><b><a name="RFC2119">[1]</a></b></td>
+<td class="author-text"><a href="mailto:sob@harvard.edu">Bradner, S.</a>, "<a href="ftp://ftp.isi.edu/in-notes/rfc2119.txt">Key words for use in RFCs to Indicate Requirement Levels</a>", BCP 14, RFC 2119, March 1997 (<a href="ftp://ftp.isi.edu/in-notes/rfc2119.txt">TXT</a>, <a href="http://xml.resource.org/public/rfc/html/rfc2119.html">HTML</a>, <a href="http://xml.resource.org/public/rfc/xml/rfc2119.xml">XML</a>).</td></tr>
+<tr><td class="author-text" valign="top"><b><a name="refs.qrp">[2]</a></b></td>
+<td class="author-text"><a href="http://www.limewire.org">Rohrs, C.</a>, "<a href="http://www.limewire.com/developer/query_routing/keyword%20routing.htm">Query Routing for the Gnutella Network</a>", May 2002.</td></tr>
+<tr><td class="author-text" valign="top"><b><a name="refs.ultrapeer">[3]</a></b></td>
+<td class="author-text"><a href="http://www.limewire.org">Rohrs, C.</a> and <a href="http://www.limewire.org">A. Singla</a>, "<a href="http://groups.yahoo.com/group/the_gdf/files/Proposals/Ultrapeer/Ultrapeers_proper_format.html">Ultrapeers: Another Step Towards Gnutella Scalability</a>", December 2001.</td></tr>
+<tr><td class="author-text" valign="top"><b><a name="refs.search">[4]</a></b></td>
+<td class="author-text"><a href="http://www.grouter.net/gnutella/">Osokine, S.</a>, "<a href="http://www.grouter.net/gnutella/search.htm">Search Optimization in the Distributed Networks</a>", December 2002.</td></tr>
+</table>
+
+<a name="rfc.authors"><br><hr size="1" shade="0"></a>
+<table border="0" cellpadding="0" cellspacing="2" width="30" height="15" align="right"><tr><td bgcolor="#990000" align="center" width="30" height="15"><a href="#toc" CLASS="link2"><font face="monaco, MS Sans Serif" color="#ffffff" size="1"><b>&nbsp;TOC&nbsp;</b></font></a><br></td></tr></table>
+<h3>Author's Address</h3>
+<table width="99%" border="0" cellpadding="0" cellspacing="0">
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Adam A. Fisk</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">LimeWire LLC</td></tr>
+<tr><td class="author" align="right">EMail:&nbsp;</td>
+<td class="author-text"><a href="mailto:afisk@limewire.com">afisk@limewire.com</a></td></tr>
+<tr><td class="author" align="right">URI:&nbsp;</td>
+<td class="author-text"><a href="http://www.limewire.org">http://www.limewire.org</a></td></tr>
+</table>
+
+<a name="anchor2"><br><hr size="1" shade="0"></a>
+<table border="0" cellpadding="0" cellspacing="2" width="30" height="15" align="right"><tr><td bgcolor="#990000" align="center" width="30" height="15"><a href="#toc" CLASS="link2"><font face="monaco, MS Sans Serif" color="#ffffff" size="1"><b>&nbsp;TOC&nbsp;</b></font></a><br></td></tr></table>
+<a name="rfc.section.A"></a><h3>Appendix A.&nbsp;Acknowledgements</h3>
+
+<p>
+	    The author would like to thank the rest of the LimeWire team and all
+        members of the Gnutella Developer Forum (GDF).  Special thanks 
+        to Serguei Osokine, whose work on search optimization clarified
+        these issues and led directly to this 
+        proposal.<a href="#refs.search" title="Osokine, S., Search Optimization in the Distributed Networks, December 2002.">[4]</a>.  
+        The <a href="http://www-db.stanford.edu/peers/">Stanford Peers Group</a> has 
+        also published a number of helpful, practical papers in this regard.
+	  
+</p></font></body></html>
+

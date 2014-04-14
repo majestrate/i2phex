@@ -1,0 +1,56 @@
+This is a small guide how to create a private Network with Phex. 
+It was originally written by Arne Babenhauserheide ( http://draketo.de )
+
+What you need: 
+
+- You must be able to build Phex from source 
+    (if you're reading this, I assume you can). 
+    
+- You need either a dedicated GWebCache 
+    (which I might explain at some other time) 
+    or a host or a set of hosts which is/are permanently online 
+    and reachable either via a static IP or via a dynamic DNS-address. 
+    (This is what you'll use, if you follow these steps)
+    
+- You have to deploy customized Phex-jars or Programs 
+    to the members of your group. 
+
+
+How to begin: 
+
+- Pick a network Name. 
+    This is in some way your passcode. Without it, noone can enter your network. 
+
+- Open src/phex/common/cfg.java and read in there, how to customize it further. 
+
+- Ppen src/phex/resources/version.properties and set the 
+    privatebuild.number to 01. 
+    Increase it by 1 for every beta or stable release you make. 
+
+- Open src/phex/resources/phex.hosts and replace any contents by a list of 
+    your static hosts (static IP or dynamic dns-address). 
+    One line for every adress. Only IP:Port or Hostname:Port. 
+
+- Build the project (go into build and type ant, if you have ant installed, 
+    else you have to find out how to get it yourself). 
+
+- Give it to your peers and give them the address of your static hosts 
+    (static IP or dyndns-adress). 
+    This host is necessary for the first connection, later on 
+    it should become obsolete, as soon as all programs have been deployed, 
+    but only if your Private network is big enough, taht there are always 
+    and at all times some people online. 
+    Your peers should add these static hosts to their favourites 
+    (in connections-view). 
+
+- After the network ran for some time, when you want to deploy a new version, 
+    copy the contents of [private-network-name]_phex.hosts from your 
+    config-files ( in $HOME/.phex/ ) into src/phex/resources/ . 
+    Then build the Program again. Now new members should be able to enter 
+    the private network without always having to rely on the static host
+    (but you should keep it online, just as safety. That bit of hassle you 
+    avoid isn't worth angry or helpless users.)
+
+
+I hope you are successful in creating your private network. 
+-- Arne Babenhauserheide ( http://draketo.de )

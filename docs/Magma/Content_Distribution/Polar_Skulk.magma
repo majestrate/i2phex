@@ -1,0 +1,10 @@
+#MAGMAv0.2 magnet:?mt=.&dn=Polar_Skulk.magma
+# This is the decentral content-distribution-list of Phex. 
+# It points to several other Magma-Lists, which are maintained 
+# independently. 
+
+list: 
+ 
+ - "magnet:?as=http://draketo.de/magma/polar_skulk-rpg-magnets.magma&dn=rpg-magnets.magma"
+  Maintainer: Arne Babenhauserheide
+   Website-url: http://draketo.de

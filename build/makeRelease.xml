@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<project name="Phex.Release" default="makeRelease" basedir="..">
+	<!-- check task availability -->
+  <available classname="org.apache.tools.ant.taskdefs.optional.PropertyFile" property="hasOptionalTasks"/>
+
+	<!-- read in phex pre build version info -->
+  <property file="${project.source}/phex/resources/version.properties" prefix="phexpre"/>
+	
+	<!-- check releases to create -->
+	<condition property="do.create.win32">
+		<equals arg1="${release.create.win32}" arg2="true"/>
+	</condition>
+	<condition property="do.create.linux">
+		<equals arg1="${release.create.linux}" arg2="true"/>
+	</condition>
+	<condition property="do.create.osx">
+		<equals arg1="${release.create.osx}" arg2="true"/>
+	</condition>
+	<condition property="do.create.src">
+		<equals arg1="${release.create.src}" arg2="true"/>
+	</condition>
+	
+	<!-- define path elements -->
+  <path id="phex.classpath">
+    <pathelement path="${phex.classpath}"/>
+  </path>
+	
+  <target name="makeRelease" depends="-init, -buildAll, -create.releases"/>
+	
+  <target name="-buildAll" depends="-clean">
+  	<!-- building with debug gives no performance overhead -->
+    <property name="build.isDebugBuild" value="true"/>
+    <ant antfile="${project.build}/build.xml" target="buildAll" inheritAll="true"/>
+  </target>
+  
+  <target name="-updateBuild">
+  	<!-- building with debug gives no performance overhead -->
+    <property name="build.isDebugBuild" value="true"/>
+    <ant antfile="${project.build}/build.xml" target="buildAll" inheritAll="true"/>
+  </target>
+
+  <target name="-clean">
+    <ant antfile="${project.build}/build.xml" target="clean" inheritAll="true"/>
+  </target>
+	
+  <target name="-init" depends="-handleSubscription, -getUserInput, -userInputIncreaseBuildYN, -increaseBuildNumber">
+  	<tstamp>
+    	<format property="Release.Date" pattern="yyyy-MM-dd"/>
+    </tstamp>
+  	
+  	<!-- read in phex build version info -->
+   	<property file="${project.source}/phex/resources/phex.properties" prefix="phex"/>
+    <property file="${project.source}/phex/resources/version.properties" prefix="phex"/>
+    <property name="phex.FullPhexVersion" value="${phex.Program.Version}.${phex.build.number}"/>
+  	
+  	<!-- define default values in case they are not set -->
+		<property name="create.postfix" value=""/>
+		<property name="nsis.subscriptionList.arg" value=""/>
+  </target>
+	
+	<target name="-handleSubscription" if="release.subscription.file">
+		<property name="nsis.subscriptionList.arg" value="/DADD_SUBSCRIPTION_LIST"/>
+		<property name="create.postfix" value="${release.subscription.outputPostfix}"/>
+  </target>
+
+	<target name="-getUserInput">		
+		<condition property="do.ask.increaseBuildNumber">
+      <and>
+        <equals arg1="${release.ask.increaseBuildNumber}" arg2="y"/>
+      </and> 
+    </condition>
+	</target>
+  
+	<target name="-userInputIncreaseBuildYN" if="do.ask.increaseBuildNumber">
+    <input defaultvalue="n" addproperty="input.increaseBuildNumber">
+    	The current build number is ${phexpre.build.number}.
+    	It is recommended to NOT increase the build number for unofficial builds,
+    	otherwise you might break the Phex update path.
+    	Do you like to increase the build number for the next official release?
+    </input>
+    <condition property="do.increaseBuildNumber">
+      <and>
+        <equals arg1="${input.increaseBuildNumber}" arg2="y"/>
+        <isset property="hasOptionalTasks"/>
+      </and> 
+    </condition>
+  </target>
+  
+  <!-- updateBuild must be after initVersion to update version file and build Jar-->
+  <target name="-create.releases" depends="-init, -updateBuild">
+  	<ant antfile="${project.build}/release.win32.xml" target="-create.win32" inheritAll="true"/>
+  	<ant antfile="${project.build}/release.linux.xml" target="-create.linux" inheritAll="true"/>
+    <ant antfile="${project.build}/release.osx.xml" target="-create.osx" inheritAll="true"/>
+  	<ant antfile="${project.build}/release.src.xml" target="-create.src" inheritAll="true"/>
+	</target>
+	
+	<target name="-copySubscriptionFile" if="release.subscription.file">
+	  <copy file="${release.subscription.file}" tofile="${subscriptionDir}/subscription.list"/>
+	</target>
+	
+	
+  <target name="-increaseBuildNumber" if="do.increaseBuildNumber">
+    <propertyfile file="${project.source}/phex/resources/version.properties">
+      <entry key="build.number" type="int" value="1" operation="+"/>
+      <entry key="build.date" type="date" value="now"/>
+    </propertyfile>
+  </target>
+</project>

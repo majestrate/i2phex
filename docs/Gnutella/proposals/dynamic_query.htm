@@ -1,0 +1,541 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0053)http://www9.limewire.com/developer/dynamic_query.html -->
+<HTML><HEAD><TITLE>Gnutella Developer Forum: Gnutella Dynamic Query Protocol v0.1</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=windows-1252">
+<META http-equiv=Expires content="Thu, 15 May 2003 21:05:30 +0000">
+<STYLE type=text/css>.title {
+	FONT-WEIGHT: bold; FONT-SIZE: 22px; COLOR: #990000; LINE-HEIGHT: 22px; FONT-FAMILY: helvetica, arial, sans-serif; TEXT-ALIGN: right
+}
+.filename {
+	FONT-WEIGHT: bold; FONT-SIZE: 18px; COLOR: #666666; LINE-HEIGHT: 28px; FONT-FAMILY: helvetica, arial, sans-serif; TEXT-ALIGN: right
+}
+P.copyright {
+	FONT-SIZE: 10px; COLOR: #000000; FONT-FAMILY: verdana, charcoal, helvetica, arial, sans-serif
+}
+P {
+	MARGIN-LEFT: 2em; MARGIN-RIGHT: 2em
+}
+SPAN.emph {
+	FONT-STYLE: italic
+}
+SPAN.strong {
+	FONT-WEIGHT: bold
+}
+SPAN.verb {
+	FONT-STYLE: oblique
+}
+LI {
+	MARGIN-LEFT: 3em
+}
+OL {
+	MARGIN-LEFT: 2em; MARGIN-RIGHT: 2em
+}
+UL.text {
+	MARGIN-LEFT: 2em; MARGIN-RIGHT: 2em
+}
+PRE {
+	MARGIN-LEFT: 3em; COLOR: #333333
+}
+UL.toc {
+	COLOR: #000000; LINE-HEIGHT: 16px; FONT-FAMILY: verdana, charcoal, helvetica, arial, sans-serif
+}
+H3 {
+	FONT-SIZE: 16px; COLOR: #333333; LINE-HEIGHT: 16px; FONT-FAMILY: helvetica, arial, sans-serif
+}
+H4 {
+	FONT-SIZE: 14px; COLOR: #000000; FONT-FAMILY: helvetica, arial, sans-serif
+}
+TD.header {
+	FONT-SIZE: 10px; COLOR: #ffffff; FONT-FAMILY: arial, helvetica, san-serif; valign: top
+}
+TD.author-text {
+	FONT-SIZE: 10px; COLOR: #000000; FONT-FAMILY: verdana, charcoal, helvetica, arial, sans-serif
+}
+TD.author {
+	FONT-WEIGHT: bold; FONT-SIZE: 10px; MARGIN-LEFT: 4em; COLOR: #000000; FONT-FAMILY: verdana, charcoal, helvetica, arial, sans-serif
+}
+A:link {
+	FONT-WEIGHT: bold; COLOR: #990000; FONT-FAMILY: MS Sans Serif, verdana, charcoal, helvetica, arial, sans-serif
+}
+A:visited {
+	FONT-WEIGHT: bold; COLOR: #333333; FONT-FAMILY: MS Sans Serif, verdana, charcoal, helvetica, arial, sans-serif
+}
+A:unknown {
+	FONT-WEIGHT: bold; COLOR: #333333; FONT-FAMILY: MS Sans Serif, verdana, charcoal, helvetica, arial, sans-serif
+}
+.link2 {
+	FONT-WEIGHT: bold; FONT-SIZE: 9px; COLOR: #ffffff; FONT-FAMILY: monaco, charcoal, geneva, MS Sans Serif, helvetica, monotype, verdana, sans-serif; TEXT-DECORATION: none
+}
+.RFC {
+	FONT-WEIGHT: bold; FONT-SIZE: 9px; COLOR: #666666; FONT-FAMILY: monaco, charcoal, geneva, MS Sans Serif, helvetica, monotype, verdana, sans-serif; TEXT-DECORATION: none
+}
+.hotText {
+	FONT-WEIGHT: normal; FONT-SIZE: 9px; COLOR: #ffffff; FONT-FAMILY: charcoal, monaco, geneva, MS Sans Serif, helvetica, monotype, verdana, sans-serif; TEXT-DECORATION: none
+}
+</STYLE>
+
+<META content="MSHTML 6.00.2800.1170" name=GENERATOR></HEAD>
+<BODY text=#000000 vLink=#666666 aLink=#000000 link=#990000 bgColor=#ffffff>
+<TABLE height=15 cellSpacing=2 cellPadding=0 width=30 align=right border=0>
+  <TBODY>
+  <TR>
+    <TD align=middle width=30 bgColor=#990000 height=15><A class=link2 
+      href="http://www9.limewire.com/developer/dynamic_query.html#toc"><FONT 
+      face="monaco, MS Sans Serif" color=#ffffff 
+      size=1><B>&nbsp;TOC&nbsp;</B></FONT></A><BR></TD></TR></TBODY></TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width="66%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=1 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR vAlign=top>
+          <TD class=header width="33%" bgColor=#666666>Gnutella Developer 
+          Forum</TD>
+          <TD class=header width="33%" bgColor=#666666>A. Fisk</TD></TR>
+        <TR vAlign=top>
+          <TD class=header width="33%" bgColor=#666666>&nbsp;</TD>
+          <TD class=header width="33%" bgColor=#666666>LimeWire LLC</TD></TR>
+        <TR vAlign=top>
+          <TD class=header width="33%" bgColor=#666666>&nbsp;</TD>
+          <TD class=header width="33%" bgColor=#666666>May 15, 
+        2003</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+<DIV align=right><FONT face="monaco, MS Sans Serif" color=#990000 
+size=+3><B><BR><SPAN class=title>Gnutella Dynamic Query Protocol 
+v0.1</SPAN></B></FONT></DIV><FONT face="verdana, helvetica, arial, sans-serif" 
+size=2>
+<H3>Abstract</H3>
+<P>The traditional Gnutella broadcast search model handles all searches 
+identically -- a search for "mp3" is broadcasted to as many nodes as a search 
+for "Gettysburg Address". As a result, searches for "mp3" return far more 
+results than they need, wasting bandwidth for both query and query hit traffic, 
+while searches for "Gettysburg Address" do not receive the desired number of 
+results. This proposal improves upon this search model by making the query 
+dynamic, with Ultrapeers connecting to more nodes and dynamically adjusting the 
+TTL of outgoing queries along specific connections to use just enough bandwidth 
+to satisfy the query. </P><A name=toc><BR>
+<HR SIZE=1 shade="0">
+</A>
+<TABLE height=15 cellSpacing=2 cellPadding=0 width=30 align=right border=0>
+  <TBODY>
+  <TR>
+    <TD align=middle width=30 bgColor=#990000 height=15><A class=link2 
+      href="http://www9.limewire.com/developer/dynamic_query.html#toc"><FONT 
+      face="monaco, MS Sans Serif" color=#ffffff 
+      size=1><B>&nbsp;TOC&nbsp;</B></FONT></A><BR></TD></TR></TBODY></TABLE>
+<H3>Table of Contents</H3>
+<UL class=toc compact><B><A 
+  href="http://www9.limewire.com/developer/dynamic_query.html#intro">1.</A>&nbsp; 
+  Introduction<BR></B><B><A 
+  href="http://www9.limewire.com/developer/dynamic_query.html#anchor1">1.1</A>&nbsp; 
+  Purpose<BR></B><B><A 
+  href="http://www9.limewire.com/developer/dynamic_query.html#requirements">1.2</A>&nbsp; 
+  Requirements<BR></B><B><A 
+  href="http://www9.limewire.com/developer/dynamic_query.html#architecture">2.</A>&nbsp; 
+  Architecture<BR></B><B><A 
+  href="http://www9.limewire.com/developer/dynamic_query.html#overview">2.1</A>&nbsp; 
+  Overview<BR></B><B><A 
+  href="http://www9.limewire.com/developer/dynamic_query.html#ultrapeer_control">2.2</A>&nbsp; 
+  Ultrapeer Controls all Aspects of Query<BR></B><B><A 
+  href="http://www9.limewire.com/developer/dynamic_query.html#degree">2.3</A>&nbsp; 
+  High Degree Network<BR></B><B><A 
+  href="http://www9.limewire.com/developer/dynamic_query.html#ttl">2.4</A>&nbsp; 
+  Decrease Time to Live (TTL)<BR></B><B><A 
+  href="http://www9.limewire.com/developer/dynamic_query.html#life">2.5</A>&nbsp; 
+  Life of a Dynamic Query<BR></B><B><A 
+  href="http://www9.limewire.com/developer/dynamic_query.html#probe">2.5.1</A>&nbsp; 
+  Probe Query<BR></B><B><A 
+  href="http://www9.limewire.com/developer/dynamic_query.html#standard">2.5.2</A>&nbsp; 
+  Standard Algorithm<BR></B><B><A 
+  href="http://www9.limewire.com/developer/dynamic_query.html#other">2.5.3</A>&nbsp; 
+  Other Considerations<BR></B><B><A 
+  href="http://www9.limewire.com/developer/dynamic_query.html#conclusion">3.</A>&nbsp; 
+  Conclusion<BR></B><B><A 
+  href="http://www9.limewire.com/developer/dynamic_query.html#rfc.references1">§</A>&nbsp; 
+  References<BR></B><B><A 
+  href="http://www9.limewire.com/developer/dynamic_query.html#rfc.authors">§</A>&nbsp; 
+  Author's Address<BR></B><B><A 
+  href="http://www9.limewire.com/developer/dynamic_query.html#anchor2">A.</A>&nbsp; 
+  Acknowledgements<BR></B></UL><BR clear=all><A name=intro><BR>
+<HR SIZE=1 shade="0">
+</A>
+<TABLE height=15 cellSpacing=2 cellPadding=0 width=30 align=right border=0>
+  <TBODY>
+  <TR>
+    <TD align=middle width=30 bgColor=#990000 height=15><A class=link2 
+      href="http://www9.limewire.com/developer/dynamic_query.html#toc"><FONT 
+      face="monaco, MS Sans Serif" color=#ffffff 
+      size=1><B>&nbsp;TOC&nbsp;</B></FONT></A><BR></TD></TR></TBODY></TABLE><A 
+name=rfc.section.1></A>
+<H3>1.&nbsp;Introduction</H3><A name=rfc.section.1.1></A>
+<H4><A name=anchor1>1.1</A>&nbsp;Purpose</H4>
+<P>Dynamic queries offer a way to receive the desired number of results for a 
+given search, with the goal of maximizing the likelihood that a user will 
+successfully download the desired file. Put another way, dynamic querying seeks 
+to hit the minimum number of nodes necessary to obtain the desired number of 
+results for a given search. </P><A name=rfc.section.1.2></A>
+<H4><A name=requirements>1.2</A>&nbsp;Requirements</H4>
+<P>The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, 
+“SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL” in this document are to be 
+interpreted as described in RFC 2119.<A 
+title="Bradner, S., Key words for use in RFCs to Indicate Requirement Levels, March 1997." 
+href="http://www9.limewire.com/developer/dynamic_query.html#RFC2119">[1]</A> An 
+implementation is not compliant if it fails to satisfy one or more of the MUST 
+or REQUIRED level requirements for the protocols it implements. An 
+implementation that satisfies all the MUST or REQUIRED level and all the SHOULD 
+level requirements for its protocols is said to be “unconditionally compliant”; 
+one that satisfies all the MUST level requirements but not all the SHOULD level 
+requirements for its protocols is said to be “conditionally compliant.” </P><A 
+name=architecture><BR>
+<HR SIZE=1 shade="0">
+</A>
+<TABLE height=15 cellSpacing=2 cellPadding=0 width=30 align=right border=0>
+  <TBODY>
+  <TR>
+    <TD align=middle width=30 bgColor=#990000 height=15><A class=link2 
+      href="http://www9.limewire.com/developer/dynamic_query.html#toc"><FONT 
+      face="monaco, MS Sans Serif" color=#ffffff 
+      size=1><B>&nbsp;TOC&nbsp;</B></FONT></A><BR></TD></TR></TBODY></TABLE><A 
+name=rfc.section.2></A>
+<H3>2.&nbsp;Architecture</H3><A name=rfc.section.2.1></A>
+<H4><A name=overview>2.1</A>&nbsp;Overview</H4>
+<P>On a high level, this change involves increasing the number of connections 
+that Ultrapeers maintain, decreasing the Time to Live (TTL) of outgoing 
+searches, and sending a search to one Ultrapeer at a time, waiting for results 
+and adjusting the TTL on each iteration based on the number of results received, 
+the number of connections left, and the number of nodes already theoretically 
+reached by the search. When the desired number of results is received, the query 
+ends. Each of these changes is dicussed in detail below. </P><A 
+name=rfc.section.2.2></A>
+<H4><A name=ultrapeer_control>2.2</A>&nbsp;Ultrapeer Controls all Aspects of 
+Query</H4>
+<P>In this scheme, the Ultrapeer controls all aspects of the query. Upon 
+receiving a query from a leaf, the Ultrapeer ignores the TTL of that query and 
+begins a dynamic query. When an Ultrapeer receives a query from another 
+dynamic-query Ultrapeer, it MUST broadcast that query just as it normally would. 
+</P><A name=rfc.section.2.3></A>
+<H4><A name=degree>2.3</A>&nbsp;High Degree Network</H4>
+<P>Clients implementing dynamic querying MUST increase the degree of their 
+Ultrapeer connections, as increasing the degree significantly increases control 
+over the number of nodes hit in a query, maximizing its bandwidth-saving 
+effects. Clients implementing this proposal MUST maintain a minimum of 15 
+connections to other Ultrapeers, and it is RECOMMENDED that clients increase 
+their degree to 30 or more. </P><A name=rfc.section.2.4></A>
+<H4><A name=ttl>2.4</A>&nbsp;Decrease Time to Live (TTL)</H4>
+<P>Clients implementing dynamic querying also MUST decrease the TTL of outgoing 
+queries. One of the biggest problems with the traditional broadcast search model 
+was that a node had little control over the horizon of a query. Once a query was 
+sent, it would attempt to hammer hundreds of thousands of nodes all at once. The 
+combinate of a higher degree network and lower TTLs dramatically reduces this 
+problem because each connection represents a much smaller node horizon. 
+<BR><BR>For example, with a degree 6 network where each query is sent with a TTL 
+of 7, a query sent down one connection theoretically would reach 23,436 
+Ultrapeers (barring cycles in the network graph). In contrast, on a degree 32 
+network where each query is sent with a TTL of 3, a query sent down one 
+connection theoretically would reach 1,024 Ultrapeers. While the total horizon 
+is also less with a degree 32, TTL 3 network, the point is that increasing the 
+degree and lowering the TTL allows the our algorithm to send the query to far 
+fewer nodes on each iteration, allowing finer- grained control over the query 
+and a more accurate dynamic calculation of what the TTL for the next iteration 
+should be. <BR><BR>In choosing the degree and the maximum TTL, clients MUST NOT 
+exceed 200,000 Ultrapeers for their maximum theoretical search horizon -- the 
+number of Ultrapeers they will in hit in searches for the rarest of files. This 
+translates into an overall horizon of 6,000,000+ nodes when taking leaves into 
+account, which should be plenty for any search, and which is only possible on a 
+network performing close to optimally. </P><A name=rfc.section.2.5></A>
+<H4><A name=life>2.5</A>&nbsp;Life of a Dynamic Query</H4>
+<P>This section discusses all aspects of a single dynamic query, including probe 
+queries, search intervals, TTL calculation, etc. </P><A 
+name=rfc.section.2.5.1></A>
+<H4><A name=probe>2.5.1</A>&nbsp;Probe Query</H4>
+<P>When a client first begins a dynamic query, it has no way of knowing how 
+common the desired file is. As such, it's unclear what TTL is appropriate for 
+the first connection. To gather more infomation, it is necessary to send a 
+"probe" query that gives some idea as to the popularity of the file. A simple 
+approach is to send a TTL=2 query down 3 connections and wait about 6 seconds 
+for results. If no results, are received, the next query may be sent with a high 
+TTL, such as 3. If the probe returns 30 results, however, it would make sense 
+for the subsequent TTL to be lower, pe perhaps 1. <BR><BR>If the client 
+implementing dynamic queries also implements <A 
+title="Fisk, A., Gnutella Ultrapeer Query Routing, v. 0.1, May 2003." 
+href="http://www9.limewire.com/developer/dynamic_query.html#refs.up_qrp">Ultrapeer 
+query routing</A>[2], further optimizations are also possible for the probe. For 
+connections that have supplied query route tables, the dynamic querier MAY 
+choose to check those route tables for hits and to use that information to both 
+determine the popularity of the file more closely and to decide which nodes to 
+send the query to. If, for example, a node has query route tables from 20 
+connections and 10 of them have hits for the query in their tables, it is clear 
+that the desired content is widely distributed, and it is very likely that the 
+probe alone will satisfy the query. Note that the querier has reached this 
+conclusion before sending a single query down any connection! In this case, the 
+querier may choose to send the query to 5 or more connections that have hits in 
+their tables, knowing that each of them should return results and likely 
+achieving the desired number of results. Here, the query is only sent to nodes 
+that are known ahead of time to contain hits and nodes without hits are not sent 
+the query. </P><A name=rfc.section.2.5.2></A>
+<H4><A name=standard>2.5.2</A>&nbsp;Standard Algorithm</H4>
+<P>Once the probe is sent, the standard dynamic query algorithm takes effect. In 
+many cases, the probe will return the desired number of results, terminating the 
+query. When the probe does not achieve the desired number of results, however, 
+the querier must begin the process of dynamically calculating the TTL, per hop 
+wait times, etc. for the remaining connections, as described below. </P><A 
+name=rfc.section.2.5.2.1></A>
+<H4><A name=ttl_calculation>2.5.2.1</A>&nbsp;Calculating the Next TTL</H4>
+<P>The algorithm for calculating the TTL for the next connection is one of the 
+most important parts of the dynamic query. This calculation must take into 
+account the number of hosts already queried, the number of remaining 
+connections, and the number of results received. On each iteration, a reasonable 
+algorithm is to divide the number of results still needed by the the average 
+number of results received per Ultrapeer queried to get the number of Ultrapeers 
+you should hit, and then to divide this number by the number of remaining 
+connections to get the total number of hosts to query per connection. With the 
+number of hosts to query per connection, you can easily calculate the 
+appropriate TTL based on the degree of the connection being queried. More 
+formally: <BR></P></FONT><PRE>
+     Let r = the number of results received
+     Let R = the number of results needed, 
+             or the number of results desired - r
+     Let H = the number of Ultrapeers theoretically queried
+     Let RH = the number of results per Ultrapeer, or r/H
+     Let HQ = the number of hosts to query to reach the 
+              desired number of results, or R/RH
+     Let C = the number of connections that have not yet 
+             received the query
+     Let HQC = the number of hosts to query per connection, 
+               or HQ/C
+     Let DEGREE = the degree of the next connection
+
+     TTL = the minimum TTL that will reach the desired number 
+           of hosts for this connection
+     
+		      </PRE><FONT face="verdana, helvetica, arial, sans-serif" size=2>
+<P><BR>Note that we calculate the TTL using the degree of the connection that 
+will receive the query. For our purposes, we assume that all nodes connected to 
+that node have the same degree -- we don't take into account the likelihood that 
+there is significant heterogeneity in the degrees of the connected nodes. 
+<BR>The TTL calculation must also take into account the new X-Max-TTL header. 
+The X-Max-TTL header indicates the maximum TTL for fresh queries the connection 
+will accept. As such, the TTL sent along a connection MUST NOT exceed the 
+X-Max-TTL for the given connection. X-Max-TTL is discussed in more detail in the 
+section on <A 
+href="http://www9.limewire.com/developer/dynamic_query.html#headers">headers</A>. 
+<BR>Finally, the difference between one TTL and the next is so great in terms of 
+the number of nodes reached that it makes sense to weight this algorithm towards 
+lower TTLs. Given that we are always working with incomplete data, favoring 
+lower TTLs mitigates the danger of choosing a TTL that is too high and wastes 
+network resources. </P><A name=rfc.section.2.5.2.2></A>
+<H4><A name=horizon>2.5.2.2</A>&nbsp;Calculating the Theoretical Horizon</H4>
+<P>At the end of each iteration, the client must add the new number of hosts 
+theoretically queried to the total. For one connection, this calculation is: 
+<BR></P></FONT><PRE>      hosts(degree,ttl) = Sum[(degree-1)^i, 0 &lt;= i &lt;= ttl-1]
+              </PRE><FONT face="verdana, helvetica, arial, sans-serif" size=2>
+<P>Note that this only calculates the theoretical horizon for the query, and not 
+the actual horizon. If there are cycles in the network graph, or if the nodes on 
+subsequent hops have different degrees, this number will be innaccurate. 
+Unfortunately, it's the best we can do without imposing overly burdensome 
+restrictions on the overall topology, and this estimate is accurate enough for 
+our purposes. This is the number that should be used in calculating the next 
+TTL. </P><A name=rfc.section.2.5.2.3></A>
+<H4><A name=wait>2.5.2.3</A>&nbsp;Time to Wait Per Hop</H4>
+<P>After sending a query to one connection, an Ultrapeer MUST wait for hosts to 
+return query hits before sending the next query to the next connection. It must 
+wait for results because those results are vital in determining the popularity 
+of the file, and therefore in calculating the TTL for sending the query down 
+subsequent connections. In experimental observations, 2400 milliseconds per hop 
+is a reasonable latency to expect. So, if a query is sent with TTL=3, the 
+querier would wait 7200 milliseconds for results before sending the query down 
+another connection. While some query hits may arrive after this wait time, 2400 
+milliseconds per hop is enough to capture the majority of hits that will be 
+returned. <BR><BR>As a general rule, the querier MUST wait 2400 milliseconds per 
+hop before sending a query down another connection. Waiting for this period of 
+time is vital because it's otherwise easy for a query to become "out of 
+control", particularly if the content is popular. If the querier does not wait 
+for an appropriate period before sending the query to another connection, the 
+algorithm may incorrectly think that the content is very rare, sending a high 
+TTL query as a result. For queries like "mp3", this is extremely destructive and 
+defeats the purpose of dynamic querying. <BR><BR>There are, however, two 
+exceptions to the 2400 millisecond rule. First, for probe queries, it makes 
+sense to send the query down multiple connections simultaneously without waiting 
+for results. Once the probe is sent, however, the querier MUST wait the number 
+of milliseconds appropriate for the hops of the probe. In addition, the querier 
+MAY scale the wait time up depending on how many connections are probed. So, if 
+a probe is sent to 3 connections with a TTL of 2, the querier MUST wait for a 
+minimum of 7200 milliseconds, but also MAY choose to wait for an extra second 
+per connection probed. This is due to the heterogeneity of latencies on the 
+network, and is particularly useful when the querier is taking advantage of 
+query route tables from <A 
+title="Fisk, A., Gnutella Ultrapeer Query Routing, v. 0.1, May 2003." 
+href="http://www9.limewire.com/developer/dynamic_query.html#refs.up_qrp">Ultrapeer 
+query routing</A>[2], where the probe may be sent to 5 or more connections with 
+a TTL of 1. An accurate probe is vital to avoid sending a query with high TTLs 
+for widely distributed content, as should become clear over the course of 
+writing specific dynamic query algorithms. <BR><BR>The second exception to the 
+2400 millisecond rule is an optimization for searches for particularly rare 
+content. When content is rare, waiting for 2400 milliseconds for every hop can 
+make the overall latency of the query unacceptable. If a query is sent to 32 
+connections at TTL=3, for example, the query would take almost 4 minutes to 
+complete! If a query has taken a significant length of time and the theoretical 
+number of nodes searched is high, the querier can be reasonably sure that the 
+content is quite rare, and MAY choose to become more aggressive with wait times. 
+For example, if the query has theoretically reached 3000 Ultrapeers and has 
+returned under under 10 results, we may choose to decrease the per-hop wait time 
+by 100 milliseconds for the next iteration. Decreasing the wait time by 100 
+milliseconds on ten successive iterations will decrease overall latency 
+significantly, but implementors must take care not to be overly aggressive in 
+this regard. This is particularly important for content in the "middle range" -- 
+content that is not too common, but not too rare. The danger with this type of 
+search is again that the algorithm will select overly aggressive TTLs and waste 
+network resources. </P><A name=rfc.section.2.5.2.4></A>
+<H4><A name=termination>2.5.2.4</A>&nbsp;Query Termination</H4>
+<P>There are several conditions that will terminate the query. These are: 
+<OL class=text>
+  <LI>The client receives 150 results for an Ultrapeer-initiated query, or 50 
+  results for a leaf-initiated query. 
+  <LI>There are no connections left to query. 
+  <LI>The theoretical horizon has hit the 200,000 limit. </LI></OL>
+<P>The number of results to search for is covered in further detail in the <A 
+href="http://www9.limewire.com/developer/dynamic_query.html#results">"Number of 
+Results"</A> section. Algorithm authors also MAY choose to impose other 
+restrictions on the query to safeguard against attack or abnormal conditions. 
+For example, a client MAY wish to limit the total lifetime of the query to, say 
+3 minutes. </P><A name=rfc.section.2.5.3></A>
+<H4><A name=other>2.5.3</A>&nbsp;Other Considerations</H4><A 
+name=rfc.section.2.5.3.1></A>
+<H4><A name=results>2.5.3.1</A>&nbsp;Number of Results</H4>
+<P>Clients MUST target a maximum of 150 total results for a given query. This 
+many results will give the client enough sources to successfully download the 
+file while saving network resources on searches for popular content. When 150 
+results are received, clients MUST NOT send the query to any more hosts. 
+<BR><BR>Because most queries are initiated by leaves, and because most clients 
+connect their leaves to 3 Ultrapeers, each Ultrapeer MUST attempt to get only 50 
+results for a query received from one of its leaves. </P><A 
+name=rfc.section.2.5.3.2></A>
+<H4><A name=extended_probe>2.5.3.2</A>&nbsp;Extended Probe</H4>
+<P></P><A name=rfc.section.2.5.3.3></A>
+<H4><A name=headers>2.5.3.3</A>&nbsp;New Connection Headers</H4>
+<P>There are several new connection headers that clients MUST add to indicate 
+their support for these features. Each header is outlined below. </P><A 
+name=rfc.section.2.5.3.3.1></A>
+<H4><A name=max_ttl>2.5.3.3.1</A>&nbsp;Maximum TTL</H4>
+<P>Clients MUST include a new "X-Max-TTL" header in their handshakes. This 
+header indicates that we should not send fresh queries to this connection with 
+TTLs higher than the X-Max-TTL. If we are routing traffic from other Ultrapeers, 
+the X-Max-TTL is irrelevant. The X-Max-TTL MUST NOT exceed 4, as any TTL above 4 
+indicates a client is allowing too much query traffic on the network. This 
+header is particularly useful for compatibility with future clients that may 
+choose to have higher degrees but that would prefer lower TTL traffic from their 
+neighbors. For example, if future clients connect to 200 Ultrapeers, they could 
+use the X-Max-TTL header to indicate to today's clients that they will not 
+accept TTLs above 2. A typical initial value for X-Max-TTL is 3, as it the 
+following example: <BR></P></FONT><PRE>  X-Max-TTL: 3
+			    </PRE><FONT face="verdana, helvetica, arial, sans-serif" size=2>
+<P></P><A name=rfc.section.2.5.3.3.2></A>
+<H4><A name=degree_header>2.5.3.3.2</A>&nbsp;Ultrapeer Degree</H4>
+<P>The X-Degree header simply indicates the number of Ultrapeer connections this 
+nodes attempts to maintain. Clients supporting this proposal must have X-Degrees 
+of at least 15, and higher values are preferable. This header takes the 
+following form: <BR></P></FONT><PRE>  X-Degree: 32
+			    </PRE><FONT face="verdana, helvetica, arial, sans-serif" size=2>
+<P></P><A name=rfc.section.2.5.3.3.3></A>
+<H4><A name=dynamic_query>2.5.3.3.3</A>&nbsp;Dynamic Query Version</H4>
+<P>Finally, the client MUST indicate the version of dynamic queries supported. 
+This will allow future versions to make connections only to hosts supporting 
+newer dynamic query features. This header takes the following form: 
+<BR></P></FONT><PRE>  X-Dynamic-Querying: 0.1
+			    </PRE><FONT face="verdana, helvetica, arial, sans-serif" size=2>
+<P></P>
+<P></P><A name=conclusion><BR>
+<HR SIZE=1 shade="0">
+</A>
+<TABLE height=15 cellSpacing=2 cellPadding=0 width=30 align=right border=0>
+  <TBODY>
+  <TR>
+    <TD align=middle width=30 bgColor=#990000 height=15><A class=link2 
+      href="http://www9.limewire.com/developer/dynamic_query.html#toc"><FONT 
+      face="monaco, MS Sans Serif" color=#ffffff 
+      size=1><B>&nbsp;TOC&nbsp;</B></FONT></A><BR></TD></TR></TBODY></TABLE><A 
+name=rfc.section.3></A>
+<H3>3.&nbsp;Conclusion</H3>
+<P>This proposal addresses one of the most glaring flaws in the traditional 
+Gnutella search model, namely that searches for widely distributed content were 
+handled in the same way as searches for rare content. This change uses much less 
+bandwidth for searches for common files while doing more work for searches for 
+rare files, improving overall network performance considerably. </P><A 
+name=rfc.references1><BR>
+<HR SIZE=1 shade="0">
+</A>
+<TABLE height=15 cellSpacing=2 cellPadding=0 width=30 align=right border=0>
+  <TBODY>
+  <TR>
+    <TD align=middle width=30 bgColor=#990000 height=15><A class=link2 
+      href="http://www9.limewire.com/developer/dynamic_query.html#toc"><FONT 
+      face="monaco, MS Sans Serif" color=#ffffff 
+      size=1><B>&nbsp;TOC&nbsp;</B></FONT></A><BR></TD></TR></TBODY></TABLE>
+<H3>References</H3>
+<TABLE width="99%" border=0>
+  <TBODY>
+  <TR>
+    <TD class=author-text vAlign=top><B><A name=RFC2119>[1]</A></B></TD>
+    <TD class=author-text><A href="mailto:sob@harvard.edu">Bradner, S.</A>, 
+      "<A href="ftp://ftp.isi.edu/in-notes/rfc2119.txt">Key words for use in 
+      RFCs to Indicate Requirement Levels</A>", BCP 14, RFC 2119, March 1997 (<A 
+      href="ftp://ftp.isi.edu/in-notes/rfc2119.txt">TXT</A>, <A 
+      href="http://xml.resource.org/public/rfc/html/rfc2119.html">HTML</A>, <A 
+      href="http://xml.resource.org/public/rfc/xml/rfc2119.xml">XML</A>).</TD></TR>
+  <TR>
+    <TD class=author-text vAlign=top><B><A name=refs.up_qrp>[2]</A></B></TD>
+    <TD class=author-text><A href="http://www.limewire.org/">Fisk, A.</A>, "<A 
+      href="http://f1.grp.yahoofs.com/v1/EHbCPh8iRqHKdls98hCO8-XiZzjgeUSUnbMC7ifpIejfpUIlFs5A7E6V4-miCr5-PdWwmDsEGHkyGcWR/Proposals/search/ultrapeer_qrp.html">Gnutella 
+      Ultrapeer Query Routing, v. 0.1</A>", May 2003.</TD></TR>
+  <TR>
+    <TD class=author-text vAlign=top><B><A name=refs.ultrapeer>[3]</A></B></TD>
+    <TD class=author-text><A href="http://www.limewire.org/">Rohrs, C.</A> and 
+      <A href="http://www.limewire.org/">A. Singla</A>, "<A 
+      href="http://groups.yahoo.com/group/the_gdf/files/Proposals/Ultrapeer/Ultrapeers_proper_format.html">Ultrapeers: 
+      Another Step Towards Gnutella Scalability</A>", December 2001.</TD></TR>
+  <TR>
+    <TD class=author-text vAlign=top><B><A name=refs.search>[4]</A></B></TD>
+    <TD class=author-text><A href="http://www.grouter.net/gnutella/">Osokine, 
+      S.</A>, "<A href="http://www.grouter.net/gnutella/search.htm">Search 
+      Optimization in the Distributed Networks</A>", December 
+2002.</TD></TR></TBODY></TABLE><A name=rfc.authors><BR>
+<HR SIZE=1 shade="0">
+</A>
+<TABLE height=15 cellSpacing=2 cellPadding=0 width=30 align=right border=0>
+  <TBODY>
+  <TR>
+    <TD align=middle width=30 bgColor=#990000 height=15><A class=link2 
+      href="http://www9.limewire.com/developer/dynamic_query.html#toc"><FONT 
+      face="monaco, MS Sans Serif" color=#ffffff 
+      size=1><B>&nbsp;TOC&nbsp;</B></FONT></A><BR></TD></TR></TBODY></TABLE>
+<H3>Author's Address</H3>
+<TABLE cellSpacing=0 cellPadding=0 width="99%" border=0>
+  <TBODY>
+  <TR>
+    <TD class=author-text>&nbsp;</TD>
+    <TD class=author-text>Adam A. Fisk</TD></TR>
+  <TR>
+    <TD class=author-text>&nbsp;</TD>
+    <TD class=author-text>LimeWire LLC</TD></TR>
+  <TR>
+    <TD class=author align=right>EMail:&nbsp;</TD>
+    <TD class=author-text><A 
+      href="mailto:afisk@limewire.com">afisk@limewire.com</A></TD></TR>
+  <TR>
+    <TD class=author align=right>URI:&nbsp;</TD>
+    <TD class=author-text><A 
+      href="http://www.limewire.org/">http://www.limewire.org/</A></TD></TR></TBODY></TABLE><A 
+name=anchor2><BR>
+<HR SIZE=1 shade="0">
+</A>
+<TABLE height=15 cellSpacing=2 cellPadding=0 width=30 align=right border=0>
+  <TBODY>
+  <TR>
+    <TD align=middle width=30 bgColor=#990000 height=15><A class=link2 
+      href="http://www9.limewire.com/developer/dynamic_query.html#toc"><FONT 
+      face="monaco, MS Sans Serif" color=#ffffff 
+      size=1><B>&nbsp;TOC&nbsp;</B></FONT></A><BR></TD></TR></TBODY></TABLE><A 
+name=rfc.section.A></A>
+<H3>Appendix A.&nbsp;Acknowledgements</H3>
+<P>The author would like to thank the rest of the LimeWire team and all members 
+of the Gnutella Developer Forum (GDF). </P></FONT></BODY></HTML>

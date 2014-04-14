@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<project name="Phex.Release.Win32" basedir="..">
+  <taskdef name="jsmoothgen" classname="net.charabia.jsmoothgen.ant.JSmoothGen"
+    classpath="${project.thirdparty}/jsmooth/lib/jsmoothgen-ant.jar"/>
+
+  <target name="-create.win32" if="do.create.win32">
+    <property name="win32.build.dir" value="${releasedir}/phex_${phex.FullPhexVersion}/win32${create.postfix}"/>
+    <property name="win32.buildSrc.dir" value="${releasedir}/phex_${phex.FullPhexVersion}/win32${create.postfix}/build"/>
+    <property name="win32.buildSrc.libDir" value="${releasedir}/phex_${phex.FullPhexVersion}/win32${create.postfix}/build/lib"/>
+  	
+    <available file="${win32.build.dir}" property="runtime.dir.available"/>
+    <fail if="runtime.dir.available"/>
+    <available file="${win32.build.dir}/phex_${phex.FullPhexVersion}.exe" property="runtime.file.available"/>
+    <fail if="runtime.file.available"/>
+  	
+  	<antcall target="-create.win32.launcher"/>
+    
+    <mkdir dir="${win32.buildSrc.dir}"/>
+    <mkdir dir="${win32.buildSrc.libDir}"/>
+    <!--copy all librarys-->
+    <copy file="${apache.logging.lib}/commons-logging.jar" todir="${win32.buildSrc.libDir}"/>
+    <copy file="${apache.httpclient.lib.path}/${apache.httpclient.lib.filename}" todir="${win32.buildSrc.libDir}"/>
+    <copy file="${apache.collections.lib.path}/${apache.collections.lib.filename}" todir="${win32.buildSrc.libDir}"/>
+    <copy file="${jgoodies.forms.lib}/forms-1.1.0.jar" todir="${win32.buildSrc.libDir}"/>
+    <copy file="${apple.lib}/MRJAdapter.jar" todir="${win32.buildSrc.libDir}"/>
+    <copy file="${jgoodies.looks.lib.path}/${jgoodies.looks.lib.filename}" todir="${win32.buildSrc.libDir}"/>
+    <copy file="${i2p.lib}/i2p.jar" todir="${win32.buildSrc.libDir}"/>
+    <copy file="${i2p.lib}/streaming.jar" todir="${win32.buildSrc.libDir}"/>
+    <copy file="${i2p.lib}/mstreaming.jar" todir="${win32.buildSrc.libDir}"/>
+    <copy file="${i2p.lib}/jbigi.jar" todir="${win32.buildSrc.libDir}"/>
+    <!--copy native stuff-->
+    <copy file="${temp}/Phex.exe" todir="${win32.buildSrc.dir}"/>
+    <copy file="${temp}/Phex_debug.exe" todir="${win32.buildSrc.dir}"/>
+    <copy file="native/release/Phex.dll" todir="${win32.buildSrc.dir}"/>
+    <!--copy phex jar-->
+    <copy file="${build.target.lib}/phex.jar" todir="${win32.buildSrc.libDir}"/>
+    <!--copy phex urls-->
+    <copy file="installer/P h e x Homepage.url" todir="${win32.buildSrc.dir}"/>
+    <!--copy doc files-->
+    <mkdir dir="${win32.buildSrc.dir}/docs"/>
+    <copy todir="${win32.buildSrc.dir}/docs">
+      <fileset dir="docs/Phex">
+        <include name="license/GPL.txt"/>
+      </fileset>
+    </copy>
+    <copy todir="${win32.buildSrc.dir}/docs" filtering="yes">
+      <fileset dir="docs/Phex">
+        <include name="readme/Phex_win.htm"/>
+        <include name="readme/Phex_other.htm"/>
+        <include name="readme/Undocumented.htm"/>
+      </fileset>
+    </copy>
+  	<!-- copy subscription file in case user requested -->
+  	<ant antfile="${project.build}/makeRelease.xml" target="-copySubscriptionFile" inheritAll="true">
+  		<property name="subscriptionDir" value="${win32.buildSrc.dir}/ext"/>
+  	</ant>
+  	
+  	<antcall target="-create.win32.installer"/>
+  </target>
+	
+	<target name="-create.win32.launcher">
+    <mkdir dir="${temp}"/>
+    <jsmoothgen project="installer/launcher/win32/Phex.jsmooth" skeletonroot="${project.thirdparty}/jsmooth/skeletons"/>
+    <jsmoothgen project="installer/launcher/win32/Phex_debug.jsmooth" skeletonroot="${project.thirdparty}/jsmooth/skeletons"/>
+  </target>
+		
+  <!-- to get nsis go to http://www.nullsoft.com/free/nsis -->
+  <target name="-create.win32.installer.init" if="isWindowsOS">
+    <property name="installerdir" value="${basedir}/installer"/>
+    <pathconvert targetos="windows" property="winReleaseDir">
+      <path>
+        <pathelement path="${releasedir}"/>
+      </path>
+    </pathconvert>
+    <filter token="nsis.ReleaseDir" value="${winReleaseDir}"/>
+  	<filter token="nsis.ProgramVersion" value="${phex.FullPhexVersion}"/>
+  	<filter token="nsis.ReleaseDate" value="${Release.Date}"/>
+    <filter token="nsis.OutputFile" value="${win32.build.dir}/phex_${phex.FullPhexVersion}.exe"/>
+    <filter token="nsis.SourceDir" value="${win32.buildSrc.dir}"/>
+  </target>
+	
+  <target name="-create.win32.installer" depends="-create.win32.installer.init" if="isWindowsOS">
+    <mkdir dir="${temp}"/>
+    <copy file="${installerdir}/phex_nsi.template" tofile="${temp}/phex_${phex.FullPhexVersion}.nsi" filtering="yes" overwrite="true" />
+    <exec dir="${temp}" executable="${release.create.win32.nsis.path}/makensis.exe" >
+      <arg line="${nsis.subscriptionList.arg} /V2 phex_${phex.FullPhexVersion}.nsi"/>
+    </exec>
+  </target>	
+</project>

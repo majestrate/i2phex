@@ -1,0 +1,86 @@
+<html>
+<body>
+<h1>The Phex Security Concept</h1>
+<h4>for Phex 0.X</h4>
+<hr>
+<h3>Requirements</h3>
+The Phex Security Concepts trys to address the following issues:<br>
+<ul>
+<li>Blocking of IPs from different areas of the program (connection, download, upload, searchResults, chat, browseHost)
+<li>Blocking words out of different views (search results, monitor)
+<li>Providing a XML import and export interface to exchange rules with Phex users.
+<li>Providing a import of Shareaza rules.
+</ul>
+
+<hr>
+<h3>General Rule</h3>
+Through any of these rules Phex MUST not filter any searches or search results of the Gnutella network.
+<ul>
+<li>A rule has a ID to identify it on import and export.
+<li>A rule has a name to describe it.
+<li>A rule defines if access should be DENIED or ALLOWED.
+<li>A rule has a counter that indicates how often it was triggered.
+<li>A rule has a set expiry time. This can be a fixed lifetime, or indefinite.
+<li>A rule can be enabled or disabled.
+<li>When a rule expires it can be deleted or disabled.
+</ul>
+
+<hr>
+<h3>IP Based Rule</h3>
+<ul>
+<li>Contains a IP and a subnetmask used to define IP ranges.<br>
+    The GUI should be able to present the ranges created by the used subnetmask
+    to assist the user to enter the range.
+<li>The IP can be selectivly blocked for network connections, downloads, uploads, search results, chat, browse host and all of these.
+</ul>
+
+<hr>
+<h3>Port Based Rule</h3>
+<ul>
+<li>Contains a Port range ( from - to ).
+<li>The Port can be selectivly blocked for network connections, downloads, uploads, search results, chat, browse host and all of these.
+</ul>
+
+<hr>
+<h3>Content Based Rule</h3>
+Content based rules define which content is displayed or hidden from display ( search, search result ) or causes hosts to be rejected ( download file name ).
+Through any of these rules Phex MUST not filter any searches or search results of the Gnutella network.
+<ul>
+<li>Contains strings tokenized by space.
+<li>Contains a choice to match all or any to be triggered.
+</ul>
+
+<hr>
+<h3>Business Logic</h3>
+<ul>
+<li>A User is able to define a list of the above rules.
+<li>A rule defines if access should be denied or allowed. When access is denyed all checks that are matched with the rule will fail. When access is allowed all checks that do not match the rule will fail. When checking a rule list and a check fails the process of checking a rule can be aborted since it can be considered as failed.
+</ul>
+
+<hr>
+<h3>Implementation</h3>
+The security framework will be implemented in the package 'phex.security'. Required classes are:
+<ul>
+<li><b>phex.security.SecurityManager</b><br>
+    The SecurityManager is a singleton class that gives framework access to the 
+    security concept and implements the base logic.
+<li><b>phex.security.SecurityRule</b><br>
+    Represents the base class of a securety rule, defined in the 'General Rule' section.
+<li><b>phex.security.IPAccessRule</b><br>
+    Represents the ip securety rule, defined in the 'IP Based Rule' section.
+<li><b>phex.security.ContentRule</b><br>
+    Represents the content securety rule, defined in the 'Content Based Rule' section.
+<li><b>phex.security.PortRestrictionRule</b><br>
+    Represents the port restriction rule, defined in the 'Port Based Rule' section.
+</ul>
+
+<hr>
+<h3>Future Improvements</h3>
+
+
+<hr>
+<font size="-2">Java is a trademark of Sun Microsystems, Inc.</font>
+<hr>
+<center><font size="-1">Copyright © 2001, 2006 The Phex Team, License: GPL-2 or later.</font></center>
+</body>
+</html>

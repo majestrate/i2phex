@@ -1,0 +1,33 @@
+<html>
+<body>
+<h1>The Phex Download Specification</h1>
+<h4>for Phex 0.X</h4>
+<hr>
+<h2>Classes</h2>
+
+<h3>SwarmingManager</h3>
+The SwarmingManager manages the list of all downloads. Also it manages and triggers SWDownloadWorkers.
+The functionalites offered are:
+<ul>
+<li>Add and remove files to the download list.
+<li>Managing of download file priority.
+<li>Regulary saving the download list to a file.
+<li>SWDownloadWorker management.
+<li>Allocating a DownloadSet for a SWDownloadWorker.
+</ul>
+<hr>
+<h3>SWDownloadWorker</h3>
+The download worker is running in a separated thread. It is allocated by the SwarmingManager.<br>
+The download worker asks the SwarmingManager to allocate a DownloadSet. A DownloadSet is a working unit with a reference to a download file that has a open segments to download and a download candidate no other SWDownloadWorker has allocated yet.
+After allocating the DownloadSet the SWDownloadCandidate associated with the DownloadSet can not be allocated in a DownloadSet anymore.<p>
+The SWDownloadWorker is now starting the initialisation process to download from the allocated SWDownloadCandidate in the DownloadSet.<br>
+First the SWDownloadWorker tries to connect to the SWDownloadCandidate. Depending on the information of the candidate and the configuration of the local host (firewall) a PUSH request or direkt connection to the host is tried. If direct connection fails a PUSH request might be initialized also.<br>
+If the connection failes a error code is assigned to the download candidate, the download set is deallocated and the download worker tries to preceed with the next download segment.<p>
+If the connection is successful the process of exchanging the HTTP handshake begins. A free SWDownloadSegment gets allocated from the download file and is passed to the DownloadEngine to exchange the HTTP handshake.
+
+<hr>
+<font size="-2">Java is a trademark of Sun Microsystems, Inc.</font>
+<hr>
+<center><font size="-1">Copyright © 2001, 2006 The Phex Team, GPL-2 or later.</font></center>
+</body>
+</html>

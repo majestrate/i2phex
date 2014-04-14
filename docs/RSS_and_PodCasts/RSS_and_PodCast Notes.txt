@@ -1,0 +1,23 @@
+PodCasts are a kind of Radio or Audio-Blog (weblog with audio-fies). 
+
+Users subscribe to a PodCasts and the enclosed files are automatically downloaded to their disks, or to a portable mp3-Player (like the iPod, from which the name stems). Every time the PodCasts gets updated, the Users download the new files automatically. 
+
+PodCasts originate from RSS-feeds, which are newsfeeds, which can be read out by various programs, just like a  newspaper, which gets delivered to you every day, but every article is delivered as soon as it has been written. 
+
+Technically, a PodCast is an XML-File (an RSS-Feed), which contains enclosures (links to files). 
+
+Phex reads PodCasts when given as a file and downloads those enclosures, regardless of the file-type. 
+
+Phex also reads out magnets and contained in enclosures or magnet-tags and downloads them. 
+
+Also Phex can create rss-feeds with magnet-tags, which display the shared files and can be downloaded in one step with Phex (add the file in the "New Download(s)" Dialog into the RSS field) or per magnet by clicking the links of the files in the RSS-field (in your rss-reader). 
+
+To create an RSS-Feed with Phex, go to the library tab, click the Export-button and select "RSS" as file-type (this puts all shared files into an rss-feed). 
+
+With the export-function you can also create Magma-Lists, which are far easier to read than xml-based RSS-feeds. 
+
+To create an rss-feed or a Magma-list, go to the library tab and click the "export"-Button. 
+
+-----
+written by Arne Babenhauserheide ( http://draketo.de )
+Copyrigt: cc attribution-sharealike

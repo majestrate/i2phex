@@ -1,0 +1,267 @@
+Buildfile: build.xml
+
+clean:
+   [delete] Deleting directory /home/arne/Dokumente/1-noch-zu-backuppen/Programme/phex/trunk/output
+
+init:
+
+buildJava:
+
+initJava:
+    [mkdir] Created dir: /home/arne/Dokumente/1-noch-zu-backuppen/Programme/phex/trunk/output/classes
+     [copy] Copying 50 files to /home/arne/Dokumente/1-noch-zu-backuppen/Programme/phex/trunk/output/classes/phex/resources
+     [copy] Copying 405 files to /home/arne/Dokumente/1-noch-zu-backuppen/Programme/phex/trunk/output/classes/phex/gui/resources
+     [copy] Copying 1 file to /home/arne/Dokumente/1-noch-zu-backuppen/Programme/phex/trunk/output/classes/phex/xml/thex
+
+compileSource:
+    [javac] Compiling 751 source files to /home/arne/Dokumente/1-noch-zu-backuppen/Programme/phex/trunk/output/classes
+    [javac] /home/arne/Dokumente/1-noch-zu-backuppen/Programme/phex/trunk/src/main/java/org/jdesktop/swingx/JXTree.java:56: warning: sun.swing.UIAction is Sun proprietary API and may be removed in a future release
+    [javac] import sun.swing.UIAction;
+    [javac]                 ^
+    [javac] /home/arne/Dokumente/1-noch-zu-backuppen/Programme/phex/trunk/src/main/java/org/jdesktop/swingx/JXTree.java:304: warning: sun.swing.UIAction is Sun proprietary API and may be removed in a future release
+    [javac]     private class Actions extends UIAction {
+    [javac]                                   ^
+    [javac] /home/arne/Dokumente/1-noch-zu-backuppen/Programme/phex/trunk/src/main/java/phex/gui/common/treetable/JTreeTable.java:70: warning: sun.swing.UIAction is Sun proprietary API and may be removed in a future release
+    [javac] import sun.swing.UIAction;
+    [javac]                 ^
+    [javac] /home/arne/Dokumente/1-noch-zu-backuppen/Programme/phex/trunk/src/main/java/phex/gui/common/treetable/JTreeTable.java:173: warning: sun.swing.UIAction is Sun proprietary API and may be removed in a future release
+    [javac]     private class Actions extends UIAction {
+    [javac]                                   ^
+    [javac] /home/arne/Dokumente/1-noch-zu-backuppen/Programme/phex/trunk/src/main/java/phex/chat/ChatEngine.java:133: warning: sun.misc.BASE64Encoder is Sun proprietary API and may be removed in a future release
+    [javac]                 String base64Str = new sun.misc.BASE64Encoder().encode(message.getBytes());
+    [javac]                                                ^
+    [javac] /home/arne/Dokumente/1-noch-zu-backuppen/Programme/phex/trunk/src/main/java/phex/chat/ChatEngine.java:322: warning: sun.misc.BASE64Decoder is Sun proprietary API and may be removed in a future release
+    [javac]                         byte[] base64Buf = new sun.misc.BASE64Decoder().decodeBuffer(str);
+    [javac]                                                        ^
+    [javac] Note: Some input files use or override a deprecated API.
+    [javac] Note: Recompile with -Xlint:deprecation for details.
+    [javac] Note: Some input files use unchecked or unsafe operations.
+    [javac] Note: Recompile with -Xlint:unchecked for details.
+    [javac] 6 warnings
+
+compileJUnit:
+    [javac] Compiling 28 source files to /home/arne/Dokumente/1-noch-zu-backuppen/Programme/phex/trunk/output/classes
+    [javac] /home/arne/Dokumente/1-noch-zu-backuppen/Programme/phex/trunk/src/test/java/phex/test/TestStringUtils.java:37: warning: unmappable character for encoding UTF8
+    [javac]             "EWS.Ein.W�rfel.System.pdf" );
+    [javac]                       ^
+    [javac] /home/arne/Dokumente/1-noch-zu-backuppen/Programme/phex/trunk/src/test/java/phex/test/TestStringUtils.java:38: warning: unmappable character for encoding UTF8
+    [javac]         assertEquals( "EWS Ein W�rfel System pdf", result );
+    [javac]                                 ^
+    [javac] Note: Some input files use unchecked or unsafe operations.
+    [javac] Note: Recompile with -Xlint:unchecked for details.
+    [javac] 2 warnings
+
+compileJava:
+
+createJar:
+    [mkdir] Created dir: /home/arne/Dokumente/1-noch-zu-backuppen/Programme/phex/trunk/output/lib
+      [jar] Building jar: /home/arne/Dokumente/1-noch-zu-backuppen/Programme/phex/trunk/output/lib/phex.jar
+      [jar] Building jar: /home/arne/Dokumente/1-noch-zu-backuppen/Programme/phex/trunk/output/lib/phex-test.jar
+
+copyThirdpartyJars:
+     [copy] Copying 1 file to /home/arne/Dokumente/1-noch-zu-backuppen/Programme/phex/trunk/output/lib
+     [copy] Copying 1 file to /home/arne/Dokumente/1-noch-zu-backuppen/Programme/phex/trunk/output/lib
+     [copy] Copying 1 file to /home/arne/Dokumente/1-noch-zu-backuppen/Programme/phex/trunk/output/lib
+     [copy] Copying 1 file to /home/arne/Dokumente/1-noch-zu-backuppen/Programme/phex/trunk/output/lib
+     [copy] Copying 1 file to /home/arne/Dokumente/1-noch-zu-backuppen/Programme/phex/trunk/output/lib
+     [copy] Copying 1 file to /home/arne/Dokumente/1-noch-zu-backuppen/Programme/phex/trunk/output/lib
+
+buildJava:
+
+buildNative:
+
+init:
+
+initNative:
+
+buildNative:
+
+buildAll:
+
+runTest:
+
+initTest:
+
+runTest:
+     [java] .----------FIFO--------------
+     [java] Queued (1): #1 - 2683kb
+     [java] Queued (2): #2 - 3925kb
+     [java] Queued (3): #3 - 1161026kb
+     [java] Queued (4): #4 - 1093298kb
+     [java] Queued (5): #5 - 1003079kb
+     [java] Queued (6): #6 - 1053197kb
+     [java] Queued (7): #7 - 2233kb
+     [java] Queued (8): #8 - 2457kb
+     [java] Queued (9): #9 - 904389kb
+     [java] Queued (10): #10 - 2243kb
+     [java] Uploading: #1 - 102ms
+     [java] Uploading: #2 - 103ms
+     [java] Uploading: #3 - 103ms
+     [java] Uploaded: #1 - 2683KB - 1ms - 2683000.0KB/s
+     [java] Uploaded: #2 - 3925KB - 1ms - 3925000.0KB/s
+     [java] Uploading: #4 - 119ms
+     [java] Uploading: #5 - 119ms
+     [java] Queued (6): #11 - 2465kb
+     [java] Queued (7): #12 - 817753kb
+     [java] Queued (8): #13 - 1073836kb
+     [java] Queued (9): #14 - 2490kb
+     [java] Queued (10): #15 - 3279kb
+     [java] Uploaded: #3 - 1161026KB - 23688ms - 49013.25565687268KB/s
+     [java] Uploading: #6 - 23796ms
+     [java] Queued (10): #16 - 3152kb
+     [java] Uploaded: #4 - 1093298KB - 33281ms - 32850.51530903519KB/s
+     [java] Uploading: #7 - 33400ms
+     [java] Queued (10): #17 - 3819kb
+     [java] Uploaded: #7 - 2233KB - 600ms - 3721.666666666667KB/s
+     [java] Uploading: #8 - 34000ms
+     [java] Queued (10): #18 - 1133128kb
+     [java] Uploaded: #8 - 2457KB - 400ms - 6142.5KB/s
+     [java] Uploading: #9 - 34399ms
+     [java] Queued (10): #19 - 1105667kb
+     [java] Uploaded: #5 - 1003079KB - 36681ms - 27346.010196014286KB/s
+     [java] Uploading: #10 - 36799ms
+     [java] Queued (10): #20 - 1140685kb
+     [java] Uploaded: #10 - 2243KB - 600ms - 3738.3333333333335KB/s
+     [java] Uploading: #11 - 37263ms
+     [java] Uploaded: #11 - 2465KB - 400ms - 6162.5KB/s
+     [java] Uploading: #12 - 37664ms
+     [java] Uploaded: #6 - 1053197KB - 26420ms - 39863.62604087812KB/s
+     [java] Uploading: #13 - 50080ms
+     [java] Uploaded: #9 - 904389KB - 25904ms - 34913.10222359481KB/s
+     [java] Uploading: #14 - 60168ms
+     [java] Uploaded: #14 - 2490KB - 397ms - 6272.0403022670025KB/s
+     [java] Uploading: #15 - 60568ms
+     [java] Uploaded: #15 - 3279KB - 598ms - 5483.277591973244KB/s
+     [java] Uploading: #16 - 37449ms
+     [java] Uploaded: #16 - 3152KB - 601ms - 5244.59234608985KB/s
+     [java] Uploading: #17 - 28443ms
+     [java] Uploaded: #17 - 3819KB - 600ms - 6365.0KB/s
+     [java] Uploading: #18 - 28442ms
+     [java] Uploaded: #12 - 817753KB - 27306ms - 29947.74042335018KB/s
+     [java] Uploading: #19 - 30645ms
+     [java] Uploaded: #13 - 1073836KB - 28206ms - 38071.19052683826KB/s
+     [java] Uploading: #20 - 41560ms
+     [java] Uploaded: #18 - 1133128KB - 32510ms - 34854.75238388188KB/s
+     [java] Uploaded: #19 - 1105667KB - 36512ms - 30282.290753724803KB/s
+     [java] Uploaded: #20 - 1140685KB - 32500ms - 35098.0KB/s
+     [java] Took: 110.975s
+     [java] Transferred: 10514804KB - 94749.30389727416KB/s
+     [java] ====================================================
+     [java] 2683 102 1
+     [java] 3925 103 1
+     [java] 1161026 103 23688
+     [java] 1093298 119 33281
+     [java] 2233 33400 600
+     [java] 2457 34000 400
+     [java] 1003079 119 36681
+     [java] 2243 36799 600
+     [java] 2465 37263 400
+     [java] 1053197 23796 26420
+     [java] 904389 34399 25904
+     [java] 2490 60168 397
+     [java] 3279 60568 598
+     [java] 3152 37449 601
+     [java] 3819 28443 600
+     [java] 817753 37664 27306
+     [java] 1073836 50080 28206
+     [java] 1133128 28442 32510
+     [java] 1105667 30645 36512
+     [java] 1140685 41560 32500
+     [java] 
+     [java] ====================================================
+     [java] .----------HRRN--------------
+     [java] Queued (1): #1 - 1094312kb
+     [java] Queued (2): #2 - 3777kb
+     [java] Queued (3): #3 - 2523kb
+     [java] Queued (4): #4 - 859604kb
+     [java] Queued (5): #5 - 925332kb
+     [java] Queued (6): #6 - 769550kb
+     [java] Queued (7): #7 - 4005kb
+     [java] Queued (8): #8 - 880971kb
+     [java] Queued (9): #9 - 2663kb
+     [java] Queued (10): #10 - 3034kb
+     [java] Uploading: #3 - 41ms
+     [java] Uploading: #9 - 40ms
+     [java] Uploading: #10 - 39ms
+     [java] Uploaded: #3 - 2523KB - 1ms - 2523000.0KB/s
+     [java] Uploaded: #9 - 2663KB - 1ms - 2663000.0KB/s
+     [java] Uploaded: #10 - 3034KB - 1ms - 3034000.0KB/s
+     [java] Uploading: #2 - 43ms
+     [java] Uploading: #7 - 41ms
+     [java] Uploading: #6 - 42ms
+     [java] Uploaded: #2 - 3777KB - 1ms - 3777000.0KB/s
+     [java] Uploaded: #7 - 4005KB - 1ms - 4005000.0KB/s
+     [java] Uploading: #4 - 43ms
+     [java] Uploading: #8 - 42ms
+     [java] Queued (3): #11 - 771671kb
+     [java] Queued (4): #12 - 628426kb
+     [java] Queued (5): #13 - 1056267kb
+     [java] Queued (6): #14 - 966872kb
+     [java] Queued (7): #15 - 2057kb
+     [java] Queued (8): #16 - 3268kb
+     [java] Queued (9): #17 - 787977kb
+     [java] Queued (10): #18 - 3042kb
+     [java] Uploaded: #6 - 769550KB - 14266ms - 53942.94125893733KB/s
+     [java] Uploading: #15 - 14207ms
+     [java] Queued (10): #19 - 1018480kb
+     [java] Uploaded: #15 - 2057KB - 199ms - 10336.683417085427KB/s
+     [java] Uploading: #18 - 14405ms
+     [java] Queued (10): #20 - 1003573kb
+     [java] Uploaded: #18 - 3042KB - 1008ms - 3017.8571428571427KB/s
+     [java] Uploading: #16 - 15413ms
+     [java] Uploaded: #16 - 3268KB - 400ms - 8170.0KB/s
+     [java] Uploading: #12 - 15814ms
+     [java] Uploaded: #4 - 859604KB - 21280ms - 40394.924812030076KB/s
+     [java] Uploading: #11 - 21220ms
+     [java] Uploaded: #8 - 880971KB - 30892ms - 28517.771591350513KB/s
+     [java] Uploading: #17 - 30831ms
+     [java] Uploaded: #12 - 628426KB - 19820ms - 31706.659939455094KB/s
+     [java] Uploading: #5 - 35739ms
+     [java] Uploaded: #11 - 771671KB - 24416ms - 31605.13597640891KB/s
+     [java] Uploading: #14 - 45637ms
+     [java] Uploaded: #17 - 787977KB - 27415ms - 28742.549699069852KB/s
+     [java] Uploading: #13 - 58247ms
+     [java] Uploaded: #5 - 925332KB - 26019ms - 35563.703447480686KB/s
+     [java] Uploading: #1 - 61818ms
+     [java] Uploaded: #14 - 966872KB - 27476ms - 35189.69282282719KB/s
+     [java] Uploading: #20 - 58692ms
+     [java] Uploaded: #13 - 1056267KB - 29487ms - 35821.44673924102KB/s
+     [java] Uploading: #19 - 73515ms
+     [java] Uploaded: #1 - 1094312KB - 33961ms - 32222.60828597509KB/s
+     [java] Uploaded: #20 - 1003573KB - 30008ms - 33443.51506264996KB/s
+     [java] Uploaded: #19 - 1018480KB - 26491ms - 38446.26476916689KB/s
+     [java] Took: 114.44s
+     [java] Transferred: 10787404KB - 94262.530583712KB/s
+     [java] ====================================================
+     [java] 2523 41 1
+     [java] 2663 40 1
+     [java] 3034 39 1
+     [java] 3777 43 1
+     [java] 4005 41 1
+     [java] 769550 42 14266
+     [java] 2057 14207 199
+     [java] 3042 14405 1008
+     [java] 3268 15413 400
+     [java] 859604 43 21280
+     [java] 880971 42 30892
+     [java] 628426 15814 19820
+     [java] 771671 21220 24416
+     [java] 787977 30831 27415
+     [java] 925332 35739 26019
+     [java] 966872 45637 27476
+     [java] 1056267 58247 29487
+     [java] 1094312 61818 33961
+     [java] 1003573 58692 30008
+     [java] 1018480 73515 26491
+     [java] 
+     [java] ====================================================
+     [java] 
+     [java] Time: 228,086
+     [java] 
+     [java] OK (2 tests)
+     [java] 
+
+startTest:
+
+BUILD SUCCESSFUL
+Total time: 5 minutes 1 second

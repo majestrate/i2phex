@@ -1,0 +1,1219 @@
+#
+# $Id$
+#
+# Hostile IP addresses, completely banned from the Gnutella network.
+#
+# We don't accept connections from those hosts, never connect to them,
+# and drop their query hits on the floor without relaying them.
+#
+# The following list is a default, based on a list provided by BearShare.
+# If you want to customize this list, put it into your ~/.gtk-gnutella
+# directory and edit it.
+#
+# This file may be changed whilst gtk-gnutella is running: it will notice
+# the update and reload the file.
+#
+
+4.43.96.0/24
+4.43.124.192/26
+24.102.41.154
+24.116.85.216
+24.162.203.114
+24.207.184.134
+24.226.54.165
+24.77.11.239
+24.79.193.6
+24.83.108.12
+24.84.58.65
+24.86.202.220
+38.144.0.0/16
+63.148.99.224/27
+64.14.0.0/16
+64.156.27.93
+64.217.126.87
+65.118.41.192/26
+65.247.105.240/28
+65.29.191.213
+65.3.12.25
+66.117.0.0/19
+66.169.40.17
+66.250.24.0/22
+66.250.52.0/24
+66.28.0.0/16
+66.67.112.128
+66.70.109.20
+66.76.151.146
+67.29.135.3
+67.83.184.69
+68.47.205.58
+68.65.171.88
+80.136.226.217
+80.193.117.105
+81.0.210.152
+128.208.45.126
+128.40.161.71
+130.111.87.162
+131.107.20.0/22
+131.235.9.146
+134.173.120.25
+138.47.110.49
+140.180.153.233
+147.188.189.44
+162.33.154.69
+172.168.232.225
+192.217.228.0/24
+194.213.194.37
+194.228.211.204
+194.237.72.231
+195.58.60.164
+198.63.0.0/16
+198.64.0.0/15
+198.66.0.0/16
+202.44.41.84
+205.251.209.62
+207.243.139.233
+209.122.130.0/24
+209.204.128.0/18
+213.67.177.135
+216.122.0.0/16
+216.144.233.0/24
+
+# Exodus Communications
+64.37.192.0/18
+64.209.128.0/20
+64.210.192.0/19
+167.216.232.0/21
+209.67.0.0/16
+209.143.224.0/20
+209.202.128.0/18
+216.109.64.0/19
+216.104.224.0/19
+216.177.64.0/19
+216.182.192.0/19
+216.219.96.0/20
+216.32.0.0/14
+216.74.128.0/18
+
+###
+### The following gathered by the gtk-gnutella team
+###
+
+# gtk-gnutella up to 0.94 handles CIDR notation WRONG!
+# 66.186.39.0/26 -> 66.186.39.0/26
+
+32.105.110.0/24
+
+# Performance Systems International (PSI) is an extremely hostile range
+# Macrovision has SmokeBlowers there; they poll GWebCaches etc. pp.
+# There are certainly non-hostile hosts but it's not worth or possible to
+# differ.
+38.96.0.0/11
+# MediaDefender
+#38.107.160.0/21
+ 
+64.15.0.0/16
+66.186.39.0/26
+
+# hosted by WV FIBER LLC
+66.186.194.0/24
+
+# Media Sentry
+66.250.46.0/24
+66.250.47.0/25
+209.133.121.0/24
+209.133.122.0/24
+
+# ServerBeach (Peer 1 network)
+64.34.160.0/19
+
+# Sound Control Media Protection, Ltd.
+# Professional bots: "LimeWire/4.9.11 1.4 GiB 462 files"; purpose unknown
+# The same ranges seem to contain bots which emit buzzword spam for
+# audio files which are not downloadable but also executables.
+# Most of these ranges belong to Hurricane Electric.
+64.71.160.0/27
+64.71.162.64/27
+64.71.164.128/27
+64.71.178.160/27
+65.19.128.0/18
+66.160.128.0/18
+66.160.192.0/20
+66.220.2.128/25
+66.220.3.192/27
+66.220.6.64/27
+66.220.11.64/27
+66.220.12.0/24
+66.220.26.128/25
+
+209.51.160.0/19
+216.66.0.0/18
+216.218.128.0/17
+
+
+# Surreal Host / Surreal Services
+# obviously the same as Sound Control Media Protection
+64.71.191.160/27
+
+# Range at Peer1; seemingly also used by SCMP
+69.90.119.128/27
+
+# Range at FDC Servers.net, LLC, also used by SCMP
+66.90.119.128/27
+
+# Minnesota valley television
+65.160.241.0/25
+
+# DONet, Inc.
+65.171.151.0/24
+
+# Share dozens or hundreds of completely corrupted WMVs
+67.18.128.0/24
+67.18.129.0/24
+67.18.213.0/24
+67.19.6.0/24
+67.19.8.0/24
+205.177.73.0/24
+
+# sBoOb.net, pr0n spammer
+194.146.227.8
+
+# cumfiesta, pr0n spammer
+207.150.179.0/24
+
+# goudkov.com, spammer
+66.98.252.210
+207.44.144.3
+207.44.144.148
+
+# Another DRM pr0n spammer
+66.63.162.128/25
+
+# Generic DRM pr0n spammer (mostly ASX files)
+66.90.103.0/24
+67.19.77.0/24
+67.19.221.0/24
+67.159.5.0/24
+208.53.138.0/24
+208.53.158.0/25
+208.53.159.0/24
+208.98.11.0/28
+208.98.23.192/26
+208.98.49.128/25
+208.98.56.192/26
+
+
+# DRM WMV pr0n spammer "Hollywood Interactive, Inc." using Mutella
+# DRM header links to smutlounge dot com
+64.27.0.0/19
+216.240.128.48/28
+216.240.128.64/30
+216.240.134.0/24
+217.115.128.48/29
+
+# isaveclub.com AKA esaveclub.com AKA edirectclub.com
+69.44.155.0/24
+69.44.156.0/24
+69.44.157.0/24
+69.44.158.0/24
+
+# hosted by voxel.net, massive spamming, uploaded file contains also GWebCache
+# URLs and possibly a trojan, SHA1 match fails continously
+# Used by PeerSentry which is also the source of *freeclub spam
+69.9.186.0/23
+69.9.188.0/23
+69.9.190.0/24
+208.122.0.0/18
+# Applied Innovations
+66.252.232.0/21
+
+# hosted by net-sentry.net, suspicious GWebCache polling
+69.26.174.0/24
+69.26.191.0/24
+
+# suspicious GWebCache polling
+63.218.20.0/24
+64.70.4.0/24
+72.35.224.0/24
+207.226.112.0/24
+# The ranges below also upload corrupt/fake MP3s
+216.152.250.192/26
+72.35.231.64/26
+
+# weasel.net, diverse GWebCache spamming/trashing
+66.68.124.56
+
+# Generic spammer, results don't even match query; Gnoozle
+70.85.111.0/24
+70.86.48.0/24
+70.86.75.0/24
+70.86.31.152/29
+70.86.86.152/29
+
+# DRM WMV spammer; giFT-based
+70.84.168.80/28
+70.85.234.0/28
+74.52.0.0/17
+69.93.107.0/24
+
+# Generic pr0n spammer, adds search term to filenames (mostly WMVs)
+63.243.162.0/27
+63.243.181.0/27
+
+# ZIP files containing setup.exe and small DRMed WMA files.  Uses Shareaza;
+# some peers identify as "Jironimo" Can be found at ranges of surfplanet.de,
+# VersaTel and HanseNet; always German ISPs; results copy the query string
+# adding diverse prefixes and suffixes. "ysbweb dot com" (Integrated Search
+# Technologies) is the origin of this spam.
+# Jironimo is presumedly Manuel Prueter (Rostock, DE) the owner of
+# free-drm-encoder dot com. Or maybe he is just one of their slaves.
+66.152.93.0/25
+# root servers or vservers so the addresses should be stable
+80.237.174.147
+81.209.165.73
+85.88.2.192/26 
+85.88.9.0/26
+78.111.66.0/26
+78.111.70.0/26
+# absolut-models dot com; screamsavers dot org; free-drm-encoder dot com;
+# pimp-my-penis dot com
+87.106.28.91
+# leaseweb/ocom
+85.17.155.0/24
+85.17.167.0/24
+# Jironimo at Versatel; dynamic range
+83.135.71.235
+83.135.89.16
+89.246.28.253
+89.246.50.198
+# same at Deutsche Telekom AG
+91.34.200.133
+
+# Spammer hosted by pie.us
+# (Sansui Ltd. has 206.223.156.0/24)
+206.223.156.128/26
+
+# WMA-DRM spam; affiliated with artistdirect.com et al.
+# hosted by Fastserve
+66.172.60.0/24
+
+# WMA-DRM spam; files are 99% compressible (zero-filled); filenames
+# imitate scene releases; WMA header contains URL pointing to
+# artistdirect.com. In other words, this is MediaDefender.
+# Assigned to Cyberverse Online.
+66.180.192.0/20
+
+# DRM spam
+63.246.153.64/28
+64.40.98.106
+# drmspace.com, 66103.vidlock.com
+216.55.178.0/24
+# vidlock.com
+216.255.180.114
+217.116.225.250
+64.72.124.0/22
+
+# getlaidquickly dot com; spam results for files which do not even exist;
+# seemingly just an attempt to make the website well-known
+#38.99.20.0/23
+# WMA spam
+#38.99.253.0/24
+#38.99.0.0/16
+
+# WMA-DRM spam; DRM URL links to intentmediaworks; giFT-based
+#38.101.225.0/24
+63.216.80.0/24
+74.205.125.0/24
+205.177.5.0/24
+205.252.3.0/24
+206.161.30.0/24
+207.176.42.0/24
+207.226.148.0/24
+209.8.0.0/24
+209.9.79.0/24
+
+# WMV spammer with over-sensitive buzzword sensor; fake LimeWire; giFT-based
+#38.96.5.128/26
+
+# Gnucleus-based DRM WMV spammer hosted by GoDaddy
+#68.178.200.89
+
+# Spams DRM WMV files with license URL pointing to 68.178.225.162; filenames
+# are bogus but are neither random nor matching the query. Examples are
+# "basketball*wmv", "flytrain*wmv", "landing*wmv" etc. with variations in the
+# trailing part like "_full-l", "part-l", "part-s" etc.); usually Gnucleus
+64.182.136.130
+64.151.98.36
+# Same as above; DRM header links to 216.93.188.81; WhenU/SaveNow spam
+206.51.230.0/24
+206.51.239.0/24
+66.232.104.0/24
+66.232.111.0/24
+66.232.112.0/24
+66.232.114.0/24
+66.232.118.0/24
+66.240.222.0/24
+66.240.254.18
+72.21.50.90/31
+61.129.51.0/24
+61.129.70.59
+61.129.251.204
+61.152.171.139
+60.12.182.0/28
+60.28.222.171
+# Chinese DRM-WMA spammer; Gnucleus
+60.190.222.219
+60.190.223.126
+# DRM license server
+#68.178.225.162
+# DRM License server used by DRM WMV spam; ETE LLC; Shanghai
+216.93.188.80/30
+
+# Gnucleus-based DRM WMV spammer hosted by HopOne
+209.160.32.221
+209.160.35.84
+209.160.35.8
+209.160.40.147
+
+# Gnucleus-based DRM WMV spammer hosted by DMG Networks
+209.165.244.242
+
+# Gnucleus-based DRM WMV spammer hosted by CNAP; it's no typo, the IP
+# address are really very similar
+209.190.22.86
+209.190.122.186
+222.73.219.128
+222.73.218.0/24
+
+# DRM WMV spammer; license URL links to 209.190.122.186
+#68.178.144.112
+
+# Gnucleus-based DRM WMV spammer hosted by ServerBeach/Peer-1
+72.51.22.0/24
+72.51.33.0/24
+72.51.34.0/24
+72.51.37.0/24
+72.51.42.0/24
+
+# Gnucleus-based DRM WMV spammer hosted by eNET
+206.222.26.34
+206.222.26.38
+
+# Shareaza-based DRM WMV spammer hosted by Peer 1 (PEER1-CALYEUNG-*)
+# The ranges are assigned to "Calvin Yeung". Servers host thousands of
+# DRMed ASX and WMV files; all about 100KB large; files point to
+# p2ptips dot com which is owned by the same person/organization.
+64.34.248.160/27
+65.39.185.240/28
+65.39.195.64/27
+66.199.142.0/26
+66.199.142.224/28
+69.28.230.192/27
+69.90.74.0/23
+69.90.216.64/26
+69.90.242.64/26
+# PEER1-NYCAT1AVLAN1-03; seemingly not part of PEER1-CALYEUNG-*
+# but the servers are.
+66.199.177.64/27
+
+# Gnoozle; "sponsored results" exploiting a brain-dead LimeWire feature
+# The SHA-1s are obviously faked and the files are not downloadable.
+# Seems to be same as getlaidquickly spammers.
+68.178.128.0/17
+#68.178.144.2
+#68.178.160.177
+#68.178.194.60
+#68.178.198.68
+#68.178.206.62
+#68.178.242.167
+#68.178.250.209
+72.167.34.231
+72.167.34.232
+208.109.0.0/16
+216.69.164.211
+
+# lowth.com; www.lowth.com is a CNAME for lowth.no-ip.com
+# Emits spam for .url files pointing to lowth.com which use frames
+# to load an URL at Amazon.co.uk.
+# requests to the root are double-redirected to Amazon.com
+86.18.3.218
+
+# A colo of lowth as it seems (port 6340). This idiot seriously needs to
+# to fix his download.pl though.
+86.7.128.215
+87.74.1.198
+
+# Same as above but the primary source is a seemingly random address
+# at port 80; these emit also unrequested results.
+204.11.216.0/23
+204.11.218.0/23
+204.11.222.0/23
+
+# Aggressivly connecting; getting disconnected due to security violations
+# Yes, this is Cisco Systems.
+128.108.0.0/16
+# Emits "WEIRD" results; not downloadable; bogus alt-locs; urn:none:; primary
+# address is always at port 80 at its own /24.
+#128.108.111.0/24
+
+# Range belong to Level 3; seems to be related to the peers by Cisco Systems
+65.57.247.0/24
+65.59.209.0/24
+65.59.210.0/24
+
+# Another range of Level 3; many fake clients emitting arbitrary spam files;
+# MP3s contain only noise or beeps
+8.9.192.0/20
+
+# DRM WMV pr0n spammer; filenames are all caps; license server is 74.52.9.122
+88.85.65.130
+88.85.65.175
+88.85.66.128/25
+
+# MOV pr0n spammer; giFT-based; results do not match queries at all;
+# links to adultpeak dot com.
+66.154.112.240/28
+66.154.124.2/31
+66.63.161.0/24
+66.63.163.0/24
+66.63.164.0/24
+66.63.167.0/24
+66.63.168.0/23
+66.63.170.0/24
+66.63.172.0/24
+66.63.174.0/24
+72.11.143.0/26
+72.11.158.0/29
+72.11.158.128/27
+76.76.8.0/23
+216.144.227.64/26
+216.144.235.64/26
+
+# MOV pr0n spammer; giFT-based; links to i2cams dot com.
+204.69.64.0/18
+65.240.96.251
+69.45.227.0/28
+69.45.229.0/26
+65.37.226.0/27
+
+# DRM WMV pr0n spammer; files link to videoaccesspoint dot com; giFT-based
+64.45.229.50
+65.221.229.56
+69.45.233.2
+
+# The one below identifies as "LemonWire"; spams for videoaccesspoint too
+65.37.238.145
+
+# DRM WMA spam without SHA-1s; the uploaded chunks are JPEGs;
+# sends very weird HTTP responses:
+# HTTP 200 OK
+# Server: Gnucleus 1.8.4.0
+# Content-type:application/binary
+# Accept-Ranges: bytes
+# Content-Range: bytes=125197-649484/125197
+# Content-Length: 524288
+# X-Gnutella-Content-URN: urn:sha1:K4JPX22BKXHMEQOJR3FNCUF2DSSK2SHQ
+#
+67.159.21.0/27
+67.159.52.0/24
+
+# .exe spam from fake LimeWire; does not match query at all; giFT-based;
+# spam is ubiquitous and shows up in *every single* search;
+# "Free Game", "Hot Babes Screensavers", "Cute Puppies Screensavers" which
+# is AdWare and/or a trojan horse. It is directly related to the
+# "getlaidquickly" spam. Apparently Relevance Marketing LTD is the culprit.
+#67.55.65.20
+#67.55.65.92/30
+#67.55.74.180
+69.42.74.68
+69.42.87.192/26
+216.255.178.18
+#216.130.182.228
+#216.130.188.210/31
+# Above mentioned adware downloads executables from the following web servers
+# puzzledesktop dot com
+64.40.106.131
+# relevancemarketingltd dot com
+64.40.106.132
+# a dot downloadmediacentral dot com
+64.40.106.133
+# sense-super dot com
+64.40.106.135
+# These belong to Relevance Marketing as well 
+64.72.123.0/24
+
+
+# Shares over 10000 pictures with all names matching "<celebrity>_pic_1.jpg";
+# The JPEGs show nothing but an URL at celebs dot deltaporn dot com on a white
+# background; Shareaza; standard port
+216.144.224.89
+
+# DRM license server; PetaAd dot com
+207.36.209.113
+
+# Eros Digital Technologies and 3Xmarketing; WMV DRM spam; giFT-based
+65.240.97.0/24
+67.128.53.72/29
+67.128.62.168/29
+
+# Little czech DRM WMV spammer with fake(?) Morpheus; results identify
+# as LimeWire; uses port 80 and others; results have no SHA-1; filenames
+# end with .wm instead of .wma or .wmv.
+82.208.41.192/29
+83.148.8.19
+87.236.194.75
+87.236.194.76/31
+212.47.3.250
+
+# pr0n MOV spammer with fake LimeWire; giFT-based
+66.11.122.0/23
+66.11.124.0/23
+
+# fake movie spam; oversensitive to buzzwords; Gnucleus based; results are LIME
+213.52.227.128/26
+
+# MP3 spam (white noise); switches User-Agent on the fly during downloads
+70.19.110.145
+
+# MP3 spam; fake LimeWire; switches User-Agent on the fly during downloads
+72.89.107.244
+
+# pr0n spammer with ancient LimeWire 2.3.3 Pro; results have no SHA-1
+# oversensitive buzzword sensor; standard port
+63.246.140.0/24
+66.232.96.0/23
+66.232.99.0/24
+
+# MOV spammer; adds dozens hundreds of fake alt-locs; links to p2pblast com
+# LimeWire-based
+# Some of these point to dfw4.preemo.org; preemo.org is registered to
+# Daniel Kerr
+63.246.133.22
+69.41.171.128/26
+69.41.173.31
+69.41.173.32/30
+72.36.200.120/29
+72.36.210.200/29
+72.36.216.48/29
+72.36.217.176/29
+75.126.77.28/30
+75.126.78.240/30
+194.126.193.8/30
+207.150.184.52/31
+207.150.184.36/31
+208.101.51.32/28
+208.101.46.160/28
+# preemo.org
+#207.150.179.72/31
+
+# Mutella-0.4.5 on port 6351 and others;
+# Zipped DRM WMV spam and dialer
+83.149.98.14
+83.149.119.16/31
+85.17.36.36
+85.118.37.47
+85.118.37.51
+88.191.11.7
+# giFT; belongs to the above Mutella peers
+213.251.174.143
+# BearShare; belongs to the above Mutella peers
+213.251.185.126/31
+
+# PDF spammer; uses gtk-gnutella; PDFs link to cyber-spy dot com
+# whois points to tcst dot net which matches 72.38.54.0/24.
+70.52.236.2
+72.38.54.146
+72.38.54.147
+72.38.54.156
+72.38.54.162
+72.38.54.183
+
+# returns results for pr0n MPEGs not matching the query; gtk-gnutella
+64.20.48.66
+
+# jailbait spammer; FBI or other degenerated scum; either part of an
+# anti-p2p campaign or collecting stats.
+58.165.231.210
+68.202.111.69
+71.193.218.50
+72.45.42.174
+
+# nocusnetworks AKA discoverynetworks; giFT-based; multiple almost identical
+# MOV files linking to nocusnetworks
+209.50.48.0/22
+69.16.142.200
+216.75.107.32/27
+
+# www.aup.lockeddns.com; used by DynDNS.org to hijack hosts of past users.
+82.94.222.186
+
+# PDF and QuickTime spam; FrostWire
+216.17.108.12
+
+# kwjmehkq dot com; DRM license server used in QuickTime spam a la p2pblast
+# The whois data is clearly bogus.
+66.111.54.160/28
+
+# reserved range
+79.79.55.0/24
+
+114.46.32.0/24
+116.108.101.0/24
+165.193.220.0/24
+167.216.144.0/24
+206.251.8.0/25
+207.234.131.147
+207.234.131.148
+
+# Macrovision Corporation, Inc. - Smokeblower Networks
+# Extremely oversensitive buzzword spammers returning bogus results
+64.92.224.0/19
+192.156.198.0/24
+209.10.214.0/24
+209.11.121.0/24
+209.11.134.0/24
+209.11.141.64/26
+209.11.141.128/26
+209.11.142.0/23
+209.193.136.96/27
+209.195.16.0/24
+209.195.58.192/26
+
+# Strange client pool of Windoze(?) machines; they connect in hordes; most
+# of them identify as LimeWire/4.0.5; Macrovision and Xeex are behind this.
+63.219.21.0/24
+63.220.57.0/24
+63.216.76.0/24
+69.72.168.0/24
+154.37.66.0/24
+204.193.134.0/24
+204.193.136.0/24
+205.134.238.0/23
+207.171.61.0/25
+208.49.28.0/24
+208.116.62.0/24
+209.10.143.0/24
+212.71.252.0/24
+216.151.128.0/19
+
+# This is supposedly on a dynamic range but it's a very interesting caught.
+# It's listening on the standard port. It's a fake LimeWire that responds with
+# a Gnutella handshake no matter what was sent. It passes completely bogus
+# addresses. Its job is either wasting resources or sniffing. It is also
+# actively connecting to other nodes.
+# "The Hinshelwood Building, Edmund Halley Road, Oxford Science Park"
+85.210.156.0/24
+81.157.11.254
+81.179.85.0/24
+86.137.187.50
+# The one below was first caught but might be outdated by now.
+81.179.74.0/24
+# This one seems to belong to these; it emits results for fake audio and
+# video files; switches GUID
+64.248.219.98
+64.248.219.196
+66.134.169.213
+
+# These are probably completely bogus but block them anyway as these are
+# returned by those GUID switchers
+67.11.22.33
+99.11.22.33
+
+# Time Warner Telecom
+64.128.109.144/28
+66.162.178.96/28
+168.215.129.64/27
+168.215.140.0/23
+206.169.0.0/16
+207.170.229.96/28
+209.163.179.112/29
+209.203.64.0/18
+216.110.48.48/29
+
+# fsh1.xcite.net and fsh2.xcite.net, reply to queries with $search + .exe
+216.169.118.81
+216.169.118.82
+
+# GWebCache polling, dubious horde behaviour
+204.9.117.0/24
+204.9.118.0/24
+
+# Overpeer, Inc
+64.89.41.0/24
+66.128.64.0/21
+66.128.227.0/24
+206.132.32.0/24
+216.144.64.0/24
+216.177.144.0/20
+
+# Tacskill Hill
+64.27.173.0/24
+66.37.204.0/24
+216.64.199.64/27
+216.227.226.0/24
+
+# Mindofteren
+64.28.69.0/24
+64.58.71.192/27
+64.58.75.160/27
+64.58.84.0/24
+64.70.43.0/24
+209.225.45.0/24
+
+# Jomcaerten Co.
+64.28.67.0/24
+64.28.80.32/27
+66.37.194.128/27
+66.37.195.32/27
+66.37.196.0/24
+66.37.210.192/27
+66.119.47.0/24
+216.19.129.0/24
+216.64.204.160/27
+
+# Whailtracts
+64.28.85.0/24
+209.225.43.224/27
+216.64.217.224/27
+216.69.229.0/24
+
+# Adult Xspace
+69.50.160.0/19
+
+# Spamming subnets from Cogent Communications
+216.28.31.0/24
+
+# Spamming ranges from Abovenet; they host MediaSentry and possibly others
+# most of them use giFT; they upload huge rar or zip files which contain
+# nothing but lame insults.
+64.124.0.0/16
+
+###
+### The following come from an htaccess denying RIAA/MPAA access
+###
+
+12.150.191.0/24
+63.199.57.0/24
+64.166.187.0/24
+64.241.31.0/24
+65.244.101.0/24
+
+# Interland
+64.224.0.0/14
+
+# Hostway Corporation
+66.113.128.0/17
+
+# WareNet
+66.252.128.0/20
+
+67.112.252.0/24
+67.125.49.0/24
+81.4.78.0/24
+146.82.174.0/24
+
+# Motion Picture Association (fr)
+194.183.226.144/29
+194.183.226.192/27
+
+195.20.32.99
+198.70.114.0/24
+
+# Motion Picture and Television Fund
+204.154.8.0/21
+
+208.192.0.0/16
+208.207.98.25
+208.209.2.0/24
+208.225.90.0/24
+208.229.253.0/24
+208.49.164.0/24
+208.50.66.0/24
+212.241.48.0/24
+
+# Quibus International AB -- subnet used by rogue agents (e.g. advertise
+# as LimeWire in hits, and when connected, they send User-Agent: Gnucleus).
+# They seem to be using giFT now. Their spam includes URLs files but MP3s
+# also DRMed WMA and even OGGs that have been messed with (constantly fade
+# in/out). These peers seem to maintain a massive amount of connections. The
+# URL files link to serv01.quibus.se.
+212.209.1.0/24
+212.209.34.128/26
+
+# Elemental Codeworks Inc; LimeWire; nodes share thousands of aliases of a
+# couple of almost identical MOV files (adult.mov) which is about 8 MB large;
+# these files link to these domains:
+# bang-sluts dot com
+# 21-plus dot com
+# p2pads dot com
+# ptopads dot com
+64.59.64.0/18
+64.72.117.0/24
+64.72.118.0/24
+64.72.120.0/24
+64.111.196.0/24
+64.111.198.0/24
+64.111.220.0/24
+64.111.221.0/28
+65.38.163.0/24
+65.38.171.0/24
+67.15.66.64/28
+208.122.192.0/24
+208.122.194.0/24
+208.122.213.0/24
+208.122.215.0/24
+208.122.216.0/24
+216.7.183.192/26
+216.17.100.0/24
+
+# The following is possibly a fake range and not the spam origin.
+# It is used by the above spammers; the results are marked as firewalled
+# and only work through pushes causing some of the above to connect.
+# Some of these results use out-of-band v3 though.
+216.139.239.240/28
+
+# Fakes User-Agent randomly for each connection; uploads noisy
+# MP3 files using an extremely aggressive buzzword filter.
+216.58.72.33
+
+# These participate in the sharewarning dot com spam; the site uses a
+# chain of redirects:
+# -> my-freemusic dot info
+# -> myaffiliateads dot com
+# -> allcoolmusic dot com
+69.89.16.0/22
+209.172.32.0/19
+216.251.32.0/20
+
+# GeekHosters; sub-range of Reflected Networks; security violations
+64.210.144.128/25
+
+# HTML/RAR/ZIP ebook link spam; 10045
+124.197.24.92
+
+# Phex; port 10897/45206; shares thousands of ZIP files (about 30 kB) infected
+# with Trojan.Downloader.Small.Ehb which downloads
+# media.teddycash.com/te-110-12-000073.exe
+64.246.52.90
+216.127.90.31
+216.139.219.194
+194.90.224.81
+
+# "Accelerator" spam; ZIP files; hosted at Bezeq International
+62.219.0.0/19
+192.115.190.0/24
+212.25.103.0/24
+212.179.18.0/24
+212.179.64.0/24
+212.179.133.0/24
+# FrostWire
+# "View $keyword with the ultimate player.zip"
+# "Download $keyword with the fastest BitTorrent downloader.zip"
+79.182.142.95
+80.48.113.243
+82.80.4.242
+
+# *_ShareAccelerator.zip; 
+# urn:sha1:ORKMW4AIZ6ERTDIZERO263GYCCTHRWX2;
+# urn:sha1:4FVEOYAEYEAJJEH4KDKGFORCUE6FUAIW;
+# *_Web_Hottest_Videos_Player.zip;
+# urn:sha1:JJXUWD5P3VGGDFEMMDT52WYN3LWJ7LBC
+# HobbyTentToolbar.zip;
+# urn:sha1:JQOOOH5FRXFVR7DOLHFP7PPMAASMFDY6
+#
+# hosted at FDC Servers.net; LimeWire
+67.159.44.0/24
+66.90.101.0/24
+
+# LimeWire; security violations; hosted at RapidSwitch and United Layer
+78.129.137.0/24
+78.129.149.0/24
+78.129.150.0/23
+83.142.224.128/25
+87.117.230.0/23
+# hellum pohellum
+207.7.135.0/24
+
+# MOV pr0n spam; viralnetworkads dot com
+64.56.67.0/26
+67.18.30.0/23
+67.18.41.0/25
+67.18.149.154
+67.18.218.42
+67.19.156.128/25
+67.19.151.0/28
+
+# MOV pr0n spam; giFt-based; fake LimeWire; xxx-marks dot com
+# Also mediaprovider.info; "Top of Charts" DRM WMA spam
+69.64.69.0/24
+64.40.113.0/24
+208.71.114.0/28
+
+# Rogers Cable Inc. KTGC KTGC-HSI; semi-dynamic; probably stable for long
+# durations; LimeWire; MOV spam;
+# like p2pblast but for 5000passwords dot com; possibly a free-rider
+# urn:sha1:QYIOU2FA3DCVHZH6KSCTX6GM623MFJBR
+74.122.64.105
+
+# MOV pr0n spam; sometimes disguised as JPG, GIF, MPEG
+# hosted by Alpha Red and Reflected Networks
+# LimeWire
+69.80.226.130
+# URLs point to this server:
+# nats dot girl2schoolgirl dot com
+# nats dot asianpervert dot com
+# nats dot ticklehorror dot com
+# nats dot solidvpn dot com
+66.254.116.176
+# Black Oak Computers
+216.131.127.58
+216.131.77.81
+# leaseweb/ocom
+85.17.162.7
+
+# Gnucleus 1.8.4.0; seems spam with adware or trojans
+209.85.52.192/26
+
+# MOV pr0n spam; 21-plus dot com
+64.89.16.0/23
+64.89.27.0/24
+
+# Respond with non-existing files; server listen but send no reply;
+# standard port
+64.93.88.64/26
+64.93.89.192/26
+
+# 62.90.175.146; hosted by Barak I.T.C;
+# LimeWire; emits LIME/12v2 with zero count; trying to stop the query?
+# shares diverse infectived files and spam
+62.90.175.0/24
+
+# LimeWire/4.9.11 and LimeWire/4.10.9; GUID switchers; further these seem to
+# abuse searches for discovery
+83.142.225.0/24
+87.117.250.0/23
+66.90.78.0/24
+69.72.161.0/24
+208.98.50.0/24
+195.242.153.0/24
+
+# LimeWire/4.13.4; GUID switchers
+68.239.124.60
+124.186.130.190
+75.34.28.32
+
+# Shareaza 2.2.5.0; GUID switchers; potentially just buggy
+81.179.65.141
+84.60.17.116
+82.239.141.113
+151.68.163.253
+
+# gtk-gnutella; MOV spam;
+# p2pads dot com; ptopads dot com; redlightcenter dot com
+85.92.157.148
+
+# BearShare; hosted by HopOne; registered for "Arkadiusz_Senko"
+# shares thousands of malware ZIPs
+66.36.243.127
+
+# WMV spam; giFT-based
+85.233.199.128/25
+
+# ASX spam; giFT-based
+#204.13.55.176/28
+
+# Accelerator and enhancer spam; zip; rar; exe; port 41000; LimeWire
+85.92.153.192/26
+121.119.182.32/27
+
+# MOV pr0n spam; video-elf dot com
+8.3.218.0/24
+84.40.30.64/27
+204.13.55.0/24
+#67.55.89.0/24
+#67.55.93.0/24
+
+# webair.com hosts a lot of DRM and pr0n spammers
+67.55.64.0/18
+216.130.160.0/19
+
+# GUID switcher; AUDJ; LimeWire/4.9.11
+193.164.133.74
+
+# SOULI?; sub-range of Global Crossing (GBLX); fake video files; high vendor
+# diversity (faked)
+64.208.52.0/22
+
+# French DRM WMV pr0n spammer; touslesfilmsx dot com; Shareaza
+91.121.67.16
+
+# "Fun Workplace Time Waster", "(US Special Release)" etc. EXE, ZIP, RAR malware/adware
+216.139.213.16/28
+
+# Fake LimeWire; ZIP spam; "BitTorrent downloader" etc.
+83.133.126.189
+83.133.127.117
+
+# HTM files; LimeWire; links to amateur dot himegimi dot jp
+125.0.151.116
+
+# shares thousands of ZIPs with UPX'd sharK trojan inside.
+208.116.32.210/31
+
+# ZIP spam
+64.40.117.192/26
+
+# These are either DDoS victims or arbitrary padding addresses, they are
+# most-likely not source of the spam
+122.154.192.11
+123.154.192.11
+
+# GnuShare (GSHR); peers send immediate 503 HTTP response before request
+# hosted by Southern Light, LLC
+69.85.192.0/18
+
+# line-age dot net; HTML redirect spam
+64.182.56.121
+
+# Thousands of infected ZIP/RAR/EXE; also bigger files; LimeWire, Phex, Shareaza
+# Michael Buck; Toronto, Ontario, M6L1B7, CA
+66.79.171.0/27
+# Michael Fedorov, Montreal, Ontario, L9J4N4, CA
+66.79.163.60
+# Organization: Viva; Contact: tibetemperor at gmail dot com
+66.109.21.128/28
+66.109.23.16/28
+66.109.24.0/28
+# Jonas Goldman, viljoen_johan06@yahoo.com
+206.71.56.32/27
+
+# MoveClicks/PULLTHEPLUG TECHNOLOGIES/Revelation Networks;
+# MOV/JPG/WMA spam; Gnucleus and LimeWire
+205.139.208.0/22
+205.139.213.0/24
+208.54.240.0/20
+216.14.80.0/20
+
+# Query-Cache-0.1; fake Ultrapeer; sniffing?
+# ZIP/MPG spammer; uses different source address
+208.53.147.0/24
+
+# Horny/Sexy/hentai/(uncensored)/new + $query + .zip; LimeWire; Adware
+69.42.82.116
+209.200.6.116
+
+# Phex; shares thousands of infected RAR/ZIP/EXE keygens and warez
+64.34.69.2
+
+# p2pads dot com; MOV; pr0n spam; hosted by Easy Online Solutions
+8.17.0.0/23
+
+# "Darkstar Management"; fake wma/mp3/m4a; switches qhit address
+78.129.136.192/26
+# same as above; probably belong together
+64.62.210.0/24
+64.62.214.0/24
+
+# MOV pr0n spam; torrentvideos dot com; Yourbrain Media Inc.
+216.169.106.242
+216.169.106.250
+# MOV pr0n spam; LimeWire; generated names; Yourbrain Media Inc.
+209.9.11.0/26
+
+# Tiversa; 144 Emeryville Dr, Cranberry, PA, 16066, US, tiversa@nauticom.net
+# uses earShare; aggressively searching for leaked corporate data and
+# terrorists (yrly)
+72.22.25.0/27
+72.22.23.0/24
+
+# JunGroup; TV ads; avi/mov/mpg
+74.208.26.207
+# Gnoozle
+74.208.44.183
+74.208.96.120
+72.167.38.22
+72.167.42.22
+72.167.45.155
+72.167.45.163
+
+# LimeWire; QuickTime AVI files; peertracking dot com
+193.53.4.0/24
+69.50.130.219
+
+# Dubious range of peers using diverse LimeWire versions
+72.172.88.0/24
+
+# MPG pr0n spam; hotyounglatinas dot com and others
+64.56.66.160/29
+64.56.66.176/29
+64.56.66.192/29
+204.8.34.176/29
+209.97.223.0/24
+74.222.0.0/24
+74.222.8.0/24
+74.222.12.0/23
+
+# (Probably fake) LimeWire/4.10.9; sends no QRP; insanely high file count
+# Likely a sniffer
+66.246.248.226
+
+# proMedia GmbH
+85.182.253.168/29
+
+# MOV; pr0n spam
+72.22.198.0/27
+
+# demonspeed.no-ip.info; LimeWire;
+# spreads Trojan.Win32.VB.bdb as 94kB ZIP files
+76.105.110.27
+
+# fake LimeWire/4.10.9; probably sniffing; no QRP
+# static range of Time Warner Telecom
+66.194.155.0/24
+66.193.224.0/24
+
+# LimeWire/4.0.5 (probably fake); security violations
+129.47.128.0/26
+
+# LimeWire/4.12.5; security violations
+71.6.153.192/26
+
+# MOV spam servers; LimeWire; s dot clubillusions dot com
+# Southwestern Bell Internet; static range;
+66.137.190.0/26
+
+# ideaFoundry at theplanet dot com range; MOV pr0n spam; BearShare;
+# viralnetworkads
+70.85.203.0/28
+
+# MOV; pr0n spam; LimeWire
+63.217.112.0/24
+
+# LimeWire (probably fake); security violations
+209.237.241.0/27
+216.240.133.223
+216.240.133.226/31
+69.59.21.0/24
+
+# JPEG pr0n spam;
+# waaw dot de
+# sexy-diva dot de
+# affaire dot us dot tt
+# woow dot de dot tt
+# boo dot tp dot de
+# yuka dot de dot tt
+# akyuk dot de dot vu
+# xdate dot de dot tt
+# megagays dot de dot tp
+#Name:         Yueksel Akdag
+#Address:      Hattinger Str. 905
+#Pcode:        44879
+#City:         Bochum
+#Country:      DE
+82.165.80.37
+#88.77.244.51
+
+# MOV/MPG/WMV pr0n spam
+64.46.44.180/31
+
+# MOV/PDF pron spam
+216.150.78.0/24

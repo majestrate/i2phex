@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<project name="Phex.Release.Linux" basedir="..">
+	<target name="-create.linux" if="do.create.linux">
+		<property name="linux.build.dir" value="${releasedir}/phex_${phex.FullPhexVersion}/linux${create.postfix}"/>
+    <property name="linux.buildSrc.dir" value="${releasedir}/phex_${phex.FullPhexVersion}/linux${create.postfix}/build"/>
+    <property name="linux.buildSrc.libDir" value="${releasedir}/phex_${phex.FullPhexVersion}/linux${create.postfix}/build/lib"/>
+    <property name="linux.buildSrc.docsDir" value="${releasedir}/phex_${phex.FullPhexVersion}/linux${create.postfix}/build/docs"/>
+
+		<available file="${linux.build.dir}" property="runtime.dir.available"/>
+    <fail if="runtime.dir.available"/>
+    <available file="${linux.build.dir}/i2phex_${phex.FullPhexVersion}.zip" property="runtime.file.available"/>
+    <fail if="runtime.file.available"/>
+		<!--create archive root directory-->
+		<mkdir dir="${linux.buildSrc.dir}" />
+		<!--I2P: copy runner scripts for both Linux and Windows-->
+		<!--lacking a cross-platform installer, we currently use Linux packages for everything-->
+		<copy file="${project.root}/run.sh" todir="${linux.buildSrc.dir}" />
+        <copy file="${project.root}/run.bat" todir="${linux.buildSrc.dir}" />
+		<!--create directory for libraries-->
+		<mkdir dir="${linux.buildSrc.libDir}" />
+		<!--copy all librarys-->
+		<copy file="${apache.logging.lib}/commons-logging.jar" todir="${linux.buildSrc.libDir}" />
+		<copy file="${apache.httpclient.lib.path}/${apache.httpclient.lib.filename}" todir="${linux.buildSrc.libDir}" />
+		<copy file="${apache.collections.lib.path}/${apache.collections.lib.filename}" todir="${linux.buildSrc.libDir}" />
+		<copy file="${jgoodies.forms.lib}/forms-1.1.0.jar" todir="${linux.buildSrc.libDir}" />
+		<copy file="${apple.lib}/MRJAdapter.jar" todir="${linux.buildSrc.libDir}" />
+		<copy file="${jgoodies.looks.lib.path}/${jgoodies.looks.lib.filename}" todir="${linux.buildSrc.libDir}" />
+		<copy file="${i2p.lib}/i2p.jar" todir="${linux.buildSrc.libDir}" />
+		<copy file="${i2p.lib}/streaming.jar" todir="${linux.buildSrc.libDir}" />
+		<copy file="${i2p.lib}/mstreaming.jar" todir="${linux.buildSrc.libDir}" />
+		<copy file="${i2p.lib}/jbigi.jar" todir="${linux.buildSrc.libDir}" />
+		<!--copy phex jar-->
+		<copy file="${build.target.lib}/phex.jar" todir="${linux.buildSrc.libDir}" />
+		<!--copy doc files-->
+		<mkdir dir="${linux.buildSrc.docsDir}" />
+		<copy todir="${linux.buildSrc.docsDir}">
+			<fileset dir="docs/Phex">
+				<include name="license/GPL.txt" />
+			</fileset>
+		</copy>
+		<copy todir="${linux.buildSrc.docsDir}" filtering="yes">
+			<fileset dir="docs/Phex">
+				<include name="readme/Phex_win.htm" />
+				<include name="readme/Phex_other.htm" />
+				<include name="readme/Undocumented.htm" />
+			</fileset>
+		</copy>
+		<!-- copy subscription file in case user requested -->
+		<ant antfile="${project.build}/makeRelease.xml" target="-copySubscriptionFile" inheritAll="true">
+			<property name="subscriptionDir" value="${linux.buildSrc.dir}/ext"/>
+		</ant>
+
+		<!-- zip it all -->
+		<!--I2P: use a different name for the I2Phex .zip archive-->
+		<zip zipfile="${linux.build.dir}/i2phex_${phex.FullPhexVersion}.zip" update="false">
+			<zipfileset dir="${linux.buildSrc.dir}" prefix="i2phex_${phex.FullPhexVersion}">
+				<include name="*/*"/>
+				<exclude name="run.*"/>
+			</zipfileset>
+			<!--I2P: add runner scripts as a separate fileset-->
+			<!--lacking a cross-platform installer, we currently use Linux packages for everything-->
+			<zipfileset dir="${linux.buildSrc.dir}" prefix="i2phex_${phex.FullPhexVersion}">
+				<include name="run.*"/>
+			</zipfileset>
+		</zip>
+
+		<!-- tar it all too (.zip doesn't support file attributes)-->
+		<!--I2P: use a different name for the I2Phex .tar archive-->
+		<tar compression="gzip" destfile="${linux.build.dir}/i2phex_${phex.FullPhexVersion}.tgz">
+			<tarfileset dir="${linux.buildSrc.dir}" prefix="i2phex_${phex.FullPhexVersion}">
+				<include name="*/*"/>
+				<exclude name="run.*"/>
+			</tarfileset>
+			<!--I2P: add runner scripts as a separate fileset-->
+			<!--lacking a cross-platform installer, we currently use Linux packages for everything-->
+			<!--while building the .tar archive, make runner scripts executable-->
+			<tarfileset dir="${linux.buildSrc.dir}" prefix="i2phex_${phex.FullPhexVersion}" mode="755">
+				<include name="run.*"/>
+			</tarfileset>
+		</tar>
+
+	</target>
+</project>

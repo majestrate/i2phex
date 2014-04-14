@@ -1,0 +1,1477 @@
+3.2.6 Final (2008-07-27)
+
+- CORE: Replaced custom thread pool implementation with JDK ThreadPoolExecutor
+
+- FIXED: Errors during browsing of invalid hosts.
+- FIXED: Various minor GUI errors.
+- FIXED: More translation errors in es_ES, es_MX and pt_BR.
+
+3.2.4 Final (2008-06-22)
+
+- FIXED: Class files of Phex 3.2.2 where compiled without Java 1.5 compatibility.
+- FIXED: Minor problems with GUI updates during initialization.
+- FIXED: Translation errors in es_ES, es_MX and pt_BR.
+- FIXED: Download preview problem with file beginning partially verified and 
+         unverified.
+
+3.2.2 Final (2008-06-15)
+
+- GUI: Brazilian Portuguese translations added (thanks to Felipe)
+- GUI: Spanish and Mexican translations added (thanks to LuisC-SM). 
+- GUI: Search Filter: Default Rule added: Hide Nasty Files. 
+- GUI: Decentral Content Distribution panel added to welcome wizard. 
+- GUI: Add option to shared files export to export only selected files.
+
+- CORE: Magma-Lists now download to a subdir of the default download dir.
+- CORE: Integrated DestAddress from i2phex which allows other forms of ID
+        beside IPs. 
+- CORE: Use of shared threads for network connections reduced threads by
+        approx. 40%
+
+- FIXED: When browsing a host a blocked URN caused a connection abort.
+- FIXED: Scanning of shared files crashed when a new directory was added.
+- FIXED: Removed a possible deadlock situation during read/write lock handling.
+- FIXED: Problems with available range set handling when download file size is 
+         unknwon are solved.
+- FIXED: A running file rescan throws errors when shared directories are
+         changed concurrently.
+- FIXED: Download file preview was not possible if file beginning was not 
+         verified yet.
+- FIXED: File size unit in search quick filter resets to 'bytes' when toggling
+         through search tabs. (Bug: #1799473)
+- FIXED: NPE on Mac OS X when displaying HTML text.
+- FIXED: Turkish language file issue
+
+3.2.0 Final (2007-07-06)
+
+- GUI: Download progress bar shows different colors for different download 
+       segment types. (Downloading/Unverified/Verified)
+- GUI: New security rule edit dialog, for better look and to integrate the 
+       security concept changes.
+- GUI: User can select to include a freebase url in Exported file-lists 
+       (magma, rss, metalink).
+- GUI: Search list is hidden by default.
+- GUI: Improved network tab selection color codes.
+
+- CORE: THEX integration to verify download data integrity.
+- CORE: Redesigned large parts of the upload architecture.
+- CORE: Changed security concept to only use cidr IP ranges. This change allowed
+        a huge optimization of performance and memory. The disadvantage is that
+        we had to drop support of IP ranges (from-to) and of 'Accept' rules.
+- CORE: Faster internal query handling.
+- CORE: Added metalink import. Thanks to lokad!
+- CORE: Reduced security list memory footprint.
+- CORE: Reduced country list memory footprint.
+
+- FIXED: A search filter rule created by copying a Phex default rule was not
+         loaded after restart.
+- FIXED: Prevent error when creating UDP Pong from an UDP Ping without SCP 
+         extension.
+- FIXED: NPE occurred when browse host is displayed before it started.
+- FIXED: Incorrect handling of chunked transfer encoding during browse host.
+- FIXED: During a download a file can switch from read-write mode to read-only 
+         mode when an upload of the partial file starts. (Bug 1689675)
+- FIXED: When uploading a "Keep-Alive" connection was closed on response code
+         "503 Requested Range Not Available" or "416 Requested Range Not 
+         Satisfiable".
+- FIXED: When doing a download file preview Phex created the folder 
+         phex.prefs.api.Settings@<some number>.  (Bug 1678124) 
+- FIXED: Download scope length calculation issue.
+- FIXED: Possible NPE when closing Phex.
+
+3.0.2 Final (2007-02-12)
+
+- FIXED: When using Java 6 table sorting was faulty.
+- FIXED: Push download deadlock situation was causing hanging push requests.
+- FIXED: Uploads could cause too many open files errors on Unix systems.
+- FIXED: Very fast downloads with very slow hard drives could cause an 
+         OutOfMemoryError.
+- FIXED: Download write buffers were causing reduced download performance.
+- FIXED: Search results were not removed from memory after closing search.
+- FIXED: Search filter rule with "delete" consequence turned into "hide" 
+         consequence on restart. (Bug: 1653752)
+
+3.0.0 Final (2007-01-07)
+
+- GUI: Configuration wizard helps to choose the basic configuration settings for
+       Phex on first startup and after an important upgrade.
+- GUI: New download configuration dialog with more options.
+- GUI: Implemented concept of IconPacks that allows users to build own set of 
+       icons.
+- GUI: New IconPack based on "Tango Project" (http://www.tango-project.org).
+       Thanks to ArneBab
+- GUI: Added search filter consequences to automatically ban the ip or download 
+       the file of a matching results.
+- GUI: After over 5 years, finally a new splash screen.
+- GUI: Splash screen can be hidden with a mouse click on it.
+- GUI: Improved search result rendering performance during scrolling.
+- GUI: Candidate search information is displayed in download overview and 
+       transfer panel.
+
+- CORE: Integrated a download write buffer to reduce disk access.
+- CORE: Improved detection of invalid and spamming query results.
+- CORE: New improved preference handling.
+
+- FIXED: Removed various memory leaks occurring on long running Phex instances.
+- FIXED: Downloads report invalid candidate errors when they use a host name 
+         instead of an IP address.
+- FIXED: The upload queue used to report a wrong position and length value.
+- FIXED: A very low bandwidth limit caused connection threads to run into long 
+         lasting lock situations.
+- FIXED: When closing a search using the search button the search tab didn't 
+         reflect the closure.
+- FIXED: QueryResponse GGEP COBS parsing error.
+- FIXED: The check to determine the number of missing connections had a minor 
+         calculation error.
+- FIXED: Resolved various UDP host cache bugs.
+
+2.8.10 Final (2006-07-16)
+
+- GUI: Used anti-aliased fonts for labeled icons in search result table to improve
+       readability.
+
+- I8N: Added French language support. Translated by Jonathan Ernst.
+
+- FIXED: Completed download files sometimes failed to rename and stayed in 
+         incomplete folder.
+- FIXED: NPE when a country flag is missing.
+
+2.8.8 Final (2006-07-01)
+
+- GUI: Integrated new set of icons.
+- GUI: Improved Windows theme support.
+- GUI: Changed Mac OS X event handling to MRJAdapter library.
+
+- CORE: Improved firewall status detection.
+
+- FIXED: Resolved race condition when a download file couldn't initialize
+         correctly.
+- FIXED: Locking and synchronization problems during shared files rescan.
+- FIXED: Possible error in the chat system.
+- FIXED: Multiple problems with the Mac OS X release script solved.
+- FIXED: A few minor problems with UDP message handling.
+- FIXED: Prevented connection drop in case of certain Pong message errors.
+
+2.8.6 Final (2006-04-25)
+
+- GUI: Multiple ban host options are now available through the popup menu.
+- GUI: A double click in the search button bar or in the free space around the 
+       search list will create a new search. 
+
+- FIXED: Invalid entry in favorites host file causes Phex to crash during
+         startup. (Bug: 1463084)
+- FIXED: On Mac OS X the search tree failed to expand when single clicking on
+         its expansion handle. (Bug: 1404131)
+- FIXED: Failed to store display settings of search list and filter panel.
+- FIXED: Fixed possible chat security vulnerability by limiting chat frames to 
+         30 and only allow one chat connection per IP.
+- FIXED: The filter rule descriptions text was cut and displayed artefacts in
+         case it contained $ or \ characters.
+- FIXED: Sorting for creation date or last download date was wrong in download
+         table. (Bug: 1476145)
+
+2.8.4 Final (2006-04-01)
+
+- GUI: Redesigned search screen offers a improved quick filter panel, complex
+       user definable and default filter rules, multiple new search and display
+       options.
+- GUI: Ability to build complex search filter rules, with an easy to use rule
+       wizard and an interactive description text.
+- GUI: Changes to the quick filter are automatically applied without pressing
+       an additional button.
+- GUI: Default adult and scam file filters.
+- GUI: Reworked search control panel to easily handle multiple searches and
+       support of the 'WhatsNew' search feature.
+- GUI: Offered a tabbed search bar besides the search list. Both can now be
+       optionally turned on or off using the 'View' menu.
+- GUI: Added option to the View menu to hide/show the new search filter panel.
+- GUI: Added option to the View menu hide/show the status bar.
+- GUI: Updated JGoodies looks library to 2.0.1
+- GUI: Updated JGoodies forms library to 1.0.6
+- GUI: Removed Chat button from search toolbar.
+
+- CORE: Support of WhatsNew search protocol.
+- CORE: Improved handling of browse host searches with better error control.
+- CORE: The candidate URN's are additionally parsed to find and verify a download
+        URN.
+- CORE: Improved browse host status display, to differentiate between connecting,
+        fetching, finished and error.
+- CORE: Updated Apache commons http client library to 3.0
+
+- FIXED: When a download file was executed and a different file with the same
+         name already exists, the different existing file was executed instead.
+         Thanks to ArneBab
+- FIXED: HEAD request uploads stayed at the initializing status after unexpected
+         disconnect.
+- FIXED: When banning a host it was not immediately removed form existing search
+         results. (Bug: 1288779)
+- FIXED: Phex used to fail on startup when a fixed exported IP is set.
+- FIXED: Prefix parts of MAGMA and RSS connection requests are not displayed 
+         anymore in 'New download' dialog.
+- FIXED: NPE during Phex shutdown.
+- FIXED: GWebCache status code outside of 2xx not interpreted correctly. Thanks
+         to Complication for the fix
+- FIXED: The Ok button was not the default button in the option dialog. 
+         (Bug: 1399824)
+
+2.8.2 Final (2005-11-21)
+
+- CORE: Improved rare parts first strategy to honor streamable files.
+- CORE: Adjusted the aggressiveness of network connection attempts to respect 
+        the overall available connection slots.
+        
+- I8N: Improved German translation, by ArneBab.
+
+- FIXED: Some (medium rated) download sources were not stored between Phex 
+         sessions. (Bug: 1354721)
+- FIXED: Setting port above 66000 can crash Phex. (Bug: 1299207)
+- FIXED: Tolerance settings for download part rating was not used. (Bug: 1354997)
+
+2.8.0 Final (2005-10-30)
+
+- GUI: New download overview screen to quickly view the download status, with an
+       multi-part progress indicator that displays exactly which parts of the 
+       file is already on your disk.
+- GUI: New download transfer screen for a overview of transferring sources.
+- GUI: A preview copy of a download can be created and a system viewer opened
+       through Phex.
+- GUI: Open file from Library screen extended to support all systems.
+- GUI: Display availability of file data of sources in multi-part progress bar.
+- GUI: The connections table displays PushProxy status of hosts "(PP)".
+- GUI: Phex update notification dialog offers option to download update immediately.
+
+- CORE: Complete rework of the download engine. Phex now uses a single 
+        incomplete download file instead of one file per segment.
+- CORE: Support of different user selectable download part selection algorithms 
+        (by availability, prioritize beginning/end, and random)
+- CORE: Improved download source selection for faster download restarts.
+- CORE: Added option to readout downloaded magma files and download there
+        contents. Thanks to ArneBab
+- CORE: Support for UDP Host Caches. Thanks to Madhu
+- CORE: Support of downloads with chunked transfer encodings (Apache).
+
+- FIXED: Download shows incorrect status queued instead of downloading. 
+         (Bug: 1274358)
+- FIXED: Sometimes download selection differs from displayed candidates/segments
+         or gets lost. (Bug: 1262942)
+- FIXED: Converting shared directories failed when updating from build 81 or 
+         earlier.
+- FIXED: Resolved various THEX upload problems.
+- FIXED: When banning many hosts interface was unresponsive. (Bug: 1338228)
+
+2.6.4 Final (2005-08-30)
+
+- CORE: Improved GWebCache handling to filter out invalid caches.
+
+- FIXED: Add shared folder didn't work on Windows systems. (Bug: 1275267)
+- FIXED: On Windows, Phex could fail to safe configuration files when exiting
+         from TaskTray. (Bug: 1274365)
+- CORE: OSX: Increased the amount  of used Ram for Java to make the interface snappy again. 
+
+2.6.2 Final (2005-08-23)
+
+- GUI: Improved status bar design. Reports Phex firewall status (RFE: 1239764) 
+       and displays upload and download rate.
+- GUI: Separated columns for transfer rate and ETA in download and upload table.
+- GUI: Enabled DELETE key in tables for connections, searches, download files and
+       download candidates. (RFE: 1238987)
+- GUI: Enabled ENTER key in search filter text fields to activate filter.
+- GUI: Integrated respect of copyright dialog popup on every start up till
+       disabled.
+
+- CORE: Integrated per download bandwidth throttling.
+- CORE: Improved Phex update check and error reporting.
+- CORE: RSS- and PodCast file-readout added. 
+- CORE: Highly optimized IP handling in security manager for a significant
+        performance gain on large IP lists. We are blocking now 88000 IP ranges
+        instead of 750. Thanks for the IP list goes to http://www.bluetack.co.uk
+- CORE: Improved accuracy of transfer rates.
+- CORE: Support for language variants like in German WortWoertlich
+
+- I8N: Added German language support. Translated by ArneBab.
+- I8N: Added German WortWoertlich language support. Translated by ArneBab.
+
+- FIXED: Several problems with the download configuration dialog.
+- FIXED: It wasn't possible to change the 'Max concurrent connects' field.
+- FIXED: MacOS X caused icon display problems in library tab.
+- FIXED: Table columns displaying a progress bar where wrongly sorted.
+- FIXED: When creation of incomplete file fails, Phex was hanging.
+- FIXED: Several GWebCache problems solved (Bug: 1248818, 1261747)
+- FIXED: MaxOS X had problems with JGoodies popup menu support.
+
+2.6 Final (2005-06-29)
+
+- CORE: Added a configurable concurrent connects limit. Windows XP SP2 users are 
+        limited to 10 concurrent connects. Phex defaults XP SP2 users to 8 and 
+        others to 20 connects. For more info and how to work around this limit
+        check the FAQ on the Phex homepage.
+- CORE: Enforced max leaf to ultrapeer connection limit of 5.
+- CORE: Improved error checking for failed download segment merge operations.
+- CORE: Response to crawler ping with pongs of connected leafs.
+- CORE: Upload side THEX integration.
+
+- FIXED: NPE causes Phex to crash on Linux with GTK Look and Feel.
+
+2.4.2 Final (2005-05-09)
+
+- FIXED: Adding of Magnet downloads with unknown file size failed.
+
+2.4 Final (2005-05-06)
+
+- CORE: Improved UP connection stability when in leaf mode.
+- CORE: Shared files exports supports magnet urls with optional xs parameter.
+        The export XML format changed, custom XSL export scripts need to be 
+        updated to function correctly.
+- CORE: Updated security list to block spam.
+- CORE: Integrated per candidate download logging.
+        (To activate raise downloadCandidateLogBufferSize in phex.cfg)
+
+- FIXED: An aborted upload can cause a NPE.
+- FIXED: Several download bugs.
+
+2.2.2 Final (2005-04-04)
+
+- CORE: Support of UTF-8 queries.
+- CORE: Ignore strange DU GEEP extension format send by Bearshare.
+
+- FIXED: None HTTP download candidates are lost on restart.
+- FIXED: Banning or adding to favorites from search caused the whole result
+         folder to be banned or added instead of just the selected results.
+- FIXED: Search for download files with URN and without search term did not work.
+
+2.2.0 Final (2005-03-27)
+
+- GUI: Enhanced Library tab to additionally support 'View Bitzi', 'Open file'
+       (Windows only), 'Filter' shared files by regular expression.
+
+- CORE: After 100 consecutive connection failures Phex assumes to be offline and
+        stops network connection tries.
+- CORE: Reporting "X-Requeries: false" connection header to fully comply with
+        Limewire's "good" host rating.
+
+- FIXED: Many candidates could cause the last segment to be allocated by 
+         multiple candidates, this caused redundant data transfer.
+- FIXED: Solved SOCKS server connection bug.
+- FIXED: Windows: Failed to open URL with default browser due to missing native 
+         library link.
+- FIXED: Many parallel downloads of a file could keep you from manually stopping
+         the download.
+- FIXED: Non-Gnutella HTTP downloads with unknwon file size and multiple 
+         candidates were only downloading from one single candidate.
+- FIXED: After Phex restart non-Gnutella HTTP downloads failed to connect.
+- FIXED: Crawler handshake failed to report peers with correct header name.
+- FIXED: PushProxyAck message parsed incorrect message size, causing 
+         IllegalArgumentException.
+
+2.1.8 Beta (2005-03-11)
+
+- FIXED: Reading multiple acceptable substitute sources from magnet.
+- FIXED: Removed Magma parsing bug causing every second element to be skipped.
+- FIXED: Automated firewall detection wasn't reiterating.
+
+2.1.6 Beta (2005-03-05)
+
+- GUI: New Library tab implementation for improved overview and easier selection
+       of shared directories.
+- GUI: Add new downloads by Magnet URN or MAGMA file without the need to search.
+- GUI: Open MAGMA file system integration for Windows and OS X.
+- GUI: New designed About dialog now also contains environment information to 
+       help find possible problems.
+
+- CORE: Added full support of the Gnutella PushProxy proposal.
+- CORE: Export shared files through a XSL based export engine.
+- CORE: previewMethod_html? will override internal browser detection code for
+        Phex forum/help/bitzi pages.
+- CORE: segmentMultiple configuration value added. All (non-initial) segments
+        are multiples of this size.
+- CORE: Added 'completionNotifyMethod' to configuration: executes when a file
+		    download is completed. Could be used to play a sound file for example.
+- CORE: Added 'logSlider' configuration variable. When changed from 0 to 1 the 
+		    bandwidth selection slider is logarithmic instead of linear.
+- CORE: Made HTTP downloads with unknown file size possible.
+- CORE: Improved support of a customized Phex installation. By Arne.
+- CORE: Integrated improved logging API to support Log4J for developers and a 
+        lightweight logging for release versions.
+
+- I8N: Added Dutch language support. Translated by RaaF.
+
+- FIXED: no longer throw away good candidates: "hijack" segments serviced by
+		     slower candidates when no more segments are available. (not yet well
+		     tested and disabled unless segmentHijacking=1 in phex.cfg)
+- FIXED: use correct text on preview button to indicate whether segment
+         will be copied or not, and which command will be run
+- FIXED: Query results with empty URN no longer cause a NPE.
+- FIXED: Transfers should not grow beyond the segment bounds anymore.
+- FIXED: Very low bandwidth limits will not keep the GUI from updating the 
+         download status anymore.
+- FIXED: Incorrectly parsed vendor message can cause connection abort.
+
+2.1.4 Beta (2004-09-29)
+
+- GUI: Generate a temporary 'preview' copy of the first segment on demand,
+       and display it (if a display program is configured). Will also work
+       on completed downloads.
+- GUI: The number of download candidates for a file is displayed on the folder
+       icon.
+
+- CORE: Default list of recognized streamable/unstreamable suffixes
+        extended, and matching is now case-insensitive.
+- CORE: Added Undocumented.htm to documentation for tips on advanced use.
+- CORE: phex.cfg is sorted.
+- CORE: Experimental: headless operation with -Djava.awt.headless=true
+
+- FIXED: Configuration values which are lists are correctly stored.
+- FIXED: Invoking help/bitzi on unix now looks for firefox, not netscape.
+- FIXED: Candidates stop correctly upon completion of download.
+- FIXED: File uploads do not abort prematurely.
+- FIXED: File upload statistics stay correct after the initial segment.
+
+2.1.2 Beta (2004-09-16)
+
+- GUI: Show segment rating in 'rate' column
+- GUI: New download and upload images.
+- GUI: right-click on a downloading file to alter the segment
+       selection strategy (under 'ordering')
+       
+- CORE: Default segment selection strategy depends on whether the file is 
+        streamable (ie: previewable during download), unstreamable, or
+        unknown. See docs/specifications/Rating.htm for more details
+
+- FIXED: Priority sorting wasn't working, resulting in files always being
+         downloaded in order, regardless of segment "rating"
+- FIXED: If a download is stopped, it was possible that extra data is saved in
+         some segments.
+
+2.1.0 Beta (2004-08-30)
+
+- GUI: Added user interface option to clear the search history.
+
+- CORE: Force slow download candidates to release a download segment when a faster candidate
+        cannot be allocated a free download segment. (Nick Farrell)
+- CORE: Prioritize the download segments of a file based on rarity of that segment. The fewer
+        hosts have a part of the file, or the slower the connection speed is to those hosts,
+        the sooner that segment will be requested. (Nick Farrell)
+- CORE: Change bandwidth limiting algorithm. Should be more stable as well as more accurate.
+        (Nick Farrell)
+- CORE: URN calculation is moved to a background task to display shared file faster on the UI.
+- CORE: Variable sized download segments depending on candidates transfer speed. (Nick Farrell)
+- CORE: Download segments are selected based on position in the file and
+        rarity. (Nick Farrell)
+- CORE: Implemented automated firewall detection by using ConnectBack VM
+- CORE: Improved Phex windows installer and uninstaller routine and interface.
+
+- FIXED: Download segmentation problem fixed which can cause too big segments. (Nick Farrell)
+- FIXED: The GUI might freeze when browsing hosts from other tabs then search.
+- FIXED: GUI will fail to paint in case last used Look and Feel is missing on system.
+- FIXED: Search input pane will not resize unbounded on long search terms.
+- FIXED: Files where shared with full path information, now only the shared part of the path
+         is used.
+
+2.0.0 Final (2004-07-09)
+
+- GUI: Country flag associated to the host are displayed left of IP addresses.
+- GUI: Adjusted Search tab colors to fit colors of the current look and feel and theme selection.
+- GUI: New language selection dialog will allow different user interface translations.
+- GUI: Splited Share tab into the two new tabs Upload and Library.
+- GUI: Splited Monitor tab into the two new tabs Search Monitor and Result Monitor. Used search
+       result table display style for Result Monitor.
+- GUI: By default displayed tabs on first startup are Network, Search, Download, Library. By
+       default hidden tabs are Upload, Result Monitor, Search Monitor, Security, Statistic.
+- GUI: Redesign of the Network tab to give it a cleaner look and display favorites.
+- GUI: Integrated settings pane to adjust debug options.
+- GUI: New table column sorting concept integrated to allow to turn of sorting.
+- GUI: Cleaner component layout and design.
+- GUI: Error message is displayed in case a Java version below 1.4 is used.
+- GUI: Pressing right mouse button on the IP at "My Address" allows coping of the IP.
+
+- CORE: To stay up-to-date with used libraries Phex was moved to Java 1.4 there is no Java 1.3
+        support any more. 
+- CORE: A new favorite hosts maintenance system was added to bookmarked the most favorite hosts.
+- CORE: Integration of IP to country database.
+- CORE: Legacy Alt-Locs without port are ignored because of different implementation of vendors
+        on how to understand these ports.
+- CORE: Optimized large download list save performance.
+- CORE: New Gnutella network selection concept to better separate network specific configurations.
+- CORE: Improved SOCKS implementation.
+- CORE: Switched to optimized SHA1 digest implementation of Philippe Verdy.
+
+- FIXED: During upload of partial files the upload status is not correctly updated and causes
+         the upload to hang.
+- FIXED: Corrected several IP address sorting bugs.
+- FIXED: Format error in Pong GGEP extension.
+- FIXED: GWebCache requests do not follow HTTP redirects anymore.
+- FIXED: Deletion of expired security rules failed.
+- FIXED: Problems with crawler handshakes resolved.
+
+0.9.5.67 BETA (02/19/2004)
+
+- GUI: Integrated JGoodies Plastic Look & Feel. Its used as default look for all systems, 
+       but Mac OS X.
+- GUI: Search progress bar integrated to watch how much longer a search will take, thanks
+       to dynamic query.
+- GUI: Integrated JGoodies Forms layout manager for improved look of Phex options dialog.
+- GUI: Showing additional 'Requesting' download status to indicate users that we only connect
+       once to request multiple segments in case other side supports Keep-Alive.
+- GUI: Removed font selection options.
+- GUI: Queued download candidates are ordered according to their position in the queue.
+- GUI: Toolbar can be hidden.
+
+- CORE: Download candidate handling improved to reduce failing connection attempts and speed
+        up connection process.
+- CORE: Added support for new X-Alt HTTP header and offered improved support for alternate
+        location handling.
+- CORE: Improved Phex update check code to transfer more update data like OS, and changes.
+- CORE: Improved performance of snooping passing traffic for query hits Phex can for itself.
+- CORE: Limewire Crawler support.
+- CORE: Limewire style daily uptime calculation for Pong GGEP extension
+- CORE: Total upload and download count is stored.
+- CORE: Ban host time is raised from session timeout to one week timeout.
+
+- FIXED: Browse Host results where not displayed correctly in new search UI.
+- FIXED: Browse Host results are not returned correctly to requester if many files are shared.
+- FIXED: Bitzi Ticket can not be viewed from search results in case top level candidate is
+         selected.
+- FIXED: Negative amount of filtered hosts in case search results have a missing SHA1.
+- FIXED: The same alternate download locations where send more then once to the same
+         connections.
+- FIXED: Error when forwarding a TTL 1 querys to ultrapeers with intra ultrapeer QRT support.
+- FIXED: Correctly calculate the used bandwidth in case traffic compression is used.
+- FIXED: Multiple statistic tracking issues.
+
+0.9.5.54 BETA (10/06/2003)
+
+- GUI: Completly new search interface integrated, giving a higher useability, better look
+       and more features.
+- GUI: Connection failed counter introduced on download candidate view.
+
+- CORE: Implemented new download segment usage and download connection handling for
+        a huge download reliability and performance gain.
+- CORE: New caught host prioritizing based on uptime, successful and failed connection
+        used to achive faster initial connection to the network.
+- CORE: Support for Gnutella network traffic compression.
+- CORE: Support for ALT GGEP extension in query hits.
+- CORE: Number of download connections failed in a row is stored across Phex sessions.
+        
+- FIXED: Solved performance problems with not responsive user interface when merging 
+         large download segments.
+- FIXED: Vendor name is not always displayed correct in the download candidates view.
+- FIXED: Last download time was updated incorrectly.
+
+0.9.0.44 Final (07/04/2003)
+
+- GUI: Download file prioritization.
+
+- CORE: Implemented support for Ultrapeer Query Routing Proposal
+- CORE: Better download candidates selection through improved round robin.
+
+- FIXED: Problems when changing the port Phex uses are solved.
+- FIXED: Incorrect ultrapeer Pong marking corrected.
+- FIXED: Download worker stopped iterating over downloads.
+
+0.9.0.40 BETA (05/16/2003)
+
+- GUI: Newly designed menu bar. With a new help menu to access the Phex site and
+       improved View menu.
+
+- CORE: Provided a Ultrapeer election algorithm to find Ultrapeer capable users.
+- CORE: Added a new Uptime statistic tracker.
+- CORE: Improved slot assignment algorithm in Ultrapeer mode.
+
+0.9.0.39 BETA (05/09/2003)
+
+- GUI: New advanced connection configuration allows to specify the number
+       of connections to ultrapeers, leafs and peers when acting as a ultrapeer
+       leaf or peer.
+- GUI: New security tab integrated. It contains a well known hostile host list
+       and allows extensive user defined access control by IP.
+- GUI: Old filtered host concept is removed and migrated into the new security
+       concept. Individual adjustments of the migrated rules is recommended.
+- GUI: Extracted statistic panel to own tab.
+- GUI: Imporved look of tables in all tabs.
+- GUI: Integrated options to show/hide table grid. By default table grids are
+       hidden on Windows and MacOSX, shown on all other plattforms.
+
+- CORE: Phex is now able to act as a Ultrapeer on the Gnutella network.
+- CORE: Integrated new security concept against known hostile hosts.
+        See http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/phex/phex/src/phex/resources/hostilehosts.cfg
+- CORE: Concatenation performance of downloaded segments improved.
+- CORE: Completly rewritten statistic tracking code.
+- CORE: Improved bandwidth tracking algorithm.
+- CORE: Support for the new interpretation of the MinSpeed field in Queries.
+- CORE: Triggering a manual shared files rescan causes a running rescan be
+        interrupted and restarted.
+- CORE: There is now only one Phex releases for Java 1.3 and 1.4. Since 0.8 the
+        differences are too small to justify the extra work of two releases.
+- CORE: Reduced and optimized the number of idle threads used to maintain
+        downloads and download candidates.
+- CORE: Dropped update support of version 0.6.3 and earlier.
+- CORE: Outgoing Gnutella 0.4 handshake dropped.
+
+- FIXED: Removed various deadlock problems occuring during shared files rescanning.
+         This also solves the problem of threads getting blocked during access to
+         shared files.
+- FIXED: When browsing a host sometimes search results are shown that are just
+         passing through the node but not belonging to the browsed host.
+- FIXED: Same Alternate Location was returned multiple times in DownloadMesh.
+- FIXED: Updated build number was not integrated correctly into the release files.
+- FIXED: Removed exception occuring when updated already available alt-location
+         with timestamp.
+- FIXED: Browse host requests are now closed correctly.
+- FIXED: Fixed problem where changes to the 'Share sub-directorys' option where
+         not saved.
+
+0.8.0.34 (02/06/2003)
+
+- GUI: Advanced search filter management allows you to create and manage
+       multiple search filter.
+- GUI: Disconnect policy moved to the Phex Options Dialog.
+       Thanks to Brian Enigma
+- GUI: Phex main tabs can be hidden from the main window.
+- GUI: New option allows you to configure the number of seconds a host error
+       appears in the connection table.
+- GUI: The Auto-Connect check box has been replaced by a Connect and Disconnect
+       toolbar button.
+- GUI: Added tool tip description to status bar stats.
+- GUI: The "Connect To" text field memorizes entered IPs in a drop down list.
+- GUI: The Phex Update notification is now configurable to also display beta
+       updates.
+
+- CORE: Ultrapeer connection capabilities
+- CORE: Query Routing Proposal support for Ultrapeer communication.
+- CORE: Gnutella Generic Extension Protocol 0.5 (GGEP) support.
+- CORE: Improved flow-control algorithem with support of Limewires SACHRIFC
+        proposal.
+- CORE: Support of Browse Host Proposal.
+- CORE: Download files are initially not splitted any more. But you are able
+        to configure splits by a fixed size or fixed count if you like.
+- CORE: Download segments are not locked before the candidate connection is
+        established.
+- CORE: Completly rewritten Upload implementation.
+- CORE: Support of ActiveQueuing to queue upload and download requests in case
+        of a busy peer.
+- CORE: Partial File Sharing download and upload support.
+- CORE: New disconnect policies allow you to drop freeloader and host with no
+        vendor. Thanks to Brian Enigma
+- CORE: Because of new Ping concept the ping latency disconncet policy was
+        dropped.
+- CORE: Gnutella Web Cache support to look up Ultrapeer IPs and fill the host
+        catcher.
+- CORE: Gnutella Chat integrated to chat with Limewire, Shareaza and Phex user.
+- CORE: Sort downloads by priority.
+- CORE: Increased network connection stability and quality.
+- CORE: HTTP 1.1 concepts and parsing standards integrated.
+- CORE: Parsing of Gnutella Message was improved.
+- CORE: TTL's are not configurable any more and fixed to 7 (Gnutella Default).
+- CORE: Ultrapeer connections are fixed to 3.
+- CORE: Improved creating of GUID performance.
+- CORE: Changed Ping behaivor. Alive pings are only send when connection stays
+        quite for some time.
+- CORE: Min/Max connection configuration has been replaced with a single
+        configuration for peers. Phex will try to connect at once to twice as
+        much nodes as required.
+- CORE: To maintain connections faster Phex already connects to new hosts while
+        dropped connections are still in error state for displaying.
+- CORE: Improved and more strict Alternate Location parsing to sort out bogus
+        locations.
+- CORE: Hashed urns are added to the Query Routing Table in the form
+        urn:sha1:xxx
+- CORE: New Routing Table implementation for better performance and less memory use.
+
+- FIXED: Removed memory leak caused by sleeping threads holding references to
+         already dead connections.
+- FIXED: Host filter was not working for search results.
+- FIXED: A high number of false search hit where returned on querys with URNs and
+         without search term.
+- FIXED: Option dialog does not close when changing shared directorys.
+- FIXED: Launch browser problem under windows.
+- FIXED: Status bar didn't update finished download count.
+- FIXED: Correctly transfer remote and listen IP.
+
+0.7.3 (07/11/2002)
+
+- GUI: In various tables a SHA1 hash table column used by HUGE can be displayed.
+- GUI: Multiple download files can be deleted and the warning dialog is only shown
+       for files that downloaded something. You are able to acknowledge or reject
+       all warnings at once.
+
+- CORE: HUGE 0.94 support to identify and locate files by hash/URN.
+
+- FIXED: Additional checks against wrongly linked segments was integrated.
+         (Sourceforge bug #577767)
+- FIXED: Invalid vendor codes can corrupt download list.
+         (Sourceforge bug #568119, #578603)
+- FIXED: GIV responses to a second PUSH request are not accepted when the first
+         request was successful.
+
+0.7.2 (07/02/2002)
+
+- GUI: The search tab integrates a new non-destructive search filter concept. It
+       allows to alter filter conditions on a already submitted search.
+- GUI: When searching twice for the same search string no new search will be
+       submitted as long as the old search is running and has not been stoped
+       manually. Instead the already running search will be selected.
+- GUI: Added option to configure the push request timeout (Download Settings).
+
+- CORE: Query Hit snooping can be enabled (Download Settings). It lets Phex
+        monitor all Query Hits that are passing by for new download candidates.
+        It is disabled by default since this feature can generate a high CPU load.
+- CORE: Failed download connection will be retried with rising wait cycles
+        between connection trys. The max number of connection trys can be
+        configured.
+- CORE: Push request are only send if they have a chance to be successful. The
+        new flag 'Connected to LAN' was introduced to estimate this better.
+- CORE: Search results are not filtered permanently. This makes it possible to
+        modify filter settings without submitting the search again.
+
+- FIXED: Completed downloads are sometimes stored in the Phex home directory and
+         not in the download directory.
+- FIXED: On tables the sorting arrow is sometimes displayed on the wrong column
+         header when columns are hidden or reordered.
+- FIXED: During longer use Phex tend to be jamed with dead connections due to
+         unsynchronized network connection states. This causes Phex to stop
+         connecting outgoing and not accepting incomming connections.
+- FIXED: A single byte could get lost when splitting and merging a segment with
+         odd byte count.
+- FIXED: Sometimes a forced IP was not correctly used.
+- FIXED: No PUSH is submitted when there is no chance that it can be successful.
+         (Sourceforge bug #568168)
+- FIXED: Sometimes Phex can't be started again when columns are reordered.
+         (Sourceforge bug #562840)
+- FIXED: The search monitor only showed n - 1 rows.
+- FIXED: Completed downloads show their real size and not anymore a size of 0.
+         (Sourceforge bug #564318)
+- FIXED: Pings are not dropped anymore when there are no more incomming slots
+         and the original TTL was 2.
+- FIXED: There was FileNotFoundException on first Phex startup.
+         (Sourceforge bug #563901)
+
+0.7.1 (05/29/2002)
+
+- CORE: When updating from 0.6.4 a backup of the file phexdownload.xml is created.
+
+- FIXED: Problems with corrupted class files causing repaint drawing problems
+         and other strange behavior of the user interface.
+
+0.7 (05/26/2002)
+
+- GUI: Tables can be configured extensively. You can show and hide table columns
+       with a right click on the table header. To auto resize columns, you can
+       double click between table columns. Most sorting problems with tables are
+       fixed. The table configuration is stored on quit and reloaded on restarts.
+- GUI: Phex can be minimized to system tray under windows.
+- GUI: New multi source download tab.
+- GUI: Download candidate and segment view in swarming download tab.
+- GUI: The number of search results that are filtered locally is displayed.
+- GUI: The unit of the minimum file size search filter can be configured (bytes/KB/MB/GB).
+- GUI: Added buttons to remove and search for new candidates in swarming view.
+- GUI: Performance improvements on download screen updates.
+- GUI: Improved GUI look and a couple of new icons.
+
+- GUI/CORE: Support to filter search results for different media types.
+
+- CORE: Completly rewritten download engine to support multi source downloads.
+- CORE: Executable to start Phex under windows. J2SE 1.3 or higher must still be
+        installed.
+- CORE: Download candidate rating and sorting based on the QHD informations.
+- CORE: Configuration option for incomplete and download directory
+- CORE: Improved Thread usage to save resources.
+
+- FIXED: Layout problems with J2SE 1.4 of multi source download split pane when
+         there is no contents.
+- FIXED: Issues with wrong display of download rate after download resume for
+         multi source downloads.
+- FIXED: Problems when resuming a download after Phex restart.
+- FIXED: Problems with differents actions to add searched files to the download list.
+
+0.6.4 ( 17.04.2002 )
+
+- GUI: Default Look and Feel is set to Metal except on Mac OS X.
+- GUI: Display vendor in network connection table.
+
+- CORE: Integrated port filter for host catcher.
+- CORE: New Logging concept.
+- CORE: Provide Phex with total bandwidth throttle.
+- CORE: Improved Gnutella 0.6 Handshaking Protocol implementation.
+- CORE: Better event dispatching strategy allowing dispatching without using the
+        AWT Event Dispatcher.
+- CORE: Removed download list update support for Phex 0.4.6 and below.
+
+- FIXED: Same query send to often to a stable connection.
+- FIXED: Problem with removing searches with J2SE 1.4
+- FIXED: Improved disconnect policy for host with to many dropped messages.
+- FIXED: Transfer rate jumping up to infinite.
+
+0.6.3 ( 27.02.2002 )
+
+- GUI: Optimized layout of the search tab. ( Sourceforge bug #502895 )
+- GUI: Changed 'Export IP' hierarchy.
+
+- CORE: Merge all throttle reset threads into 1 for better performance.
+- CORE: Optimized research strategy for better research efficiency.
+
+- FIXED: When PUSH request fails two download candidates are removed.
+- FIXED: Upload bandwidth is always set to unlimited if download bandwidth is set
+         to unlimited.
+- FIXED: Bandwidth settings are not displayed correctly if Modem connection is selected.
+- FIXED: File inclusion and exclusion can't be saved ( Sourceforge bug #515685 )
+- FIXED: For some fonts the text inside a progress bar is not completely visible.
+         ( Sourceforge bug #502899 )
+- KNOWN PROBLEM: The maximal overall bandwidth setting is not fully functional currently.
+
+0.6.2 ( 29.01.2002 )
+
+- GUI: Completely new designed settings dialog for easier Phex configuration.
+- GUI: Added phex uptime to, and removed duplicate average hops field from, the network tab.
+
+- CORE: Performance improvement for searches against your shared files.
+- CORE: Added more verbose loging when a download candidate is removed.
+
+- FIXED: Critical bug with total file size handling. Causing 'add candidate' and research
+         to not function properly.
+- FIXED: phex.msg.MsgManager.forwardMsg was attempting to forward message too many times.
+- FIXED: Small realtime reduction for host traffic.
+- FIXED: The list of include and exclude files will now only be checked against files not
+         against directorys.
+- KNOWN PROBLEM: The maximal overall bandwidth setting is not fully functional currently. We
+        released anyway to publish a significant download efficiency bug fix.
+
+0.6.1 ( 07.01.2002 )
+
+- GUI: Total connection time is now provided for each remote host (Uptime cell).
+       "Connected!" is no longer displayed for stable connections.
+- GUI: Display average upload and download rates for whole session. Provide more
+       stable time remaining based off average download.
+- GUI: Make Download and Share tabs more similar by providing a % completed cell
+       in Share tab and changing some names slightly.
+- GUI: Slightly modified shared and uptime displays for Network Tab.
+- GUI: Add minimum file size option in Search tab.
+
+
+- CORE: Searches are now performed with upper and lower bound on file size. The
+        GUI only allows, presently, the option of the changing lower bound.
+- CORE: Use StrUtil.getAppNameVersion() everywhere in code for software name
+        and version.
+- CORE: Phex may now have a comment associated with the release
+        "PHEX 0.6.1 (unstable)".
+- CORE: CellRenderers and Tables are now decoupled for non standard cell renderers.
+- CORE: Integrate new non linear bandwidth throttle for download,upload and network connections
+
+- FIXED: Uploading race condition eliminated which would allow the
+         configured Upload Parameters to be exceeded if a burst of
+         upload requests were received.
+- FIXED: Fixed several upload and download file size calculation problems.
+- FIXED: Percentages are now correct for resumed downloads and partial uploads.
+- FIXED: Missing increment of file statistics for incoming connection.
+
+0.6 ( 15.11.2001 )
+
+- GUI: When downloading a search result you can now select between a quick
+       start of the download or a configuration dialog that allows you to
+       set up the download configuration in an extended way.
+- GUI: Added 'Size' column to the shared files table.
+- GUI: Abutton to remove a search is available on the search screen.
+- GUI: The number of query hits is displayed in the list of searches.
+- GUI: The number of files shared and there total size is displayed in the
+       share screen.
+
+- CORE: Rewritten Search freamework offers a better research algorithm to help
+        you find your files faster and be more friendly to the network.
+        Also searches are automaticly submited to new stable ( connected at
+        least 60 seconds ) hosts until the search is stoped or times out
+        ( auto re-search: 2 minutes, user search 5 minutes )
+        (Sourceforge request #473488).
+- CORE: Full support for extended Query Hit Discriptors.
+- CORE: Support of the new Gnutella Protocol 0.6.
+- CORE: Improved loading of shared files in the background to keep the user
+        interface from blocking.
+- CORE: An automatic check for Phex updates is done once a week and a notification
+        dialog is displayed to the user. Currently the update must be installed
+        manually. An automatic installation might be introduced in upcomming releases.
+- CORE: Removed support for disabling sharing. Every user is supposed to share to
+        guarantee a healthy network.
+- CORE: Improved performence of building query responses.
+- CORE: Improved file finding and error tolerance for upload requests.
+- CORE: Short timeouts for hosts that are in a private network ( yellow IP ).
+- CORE: The maximal number of hosts in the host catcher is raised to 5000.
+
+- FIXED: Wrong calculation of download/upload rate. The calculation is now based
+         on a timestamp that is periodically refreshed.
+- FIXED: Problems when having search monitor enabled and displaying 0 rows.
+- FIXED: Very large download log window sometimes bigger then the screen.
+         Sourceforge bug #476257.
+
+0.5.6 ( 26.09.2001 )
+
+- GUI: A new auto connect host overview panel on the Network tab allows you to
+       configure the auto connect hosts by yourself. The hosts file will be stored in
+       the file autoconnecthosts.cfg in your phex directory
+- GUI: Improved Download refresh handling to reduce flickering of table during updates.
+
+- CORE: Imporved auto connect host interface.
+
+- FIXED: Illegal filename issues when trying to save download files.
+- FIXED: The phex.jar is lower case again. Sourceforge bug #464696
+
+0.5.5 (21.09.2001)
+
+- GUI: Displays status color on selected table cells.
+- GUI: Removed number overflow for the file count in the network statistic.
+- GUI: Removed the unused 'Alias' column in the Shared Files table and added a
+       'Directory' column.
+
+- GUI/CORE: Performance improvements with specific gui updates when data is changing.
+
+- CORE: Automaticly tryes to bind to next local port if port is blocked.
+- CORE: A download in the download list can have 'No candidates' if no known remote
+        host is able to provide a download file.
+- CORE: Phex gets its own home subdirectory in the user home directory. The name
+        is phex for all non unix systems and .phex for unix systems. All old files
+        will be moved into the new directory
+
+- FIXED: Open upload slot issues that sometimes causes that no QueryHits are returned.
+- FIXED: Download resuming is not working in some cases. Sourceforge bug #459087
+
+0.5.4 (05.09.2001)
+
+- GUI: Added configurable search monitoring.
+- CORE: Improved port out of range handling.
+- CORE: Updated auto connect hosts.
+
+
+0.5.3 (11.08.2001)
+
+- GUI: Improved HostCatcher without a moving selection.
+- GUI: Improved Network event model for better performance and faster updates.
+- GUI: Changed average hops to float.
+
+- CORE: Faster Host connect strategy.
+- CORE: URL decoding of download request.
+
+- FIXED: Can't resume downloads from Limewire higher then 1.4. Sourceforge bug #445210
+- FIXED: Laxed the very strong incomming connection rejection. Sourceforge bug #447770
+- FIXED: Deadlock on search when reaching max search results. Sourceforge bug #442152
+
+0.5.2 (10.07.2001)
+
+- CORE: Maximum retries until new search is issued set from 300 to 500.
+- CORE: ReSearch if only one candidate is left (instead of two).
+- CORE: Set default retry waiting time to 120 seconds.
+- CORE: Classpath was added to the manifest so Phex can be started via
+        "java -jar phex.jar" again. The StartPhex.class was removed.
+
+
+0.5.1 (25.06.2001)
+
+- GUI: Integrated progress bar in download tab
+
+- CORE: Added debug log system.
+- CORE: Added command line parsing and help. Try java -jar phex.jar -h.
+- CORE: Improved automation for download candidate search was introduced.
+
+- FIXED: Sometimes phex couldn't remove several files at once.
+- FIXED: Javadoc talks about a program called phex now instead of furi.
+- FIXED: Possible out of range errors in tooManyDownloadPerIP and
+  removeCurrentCandidate related to the mCurrCandidate = -1 semantic.
+- FIXED: Workaround for the text field doesn't respont problem under X.
+- FIXED: Removed J2SE 1.3 issues to be compatible with J2SE 1.2
+- FIXED: Duplicated hosts are not accepted anymore in the download candidates.
+- FIXED: Busy hosts are not removed from download candidates.
+- FIXED: Last host can be removed.
+- FIXED: Imporved search behavior to keep it from returning to many results.
+- FIXED: Allow up to 255 char filenames.
+- FIXED: Some thread synconization problems.
+
+- KNOWN BUG: If you have on some systems (Windows) very long pathnames you can
+  get into trouble with long filenames. Windows allows you to have 255 char
+  filename but the whole path including the filename is only allowed to be 260
+  chars long. This will be addressed later since it's not so very critical in
+  most situations.
+- KNOWN BUG: There are some problems rendering the swing progress bar. Please
+  refer to java bug 4427501.
+- KNOWN BUG: There are some problems with the swing focus management. Please
+  refer to java bug 4290675. These will be solved with j2se 1.4.
+
+
+0.5.0 (07.06.2001)
+
+- GUI: remaining time until next download retry is now displayed dynamically
+- GUI: added all available system fonts to the font selection
+- GUI: the strange SHIFT clicking to sort tables is been replaced by single
+  clicks
+- GUI: to rate a search result a score was introduced that shows in percent
+  how many search terms are part of the filename.
+- GUI: downloadlist displays the local filename instead of the remote filename
+  when downloading
+- GUI: separated the percentage column from the size column in the download
+  table
+- GUI: changed the order of columns in the upload table to reflect the order in
+  the download table
+
+- CORE: rework of the shared file handling gives a little more performance
+  and pushes the max numbers of shared files a system is able to handle a
+  little further.
+- CORE: improvement on formating byte strings. Memory allocation improvements.
+- CORE: changed tooManyDownloadPerIP to check if there is a current remotefile,
+  since we allow now that no remotehost does exist or is active.
+- CORE: XML lists store status of download.
+- CORE: Added a improved start support for Phex. Hopefully this makes thinks
+  easier to handle for the users. To use it place StartPhex, phex.jar and the
+  jaxp  jars in the same directory. Starting should work with calling
+  "jre StartPhex" or "jre -cp . StartPhex".
+  More documentation about it is in the javadoc of the StartPhex class itself.
+- CORE: Removed dependencies on ObjectStream. Trying to do still a good job
+  reading old filelists.
+- CORE: The download list is exported in XML. The old download list will
+  hopefully be still loaded if no XML download list is available. The
+  filename of the xml download list is phexdownload.xml
+- CORE: reserve 25% or 1 (whichever is greater) connection slots for outgoing
+  connections.  If max connections is 1, then don't reserved
+- CORE: font update is done without restarting client
+- CORE: changed format of phex.download. Convert old format to new format.
+- CORE: integrated a new search engine for better search performance.
+- CORE: time of logfileentry is added in front of the entry.
+
+- FIXED: integrated a new multi plattform browser launcher.
+- FIXED: removed unnecessary menu item to set the user name for the removed
+  chat.
+- FIXED: flickering of the download-candidates table reduced
+- FIXED: retries are now working as they should. No more gc race.
+- FIXED: fixed an ArrayIndexOutOfBoundsException when removing files from the
+  bottom of the downloadlist. Table entries are now deselected before removal.
+
+0.4.6 (19.05.2001)
+
+- empty download buffer timeout implemented
+
+0.4.5: (18.05.2001)
+
+- check for 50% outgoing connections implemented
+- file pushing is now properly supported in both directions
+- new splashscreen
+- the candidate search of a file is stopped if it starts downloading
+- download buffer check implemented so downloads will not attempt to read from
+  empty buffer
+- some minor bugfixes
+
+0.4.2: (14.05.2001)
+
+- fixed "unstoppable searches" bug
+- resumes from Limewire 1.4x hosts are accepted
+
+0.4.1: (04.05.2001)
+
+- the downloadfiles logs are now cut at 4048 bytes
+- the garbage collector is called after each downloads
+  300th download attempt
+
+0.4.0: (22.04.2001)
+
+- search candidates with different filenames but same file
+  size are accepted
+- automatic search for new candidates when less then three
+  candidates are present
+- if push request fails, candidate is removed from list
+- if host cannot be found, candidate is removed from list
+
+0.3.1: (21.04.2001)
+
+- the candidates list is now an ArrayList instead of
+  a Vector
+- the file sharing classes have been put into a seperate
+  package (phex.share)
+
+0.3.0: (19.04.2001)
+
+- the size and number of shared files of each connected remote host
+  is now displayed on the "Gnutella net" panel
+- the remote client id is now displayed in an own column in the "Share" panel
+- the size of the search results sent by phex is now sent in kilobytes instead
+  of bytes
+
+0.2.1: (16.04.2001)
+
+- backstepping when resuming downloads is now finally implemented
+
+0.2.0: (15.04.2001)
+
+- new feature added: search new download candidates
+- download messages extended and modified to closer reflect the things
+  happening in the background
+- standart waiting time for resumed downloads set to 30 seconds (instead of 5
+  minutes)
+
+0.1.1 (preview 2): (09/04/2001)
+
+- further packaging of the source
+
+0.1.0 (preview 1): (04/04/2001)
+
+- a new branch of this software is opened under the name "Phex" by
+  Konrad Haenel.
+- the "Chat" and "IRCChat" modules have been removed.
+- the "furi"-package is now seperated into various smaller packages.
+
+
+
+********************************************************************************
+*   This is where the development of Furi ends and Phex begins. I will use     *
+*   new version-numbers to reflect the change of the project.                  *
+********************************************************************************
+
+
+
+
+0.6.8: (08/02/2000)
+
+- bug fix: Connection Timeout setting can't be set.  Always reverted back to 0.
+
+
+0.6.7: (08/01/2000)
+
+- IRC channel chat.
+- IRC one-to-one chat.
+- Identd server.
+- perform find on search result.
+- protect private network with password.
+- secured exchange of authentication info without sending password in clear text.
+- remove old style of exchange of authentication info, i.e. GNUTELLA PASSWORD REQUIRED
+- flow control: deprecate neighbor if it's too slow.  stop forwarding broadcast msg.
+- status bar.
+- launch web browser on a remote file of the search result.
+- launch browser to browse remote site on search result window.
+- configure web browser to launch.
+- turn disconnect policy on an off.
+- save disconnect dropped packet percentage.
+- save disconnect latency timeout.
+- add border to search and download panes.
+- turn tooltip popup on and off.
+- enable search button upon restart.
+- enable search button when any change on the search options.
+- auto-serialized config file.
+- import host list on connect host editbox.
+- add default IP address masks for filtered-hosts.
+- new arriving host replaces old non-connectable host in host catcher.
+- fix the margin of the info/description label on various dialog boxes.
+- clear search history.
+- configurable retry interval.
+- configurable ping timeout.
+- download retry wait.
+- download retry rotation on queued download.
+- restart from the beginning of host catcher once tried all the hosts in it.
+- bug fix: limit connection to max connection instead of max plus one.
+
+
+0.6.6: (06/22/2000)
+
+- persistent resume of download across sessions.
+- allow picking of multiple download candidates for a download.
+- allow download to switch between candidates.
+- search new download candidates for a download.
+- auto-resume download at startup.
+- auto-search on download candidate at startup.
+- auto-retry.
+- time delay for showing download error message.
+- improve responsiveness.  Add standalone thread for background jobs instead of using Swing's timer.
+- ping neighbor periodatically to get host to host latency.
+- use hash value for the sharefile's index.
+- configurable connection timeout.
+- new splash screen, thanks to Chris Pall's JPEG file (chrisbp@documentprocessing.com).
+- improve showing download log.
+- disconnect connection if drop packet ratio is too high.
+- disconnect connection if too many packets are queued in the send queue.
+- disconnect connection if latency is timed out too long.
+- disconnect policy dialog box.
+- distinguish gnutella GET and http GET, return partial response and Content-Length.
+- bug fix: severe security hole, http://ip:port/../ can browse int higher directory.
+- bug fix: using web browser to download files from FURI running JDK 1.1 doesn't work.
+- bug fix: negative download percentage.
+
+
+0.6.5: (06/06/2000)
+
+- installer for win95/98/NT.
+- splash screen
+- has separate host catcher list for each network name, to better maintain a private network.
+- auto-connect from the current selection of the host catcher.
+- copy URL of result file to system's clipboard. (thanks to Jeff Thompson jeff@thefirst.org)
+- show download time left as hour:minute:second.
+- double click download.
+- mark search result that has been downloaded.
+- show the routed-from host ip in search monitor.
+- bug fix: Encode filename in HTTP directory listing. (thanks to Jeff Thompson jeff@thefirst.org)
+- bug fix: Hitting Connect from host catcher while it's being populated locks up FURI.
+- bug fix: Download button got enabled/disabled rapidly when lots of results coming back.
+- bug fix: Max share setting in Share Setup doesn't get saved.
+
+
+0.6.4: (05/26/2000)
+
+- multi-keyword search on shared files' names and content.
+- make proxy password's textfield hide text being typed.
+- restrict the max number of matching results to return in response to incoming search.
+- make search table's number columns sorted like number.
+- make passive search table's number columns sorted like number.
+- make share table's number columns sorted like number.
+- bug fix: encode URL in browsing and navigation.
+- bug fix: in JDK 1.3, search result table loses selection while results coming back.
+- bug fix: can't cancel a window close event from the system menu.
+
+
+0.6.3: (05/25/2000)
+
+- web server capability added.  now FURI can serve html pages to browser.
+- navigate directory listing from browser.
+- content search on file types: txt html htm jsp java c cc cpp h chh cxx mp3 csv.
+- content search - built indexing framework and indexing engine.
+- multiple simultaneous searches, upto 20.
+- search/result history by combobox.
+- shared directories and files browsing from a web browser.
+- return HTTP errors when request is bad.
+- add per host limit on the number of downloads.
+- add per host limit on the number of uploads.
+- remove restriction on matching filename before upload.  filename with spaces can be uploaded now.
+- re-arrange the colors of download/upload types.  green for completed was too light to see.
+- make passive search result table sortable by column.
+- make menus tab context-sensitive.
+- split read/write/drop/send queue into columns.
+- color code the host table based on status.
+- change the accelerator keys for view tabs from F1-F6 to Ctrl-1 to Ctrl-6.
+- added default starter cache proxy hosts.
+- added borders to each tab.
+- pipe stdout to furi.log file.
+- bug fix: passive search now uses the current max search limit.
+- bug fix: colors don't re-sort in the download window when files are sorted (like the selections)
+- bug fix: colors don't re-sort in the upload window when files are sorted (like the selections)
+- bug fix: don't try push request download if Behind Firewall is checked by user.
+- bug fix: The F2 (Search) and F6 (Chat) shortcuts don't always seem to work.
+- bug fix: memory leak in routing table.  (thanks to Todd Fast, todd@conga.com)
+- bug fix: split windows won't collapse when used in JDK 1.3 or when switching Look&Feel.
+
+
+0.6.2: (05/16/2000)
+
+- go through hoops to work around the freaking losing table selection bug in JDK 1.3.
+  this would help people using JDK 1.3.
+
+
+0.6.1: (05/15/2000)
+
+- lots GUI cleanup.
+- clean up and use the action framework.
+- use the menu bar.
+- add popup context menus at right mouse click.
+- clean up icons.
+- connect UI components to allow enable/disable.
+- user not allowed to select multiple chat channels
+- remove the usage of URLDecoder() to be compatible with JDK 1.1.x.  Upload works in JDK 1.1.x now.
+- disable file sharing works now.
+- add msg count to chat channel.
+- add new msg since last read to chat channel.
+- add max chat limit per channel.
+- sort chat channels by number of msgs.
+- filter long channel name bad chat packets.
+- show remote servant name during download.
+- add menu for ignored, filtered, invalid host.
+- right-click context menu for adding ignored host.
+- right-click context menu for adding invalid host.
+- right-click context menu for adding filtered host.
+- save/restore clientID.
+- filter out abnormally huge filesize and file count in InitResponse.
+- encode filename in HTML interface (thanks to Jeff Thompson jeff@thefirst.org)
+- color code the download/upload tables.  Red for failures/aborting, green for completion, blue for in progress
+- preserve extension when shortening download filename.
+- add the number of matched search in the shared file list.
+- add the number of uploads in the shared file list.
+- bug fix: check cchat msg seen.
+- bug fix: divide by 0 exception when displaying 0 length file in the download table.
+- bug fix: download rate is computed wrong for resumed download.
+- bug fix: divide by zero error in calculating upload percentage when the other host requests 0 byte upload.
+- bug fix: disable sharing doesn't work.
+
+
+0.6.0: (05/10/2000)
+
+- user-selectable fonts.  currently restart is required to see the changes.
+- remove URL-encoded filename since some servants can't handle it.
+- remove path from filename before saving the download file.
+- split the filtered host list into two lists - filtered host list for
+filtering search result and invalid host list for guarding the host catcher.
+- add checkbox to search result to easily control whether to use the filter host list.
+
+
+0.5.9: (05/06/2000)
+
+- support outgoing connection (network/download/push upload) via Socks5 proxy server.
+- keyword filtering on search result, for removing bogus result.
+- add tooltips on the fields at the Search tab.
+
+
+0.5.8: (05/04/2000)
+
+- remove existing trailing path separator in download directory.
+- shorten download filename for those platforms that has short name limit.
+- add download log for better diagnosing download problem.
+- bug fix: accept different kinds of HTTP replies during download.
+- add setting for indicating FURI is running behind firewall.
+- the filterd hosts list now only applied to search result if the Behind Firewall setting is set.
+
+
+0.5.7: (05/04/2000)
+
+- route push request.
+- handle push request upload.
+- perform push request download.
+- named private network.
+- join/leave network.
+- protect my host with password.
+- connect to remote host with password.
+- restart listener automatically when port changed.
+- add checkbox to turn on/off auto-connect from host catcher.
+- replace Add Host and Remove Host buttons with Connect button.
+- add checkbox for auto-cleanup of defunct connection.
+- hitting Enter in the connect host textfield will start the connect operation.
+- auto-select the chat channel as the first chat coming in.
+- add setting for behind firewall.
+- check for returned HTTP error in download.
+- filter duplicate from passive search.
+- bug fix: channel chat's date is formated wrong.
+- bug fix: can't remove the last host in the list.
+
+
+0.5.6: (05/01/2000)
+
+- resume download for stopped or error download.
+- partial download, reuse existing partial download.
+- remove Abort Download button; replace it with stop button.
+- remove Clear Complete button; replace it with general Remove button.
+- download's Stop/Resume/Remove buttons can work on multiple selections.
+- ask to confirm overwriting existing file when downloading new file.
+- prevent same filename files to be downloaded at the same time.
+- partial upload, upload resumed
+- optionally automatically remove completed downloads.
+- optionally automatically remove completed uploads.
+- give the file list page when the HTTP request is not on a file.
+- allow Browser/GetRight/Go!zilla to download and resume download files from FURI.
+- manual setting of my ip address.
+- ignored hosts, prevent unwanted hosts from connnecting to FURI.
+- filtered hosts, filter out search result from unwanted hosts.
+- remove filtered ip from host catcher.
+- make * to be the default inclusion pattern for file sharing.
+- recusively scan shared directories.
+- download/upload/search tables remainded sorted even as new result arrived.
+- filealias.txt file to describe the files being share.
+- inclusion pattern for sharing file now support the *exp and exp* patterns.
+- shared file table has extra columns for alias, search count, and upload count.
+- add Stop search button.
+- display number of files found of a search.
+- hit Enter on the search text field starts the search.
+- remove duplicate files in passive search result.
+- change the unit for bandwidth limit from bytes to K.
+- bug fix: reverse the checking of search's min speed against My Host Speed.
+- bug fix: the menu for enable/disable monitor search is reversed.
+- bug fix: if furi.cfg doesn't exist and the Download directory is not set, search will give error.
+- allow port to be specified to be randomly generated - set to 0.
+
+
+0.5.5: (04/24/2000)
+
+- performance improvement.
+- passive search through monitoring result.
+- show my ip and port.
+- random listening port.
+- initial listening port is not going to be at 6436.  random default starting port.
+- reset/update statistics.
+- download passive search result.
+- discard msg if the main send queue is too long.
+- discard msg if the private send queue of a host is too long.
+- limit max hosts caught.
+- drop msg if its TTL is greater than MaxTTL.  Temporary drastic hack to stop flooding.
+- better total file size display.
+- visual cue for searching.
+- limit on max connections (both incoming and outgoing).
+- set max bandwidth.
+- the bandwidth throttle is calculated correctly now; the limit should be spreaded out among all downloads/uploads.
+- msg rate, sampling at discreet interval.
+- enable/disable further upload.
+- warn of download/upload pending at exit time.
+- enable/disable search monitor.
+- show share file list.
+- make host save in discreet intervals.
+- use currentTimeMillis instead of Date.
+- format chat's time.
+- faster access to system configuration.
+- sorting stays in effect when new results arrived.
+- auto-cleanup of defunct connection, delayed cleanup.
+- bug fix: multi-selection bug.
+- bug fix: removing multiple hosts bug.
+- bug fix: look and feel menu not following saved setting.
+
+
+0.5.4: (04/15/2000)
+
+- fix bug: invalid share directory causes FURI to puke.
+- fix bug: multiple threads are contending to save the furi.hosts file;
+would cause problem on platforms that have exclusive file open.
+
+
+0.5.3: (04/14/2000)
+
+- clean up old routing table entry and msg-seen table.
+- ensure unique caught host.
+- reset hosts caught.
+- refuse to add duplicate host.
+- auto connect of caught hosts.
+- save host catcher hosts.
+- fix sorter bug in host catcher table.
+- more info on monitor.
+- send queue length as an indication of host speed.
+- change localhost to 127.0.0.1.
+- change the way my ip address is figured out.
+
+
+0.5.2: (04/12/2000)
+
+- remove and change some code using JDK 1.2 so that FURI works with JDK 1.1.7 plust swing 1.1.1.
+
+
+0.5.1: (04/08/2000)
+
+- forward unknown msg.
+- recv/sent/drop counts.
+- stop search when upload limit reached.
+- auto-start connect after add host.
+- bulk remove host.
+- bulk connect host.
+- bulk disconnect host.
+- save old search text and setting
+- separate file ext in search result
+- redo requeue sending to busy host.
+- redo deserializeString, return len, pass in StringBuffer, watch for non-0 string.
+- throttle # of download
+- throttle download bandwidth
+- config for download directory, bandwidth, # of download, auto-clear completed
+- throttle # of unload
+- throttle upload bandwidth
+- config for share directories, bandwidth, # of upload, search limit, auto-clear completed
+- startup parameter on config file
+- share exclusion/inclusion
+- search monitor
+- config listening port, my speed, TTL, min connection
+- host catcher
+- connect from host catcher
+- stat, host, file count, total size, msg count, hop count, upload count, download count
+- channel chat
+- add timestamp to chat msg
+- config save has problem
+
+
+0.5.0: (04/03/2000)
+
+- Initial version.
+
+
+0.0.0: (03/25/2000)
+
+- FURI project started.
+
+

@@ -1,0 +1,138 @@
+
+ACTIVE QUEUING MECHANISM
+
+This document describes an "active queuing mechanism" which allows
+upload transfers to be queued and undertaken at a later time,
+providing the queued recipient with a live update of their position
+as they move toward the head of the queue.
+
+As of 10-Aug-2002 this mechanism has been implemented in Shareaza and
+BearShare and upcoming releases of LimeWire and Gnucleus.  These
+servents represent useful compatibility testing tools for future
+implementations.
+
+The mechanism described here is very simple and to the point.  Although
+a number of alternative proposals have been tabled to provide upload
+queuing support, it was generally felt that they either:
+
+- Did not provide solutions to key problems, or
+
+- Overcomplicated the process beyond what is necessary for an
+  effective result.
+
+Some key requirements met by this mechanism:
+
+- Upload queues should provide both users with a visual indication of
+  the queue position
+
+- They should not rely on a "reverse connect", which may not be possible
+  depending on the firewalled/push situation
+
+- Holding a position in the queue should require maintaining an "idle"
+  connection: drop the connection, lose your place.
+
+  I.e. a servent wishing to retain a place in the queue must be willing
+  to utilise some resources for the privilage (in the form of an idle
+  connection).
+
+With these requirements in mind, upload queues are supported through a
+single additional header "X-Queue", which is included in both the HTTP
+request and response.
+
+Clients which support queues send "X-Queue: 0.1", which simply tags the
+request as a candidate for queuing.  If this header is not received, the
+requesting client is assumed to follow normal Gnutella behavior in the
+event of a busy response.
+
+If there is an upload "slot" available, the download begins as normal
+with a 200 or 206 response.  If not, the request is placed at the end
+of the queue and a 503 response is returned with the additional
+X-Queue header, of the form:
+
+  X-Queue: position=2,length=5,limit=4,pollMin=45,pollMax=120
+
+Clearly this header includes several pieces of information separated by
+commas in the usual manner.  Every part is optional, and if desired it
+can be broken into multiple headers, etc.
+
+A description of each part follows:
+
+The "position" key indicates the request’s position in the queue, where
+position 1 is next in line for an available slot.  The "length" key
+indicates the current length of the queue, for informational purposes.
+Likewise the "limit" key specifies the number of concurrent uploads
+allowed.  All of this information is completely optional, and is only
+used for displaywithin the client.
+
+Finally, "pollMin" and "pollMax" provide hints to the requesting client
+as to how often it should re-request the file (in seconds).  Requesting
+more often than pollMin will be seen as flooding, and cause a
+disconnection.  Failing to issue a request before pollMax will be seen
+as a dropped connection.  Once again these items are optional and need
+not be present in the header, in which case a default retry interval
+can be used.
+
+Upon receiving a 503 response with an X-Queue header, the downloader
+displays any information it received to the user and waits for an 
+ppropriate period before reissuing the request.  The default retry
+period is adjusted to lie comfortably within pollMin and pollMax if they
+were present in the response, which allows a particularly busy server
+to adjust its parameters and reduce load.  When the request finally
+succeeds, it does so in the normal way.
+
+This approach has some key advantages:
+
+- The downloader can see their place in the queue change as they move
+  towards position #1, so even if the queue is long, at least progress
+  can be observed.  Important not to underestimate the value of showing
+  visible progress to the user.
+
+- Because the HTTP request is reissued periodically, the client is able to
+  request the most appropriate "Range" each time.  It also allows active
+  propagation of alternate location headers in both directions, and in the
+  case of a partial file gives the requesting client an up-to-date picture
+  of the available ranges.
+
+- By requiring the requesting client to maintain a connection, there is no
+  need to hold open upload positions for a request that may never come.
+  If the client is no longer interested in downloading from this source
+  (found other sources, etc), it can close the connection immediately.
+
+A few notes:
+
+- If the requesting client issues a request for a different file while it
+  is in a queued state, it is shifted back to the end of the queue.  It
+  must continue to request the same file in order to hold the position.
+
+- When a successful partial request completes, the client is allowed to
+  make an additional request without being shifted to the end of the queue.
+  This allows clients to perform fixed block size / chunking downloads
+  without the risk of losing their position.
+
+- The queue has a maximum length, and any requests which would not fit
+  within it are sent a standard, non-queued 503.
+
+Upload queues represent an important step for the evolution of Gnutella
+because they reward users who have waited for a file, rather than a "luck
+of the draw" approach which (if anything) rewards users who abuse the
+system by requesting too often, etc.  It is also much more satisfying for
+a user to see a decrementing queue position which assures that progress
+is being made, rather than a seemingly never-ending stream of busy messages.
+
+This mechanism can be extended to provide more optimised performance:
+
+- The pollMin and pollMax time variables can be made proportional to the
+position within the queue.  As a request moves closer to the head of the
+queue, the polling times can be reduced.  This provides the requesting
+party with a finer precision update, and reduces or eliminates any gap
+in transmission when moving from the head of the queue into an active
+transfer state.
+
+- Query-hit output can be adjusted based on the state of the upload
+  queues -- for example, if no queue positions are available, it may be
+  prudent to reduce the output of query hits, with the goal of reducing
+  the number of new upload requests which could not be accepted.
+
+Michael Stokes <mike@shareaza.com>
+With generous contributions from many other GDF members.
+10-Aug-2002

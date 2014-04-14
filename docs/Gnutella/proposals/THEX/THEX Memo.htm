@@ -1,0 +1,167 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0068)http://groups.yahoo.com/group/the_gdf/files/Proposals/HUGE/THEX.html -->
+<HTML><HEAD><TITLE>Tree Hash EXchange format (THEX)</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=windows-1252">
+<META 
+content="THEX, Merkle, tree, hash, discrete, file, digest, subrange, secure, DIME, SOAP, XML, URN, URI, TigerTree, Tiger, Base32, Bitzi, bitprint, swarm download, Gnutella, HUGE, peer-to-peer" 
+name=keywords>
+<META content="MSHTML 5.50.4913.1100" name=GENERATOR></HEAD>
+<BODY>
+<H1>Tree Hash EXchange format (THEX)</H1>
+<H2>Abstract</H2>
+<BLOCKQUOTE>
+  <P>The following memo presents the Tree Hash Exchange (THEX) format, for 
+  exchanging <B>Merkle Hash Trees</B> built up from the subrange digests of 
+  discrete digital files. Such tree hash data structures assist in file 
+  integrity verification, allowing arbitrary subranges of bytes to be verified 
+  before the entire file has been received.</P></BLOCKQUOTE>
+<H2>Description and references</H2>
+<BLOCKQUOTE>
+  <P>To get the latest complete version of the THEX specification, visit:<BR><A 
+  href="http://open-content.net/specs/draft-jchapweske-thex-01.html"><B>http://open-content.net/specs/draft-jchapweske-thex-01.html</B></A></P>
+  <P>THEX can be used to exchange Merkle Hash Trees computed with various 
+  message digest algorithms and various digest sizes (including "CRC32", "MD5", 
+  "SHA1" or "Tiger" with all their variants).</P>
+  <P>Despite THEX trees built with CRC32 are very fast to compute and can detect 
+  most errors in transmissions, they don't offer security against undesired 
+  tampering of file contents. In addition, CRC32 tends to be too small for large 
+  file contents where THEX is typically needed. So, stronger digest algorithms 
+  with longer lengths are highly preferable.</P>
+  <P>Most THEX applications will then use the 160-bit "SHA1" message digest 
+  algorithm, or the faster and stronger 192-bit "Tiger" message digest 
+  algorithm, as they are currently irreversible.</P>
+  <P>It's possible to use reduced versions of these two message digests to 
+  minimize the storage space used by serialized THEX tree data, but message 
+  digests should generate at least 128 bits, each bit with approximately equal 
+  encryption strength.</P>
+  <P>The standard THEX tree data exchange format uses XML in its encapsulation 
+  layer according to the Direct Internet Message Encapsulation (alias 
+  <B>DIME</B>) specification used for XML Web Services, initially developed by 
+  Henrik Frystik Nielsen, and developped as an IETF draft by Microsoft/IBM for 
+  SOAP. Visit:<BR><A 
+  href="http://msdn.microsoft.com/webservices/understanding/gxa/default.asp?pull=/library/en-us/dnglobspec/html/dimeindex.asp">http://msdn.microsoft.com/webservices/understanding/gxa/default.asp?pull=/library/en-us/dnglobspec/html/dimeindex.asp</A>)</P>
+  <P>The THEX serialized tree data transported in a DIME encapsulation should be 
+  accessible in a location independant way, for example the secure "urn:sha1:" 
+  URN or very secure "urn:bitprint:" URN (both requires precomputing the digests 
+  of the fully serialized tree), or a more simple "uuid:" URI defined in SOAP 
+  and referenced in DIME (this UUID can be generated independantly of the 
+  serialized tree data content, and may reduce the time to generate the DIME 
+  encapsulation as it does not require an additional hash, but this makes THEX 
+  serialized trees less secure).</P>
+  <P>For some distributed applications (in peer-to-peer file exchange protocols 
+  or distributed file systems), the THEX encapsulation in XML with DIME may be 
+  unnecessary, if user-agents all agree on the message digest algorithm to use, 
+  and on its tree data serialization format. In that case, only the tree data 
+  URN may be necessary, and transported for example during connection handshake 
+  headers (if using HTTP-like protocols that allow transporting such extensions 
+  before the actual file content data). Note however that DIME allows further 
+  extension to stronger or faster alternate algorithms if they become 
+  necessary.</P></BLOCKQUOTE>
+<H2>Applications of THEX for "TigerTree" file digests</H2>
+<BLOCKQUOTE>
+  <P>A typical application of Merkle Hash Trees is "TigerTree" which is another 
+  file Digest that can complement "SHA1" file digests.</P>
+  <P>A "TigerTree" digest <B>differs</B> from a full "Tiger" because it is NOT 
+  computed by digesting the full file, but by combining "Tiger" digests computed 
+  on individual 1KB blocks, and combining them in a Merkle Hash Tree. The 
+  "TigerTree" digest of the file is the root hash of the Merkle Hash tree 
+  computed with the standard "Tiger" digest.</P></BLOCKQUOTE>
+<H2>Bitzi's "bitprint:" URNs and TigerTree file digests</H2>
+<BLOCKQUOTE>
+  <P>The Bitzi's "bitprint:" URN scheme uses the "TigerTree" file digest, NOT 
+  the "Tiger" file digest. They will most often be different for any file that 
+  is larger than 1024-9=<B>1013</B> bytes exactly, and will always be identical 
+  ONLY for small files up to 1013 bytes.</P>
+  <P>"bitprint:" URNs can be computed without generating and serializing the 
+  full Merkle Hash Tree. But for applications in Gnutella with swarmed 
+  downloads, it's best to keep a storage for intermediate hash values, that 
+  complies to the THEX binary serialization format.</P>
+  <P>Note: Bitzi's "bitprint:" URN are using the following format:</P>
+  <BLOCKQUOTE>"<B>urn:bitprint:</B><I>SHA1</I><B>.</B><I>TigerTree</I>"</BLOCKQUOTE>
+  <P>where:</P>
+  <UL>
+    <LI>"<B>urn:</B>" is NOT case significant (according to URI specification) 
+    and designates the protocol format for Universal Resource Names that MUST be 
+    <B>location-independant</B> (lowercase is strongly recommanded as the 
+    canonical format); 
+    <LI>"<B>bitprint:</B>" is NOT case significant (according to URN 
+    specification) and designates the URN encoding scheme that SHOULD be 
+    registered (lowercase is strongly recommanded as the canonical format, as 
+    this URN scheme is not formally registered); 
+    <LI>the rest of the string normally depends of the encoding and may 
+    differentiate lowercase and uppercase letters, so a "canonical" 
+    representation is needed to conform to the URN standard: 
+    <UL>
+      <LI>"<I>SHA1</I>" is the <B>Canonical Base32</B> encoding of the 160-bit 
+      (20 bytes) "SHA1" digest of the full file, as a 32-characters ASCII 
+      string; 
+      <LI>"<I>TigerTree</I>" is the <B>Canonical Base32</B> encoding of the 
+      192-bit (24 bytes) "TigerTree" digest of the full file, as a 39-characters 
+      ASCII string; 
+      <LI>(A Canonical Base32 string uses only <B>uppercase</B> ASCII letters 
+      'A' to 'Z' to encode base 32 digit values 0 to 25, and ASCII digits '2' to 
+      '7' to encode base 32 digit values 26 to 31. So servents MAY accept 
+      lowercase letters as equivalent, but they SHOULD only generate uppercase 
+      letters.) </LI></UL>
+    <LI>The total length of a "urn:bitprint:" URI is exactly 3+1+8+1+32+1+39=85 
+    characters </LI></UL>
+  <P>Note: The shorter (but less secure) "sha1:" URN for any file content can be 
+  simply infered from an existing "bitprint:" URN for the same file content by 
+  replacing the URN encoding scheme, and stripping the "<B>.</B>" and the 
+  <I>TigerTree</I> part. So transporting both the "sha1:" URN and the 
+  "bitprint:" URN is not needed, as the latter will suffice in most cases.</P>
+  <P>To get the latest complete specification of the <B>"bitprint:" URN 
+  scheme</B>, visit:<BR><A 
+  href="http://bitzi.com/developer/bitprint">http://bitzi.com/developer/bitprint</A>.</P>
+  <P>To get reference documentation about the <B>standard "Tiger" message 
+  digest</B>, and a sample <B>C implementation</B>, visit:<BR><A 
+  href="http://www.cs.technion.ac.il/~biham/Reports/Tiger/">http://www.cs.technion.ac.il/~biham/Reports/Tiger/</A>.</P>
+  <P>To get reference documentation about the <B>standard "Base32" encoding</B>, 
+  visit:<BR><A 
+  href="http://www.ietf.org/internet-drafts/draft-josefsson-base-encoding-03.txt">http://www.ietf.org/internet-drafts/draft-josefsson-base-encoding-03.txt</A>.</P>
+  <P>To get a sample Public Domain <B>implementation in Java of the "Tiger" 
+  Digest</B> and of simple Base16, Base32, Base64 encoders/decoders, visit: <A 
+  href="http://groups.yahoo.com/group/the_gdf/files/Proposals/HUGE/com.bitzi.util/">http://groups.yahoo.com/group/the_gdf/files/Proposals/HUGE/com.bitzi.util/</A>.</P></BLOCKQUOTE>
+<H2>Applications of THEX for peer-to-peer file exchanges</H2>
+<BLOCKQUOTE>
+  <P>THEX works best with peer-to-peer file exchanges and distributed 
+  filesystems.</P>
+  <P>The "swarmed downloads" feature on <B>Gnutella</B> will best benefit from 
+  THEX as it allows verifying the integrity of files downloaded by fragments 
+  from multiple sources, as discovered with the "<B>HUGE</B>" protocol extension 
+  proposal for Gnutella that is largely approved by most Gnutella servent 
+  vendors</P>
+  <P>For a complete specification of the <B>HUGE protocol extension</B> 
+  (Hash/URN Generic Extension) by Gnutella servents, visit:<BR><A 
+  href="http://groups.yahoo.com/group/the_gdf/files/Proposals/HUGE/">http://groups.yahoo.com/group/the_gdf/files/Proposals/HUGE/</A>.</P>
+  <P>For a complete specification of the <B>PFSP protocol extension</B> (Partial 
+  File Sharing Protocol) by Gnutella servents, visit:<BR><A 
+  href="http://groups.yahoo.com/group/the_gdf/files/Proposals/PFSP/">http://groups.yahoo.com/group/the_gdf/files/Proposals/PFSP/</A>.</P>
+  <P>For a complete specification of the <B>standard Gnutella protocol</B>, 
+  visit:<BR><A 
+  href="http://groups.yahoo.com/group/the_gdf/files/Development/">http://groups.yahoo.com/group/the_gdf/files/Development/</A>.</P>
+  <P>For developers only, <B>technical discussions</B> about the evolutions of 
+  the Gnutella protocol, visit:<BR><A 
+  href="http://groups.yahoo.com/group/the_gdf/">http://groups.yahoo.com/group/the_gdf/</A> 
+  (may require user registration on the <I>Yahoo!</I> service).</P></BLOCKQUOTE>
+<H2><B>THEX specification Table of Contents</B></H2>
+<BLOCKQUOTE>
+  <UL>
+    <LI>1. Introduction 
+    <LI>2. Merkle Hash Trees 2.1 Unbalanced Trees 2.2 Choice Of Segment Size 
+    <LI>3. Serialization Format 
+    <UL>
+      <LI>3.1 DIME Encapsulation 
+      <LI>3.2 XML Tree Description 
+      <UL>
+        <LI>3.2.1 File Size 
+        <LI>3.2.2 File Segment Size 
+        <LI>3.2.3 Digest Algorithm 
+        <LI>3.2.4 Digest Output Size 
+        <LI>3.2.5 Serialized Tree Depth 
+        <LI>3.2.6 Serialized Tree Type 
+        <LI>3.2.7 Serialized Tree URI </LI></UL>
+      <LI>3.3 Breadth-First Serialization 
+      <UL>
+        <LI>3.3.1 Serialization Type URI </LI></UL></LI></UL>
+    <LI>§ Authors' Addresses </LI></UL></BLOCKQUOTE></BODY></HTML>

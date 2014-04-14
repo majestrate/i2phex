@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist SYSTEM "file://localhost/System/Library/DTDs/PropertyList.dtd">
+<plist version="0.9">
+<dict>
+	<key>CFBundleName</key>
+	<string>Phex</string>
+	<key>CFBundleIdentifier</key>
+	<string>de.phex</string>
+	<key>CFBundleVersion</key>
+	<string>3.0.2</string>
+	<key>CFBundleURLTypes</key>
+        <array>
+                <dict>
+                        <key>CFBundleURLName</key>
+                        <string>Magnet</string>
+                        <key>CFBundleURLSchemes</key>
+                        <array>
+                                <string>magnet</string>
+                        </array>
+                </dict>
+        </array>
+	<key>CFBundleDocumentTypes</key>
+        <array>
+                <dict>
+                        <key>CFBundleTypeExtensions</key>
+                        <array>
+                                <string>magma</string>
+                        </array>
+                        <key>CFBundleTypeName</key>
+                        <string>MAGMA List (MAGnet MAnifest)</string>
+                        <key>CFBundleTypeRole</key>
+                        <string>Viewer</string>
+						<key>CFBundleTypeIconFile</key>
+						<string>magma-icon.icns</string>
+                </dict>
+        </array>
+	<key>CFBundleAllowMixedLocalizations</key>
+	<string>true</string>
+	<key>CFBundleExecutable</key>
+	<string>JavaApplicationStub</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>3.0.2</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleGetInfoString</key>
+	<string>Phex 2.8.10</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleIconFile</key>
+	<string>phex-osx.icns</string>
+	<key>Java</key>
+	<dict>
+		<key>VMOptions</key>
+		<string>-Xms64m -Xmx128m</string>
+		<key>MainClass</key>
+		<string>phex.Main</string>
+		<key>JVMVersion</key>
+		<string>1.5+</string>
+		<key>ClassPath</key>
+			<array>
+			<string>$JAVAROOT/phex.jar</string>
+			<string>$JAVAROOT/commons-logging.jar</string>
+			<string>$JAVAROOT/commons-httpclient-3.0.jar</string>
+			<string>$JAVAROOT/commons-collections-3.2.jar</string>
+			<string>$JAVAROOT/forms-1.1.0.jar</string>
+			<string>$JAVAROOT/looks-2.1.4.jar</string>
+			<string>$JAVAROOT/MRJAdapter.jar</string>
+			<string>$JAVAROOT/MRJToolkitStubs.zip</string>
+			</array>
+		<key>Properties</key>
+		<dict>
+			<key>apple.laf.useScreenMenuBar</key>
+			<string>true</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

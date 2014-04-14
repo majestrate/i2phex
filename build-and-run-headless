@@ -1,0 +1,3 @@
+#!/bin/sh
+cd $(dirname "$0")/build && ant
+cd ../output/lib && java -Xmx384m -Djava.awt.headless=true -jar phex.jar

@@ -1,0 +1,173 @@
+;--------------------------------
+;Include Modern UI
+!include "MUI.nsh"
+
+;--------------------------------
+;General
+  ;Name and file
+  Name "Phex @nsis.ProgramVersion@"
+  OutFile "@nsis.OutputFile@"
+  
+  ;Default installation folder
+  InstallDir "$PROGRAMFILES\Phex_@nsis.ProgramVersion@"
+  
+  ;Get installation folder from registry if available
+  InstallDirRegKey HKEY_LOCAL_MACHINE "SOFTWARE\Phex_@nsis.ProgramVersion@" ""
+  
+  !cd "@nsis.ReleaseDir@"
+
+;--------------------------------
+;Interface Settings
+
+  !define MUI_ABORTWARNING
+  XPStyle on
+
+;--------------------------------
+;Pages
+  !insertmacro MUI_PAGE_WELCOME
+  !insertmacro MUI_PAGE_LICENSE "@nsis.SourceDir@\docs\license\GPL.txt"
+  !insertmacro MUI_PAGE_COMPONENTS
+  !insertmacro MUI_PAGE_DIRECTORY
+  !insertmacro MUI_PAGE_INSTFILES
+  !define MUI_FINISHPAGE_RUN "$INSTDIR\Phex.exe"
+  !define MUI_FINISHPAGE_LINK "Visit Phex Homepage"
+  !define MUI_FINISHPAGE_LINK_LOCATION http://phex.kouk.de
+  !define MUI_FINISHPAGE_NOREBOOTSUPPORT
+  !insertmacro MUI_PAGE_FINISH
+  
+  !insertmacro MUI_UNPAGE_WELCOME
+  !insertmacro MUI_UNPAGE_CONFIRM
+  !insertmacro MUI_UNPAGE_COMPONENTS
+  !insertmacro MUI_UNPAGE_INSTFILES
+  !insertmacro MUI_UNPAGE_FINISH
+
+;--------------------------------
+;Languages
+ 
+  !insertmacro MUI_LANGUAGE "English"
+  
+
+CRCCheck on
+
+;--------------------------------
+;Installer Sections
+Section "Phex @nsis.ProgramVersion@" ; (default section)
+
+SetOutPath "$INSTDIR"
+File "@nsis.SourceDir@\Phex.dll"
+File "@nsis.SourceDir@\Phex.exe"
+File "@nsis.SourceDir@\Phex_debug.exe"
+File "@nsis.SourceDir@\P h e x Homepage.url"
+
+SetOutPath "$INSTDIR\lib"
+File "@nsis.SourceDir@\lib\phex.jar"
+File "@nsis.SourceDir@\lib\looks-2.1.4.jar"
+File "@nsis.SourceDir@\lib\forms-1.1.0.jar"
+File "@nsis.SourceDir@\lib\commons-logging.jar"
+File "@nsis.SourceDir@\lib\commons-httpclient-3.0.1.jar"
+File "@nsis.SourceDir@\lib\commons-collections-3.2.jar"
+
+; SetOutPath "$INSTDIR\readme"
+; File "@nsis.SourceDir@\readme\changelog.txt"
+; File "@nsis.SourceDir@\readme\contributors.txt"
+
+SetOutPath "$INSTDIR\docs\license"
+File "@nsis.SourceDir@\docs\license\GPL.txt"
+
+SetOutPath "$INSTDIR\docs\readme"
+File "@nsis.SourceDir@\docs\readme\Phex_win.htm"
+File "@nsis.SourceDir@\docs\readme\Phex_other.htm"
+
+; Special section for releases with included subscription list
+!ifdef ADD_SUBSCRIPTION_LIST
+SetOutPath "$INSTDIR\ext"
+File "@nsis.SourceDir@\ext\subscription.list"
+!endif
+
+SetOutPath "$INSTDIR"
+
+CreateDirectory "$SMPROGRAMS\Phex"
+CreateShortCut "$SMPROGRAMS\Phex\Phex @nsis.ProgramVersion@.lnk" "$INSTDIR\Phex.exe"
+CreateShortCut "$SMPROGRAMS\Phex\Phex @nsis.ProgramVersion@ Debug.lnk" "$INSTDIR\Phex_debug.exe"
+CreateShortCut "$SMPROGRAMS\Phex\Phex Homepage.lnk" "$INSTDIR\P h e x Homepage.url"
+CreateShortCut "$SMPROGRAMS\Phex\Uninstall Phex @nsis.ProgramVersion@.lnk" "$INSTDIR\uninst.exe"
+
+;Store installation folder
+WriteRegStr HKEY_LOCAL_MACHINE "SOFTWARE\Phex_@nsis.ProgramVersion@" "" "$INSTDIR"
+;Register as magma file handler
+WriteRegStr HKEY_CLASSES_ROOT "MagmaFile\shell\open\command" "" "$\"$INSTDIR\Phex.exe$\" -magma $\"%1$\""
+WriteRegStr HKEY_CLASSES_ROOT ".magma" "" "MagmaFile"
+;Store uninstall infos folder
+WriteRegStr HKEY_LOCAL_MACHINE "Software\Microsoft\Windows\CurrentVersion\Uninstall\Phex_@nsis.ProgramVersion@" "DisplayName" "Phex @nsis.ProgramVersion@ (remove only)"
+WriteRegStr HKEY_LOCAL_MACHINE "Software\Microsoft\Windows\CurrentVersion\Uninstall\Phex_@nsis.ProgramVersion@" "UninstallString" '"$INSTDIR\uninst.exe"'
+; write out uninstaller
+WriteUninstaller "$INSTDIR\uninst.exe"
+
+SectionEnd ; end of default section
+
+Section "Desktop Shortcut"
+
+SetOutPath "$INSTDIR"
+CreateShortCut "$DESKTOP\Phex.lnk" "$INSTDIR\Phex.exe"
+
+SectionEnd ; end of default section
+
+; begin uninstall settings/section
+UninstallText "This will uninstall Phex from your system"
+
+Section un.Phex @nsis.ProgramVersion@
+; add delete commands to delete whatever files/registry keys/etc you installed here.
+Delete "$INSTDIR\Phex.dll"
+Delete "$INSTDIR\Phex.exe"
+Delete "$INSTDIR\Phex_debug.exe"
+Delete "$INSTDIR\P h e x Homepage.url"
+Delete "$INSTDIR\lib\Phex.jar"
+Delete "$INSTDIR\lib\looks-2.1.4.jar"
+Delete "$INSTDIR\lib\forms-1.1.0.jar"
+Delete "$INSTDIR\lib\commons-logging.jar"
+Delete "$INSTDIR\lib\commons-httpclient-3.0.1.jar"
+Delete "$INSTDIR\lib\commons-collections-3.2.jar"
+
+; Delete "$INSTDIR\readme\changelog.txt"
+; Delete "$INSTDIR\readme\contributors.txt"
+Delete "$INSTDIR\docs\license\GPL.txt"
+Delete "$INSTDIR\docs\readme\Phex_win.htm"
+Delete "$INSTDIR\docs\readme\Phex_other.htm"
+
+; Special section for releases with included subscription list
+!ifdef ADD_SUBSCRIPTION_LIST
+Delete "$INSTDIR\ext\subscription.list"
+!endif
+
+Delete "$DESKTOP\Phex.lnk"
+Delete "$SMPROGRAMS\Phex\Phex @nsis.ProgramVersion@.lnk"
+Delete "$SMPROGRAMS\Phex\Phex @nsis.ProgramVersion@ Debug.lnk"
+Delete "$SMPROGRAMS\Phex\Phex Homepage.lnk"
+Delete "$SMPROGRAMS\Phex\Uninstall Phex @nsis.ProgramVersion@.lnk"
+RMDir "$SMPROGRAMS\Phex"
+
+DeleteRegKey HKEY_LOCAL_MACHINE "SOFTWARE\Phex_@nsis.ProgramVersion@"
+
+;delete magma keys only if unchanged
+ReadRegStr $1 HKEY_CLASSES_ROOT "MagmaFile\shell\open\command" ""
+;StrCmp $1 "$\"$INSTDIR\Phex.exe$\" -magma $\"%1$\"" SkipMagmaDelete
+DeleteRegKey HKEY_CLASSES_ROOT  "MagmaFile"
+DeleteRegKey HKEY_CLASSES_ROOT  ".magma"
+;SkipMagmaDelete:
+
+DeleteRegKey HKEY_LOCAL_MACHINE "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Phex_@nsis.ProgramVersion@"
+
+RMDir "$INSTDIR\docs\license"
+RMDir "$INSTDIR\docs\readme"
+RMDir "$INSTDIR\docs"
+RMDir "$INSTDIR\lib"
+Delete "$INSTDIR\uninst.exe"
+RMDir "$INSTDIR"
+SectionEnd ; end of uninstall section
+
+Section /o "un.Phex User Configuration"
+; add delete commands to delete whatever files/registry keys/etc you installed here.
+RMDir /r "$APPDATA\Phex"
+SectionEnd ; end of uninstall section
+
+; eof

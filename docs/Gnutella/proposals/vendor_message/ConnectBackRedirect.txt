@@ -1,0 +1,43 @@
+
+From: http://groups.yahoo.com/group/the_gdf/message/18172
+
+Dear GDF,
+In an effort to make the UDP and TCP ConnectBack protocols more
+accurate, LimeWire introduces the following two new Vendor Messages:
+
+* TCP ConnectBack Redirect: LIME/7v1 (Payload: 6 bytes: 4 byte IP
+Address, 2 byte LE port)
+* UDP ConnectBack Redirect: LIME/8v1 (Payload: 6 bytes: 4 byte IP
+Address, 2 byte LE port)
+
+These messages should be forwarded from Ultrapeers that have received
+a TCP/UDP ConnectBack request (from a Leaf) to another Ultrapeer that
+supports the redirect message (as advertised in the MessagesSupported
+Message). If no Ultrapeer that supports the new Redirect messages
+exist, the Ultrapeer should simply perform the connect back itself (as
+per the old protocol). The Ultrapeer should construct the new messages
+by using a combination of data derived from the original ConnectBack
+message and information about the Leaf it maintains (i.e. its IP
+address).
+An Ultrapeer that receives a Redirect message should try to connect
+to the specified host assuming the following conditions are true: 1)
+the Ultrapeer is not connected to the IP described in the Redirect
+message and 2) the Ultrapeer has not tried to connect back to the IP
+described by the Redirect message in the last 10 or so minutes.
+
+This new protocol is necessary because some routers allow incoming
+TCP/UDP connections from a host a computer behind the router has an
+outgoing connection to. This sometimes results in a client thinking it
+can accept incoming TCP/UDP connection when actually it can not. The
+redirect mechanism is much more foolproof - it cannot make a mistake as
+to whether a host can accept incoming TCP/UDP or not.
+
+LimeWire currently has the 'server side' (support of redirect messages)
+of this change in our current release (3.6.x). Our next version will
+include 'client side' support (Ultrapeers will attempt to redirect
+TCP/UDP ConnectBack requests to hosts that support redirect messages).
+
+I welcome any comments/criticism.
+
+Thanks!
+Susheel

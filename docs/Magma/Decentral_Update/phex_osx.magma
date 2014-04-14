@@ -1,0 +1,14 @@
+#MAGMAv0.2 magnet:?mt=.&as=http://dateien.draketo.de/phex_osx.magma&dn=phex_osx.magma
+#With this List your Library opens its doors. 
+
+list:
+  
+ - "magnet:?xt=urn:sha1:26GPFQOQNK54FL7KCE3OO5F7R3NJ7RIT
+   &dn=phex_3.0.0.99_osx.zip
+   &xs=http://edrikor.dyndns.org:9846/uri-res/N2R?urn:sha1:26GPFQOQNK54FL7KCE3OO5F7R3NJ7RIT&as=http://www.freebase.be/g2/dlcount.php?sha1=26GPFQOQNK54FL7KCE3OO5F7R3NJ7RIT&as=http://heanet.dl.sourceforge.net/sourceforge/phex/phex_3.0.0.99_osx.zip&as=http://internap.dl.sourceforge.net/sourceforge/phex/phex_3.0.0.99_osx.zip&as=http://mesh.dl.sourceforge.net/sourceforge/phex/phex_3.0.0.99_osx.zip&as=http://puzzle.dl.sourceforge.net/sourceforge/phex/phex_3.0.0.99_osx.zip&as=http://easynews.dl.sourceforge.net/sourceforge/phex/phex_3.0.0.99_osx.zip&as=http://osdn.dl.sourceforge.net/sourceforge/phex/phex_3.0.0.99_osx.zip&as=http://keihanna.dl.sourceforge.net/sourceforge/phex/phex_3.0.0.99_osx.zip&as=http://optusnet.dl.sourceforge.net/sourceforge/phex/phex_3.0.0.99_osx.zip&as=http://switch.dl.sourceforge.net/sourceforge/phex/phex_3.0.0.99_osx.zip&as=http://ovh.dl.sourceforge.net/sourceforge/phex/phex_3.0.0.99_osx.zip&as=http://kent.dl.sourceforge.net/sourceforge/phex/phex_3.0.0.99_osx.zip&as=http://osdn.dl.sourceforge.net/sourceforge/phex/phex_3.0.0.99_osx.zip&as=http://jaist.dl.sourceforge.net/sourceforge/phex/phex_3.0.0.99_osx.zip&as=http://ufpr.dl.sourceforge.net/sourceforge/phex/phex_3.0.0.99_osx.zip&as=http://umn.dl.sourceforge.net/sourceforge/phex/phex_3.0.0.99_osx.zip&as=http://nchc.dl.sourceforge.net/sourceforge/phex/phex_3.0.0.99_osx.zip&as=http://jaist.dl.sourceforge.net/sourceforge/phex/phex_3.0.0.99_osx.zip&as=http://citkit.dl.sourceforge.net"
+  file-name: phex_3.0.0.99_osx.zip
+  file-size: 3602260
+    
+# Phex: Copyright 2006 The Phex Team - GPL-2 or later.
+# Link: http://phex.org
+# Developer-link: http://sf.net/projects/phex

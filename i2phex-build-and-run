@@ -1,0 +1,5 @@
+#!/bin/sh
+cd $(dirname "$0")/build && ant clean buildAll
+cp -R ~/.i2phex-settings ~/.i2phex-settings-backup
+cp -R ~/.phex ~/.phex-backup
+cd ~/.i2phex-settings/ && java -jar ~/Dokumente/Programme/phex/i2phex/output/lib/phex.jar -c ~/.i2phex-settings 

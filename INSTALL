@@ -1,0 +1,48 @@
+This is a (brief) guide to compiling and installing Phex from CVS. It is
+aimed at people with low(ish) experience with java applications. Please
+remember to say if you were using a self-made version of Phex when you report
+errors.
+
+Requirements:
+- CVS (https://www.cvshome.org/)
+- Java 1.4.X (or 1.5.X) SDK (http://java.sun.com/j2se/1.4.2/download.html)
+- Apache Ant (http://ant.apache.org/bindownload.cgi)
+
+Step 0: install java, ant and CVS
+This should be fairly straightforward for the most part.
+Make sure your environment variables are set correctly.
+ie: JAVA_HOME=<path_to_java>
+ANT_HOME=<path_to_ant>
+PATH=%JAVA_HOME%\bin;%ANT_HOME%\bin;%PATH%
+
+Step 1: get the Phex source code
+Create a directory where the Phex source code is to be stored. From that
+directory, execute the following commands:
+cvs -d:pserver:anonymous@cvs.sourceforge.net:/cvsroot/phex login
+cvs -z3 -d:pserver:anonymous@cvs.sourceforge.net:/cvsroot/phex co phex
+
+This should log you into the sourceforge repository and get the current version
+of Phex.
+
+(When you want to update this source, simply execute the following from the
+Phex directory:
+cvs update -dPAC
+Warning: this will throw away any changes you made to the source code. If
+you want to keep your changes during an update, try 'cvs update -dPA'
+)
+
+Step 2: Build Phex
+From the phex/build directory, execute:
+ant 
+
+This should be sufficient to build Phex.
+
+Step 3: Run Phex
+From the phex/output direcoty, execute:
+java -jar phex.jar
+
+This should run Phex, using your default configuration. You can use the -c
+parameter to specify an alternate configuration directory.
+
+Please contact me (nxf at sourceforge dot net) if this document is not detailed
+enough or incorrect.

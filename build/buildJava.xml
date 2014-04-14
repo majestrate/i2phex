@@ -1,0 +1,60 @@
+<project name="Phex.Java" default="buildJava" basedir="..">
+  <property name="project.native" value="${project.root}/native"/>
+  <path id="library.classpath">
+    <pathelement path="${library.classpath}"/>
+  </path>
+  <path id="phex.classpath">
+    <pathelement path="${phex.classpath}"/>
+  </path>
+  <target name="buildJava" depends="initJava, compileSource, compileJUnit, createJar, copyThirdpartyJars"/>
+  <target name="compileJava" depends="initJava, compileSource, compileJUnit"/>
+  <target name="initJava">
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${build.target.classes}"/>
+    <copy todir="${build.target.classes}/phex/resources">
+      <fileset dir="${project.source}/phex/resources"/>
+    </copy>
+    <copy todir="${build.target.classes}/phex/gui/resources">
+      <fileset dir="${project.source}/phex/gui/resources"/>
+    </copy>
+  	<copy todir="${build.target.classes}/phex/xml/thex">
+      <fileset dir="${project.source}/phex/xml/thex">
+      	<include name="*.dtd" />
+      </fileset>
+    </copy>
+    <!--I2P: to avoid visual confusion, override default splash screen with a distinct one-->
+    <copy overwrite="true"
+          file="${project.root}/docs/Customize/Themes/i2phex-splash-boxstr.png"
+          tofile="${build.target.classes}/phex/resources/splash.png" />
+    <!-- Sets isJUnitAvailable when the  file is in the classpath -->
+    <available classname="junit.framework.TestCase" classpathref="library.classpath" property="isJUnitAvailable"/>
+  </target>
+  <target name="compileSource" depends="initJava">
+    <!-- Sets to debug build if nothing else is set -->
+    <condition property="build.isDebugBuild" value="true">
+      <not><isset property="build.isDebugBuild"/></not>
+    </condition>
+    <javac srcdir="${project.source}" destdir="${build.target.classes}" excludes="com/l2fprod/**, phex/test/**" classpathref="phex.classpath" includeAntRuntime="no" debug="${build.isDebugBuild}" source="1.5" target="1.5"/>
+  </target>
+  <!-- to get JUnit go to http://www.junit.org -->
+  <target name="compileJUnit" depends="initJava" if="isJUnitAvailable">
+    <javac srcdir="${project.testsource}" destdir="${build.target.classes}" includes="phex/test/**" classpathref="phex.classpath" includeAntRuntime="no" source="1.5"/>
+  </target>
+  <target name="createJar" depends="initJava, compileJava">
+    <mkdir dir="${build.target.lib}"/>
+    <jar jarfile="${build.target.lib}/phex.jar" basedir="${build.target.classes}" excludes="phex/test/**" manifest="build\manifestupdate.txt"/>
+    <jar jarfile="${build.target.lib}/phex-test.jar" basedir="${build.target.classes}" includes="phex/test/**"/>
+  </target>
+  <target name="copyThirdpartyJars">
+    <copy file="${apache.logging.lib}/commons-logging.jar" todir="${build.target.lib}"/>
+    <copy file="${apache.httpclient.lib.path}/${apache.httpclient.lib.filename}" todir="${build.target.lib}"/>
+    <copy file="${apache.collections.lib.path}/${apache.collections.lib.filename}" todir="${build.target.lib}"/>
+    <copy file="${jgoodies.forms.lib}/forms-1.1.0.jar" todir="${build.target.lib}"/>
+    <copy file="${jgoodies.looks.lib.path}/${jgoodies.looks.lib.filename}" todir="${build.target.lib}"/>
+    <copy file="${apple.lib}/MRJAdapter.jar" todir="${build.target.lib}"/>
+    <copy file="${i2p.lib}/i2p.jar" todir="${build.target.lib}"/>
+    <copy file="${i2p.lib}/streaming.jar" todir="${build.target.lib}"/>
+    <copy file="${i2p.lib}/mstreaming.jar" todir="${build.target.lib}"/>
+    <copy file="${i2p.lib}/jbigi.jar" todir="${build.target.lib}"/>
+  </target>
+</project>

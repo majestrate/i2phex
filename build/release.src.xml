@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<project name="Phex.Release.Src" basedir="..">
+	<target name="-create.src" if="do.create.src">
+    <property name="src.build.dir" value="${releasedir}/phex_${phex.FullPhexVersion}/src${create.postfix}" />
+    <property name="src.buildSrc.dir" value="${releasedir}/phex_${phex.FullPhexVersion}/src${create.postfix}/build" />
+    <property name="src.buildSrc.libDir" value="${releasedir}/phex_${phex.FullPhexVersion}/src${create.postfix}/build/lib" />
+
+    <available file="${src.build.dir}" property="runtime.dir.available" />
+    <fail if="runtime.dir.available" />
+    <available file="${src.build.dir}/phex_${phex.FullPhexVersion}.zip" property="runtime.file.available" />
+    <fail if="runtime.file.available" />
+
+    <mkdir dir="${src.buildSrc.dir}" />
+
+    <!-- copy libs -->
+    <copy file="${apache.logging.lib}/commons-logging.jar" todir="${src.buildSrc.libDir}" />
+    <copy file="${apache.httpclient.lib.path}/${apache.httpclient.lib.filename}" todir="${src.buildSrc.libDir}" />
+    <copy file="${apache.collections.lib.path}/${apache.collections.lib.filename}" todir="${src.buildSrc.libDir}" />
+    <copy file="${jgoodies.forms.lib}/forms-1.1.0.jar" todir="${src.buildSrc.libDir}" />
+    <copy file="${apple.lib}/MRJAdapter.jar" todir="${src.buildSrc.libDir}" />
+    <copy file="${jgoodies.looks.lib.path}/${jgoodies.looks.lib.filename}" todir="${src.buildSrc.libDir}" />
+    <!-- copy source -->
+    <copy todir="${src.buildSrc.dir}/src">
+      <fileset dir="src">
+        <include name="**/*.*" />
+        <exclude name="CVS" />
+        <exclude name="**/*.bak" />
+        <exclude name="**/*.*~" />
+    </fileset>
+    </copy>
+    <!-- copy native -->
+    <copy todir="${src.buildSrc.dir}/native/csource">
+      <fileset dir="native/csource">
+        <include name="**/*.*" />
+        <exclude name="CVS" />
+        <exclude name="**/*.bak" />
+        <exclude name="**/*.*~" />
+      </fileset>
+    </copy>
+    <!--copy doc files-->
+    <mkdir dir="${src.buildSrc.dir}/docs" />
+    <copy todir="${src.buildSrc.dir}/docs">
+      <fileset dir="docs/Phex">
+        <include name="license/GPL.txt" />
+        <include name="build/*.htm" />
+      </fileset>
+    </copy>
+		<copy todir="${src.buildSrc.dir}/docs" filtering="yes">
+			<fileset dir="docs/Phex">
+				<include name="readme/Phex_win.htm" />
+				<include name="readme/Phex_other.htm" />
+			</fileset>
+		</copy>
+		<!--copy build files-->
+		<mkdir dir="${src.buildSrc.dir}/build" />
+		<copy todir="${src.buildSrc.dir}/build">
+			<fileset dir="build">
+				<include name="*.xml" />
+				<include name="manifestupdate.txt" />
+				<exclude name="CVS" />
+				<exclude name="**/*.bak" />
+				<exclude name="**/*.*~" />
+			</fileset>
+		</copy>
+		<zip zipfile="${src.build.dir}/phex_${phex.FullPhexVersion}_src.zip" update="false">
+			<zipfileset dir="${src.buildSrc.dir}" prefix="phex_${phex.FullPhexVersion}_src" />
+		</zip>
+	</target>
+</project>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hashtree SYSTEM "http://open-content.net/spec/thex/thex.dtd">
+<hashtree>
+  <file size="1000" segmentsize="10"/>
+  <digest algorithm="http://open-content.net/spec/digest/tiger" outputsize="24"/>
+  <serializedtree depth="5" type="http://open-content.net/spec/thex/breadthfirst" uri="uuid:123456789"/>
+</hashtree>
