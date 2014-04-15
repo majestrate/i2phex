@@ -5,3 +5,4 @@ output
 .svn
 *.so
 *.dll
+*.log

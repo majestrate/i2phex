@@ -1,4 +1,4 @@
-<project name="Phex" default="buildAll" basedir="..">
+<project name="Phex" default="uberjar" basedir=".">
   <!-- set global properties for this build -->
   <property name="project.root" value="${basedir}"/>
   <property name="project.build" value="${project.root}/build"/>
@@ -126,6 +126,17 @@
   </target>
   <target name="runTest" depends="buildAll">
     <ant antfile="${project.build}/testSuite.xml" inheritAll="true"/>
+  </target>
+  <target name="uberjar" depends="buildAll">
+    <jar destfile="i2phex.jar">
+      <manifest>
+        <attribute name="Main-Class" value="phex.Main"/>
+        <attribute name="Class-Path" value="."/>
+      </manifest>
+      <zipgroupfileset excludes="META-INF/*.SF" dir="${project.buildtarget}/lib/">
+        <include name="**/*.jar" />
+      </zipgroupfileset>
+    </jar>
   </target>
   <target name="init">
     <condition property="isWindowsOS">
